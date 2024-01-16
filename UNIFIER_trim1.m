@@ -73,6 +73,7 @@ lb=[-inf,...         % u
 
 options.Display       = 'iter-detailed';
 options.Algorithm     = 'sqp';
+% options.Algorithm     = 'interior-point';
 options.FunValCheck   = 'off';
 options.ScaleProblem  = 'false';
 options.FinDiffType   = 'forward';
@@ -82,7 +83,7 @@ options.DiffMinChange = 1e-5;  % Minimum change in variables for finite-differen
 % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
 % options.TolCon        = 1e-3;  % Constraint violation tolerance
 % options.MaxIter       = 100;   % Max iterations
-options.MaxFunEvals   = 1000;  % Max function evaluations
+% options.MaxFunEvals   = 1000;  % Max function evaluations
 options.PlotFcns      = {@optimplotx, @optimplotfval, @optimplotfunccount, @optimplotconstrviolation, @optimplotstepsize, @optimplotfirstorderopt};
 options.OutputFcn     = @outputFcn_global;
 
