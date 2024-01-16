@@ -62,8 +62,8 @@ fprintf('\n');
 fprintf('<strong>CALCULATING..</strong>');
 
 tic
-set_param('UNIFIER_dyn2','SimulationMode','rapid-accelerator')
-UNIFIER_dyn2([],[],[],'compile')
+set_param('UNIFIER_dyn','SimulationMode','rapid-accelerator')
+UNIFIER_dyn([],[],[],'compile')
 
 for i=1:dFlap_n
     % Va(i) = Re(i)*nu/c;
@@ -77,9 +77,9 @@ for i=1:dFlap_n
             x = [0;                   % 1) xe [m]
                  0;                   % 2) ye [m]
                  -h;                  % 3) (-)ze [m]
-                 Va*cos(alpha(j)); % 4) u [m/s]
+                 Va*cos(alpha(j));    % 4) u [m/s]
                  0;                   % 5) v [m/s]
-                 Va*sin(alpha(j)); % 6) w [m/s]
+                 Va*sin(alpha(j));    % 6) w [m/s]
                  deg2rad(0);          % 7) phi [rad]
                  alpha(j);            % 8) theta [rad]
                  deg2rad(0);          % 9) psi [rad/s]
@@ -95,7 +95,7 @@ for i=1:dFlap_n
                  0.0];                % 19) HTU [0-1]
             
             % Call dynamics function
-            out = UNIFIER_dyn2(0,[],[x;u],'outputs');
+            out = UNIFIER_dyn(0,[],[x;u],'outputs');
             % res.dx     = out(1:12);
             % res.Fb     = out(13:15);
             % res.P      = out(16);
@@ -130,7 +130,7 @@ for i=1:dFlap_n
     end
 end
 
-UNIFIER_dyn2([],[],[],'term')
+UNIFIER_dyn([],[],[],'term')
 
 fprintf('\n');
 fprintf('\n');

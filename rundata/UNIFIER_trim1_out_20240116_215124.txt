@@ -1,0 +1,81 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    2.723554e+01    0.000e+00    6.280e+02
+    1      23    2.626659e+01    0.000e+00    9.452e+02    1.667e-02
+    2      30    2.414408e+01    0.000e+00    6.788e+02    1.706e-02
+    3      39    1.805354e+01    0.000e+00    6.497e+02    7.675e-02
+    4      45    1.077046e+01    0.000e+00    7.856e+02    1.217e-01
+    5      51    4.220034e+00    0.000e+00    3.661e+02    2.280e-01
+    6      57    3.914453e-01    0.000e+00    4.353e+01    2.436e-02
+    7      63    1.261027e-01    0.000e+00    1.167e+02    5.376e-01
+    8      69    5.040669e-02    0.000e+00    1.346e+01    3.202e-01
+    9      75    1.565280e-02    0.000e+00    1.642e+01    6.896e-02
+   10      81    4.430470e-03    0.000e+00    5.808e+00    3.967e-02
+   11      87    4.308046e-03    0.000e+00    5.316e-01    7.933e-04
+   12      93    3.925566e-03    0.000e+00    4.757e-01    3.145e-03
+   13      99    3.481277e-03    0.000e+00    1.000e-01    3.775e-03
+   14     105    8.928649e-04    0.000e+00    6.181e-01    1.712e-02
+   15     111    2.536395e-04    0.000e+00    1.976e-01    1.186e-02
+   16     137    2.536343e-04    0.000e+00    1.995e-01    1.800e-08
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-08, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 00:01:42
+Avg. per Iteration   = 00:00:05
+Avg. per Func. Eval. = 0.7248 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ye    [m]    </strong>        0.0000
+    <strong>3) ze    [m]    </strong>    -1219.0000
+    <strong>4) u     [m/s]  </strong>       72.6113
+    <strong>5) v     [m/s]  </strong>        0.0000
+    <strong>6) w     [m/s]  </strong>       -4.2760
+    <strong>7) phi   [deg]  </strong>        0.0000
+    <strong>8) theta [deg]  </strong>       -3.3688
+    <strong>9) psi   [deg]  </strong>        0.0000
+    <strong>10) p    [deg/s]</strong>        0.0000
+    <strong>11) q    [deg/s]</strong>        0.0000
+    <strong>12) r    [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dAileron  [deg]</strong>     0.0000
+    <strong>2) dRudder   [deg]</strong>     0.0000
+    <strong>3) dElevator [deg]</strong>     2.8063
+    <strong>4) dFlap     [deg]</strong>    10.0000
+    <strong>5) DEP_col   [deg]</strong>     0.6503
+    <strong>6) DEP_slope [deg]</strong>     0.0000
+    <strong>7) HTU       [deg]</strong>     0.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    72.7371
+    <strong>2) yedot    [m/s]   </strong>     0.0000
+    <strong>3) zedot    [m/s]   </strong>    -0.0017
+    <strong>4) udot     [m/s2]  </strong>    -0.0145
+    <strong>5) vdot     [m/s2]  </strong>     0.0000
+    <strong>6) wdot     [m/s2]  </strong>    -0.0055
+    <strong>7) phidot   [deg/s] </strong>     0.0000
+    <strong>8) thetadot [deg/s] </strong>     0.0000
+    <strong>9) psidot   [deg/s] </strong>     0.0000
+    <strong>10) pdot    [deg/s2]</strong>    -0.0000
+    <strong>11) qdot    [deg/s2]</strong>     0.0020
+    <strong>12) rdot    [deg/s2]</strong>    -0.0000
+

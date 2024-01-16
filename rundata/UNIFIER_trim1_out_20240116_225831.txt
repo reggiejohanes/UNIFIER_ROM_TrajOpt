@@ -1,0 +1,59 @@
+<strong><< OPTIMIZATION START >></strong>
+
+[Warning: '<a href="matlab:open_system ('UNIFIER_dyn2')">UNIFIER_dyn2</a>' is already compiled] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim1', 'D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim1.m', 96)" style="font-weight:bold">UNIFIER_trim1</a> (<a href="matlab: opentoline('D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim1.m',96,0)">line 96</a>)] 
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    2.604267e+01    0.000e+00    2.214e+02
+    1      26    2.483595e+01    0.000e+00    1.456e+02    9.468e-03
+    2      35    2.481137e+01    0.000e+00    1.094e+02    9.548e-03
+    3      42    6.035282e+00    0.000e+00    2.913e+02    5.664e-01
+    4      49    3.044049e+00    0.000e+00    4.348e+02    4.409e-01
+    5      56    1.459683e+00    0.000e+00    3.848e+02    3.687e-01
+    6      63    5.728459e-01    0.000e+00    1.894e+02    2.004e-01
+    7      71    2.853777e-01    0.000e+00    4.602e+01    6.703e-02
+    8      78    4.939371e-01    0.000e+00    3.946e+01    1.792e-01
+    9      85    3.745679e-01    0.000e+00    1.473e+00    5.513e-02
+   10      92    2.661665e-01    0.000e+00    1.474e+01    5.448e-02
+   11     100    2.533702e-01    0.000e+00    3.514e+00    3.138e-02
+   12     107    2.539901e-01    0.000e+00    9.255e+00    1.941e-02
+   13     114    2.529973e-01    0.000e+00    2.218e+00    2.499e-03
+   14     124    2.529365e-01    0.000e+00    2.780e+00    4.183e-04
+   15     133    2.525450e-01    0.000e+00    2.629e+00    2.847e-04
+   16     141    2.526052e-01    0.000e+00    1.388e+00    2.315e-04
+   17     150    2.525223e-01    0.000e+00    5.153e-01    3.986e-05
+   18     157    2.522866e-01    0.000e+00    8.950e-01    1.712e-04
+   19     167    2.521662e-01    0.000e+00    5.138e-01    1.716e-04
+   20     174    2.521571e-01    0.000e+00    2.490e+00    5.145e-05
+   21     183    2.521794e-01    0.000e+00    8.848e-01    2.262e-05
+   22     197    2.521799e-01    0.000e+00    1.762e+00    1.098e-05
+   23     207    2.521798e-01    0.000e+00    7.720e-01    6.469e-07
+   24     230    2.521798e-01    0.000e+00    6.356e-01    8.247e-09
+
+<a href = "matlab: helpview('optim','feasible_better_objective','CSHelpWindow');">Feasible point with lower objective function value found</a>.
+
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-08, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 00:00:03
+Avg. per Iteration   = 00:00:00
+Avg. per Func. Eval. = 0.0145 seconds
+{Unrecognized function or variable 'x'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim1', 'D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim1.m', 135)" style="font-weight:bold">UNIFIER_trim1</a> (<a href="matlab: opentoline('D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim1.m',135,0)">line 135</a>)
+out  = UNIFIER_dyn2(0,[],[x;u],'outputs');
+} 
+opentoline('D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim1.m',135,0)
+UNIFIER_dyn2([],[],[],'term')
+[Warning: Termination of '<a href="matlab:open_system ('UNIFIER_dyn2')">UNIFIER_dyn2</a>' deferred] 
+UNIFIER_dyn2([],[],[],'term')
+UNIFIER_dyn2([],[],[],'term')
+{The model '<a href="matlab:open_system ('UNIFIER_dyn2')">UNIFIER_dyn2</a>' must be compiled before it can be
+accessed programmatically.
+} 
+UNIFIER_trim1

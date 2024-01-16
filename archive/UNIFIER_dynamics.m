@@ -1,3 +1,6 @@
+% function xdot=UNIFIER_dynamics(x,u)
+
+% Test
 clc
 clear
 close all
@@ -16,27 +19,30 @@ x = [0;           % 1) xe [m]
      deg2rad(0);  % 11) q [rad/s]
      deg2rad(0)]; % 12) r [rad/s]
 u = [deg2rad(0);  % 13) dAil [rad]
-      deg2rad(0);  % 14) dRud [rad]
-      deg2rad(0);  % 15) dElev [rad]
-      deg2rad(0);  % 16) dFlap [rad] 
-      1.0;         % 17) DEP_col [0-1]
-      0.0;         % 18) DEP_slope [0-1]
-      0.0];        % 19) HTU [0-1]
+     deg2rad(0);  % 14) dRud [rad]
+     deg2rad(0);  % 15) dElev [rad]
+     deg2rad(0);  % 16) dFlap [rad] 
+     1.0;         % 17) DEP_col [0-1]
+     0.0;         % 18) DEP_slope [0-1]
+     0.0];        % 19) HTU [0-1]
+
+x0   = x;
+u0   = u;
+Vrw0 = x(4:6);
+[~,~,~,rho0,~]=atmosisa(-1*x(3));
+
+t_sim  = 0;
+% res    = sim("RCAM_sim.slx",'SrcWorkspace','current',...
+%                 'SimulationMode','rapid', ...
+%                 'RapidAcceleratorUpToDateCheck','off');
+res    = sim("UNIFIER_dyn1.slx",'SrcWorkspace','current');
+xdot   = res.xdot';
 
 set_param('UNIFIER_dyn2','SimulationMode','rapid-accelerator')
 UNIFIER_dyn2([],[],[],'compile')
-tic
 out = UNIFIER_dyn2(0,[],[x;u],'outputs');
-res.dx     = out(1:12);
-res.Fb     = out(13:15);
-res.P      = out(16);
-res.Fb_ae  = out(17:19);
-res.Mb_ae  = out(20:22);
-res.Fb_DEP = out(23:25);
-res.Mb_DEP = out(26:28);
-res.Fb_HTU = out(29:31);
-res.Mb_HTU = out(32:34);
-res.T_DEP  = out(35:46);
-res.CT_DEP = out(47:58);
-toc
 UNIFIER_dyn2([],[],[],'term')
+
+
+
+% end

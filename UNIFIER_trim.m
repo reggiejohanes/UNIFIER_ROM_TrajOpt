@@ -7,33 +7,41 @@ close all
 
 starttime = datetime; % start date & time
 timestamp = string(starttime,"yyyyMMdd_HHmmss");
-logname   = 'rundata\UNIFIER_trim1_out_' + timestamp; % name of diary & data log file
+logname   = 'rundata\UNIFIER_trim_out_' + timestamp; % name of diary & data log file
 
 diary (logname + '.txt')
 diary on % start diary
 
 %% Set target trim conditions
 
-Va_target = 72.74;  % airspeed target [m/s] cruise=72.74
-ze_target = 1219; % altitude [m] cruise=1219
+%2nd descent phase
+% Va_target = 39;                        % airspeed target [m/s] descent=39m/s
+% ze_target = convlength(1500,'ft','m'); % altitude [m] 2nd descent phase=1500ft
+
+%cruise
+Va_target = 72.74; % airspeed target [m/s] cruise=72.74m/s
+ze_target = 1219;  % altitude [m] cruise=1219m
+
+dFlap     = deg2rad(0); % flap deflection [deg]
 
 global target
 target.Va    = Va_target;
 target.ze    = ze_target;
+target.dFlap = dFlap;
 
 %% Initialize z_guess
 
 % Initial states
-x0 = [Va_target;   % u [m/s]
-      0;           % w [m/s]
-      deg2rad(1)]; % theta [deg]
+x0 = [Va_target/100; % u [m/s]
+      0/100;         % w [m/s]
+      deg2rad(0)];   % theta [deg]
 
 % Initial control inputs
-u0 = [deg2rad(-2);  % Elevator deflection [deg]
-      deg2rad(12);  % Flap deflection [deg]
-      0.5];        % DEP activity factor (collective) [0-1]
+u0 = [deg2rad(0); % Elevator deflection [deg]
+      0.5;         % DEP activity factor (collective) [0-1]
+      0.5];        % HTU activity factor (collective) [0-1]
 
-init = 1;  % 0 = start from initial guess
+init = 0;  % 0 = start from initial guess
            % 1 = use saved values from last run
 
 if init==0
@@ -56,29 +64,29 @@ load UNIFIER_LOAD umin umax
 % upper bounds
 ub=[inf,...          % u
     inf,...          % w
-    deg2rad(10),...  % theta pitch
+    deg2rad(10),...  % theta (pitch)
     umax(3),...      % dElevator
-    umax(4),...      % dFlap
-    umax(5)];        % DEP_col
+    umax(5),...      % DEP_col
+    umax(7)];        % HTU
 
 % lower bounds
 lb=[-inf,...         % u
     -inf,...         % w
-    -deg2rad(5),...  % theta pitch
+    -deg2rad(5),...  % theta (pitch)
     umin(3),...      % dElevator
-    umin(4),...      % dFlap
-    umin(5)];        % DEP_col
+    umin(5),...      % DEP_col
+    umin(7)];        % HTU
 
 % Set options -------------------------------------------------------------
 
 options.Display       = 'iter-detailed';
-options.Algorithm     = 'sqp';
-% options.Algorithm     = 'interior-point';
+% options.Algorithm     = 'sqp';
+options.Algorithm     = 'interior-point';
 options.FunValCheck   = 'off';
 options.ScaleProblem  = 'false';
 options.FinDiffType   = 'forward';
 options.TolX          = 1e-8;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-options.DiffMinChange = 1e-5;  % Minimum change in variables for finite-difference gradients. Default=0.
+options.DiffMinChange = 1e-7;  % Minimum change in variables for finite-difference gradients. Default=0.
 % options.DiffMaxChange = 1e-0;  % Maximum change in variables for finite-difference gradients. Default=Inf.
 % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
 % options.TolCon        = 1e-3;  % Constraint violation tolerance
@@ -90,7 +98,9 @@ options.OutputFcn     = @outputFcn_global;
 % Run optimization --------------------------------------------------------
 
 tic
-[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim1_obj(x),z0,[],[],[],[],lb,ub,[],options);
+set_param('UNIFIER_dyn','SimulationMode','rapid-accelerator')
+UNIFIER_dyn([],[],[],'compile')
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim_obj(x),z0,[],[],[],[],lb,ub,[],options);
 t_fmincon=toc;
 
 fprintf('<strong><< OPTIMIZATION COMPLETE >></strong>');
@@ -104,28 +114,33 @@ fprintf('Avg. per Func. Eval. = %6.4f seconds\n',t_fmincon/output.funcCount);
 %% Process Results
 
 % Extract states & controls -----------------------------------------------
-xstar=[0;...          % xe
-       0;...          % ye
-       -ze_target;... % ze
-       zstar(1);...   % u
-       0;...          % v
-       zstar(2);...   % w
-       0;...          % phi
-       zstar(3);...   % theta
-       0;...          % psi
-       0;...          % p
-       0;...          % q
-       0];            % r
-ustar=[0;...          % dAil
-       0;...          % dRud
-       zstar(4);...   % dElev
-       zstar(5);...   % dFlap
-       zstar(6);...   % DEP_col
-       0;...          % DEP_slope
-       0];            % HTU
+xstar=[0;...            % xe
+       0;...            % ye
+       -ze_target;...   % ze
+       zstar(1)*100;... % u
+       0;...            % v
+       zstar(2)*100;... % w
+       0;...            % phi
+       zstar(3);...     % theta
+       0;...            % psi
+       0;...            % p
+       0;...            % q
+       0];              % r
+ustar=[0;...            % dAil
+       0;...            % dRud
+       zstar(4);...     % dElev
+       dFlap;...        % dFlap
+       zstar(5);...     % DEP_col
+       0;...            % DEP_slope
+       zstar(6)];       % HTU
 
 % Evaluate accelerations --------------------------------------------------
-xdotstar=UNIFIER_dynamics(xstar,ustar);
+
+% xdotstar=UNIFIER_dynamics(xstar,ustar);
+
+out  = UNIFIER_dyn(0,[],[xstar;ustar],'outputs');
+UNIFIER_dyn([],[],[],'term')
+xdotstar = out(1:12);
 
 % Table 1 - States --------------------------------------------------------
 xstardisp=xstar;
@@ -194,7 +209,7 @@ disp(xdottable0)
 %% Save results
 
 % save for next run
-save UNIFIER_trim1_res zstar xstar ustar
+save UNIFIER_trim_res zstar xstar ustar
 
 % save workspace
 save (logname);
