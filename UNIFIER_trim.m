@@ -17,11 +17,11 @@ diary on % start diary
 %2nd descent phase
 % Va_target = 39;                        % airspeed target [m/s] descent=39m/s
 % ze_target = convlength(1500,'ft','m'); % altitude [m] 2nd descent phase=1500ft
+% dFlap     = deg2rad(12); % flap deflection [deg]
 
 %cruise
 Va_target = 72.74; % airspeed target [m/s] cruise=72.74m/s
 ze_target = 1219;  % altitude [m] cruise=1219m
-
 dFlap     = deg2rad(0); % flap deflection [deg]
 
 global target
@@ -47,7 +47,7 @@ init = 0;  % 0 = start from initial guess
 if init==0
     z0 = [x0;u0];
 else
-    load UNIFIER_trim1_res zstar
+    load UNIFIER_trim_res zstar
     z0 = zstar;
 end
 

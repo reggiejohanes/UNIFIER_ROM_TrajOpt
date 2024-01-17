@@ -156,7 +156,7 @@ ROM.J       = J';
 
 dFlap_test = deg2rad(0);
 alpha_test = deg2rad(0);
-J_test     = 0.8;
+J_test     = 1.0;
 CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CL,dFlap_test,alpha_test,J_test)
 CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CD,dFlap_test,alpha_test,J_test)
 
