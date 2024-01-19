@@ -76,13 +76,10 @@ UNIFIER_dyn([],[],[],'compile')
 for i=1:dFlap_n
     % Va(i) = Re(i)*nu/c;
     % qS(i) = 0.5*rho*Va(i)^2*S;
-
     for j=1:alpha_n
-
         for k=1:DEP_n
-            
             for m=1:dElev_n
-
+                
                 % Setup state & control vectors
                 x = [0;                   % 1) xe [m]
                      0;                   % 2) ye [m]
@@ -135,7 +132,6 @@ for i=1:dFlap_n
                 CM(i,j,k,m) = My(i,j,k,m)/(qS*c);
             
             end
-
             % Store J, CT
             J(k)      = out(59);
             CT(k)     = out(47);
