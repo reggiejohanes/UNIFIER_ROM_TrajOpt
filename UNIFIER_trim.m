@@ -24,6 +24,11 @@ Va_target = 72.74; % airspeed target [m/s] cruise=72.74m/s
 ze_target = 1219;  % altitude [m] cruise=1219m
 dFlap     = deg2rad(0); % flap deflection [deg]
 
+%test
+% Va_target = 55; % airspeed target [m/s] cruise=72.74m/s
+% ze_target = 500;  % altitude [m] cruise=1219m
+% dFlap     = deg2rad(11.0411); % flap deflection [deg]
+
 global target
 target.Va    = Va_target;
 target.ze    = ze_target;
@@ -107,8 +112,10 @@ fprintf('<strong><< OPTIMIZATION COMPLETE >></strong>');
 fprintf('\n');
 fprintf('\n');
 disp('Optimization Processing Time:');
-fprintf('Total                = %6s\n',char(duration(0,0,t_fmincon)));
-fprintf('Avg. per Iteration   = %6s\n',char(duration(0,0,t_fmincon/(output.iterations+1))));
+% fprintf('Total                = %6s\n',char(duration(0,0,t_fmincon)));
+% fprintf('Avg. per Iteration   = %6s\n',char(duration(0,0,t_fmincon/(output.iterations+1))));
+fprintf('Total                = %6.4f seconds\n',t_fmincon);
+fprintf('Avg. per Iteration   = %6.4f seconds\n',t_fmincon/(output.iterations+1));
 fprintf('Avg. per Func. Eval. = %6.4f seconds\n',t_fmincon/output.funcCount);
 
 %% Process Results

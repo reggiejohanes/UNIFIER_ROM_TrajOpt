@@ -9,7 +9,7 @@ load UNIFIER_LOAD.mat c S
 
 %% SET FLIGHT CONDITIONS
 
-Va     = 20;   % airspeed [m/s]
+Va     = 70;   % airspeed [m/s]
 h      = 1000; % altitude [m]
 
 [~,~,~,rho,nu] = atmosisa(h);
@@ -40,6 +40,14 @@ DEP_max = 1;
 DEP_inc = 0.1;
 DEP_n   = (DEP_max-DEP_min)/DEP_inc+1;
 DEP_col = linspace(DEP_min,DEP_max,DEP_n)';
+
+% Elevator deflection
+dElev_min = -5;
+dElev_max = 20;
+dElev_inc = 5;
+dElev_n   = (dElev_max-dElev_min)/dElev_inc+1;
+dElev_deg = linspace(dElev_min,dElev_max,dElev_n)';
+dElev     = deg2rad(dElev_deg);
 
 % Reynolds number
 % Re_min    = 2.5e6;
@@ -72,62 +80,68 @@ for i=1:dFlap_n
     for j=1:alpha_n
 
         for k=1:DEP_n
+            
+            for m=1:dElev_n
 
-            % Setup state & control vectors
-            x = [0;                   % 1) xe [m]
-                 0;                   % 2) ye [m]
-                 -h;                  % 3) (-)ze [m]
-                 Va*cos(alpha(j));    % 4) u [m/s]
-                 0;                   % 5) v [m/s]
-                 Va*sin(alpha(j));    % 6) w [m/s]
-                 deg2rad(0);          % 7) phi [rad]
-                 alpha(j);            % 8) theta [rad]
-                 deg2rad(0);          % 9) psi [rad/s]
-                 deg2rad(0);          % 10) p [rad/s]
-                 deg2rad(0);          % 11) q [rad/s]
-                 deg2rad(0)];         % 12) r [rad/s]
-            u = [deg2rad(0);          % 13) dAil [rad]
-                 deg2rad(0);          % 14) dRud [rad]
-                 deg2rad(0);          % 15) dElev [rad]
-                 dFlap(i);            % 16) dFlap [rad] 
-                 DEP_col(k);          % 17) DEP_col [0-1]
-                 0.0;                 % 18) DEP_slope [0-1]
-                 0.0];                % 19) HTU [0-1]
+                % Setup state & control vectors
+                x = [0;                   % 1) xe [m]
+                     0;                   % 2) ye [m]
+                     -h;                  % 3) (-)ze [m]
+                     Va*cos(alpha(j));    % 4) u [m/s]
+                     0;                   % 5) v [m/s]
+                     Va*sin(alpha(j));    % 6) w [m/s]
+                     deg2rad(0);          % 7) phi [rad]
+                     alpha(j);            % 8) theta [rad]
+                     deg2rad(0);          % 9) psi [rad/s]
+                     deg2rad(0);          % 10) p [rad/s]
+                     deg2rad(0);          % 11) q [rad/s]
+                     deg2rad(0)];         % 12) r [rad/s]
+                u = [deg2rad(0);          % 13) dAil [rad]
+                     deg2rad(0);          % 14) dRud [rad]
+                     dElev(m);            % 15) dElev [rad]
+                     dFlap(i);            % 16) dFlap [rad] 
+                     DEP_col(k);          % 17) DEP_col [0-1]
+                     0.0;                 % 18) DEP_slope [0-1]
+                     0.0];                % 19) HTU [0-1]
+                
+                % Call dynamics function
+                out = UNIFIER_dyn(0,[],[x;u],'outputs');
+                % res.dx     = out(1:12);
+                % res.Fb     = out(13:15);
+                % res.P      = out(16);
+                % res.Fb_ae  = out(17:19);
+                % res.Mb_ae  = out(20:22);
+                % res.Fb_DEP = out(23:25);
+                % res.Mb_DEP = out(26:28);
+                % res.Fb_HTU = out(29:31);
+                % res.Mb_HTU = out(32:34);
+                % res.T_DEP  = out(35:46);
+                % res.CT_DEP = out(47:58);
+                F_ae_b = out(17:19);
+                
+                % Convert forces to wind axis
+                rot    = [cos(alpha(j))   0  sin(alpha(j));  
+                          0             1  0;
+                          -sin(alpha(j))  0  cos(alpha(j))];
+                F_ae_w = rot*F_ae_b;
+                L(i,j,k,m)   = -F_ae_w(3);
+                D(i,j,k,m)   = -F_ae_w(1);
+               
+                My(i,j,k,m)  = out(21);
+                
+                % Calculate coefficients
+                CL(i,j,k,m) = L(i,j,k,m)/qS;
+                CD(i,j,k,m) = D(i,j,k,m)/qS;
+                CM(i,j,k,m) = My(i,j,k,m)/(qS*c);
             
-            % Call dynamics function
-            out = UNIFIER_dyn(0,[],[x;u],'outputs');
-            % res.dx     = out(1:12);
-            % res.Fb     = out(13:15);
-            % res.P      = out(16);
-            % res.Fb_ae  = out(17:19);
-            % res.Mb_ae  = out(20:22);
-            % res.Fb_DEP = out(23:25);
-            % res.Mb_DEP = out(26:28);
-            % res.Fb_HTU = out(29:31);
-            % res.Mb_HTU = out(32:34);
-            % res.T_DEP  = out(35:46);
-            % res.CT_DEP = out(47:58);
-            F_ae_b = out(17:19);
-            
-            % Convert forces to wind axis
-            rot    = [cos(alpha(j))   0  sin(alpha(j));  
-                      0             1  0;
-                      -sin(alpha(j))  0  cos(alpha(j))];
-            F_ae_w = rot*F_ae_b;
-            L(i,j,k)   = -F_ae_w(3);
-            D(i,j,k)   = -F_ae_w(1);
-            
-            % Calculate coefficients
-            CL(i,j,k) = L(i,j)/qS;
-            CD(i,j,k) = D(i,j)/qS;
+            end
 
             % Store J, CT
             J(k)      = out(59);
             CT(k)     = out(47);
-
-            % fprintf('.');
         end
     end
+    fprintf('.')
 end
 
 UNIFIER_dyn([],[],[],'term')
@@ -138,7 +152,10 @@ fprintf('<strong><< LOOP END >></strong>');
 fprintf('\n');
 fprintf('\n');
 
-toc
+t_eval = toc;
+evals  = dFlap_n*alpha_n*DEP_n*dElev_n;
+fprintf('Total               = %6.4f seconds\n',t_eval);
+fprintf('Avg. per Evaluation = %6.4f seconds\n',t_eval/evals);
 
 %% COMPILE DATA
 
@@ -156,9 +173,9 @@ ROM.J       = J';
 
 dFlap_test = deg2rad(0);
 alpha_test = deg2rad(0);
-J_test     = 1.0;
-CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CL,dFlap_test,alpha_test,J_test)
-CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CD,dFlap_test,alpha_test,J_test)
+J_test     = 1.7;
+CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CL,dFlap_test,alpha_test,J_test);
+CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CD,dFlap_test,alpha_test,J_test);
 
 %% PLOT RESULTS
 
@@ -198,6 +215,21 @@ ylabel('C_D  ')
 xlabel('\alpha [deg]')
 set(get(gca,'ylabel'),'rotation',0)
 legend(dflaplegend,'Location','northwest')
+
+figure('Name','Pitching Moment Coefficient','Position',[150 250 600 500])
+for i=1:dFlap_n
+    dflaplegend(i) = strjoin(["\delta_{flap} =",num2str(dFlap_deg(i)),"\circ"]);
+    plot(alpha_deg,CM(i,:,1),plotstyle(i))
+    hold on
+end
+title('Pitching Moment Coefficient')
+yline(0)
+xline(0)
+grid on
+ylabel('C_M  ')
+xlabel('\alpha [deg]')
+set(get(gca,'ylabel'),'rotation',0)
+legend(dflaplegend,'Location','southwest')
 
 
 
