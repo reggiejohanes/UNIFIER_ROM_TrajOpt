@@ -1,5 +1,5 @@
 
-clc
+% clc
 clear
 close all
 
@@ -9,8 +9,8 @@ load UNIFIER_LOAD.mat c S
 
 %% SET FLIGHT CONDITIONS
 
-Va     = 70;   % airspeed [m/s]
-h      = 1000; % altitude [m]
+Va     = 72.73;   % airspeed [m/s]
+h      = 1219; % altitude [m]
 
 [~,~,~,rho,nu] = atmosisa(h);
 Re             = Va*c/nu;
@@ -39,7 +39,7 @@ DEP_min = 0;
 DEP_max = 1;
 DEP_inc = 0.1;
 DEP_n   = (DEP_max-DEP_min)/DEP_inc+1;
-DEP_col = linspace(DEP_min,DEP_max,DEP_n)';
+DEP_col = linspace(DEP_max,DEP_min,DEP_n)';
 
 % Elevator deflection
 dElev_min = -5;
@@ -159,19 +159,34 @@ ROM.Va      = Va;
 ROM.h       = h;
 ROM.CL      = CL;
 ROM.CD      = CD;
+ROM.CM      = CM;
 ROM.dFlap   = dFlap;
 ROM.alpha   = alpha;
 ROM.DEP_col = DEP_col;
 ROM.CT      = CT';
 ROM.J       = J';
+ROM.dElev   = dElev; 
+
+save ROM ROM
 
 %% TEST INTERPOLATION
 
-dFlap_test = deg2rad(0);
-alpha_test = deg2rad(0);
-J_test     = 1.7;
-CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CL,dFlap_test,alpha_test,J_test);
-CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.CD,dFlap_test,alpha_test,J_test);
+% dFlap_test = deg2rad(0);
+% alpha_test = deg2rad(0);
+% J_test     = 1.7;
+% dElev_test = deg2rad(20);
+dFlap_test = 0;
+alpha_test = 0.0157;
+J_test     = 1.98;
+dElev_test = -0.0153;
+
+CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...   % breakpoints
+                     ROM.CL,...                                % table data
+                     dFlap_test,alpha_test,J_test,dElev_test) % inputs
+
+CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+                     ROM.CD,...
+                     dFlap_test,alpha_test,J_test,dElev_test)
 
 %% PLOT RESULTS
 
