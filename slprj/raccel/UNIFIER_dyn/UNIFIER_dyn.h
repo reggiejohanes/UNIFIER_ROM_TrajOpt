@@ -29,7 +29,7 @@
 #define NSAMPLE_TIMES (2) 
 #define NINPUTS (1)       
 #define NOUTPUTS (70)     
-#define NBLOCKIO (76) 
+#define NBLOCKIO (77) 
 #define NUM_ZC_EVENTS (0) 
 #ifndef NCSTATES
 #define NCSTATES (0)   
@@ -55,63 +55,64 @@ struct { uint32_T g1bez0i0y4 ; uint32_T hq0naomli3 ; uint32_T ojom230ae1 [ 2
 kgmxbpmzzy [ 3 ] ; real_T pyp2bnyod5 [ 3 ] ; real_T noeiauttpl [ 3 ] ; real_T
 iy2nxhyqc1 [ 3 ] ; real_T copfzvyvfn [ 3 ] ; real_T npsuhx1330 [ 3 ] ; real_T
 phkvheqamq [ 2 ] ; real_T hn4ul2bos2 [ 2 ] ; real_T f40dvdh03c [ 2 ] ; real_T
-gh0om3pyty [ 2 ] ; real_T i0nsydannn ; real_T pd2gmgjs20 ; real_T jefg5cifsj
-; real_T gfknqoynom ; real_T icmhkhsb0o ; real_T lwgmtklpwc [ 2 ] ; real_T
-l3mgpdtrrg [ 3 ] ; real_T kunmel5bx4 [ 16 ] ; real_T mgyjrcfqfu [ 16 ] ;
-real_T cyv21phhbm [ 3 ] ; real_T czxnr0doyy [ 3 ] ; real_T kqrxmtokjd [ 9 ] ;
-real_T bjhstbmrsn ; real_T osqwflveuv ; real_T bp0afaxpp5 ; real_T j1stuyzs1t
-[ 3 ] ; real_T jv53lpnvpb [ 3 ] ; real_T fp54rsi3hk [ 12 ] ; real_T
-omkpqlajlz [ 3 ] ; real_T orlelyhfjl ; real_T p1lfhtknc0 [ 12 ] ; real_T
-nluycx3bh3 [ 12 ] ; real_T jltpjpl4zp [ 36 ] ; real_T etlvxwxtcy [ 12 ] ;
-real_T fqp13muoyo [ 36 ] ; real_T bftm5ocvno [ 12 ] ; real_T eljuwfhp1f [ 12
-] ; uint32_T nhcvscc4t0 [ 16 ] ; uint32_T pmh50qaazg [ 16 ] ; uint32_T
-g53iqbai0i ; uint32_T jqfgyi5cqv ; uint32_T bqft1jkk0z ; uint32_T fu5nkfrvvl
-; real32_T on23viyejw [ 7 ] ; real32_T pqjyj5rgda [ 21 ] ; real32_T
-fpov3sjl4o [ 21 ] ; real32_T bdrmalqcon [ 48 ] ; real32_T jdsvzdisey [ 3 ] ;
-real32_T lxkh42xndm [ 3 ] ; real32_T lcnor15erx [ 3 ] ; real32_T ecjaklyjaq ;
-real32_T f5f1ypai11 [ 3 ] ; real32_T ayw0otszrq ; real32_T lkci5wisjr ;
-real32_T gbccn4rvbj ; real32_T igwg4uissg ; real32_T ejdl4n31el [ 3 ] ;
-real32_T bavqi0oauu [ 21 ] ; real32_T kainbdj3jz [ 21 ] ; real32_T
-bavqi0oauug [ 21 ] ; real32_T kainbdj3jzn [ 21 ] ; real32_T kainbdj3jznl [ 48
-] ; real32_T jet1i0an5d [ 14 ] ; real32_T crx1qgibvo [ 14 ] ; real32_T
-dzpd4knetl [ 16 ] ; real32_T jet1i0an5do [ 16 ] ; real32_T crx1qgibvon [ 16 ]
-; frwhndjhji au023bergz [ 12 ] ; ji3ndkntu1ys25k jz0qdcsmmmwh5rk [ 7 ] ;
-ji3ndkntu1ys2 jz0qdcsmmmwh5 [ 7 ] ; ji3ndkntu1ys jz0qdcsmmmwh [ 16 ] ;
-ji3ndkntu1y jz0qdcsmmmw [ 14 ] ; ji3ndkntu1 jz0qdcsmmm [ 16 ] ; bquln0nszd
-p5rpnypkdo [ 12 ] ; } B ; typedef struct { real_T e3yadhhovi [ 9 ] ; struct {
-void * AQHandles ; } dvyolrqdzv ; struct { void * AQHandles ; } mufuzbr4b0 ;
-struct { void * AQHandles ; } luslbh35sa ; struct { void * AQHandles ; }
-bkfymzmyo1 ; struct { void * AQHandles ; } om2nnm1fr2 ; struct { void *
-AQHandles ; } iu1eblahay ; struct { void * AQHandles ; } cwjlkt42c1 ; struct
-{ void * AQHandles ; } aspxonopyb ; struct { void * AQHandles ; } mw5cjkjcde
-; struct { void * LoggedData [ 3 ] ; } flhwc3z3tt ; struct { void *
-LoggedData [ 3 ] ; } nw45trtl3m ; struct { void * AQHandles ; } lva0k0x22x ;
-struct { void * AQHandles ; } kce22jbhq5 ; uint32_T esnn32lqad [ 5 ] ;
-uint32_T lkiofcx0nc [ 5 ] ; uint32_T d45t54zzh0 [ 5 ] ; uint32_T obz0u22bxk [
-2 ] ; uint32_T mtbzqory0k [ 2 ] ; uint32_T cv4ea1x5bf [ 2 ] ; uint32_T
-p0luwllcwa [ 5 ] ; uint32_T momrqi2s1w [ 5 ] ; uint32_T jevgaddxph [ 5 ] ;
-uint32_T dctbywbcef [ 2 ] ; uint32_T iiazkmp3zq [ 2 ] ; uint32_T pb5bsdxxpa [
-2 ] ; uint32_T p4va2j4maz [ 16 ] ; uint32_T ldxzligihn [ 16 ] ; uint32_T
-fb00myaqvg [ 16 ] ; uint32_T hkblkqalfc [ 16 ] ; uint32_T eewvdaqf4r [ 16 ] ;
-uint32_T dgwkzgwl00 [ 16 ] ; uint32_T lsgiesztth [ 16 ] ; uint32_T m05sv2n1iq
-[ 16 ] ; uint32_T fiq4gqvmys ; uint32_T oa32expm1m ; uint32_T mnbvnpxi3q ;
-uint32_T khbxaboxwb ; uint32_T djzedhv1ik ; uint32_T luravducvq [ 16 ] ;
-uint32_T e15temhbyp [ 16 ] ; uint32_T jseguf13yy ; uint32_T cfngthrtfc ;
-uint32_T k3rxirp2ci ; uint32_T nfqrlmtid3 ; uint32_T mitq3fljz5 [ 2 ] ;
-int8_T lmdux514h1 ; int8_T ckg5ciehpx ; iuffgcvqdz au023bergz [ 12 ] ; } DW ;
-typedef struct { real_T p1y0j2wmyr ; } ExtU ; typedef struct { real_T
-ekh2fh00tc [ 70 ] ; } ExtY ; typedef struct { rtwCAPI_ModelMappingInfo mmi ;
-} DataMapInfo ; struct opnvvzhshw_ { real_T K_slope_Gain ; } ; struct
-j53mv3qbck_ { real32_T Constant1_Value ; } ; struct j53mv3qbck1_ { real32_T
-Constant1_Value ; } ; struct j53mv3qbck1cop_ { real_T Constant_Value ;
-real32_T Constant_Value_bcqheaf40z ; } ; struct dlxjkzkckz_ { real_T
-Constant_Value ; real32_T Constant_Value_lhjgiuieqz ; } ; struct ou5c4vmqt0_
-{ real_T actf2T_Gain ; real_T Saturation2_UpperSat ; real_T
-Saturation2_LowerSat ; real_T Switch1_Threshold ; real_T Gain1_Gain ; real_T
-Saturation_UpperSat ; real_T Saturation_LowerSat ; real_T Gain2_Gain ; real_T
-Saturation1_UpperSat ; real_T Saturation1_LowerSat ; real_T Gain3_Gain ;
-real_T Saturation_UpperSat_dzx4r24qqm ; real_T Saturation_LowerSat_lu14kynpbe
-; real_T Gain_Gain ; real_T Saturation1_UpperSat_o3uhb5q0dz ; real_T
+gh0om3pyty [ 2 ] ; real_T i0nsydannn ; real_T pd2gmgjs20 ; real_T jf0izapwy0
+[ 6 ] ; real_T jefg5cifsj ; real_T gfknqoynom ; real_T icmhkhsb0o ; real_T
+lwgmtklpwc [ 2 ] ; real_T l3mgpdtrrg [ 3 ] ; real_T kunmel5bx4 [ 16 ] ;
+real_T mgyjrcfqfu [ 16 ] ; real_T cyv21phhbm [ 3 ] ; real_T czxnr0doyy [ 3 ]
+; real_T kqrxmtokjd [ 9 ] ; real_T bjhstbmrsn ; real_T osqwflveuv ; real_T
+bp0afaxpp5 ; real_T j1stuyzs1t [ 3 ] ; real_T jv53lpnvpb [ 3 ] ; real_T
+fp54rsi3hk [ 12 ] ; real_T omkpqlajlz [ 3 ] ; real_T orlelyhfjl ; real_T
+p1lfhtknc0 [ 12 ] ; real_T nluycx3bh3 [ 12 ] ; real_T jltpjpl4zp [ 36 ] ;
+real_T etlvxwxtcy [ 12 ] ; real_T fqp13muoyo [ 36 ] ; real_T bftm5ocvno [ 12
+] ; real_T eljuwfhp1f [ 12 ] ; uint32_T nhcvscc4t0 [ 16 ] ; uint32_T
+pmh50qaazg [ 16 ] ; uint32_T g53iqbai0i ; uint32_T jqfgyi5cqv ; uint32_T
+bqft1jkk0z ; uint32_T fu5nkfrvvl ; real32_T on23viyejw [ 7 ] ; real32_T
+pqjyj5rgda [ 21 ] ; real32_T fpov3sjl4o [ 21 ] ; real32_T bdrmalqcon [ 48 ] ;
+real32_T jdsvzdisey [ 3 ] ; real32_T lxkh42xndm [ 3 ] ; real32_T lcnor15erx [
+3 ] ; real32_T ecjaklyjaq ; real32_T f5f1ypai11 [ 3 ] ; real32_T ayw0otszrq ;
+real32_T lkci5wisjr ; real32_T gbccn4rvbj ; real32_T igwg4uissg ; real32_T
+ejdl4n31el [ 3 ] ; real32_T bavqi0oauu [ 21 ] ; real32_T kainbdj3jz [ 21 ] ;
+real32_T bavqi0oauug [ 21 ] ; real32_T kainbdj3jzn [ 21 ] ; real32_T
+kainbdj3jznl [ 48 ] ; real32_T jet1i0an5d [ 14 ] ; real32_T crx1qgibvo [ 14 ]
+; real32_T dzpd4knetl [ 16 ] ; real32_T jet1i0an5do [ 16 ] ; real32_T
+crx1qgibvon [ 16 ] ; frwhndjhji au023bergz [ 12 ] ; ji3ndkntu1ys25k
+jz0qdcsmmmwh5rk [ 7 ] ; ji3ndkntu1ys2 jz0qdcsmmmwh5 [ 7 ] ; ji3ndkntu1ys
+jz0qdcsmmmwh [ 16 ] ; ji3ndkntu1y jz0qdcsmmmw [ 14 ] ; ji3ndkntu1 jz0qdcsmmm
+[ 16 ] ; bquln0nszd p5rpnypkdo [ 12 ] ; } B ; typedef struct { real_T
+e3yadhhovi [ 9 ] ; struct { void * AQHandles ; } dvyolrqdzv ; struct { void *
+AQHandles ; } mufuzbr4b0 ; struct { void * AQHandles ; } luslbh35sa ; struct
+{ void * AQHandles ; } bkfymzmyo1 ; struct { void * AQHandles ; } om2nnm1fr2
+; struct { void * AQHandles ; } iu1eblahay ; struct { void * AQHandles ; }
+cwjlkt42c1 ; struct { void * AQHandles ; } aspxonopyb ; struct { void *
+AQHandles ; } lcspm5z3se ; struct { void * AQHandles ; } mw5cjkjcde ; struct
+{ void * LoggedData [ 3 ] ; } flhwc3z3tt ; struct { void * LoggedData [ 3 ] ;
+} nw45trtl3m ; struct { void * AQHandles ; } lva0k0x22x ; struct { void *
+AQHandles ; } kce22jbhq5 ; uint32_T esnn32lqad [ 5 ] ; uint32_T lkiofcx0nc [
+5 ] ; uint32_T d45t54zzh0 [ 5 ] ; uint32_T obz0u22bxk [ 2 ] ; uint32_T
+mtbzqory0k [ 2 ] ; uint32_T cv4ea1x5bf [ 2 ] ; uint32_T p0luwllcwa [ 5 ] ;
+uint32_T momrqi2s1w [ 5 ] ; uint32_T jevgaddxph [ 5 ] ; uint32_T dctbywbcef [
+2 ] ; uint32_T iiazkmp3zq [ 2 ] ; uint32_T pb5bsdxxpa [ 2 ] ; uint32_T
+p4va2j4maz [ 16 ] ; uint32_T ldxzligihn [ 16 ] ; uint32_T fb00myaqvg [ 16 ] ;
+uint32_T hkblkqalfc [ 16 ] ; uint32_T eewvdaqf4r [ 16 ] ; uint32_T dgwkzgwl00
+[ 16 ] ; uint32_T lsgiesztth [ 16 ] ; uint32_T m05sv2n1iq [ 16 ] ; uint32_T
+fiq4gqvmys ; uint32_T oa32expm1m ; uint32_T mnbvnpxi3q ; uint32_T khbxaboxwb
+; uint32_T djzedhv1ik ; uint32_T luravducvq [ 16 ] ; uint32_T e15temhbyp [ 16
+] ; uint32_T jseguf13yy ; uint32_T cfngthrtfc ; uint32_T k3rxirp2ci ;
+uint32_T nfqrlmtid3 ; uint32_T mitq3fljz5 [ 2 ] ; int8_T lmdux514h1 ; int8_T
+ckg5ciehpx ; iuffgcvqdz au023bergz [ 12 ] ; } DW ; typedef struct { real_T
+p1y0j2wmyr ; } ExtU ; typedef struct { real_T ekh2fh00tc [ 70 ] ; } ExtY ;
+typedef struct { rtwCAPI_ModelMappingInfo mmi ; } DataMapInfo ; struct
+opnvvzhshw_ { real_T K_slope_Gain ; } ; struct j53mv3qbck_ { real32_T
+Constant1_Value ; } ; struct j53mv3qbck1_ { real32_T Constant1_Value ; } ;
+struct j53mv3qbck1cop_ { real_T Constant_Value ; real32_T
+Constant_Value_bcqheaf40z ; } ; struct dlxjkzkckz_ { real_T Constant_Value ;
+real32_T Constant_Value_lhjgiuieqz ; } ; struct ou5c4vmqt0_ { real_T
+actf2T_Gain ; real_T Saturation2_UpperSat ; real_T Saturation2_LowerSat ;
+real_T Switch1_Threshold ; real_T Gain1_Gain ; real_T Saturation_UpperSat ;
+real_T Saturation_LowerSat ; real_T Gain2_Gain ; real_T Saturation1_UpperSat
+; real_T Saturation1_LowerSat ; real_T Gain3_Gain ; real_T
+Saturation_UpperSat_dzx4r24qqm ; real_T Saturation_LowerSat_lu14kynpbe ;
+real_T Gain_Gain ; real_T Saturation1_UpperSat_o3uhb5q0dz ; real_T
 Saturation1_LowerSat_cob1qvjvl1 ; real_T Gain3_Gain_kiqvbbswpr ; real_T
 Gain5_Gain ; real_T Saturation3_UpperSat ; real_T Saturation3_LowerSat ;
 real_T Constant3_Value ; real_T Constant_Value ; real_T Constant1_Value ;

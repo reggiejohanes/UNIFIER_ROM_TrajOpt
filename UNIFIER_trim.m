@@ -141,6 +141,8 @@ ustar=[0;...            % dAil
        0;...            % DEP_slope
        zstar(6)];       % HTU
 
+vastar=sqrt(xstar(4)^2+xstar(6)^2);
+
 % Evaluate accelerations --------------------------------------------------
 
 % xdotstar=UNIFIER_dynamics(xstar,ustar);
@@ -216,7 +218,7 @@ disp(xdottable0)
 %% Save results
 
 % save for next run
-save UNIFIER_trim_res zstar xstar ustar
+save UNIFIER_trim_res zstar xstar ustar vastar
 
 % save workspace
 save (logname);

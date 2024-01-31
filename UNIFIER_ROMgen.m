@@ -9,8 +9,8 @@ load UNIFIER_LOAD.mat c S
 
 %% SET FLIGHT CONDITIONS
 
-Va     = 72.73;   % airspeed [m/s]
-h      = 1219; % altitude [m]
+Va     = 72.74; % airspeed [m/s] cruise=72.74
+h      = 1219;  % altitude [m]
 
 [~,~,~,rho,nu] = atmosisa(h);
 Re             = Va*c/nu;
@@ -64,6 +64,7 @@ dElev     = deg2rad(dElev_deg);
 
 %% EVALUATE FORCES & MOMENTS
 
+fprintf('\n');
 fprintf('<strong><< LOOP START >></strong>');
 fprintf('\n');
 fprintf('\n');
@@ -182,11 +183,11 @@ dElev_test = -0.0153;
 
 CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...   % breakpoints
                      ROM.CL,...                                % table data
-                     dFlap_test,alpha_test,J_test,dElev_test) % inputs
+                     dFlap_test,alpha_test,J_test,dElev_test); % inputs
 
 CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
                      ROM.CD,...
-                     dFlap_test,alpha_test,J_test,dElev_test)
+                     dFlap_test,alpha_test,J_test,dElev_test);
 
 %% PLOT RESULTS
 
