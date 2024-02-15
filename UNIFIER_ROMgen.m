@@ -5,7 +5,7 @@ close all
 
 %% GET AIRCRAFT DATA
 
-load UNIFIER_LOAD.mat c S
+load data/UNIFIER_LOAD.mat c S
 
 %% SET FLIGHT CONDITIONS
 
@@ -168,7 +168,7 @@ ROM.CT      = CT';
 ROM.J       = J';
 ROM.dElev   = dElev; 
 
-save ROM ROM
+save data/UNIFIER_ROM.mat ROM
 
 %% TEST INTERPOLATION
 
