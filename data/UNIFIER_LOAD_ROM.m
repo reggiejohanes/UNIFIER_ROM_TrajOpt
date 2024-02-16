@@ -5,7 +5,7 @@
 
 %% Constants
 
-g = 9.80665;      % standard gravity
+gr = 9.80665;      % standard gravity
 
 %% Aircraft Data
 
@@ -52,8 +52,8 @@ umin(1) = -25; % Min aileron deflection  [deg]
 umax(1) = 25;  % Max aileron deflection  [deg]
 umin(2) = -30; % Min rudder deflection   [deg]
 umax(2) = 30;  % Max rudder deflection   [deg]
-umin(3) = -30; % Min elevator deflection [deg]
-umax(3) = 30;  % Max elevator deflection [deg]
+umin(3) = -5; % Min elevator deflection [deg]
+umax(3) = 20;  % Max elevator deflection [deg]
 umin(4) = 0;   % Min flap deflection     [deg]
 umax(4) = 25;  % Max flap deflection     [deg]
 umin(5) = 0;   % Min DEP_col             [-]
@@ -64,16 +64,19 @@ umin(7) = 0;   % Min HTU                 [-]
 umax(7) = 1;   % Max HTU                 [-]
 
 % Rate limits
-% dumax(1)   = 60; % Aileron    [deg/s]
-% dumax(2)   = 60; % Stabilizer [deg/s]
-% dumax(3)   = 60; % Rudder     [deg/s]
-% dumax(4:5) = 2;  % Throttle   [deg/s]
+dumax(1) = 60; % Aileron    [deg/s]
+dumax(2) = 60; % Rudder     [deg/s]
+dumax(3) = 60; % Elevator   [deg/s]
+dumax(4) = 10; % Flap       [deg/s]
+dumax(5) = 2;  % DEP_col
+dumax(6) = 2;  % DEP_slope
+dumax(7) = 2;  % HTU
 
 % Convert to rad
 umin(1:4)  = deg2rad(umin(1:4));
 umax(1:4)  = deg2rad(umax(1:4));
-% dumax = deg2rad(dumax);
+dumax      = deg2rad(dumax);
 
 %% Save to .mat
 
-% save UNIFIER_LOAD_ROM
+save UNIFIER_LOAD_ROM

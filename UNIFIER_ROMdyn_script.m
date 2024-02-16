@@ -12,7 +12,7 @@ function DX=UNIFIER_ROMdyn_script(X,U)
 
 %% Constants
 
-UNIFIER_LOAD_ROM
+load data/UNIFIER_LOAD_ROM.mat
 
 prop_d  = 1.6;
 DEP_inc = deg2rad(-5);
@@ -33,8 +33,6 @@ dElev = U(:,1); % rad
 dFlap = U(:,2); % rad
 DEP   = U(:,3); % 0-1
 HTU   = U(:,4); % 0-1
-
-n = numel(x);
 
 %% Intermediate Variables
 
@@ -130,8 +128,8 @@ Fz_b = Fae_b_z + FDEP_b_z + FHTU_b_z;
 M_b  = Mae + MDEP + MHTU;
 
 % Force/moment balance equations ------------------------------------------
-du = Fx_b./m - w.*q - g.*sin(theta);
-dw = Fz_b./m + u.*q + g.*cos(theta);
+du = Fx_b./m - w.*q - gr*sin(theta);
+dw = Fz_b./m + u.*q + gr*cos(theta);
 dq = M_b/Iyy;
 
 % Kinematics --------------------------------------------------------------
