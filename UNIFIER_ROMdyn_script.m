@@ -10,6 +10,9 @@ function DX=UNIFIER_ROMdyn_script(X,U)
 % U = [-0.015298320692100, 0, 0.306978739246813, 0.271067256037969;...
 %      -0.015298320692100, 0, 0.306978739246813, 0.271067256037969];
 
+% X=
+% U=[-0.0147088595873634	0.0148091820854915	0.190332192026704	0.286393136644245];
+
 %% Constants
 
 load data/UNIFIER_LOAD_ROM.mat
@@ -21,7 +24,7 @@ n_prop  = 12;
 %% Extract State and Control Variables
 
 % States
-x     = X(:,1); % mc
+x     = X(:,1); % m
 z     = X(:,2); % m
 u     = X(:,3); % m/s
 w     = X(:,4); % m/s

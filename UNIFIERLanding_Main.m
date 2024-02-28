@@ -24,6 +24,7 @@ t_run=toc;
 %% Plot Figures
 
 % close all
+% Va = solution.X(:,)
 
 % control histories ---------------------------------------------------------
 
@@ -102,19 +103,19 @@ grid on
 % physical trajectory -----------------------------------------------------
 
 fig(3)=figure('Name','Physical Trajectory and Airspeed','Position', [50 450 1450 400]);
-tiledlayout(1,3,"TileSpacing","tight","Padding","compact")
-nexttile([1,2])
+% tiledlayout(1,3,"TileSpacing","tight","Padding","compact")
+% nexttile([1,2])
 plot(solution.X(:,1)/1000,-1*solution.X(:,2),'.-k')
 title('Altitude vs Horizontal Distance')
 xlabel('Horizontal Distance, km')
 ylabel('Altitude, m')
 grid on
-nexttile
-plot(solution.T,Va,'.-k')
-title('Time vs Airspeed')
-xlabel('Time, s')
-ylabel('Airspeed, m/s')
-grid on
+% nexttile
+% plot(solution.T,Va,'.-k')
+% title('Time vs Airspeed')
+% xlabel('Time, s')
+% ylabel('Airspeed, m/s')
+% grid on
 
 %% Save results
 

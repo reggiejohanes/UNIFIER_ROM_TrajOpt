@@ -99,8 +99,8 @@ problem.states.xrl = [-inf -inf -inf -inf -inf -inf];
 problem.states.xru = [ inf  inf  inf  inf  inf  inf]; 
 
 % State error bounds
-problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(5) deg2rad(1)];
-problem.states.xErrorTol_integral = [1 1 0.5 0.5 deg2rad(5) deg2rad(1)];
+problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(5) deg2rad(1)]/5;
+problem.states.xErrorTol_integral = [1 1 0.5 0.5 deg2rad(5) deg2rad(1)]/5;
 
 % State constraint error bounds
 problem.states.xConstraintTol  = [1 1 0.5 0.5 deg2rad(5) deg2rad(1)];
