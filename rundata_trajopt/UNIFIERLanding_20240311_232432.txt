@@ -1,0 +1,7 @@
+{Unrecognized function or variable 'zf'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding.m', 64)" style="font-weight:bold">UNIFIERLanding</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding.m',64,0)">line 64</a>)
+xf      = -1*(z0-zf)/tand(3); % 3deg glide slope
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 25)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',25,0)">line 25</a>)
+[problem,guess]      = UNIFIERLanding;        % Fetch the problem definition} 
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding.m',64,0)
+UNIFIERLanding_Main

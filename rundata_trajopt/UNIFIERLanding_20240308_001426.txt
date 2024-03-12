@@ -1,0 +1,186 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   405738
+Number of nonzeros in Lagrangian Hessian.............:   214200
+
+Total number of variables............................:     9975
+                     variables with only lower bounds:      997
+                variables with lower and upper bounds:     5987
+                     variables with only upper bounds:      997
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:    13978
+        inequality constraints with only lower bounds:     3992
+   inequality constraints with lower and upper bounds:     5994
+        inequality constraints with only upper bounds:     3992
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  4.1096930e+02 3.37e+02 1.00e+00   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.1101847e+02 3.37e+02 3.79e+01  -4.6 3.45e+02    -  1.12e-03 2.79e-04f  1
+   2  4.1101847e+02 3.37e+02 2.75e+03   0.5 9.04e+02    -  2.97e-03 1.99e-08f  2
+   3  4.1101080e+02 3.36e+02 1.17e+04   1.3 1.08e+03    -  3.06e-02 9.01e-04f  1
+   4  4.1102428e+02 3.36e+02 1.94e+04   0.8 3.46e+02    -  3.49e-02 6.91e-05f  1
+   5  4.1152635e+02 3.36e+02 1.71e+06   3.1 2.25e+03    -  9.56e-02 1.34e-03f  1
+   6  4.1153200e+02 3.36e+02 3.54e+06   2.0 3.00e+02    -  1.00e-01 1.85e-04h  1
+   7  4.1640965e+02 3.30e+02 3.40e+06   1.3 3.90e+02    -  1.36e-02 1.60e-02h  1
+   8  4.1991767e+02 3.27e+02 4.88e+06   1.3 3.48e+02    -  4.72e-02 1.09e-02h  2
+   9  4.3163088e+02 3.15e+02 4.96e+06   1.3 3.32e+02    -  3.99e-02 3.62e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  4.3845371e+02 3.08e+02 7.36e+06   1.3 3.16e+02    -  3.97e-02 2.17e-02h  1
+  11r 4.3845371e+02 3.08e+02 1.00e+03   2.5 0.00e+00   4.0 0.00e+00 3.34e-07R  5
+  12r 4.6418160e+02 2.82e+02 1.86e+03  -3.8 2.26e+02    -  4.56e-01 1.14e-01f  1
+  13r 4.6418566e+02 2.82e+02 2.41e+03   1.7 1.08e+03    -  3.32e-01 3.78e-06f  1
+Warning: Cutting back alpha due to evaluation error
+  14r 6.0449293e+02 1.42e+02 2.35e+03  -3.9 4.52e+03    -  4.59e-02 3.11e-02f  2
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Evaluation error during soft restoration phase step.
+Warning: Evaluation error during soft restoration phase step.
+Warning: Evaluation error during soft restoration phase step.
+  15r 6.0449293e+02 1.42e+02 9.99e+02   2.2 0.00e+00   3.5 0.00e+00 4.77e-07R 22
+  16r 6.0456689e+02 1.42e+02 9.99e+02  -4.1 3.01e+02    -  9.01e-02 2.48e-04f  1
+  17r 6.0457204e+02 1.42e+02 9.99e+02  -0.2 3.51e+02    -  7.36e-02 1.47e-05f  1
+  18r 6.1012888e+02 1.36e+02 9.84e+02  -4.1 3.91e+02    -  9.87e-02 1.42e-02f  1
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+  19r 6.2414257e+02 1.22e+02 9.55e+02  -4.1 4.71e+02    -  2.66e-02 2.98e-02f  4
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Evaluation error during soft restoration phase step.
+Warning: Evaluation error during soft restoration phase step.
+Warning: Evaluation error during soft restoration phase step.
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20r 6.2414257e+02 1.22e+02 9.99e+02   2.1 0.00e+00   3.0 0.00e+00 4.77e-07R 22
+  21r 6.2414258e+02 1.22e+02 1.36e+03  -0.0 3.18e+02    -  3.39e-01 1.55e-08f  3
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+  22r 6.2791425e+02 1.18e+02 2.25e+03  -0.3 6.25e+02    -  3.52e-01 6.06e-03f  6
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+  23r 6.2974186e+02 1.16e+02 2.49e+03   0.2 1.97e+03    -  1.65e-01 9.29e-04f  7
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+  24r 6.3064155e+02 1.16e+02 2.49e+03   0.4 3.39e+03    -  9.75e-02 2.66e-04f  8
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+Warning: Cutting back alpha due to evaluation error
+  25r 6.3086473e+02 1.15e+02 2.34e+03  -0.1 1.75e+03    -  9.71e-02 1.28e-04f 10
+Reallocating memory for MA57: lfact (4463093)
+Reallocating memory for MA57: lfact (20824270)
+Reallocating memory for MA57: lfact (32198821)
+Reallocating memory for MA57: lfact (71813744)
+Reallocating memory for MA57: lfact (76516568)
+Reallocating memory for MA57: lfact (84685752)
+Reallocating memory for MA57: lfact (94895369)
+WARNING: Problem in step computation; switching to emergency mode.
+  26r 6.3086473e+02 1.15e+02 2.34e+03  -0.1 1.75e+03  20.0 0.00e+00 0.00e+00R  1
+WARNING: Problem in step computation; switching to emergency mode.
+Restoration phase is called at point that is almost feasible,
+  with constraint violation 1.482760e-14. Abort.
+Restoration phase in the restoration phase failed.
+
+Number of Iterations....: 26
+
+                                   (scaled)                 (unscaled)
+Objective...............:   6.3086472980648296e+02    6.3086472980648296e+02
+Dual infeasibility......:   2.3394050886608266e+03    2.3394050886608266e+03
+Constraint violation....:   1.1537138564923545e+02    1.1537138564923545e+02
+Complementarity.........:   4.7305356813926610e+03    4.7305356813926610e+03
+Overall NLP error.......:   1.1537138564923545e+02    4.7305356813926610e+03
+
+
+Number of objective function evaluations             = 44
+Number of objective gradient evaluations             = 15
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 111
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 28
+Number of Lagrangian Hessian evaluations             = 27
+Total CPU secs in IPOPT (w/o function evaluations)   =   2261.786
+Total CPU secs in NLP function evaluations           =     70.400
+
+EXIT: Restoration Failed!
+computation time:
+   2.3322e+03
+minimized cost:
+  630.8647
+Maximum absolute local error:
+    1.0080    2.0752    0.2763    1.3183    0.0073    0.0771
+Maximum relative local error:
+    0.0000    0.0017    0.0037    0.1836    0.0067    0.0723
+Maximum absolute constraint violation:
+  Columns 1 through 7
+         0         0         0         0    0.0005         0         0
+  Columns 8 through 14
+         0         0         0         0    0.0109         0         0
+  Columns 15 through 20
+         0         0         0         0         0    0.0871
+Number of active constraints:
+     3

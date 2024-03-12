@@ -1,3 +1,4 @@
+
 clc
 clear all
 close all
@@ -5,6 +6,7 @@ close all
 %% Load data
 
 load rundata_trajopt/UNIFIERLanding_20240219_003236.mat solution
+% load rundata_trajopt/UNIFIERLanding_20240312_124904.mat solution
 load data/UNIFIER_LOAD_ROM.mat
 
 dt       = solution.T(2);    % timestep size
@@ -15,7 +17,7 @@ Umax     = [umax(3) umax(4) umax(5) umax(7)];     % controls max value
 Umin     = [umin(3) umin(4) umin(5) umin(7)];     % controls min value
 DUmax    = [dumax(3) dumax(4) dumax(5) dumax(7)]; % control rate limits
 
-%%
+%% Optimization
 
 fprintf('OPTIMIZATION PROGRESS:\n')
 fprintf(' ____________________ \n')
@@ -26,67 +28,62 @@ startLoop = tic;
 nsteps=40;
 for i=1:nsteps
 
-    % initial states
+    % current state
     if i==1
         X_res(i,:) = X_target(1,:);
     else
         X_res(i,:) = X_res(i-1,:) + DX_res(i-1,:).*dt;
     end
+
+    if i~=nsteps
+        % target accelerations
+        DX_target(i,:) = (X_target(i+1,:)-X_res(i,:))/dt;
     
-    % target accelerations
-    DX_target(i,:) = (X_target(i+1,:)-X_res(i,:))/dt;
-    
-    % guess
-    if i==1
-        U_guess(i,:) = [deg2rad(-1) deg2rad(0.1) 0.31 0.25];
-    else
-        U_guess(i,:) = U_res(i-1,:);
+        % guess control inputs, bounds
+        if i==1
+            U_guess(i,:) = [deg2rad(-1) deg2rad(0.1) 0.31 0.25];
+            ub(i,:) = Umax;
+            lb(i,:) = Umin;
+        else
+            U_guess(i,:) = U_res(i-1,:);
+            ub(i,:) = min(U_res(i-1,:)+DUmax,Umax);
+            lb(i,:) = max(U_res(i-1,:)-DUmax,Umin);
+        end
+        
+        % set fmincon options
+        options.Display       = 'off';
+        % options.Algorithm     = 'sqp';
+        options.Algorithm     = 'interior-point';
+        options.FunValCheck   = 'off';
+        options.ScaleProblem  = 'false';
+        options.FinDiffType   = 'forward';
+        options.TolX          = 1e-8;  % Termination tolerance on x (aka step tolerance) Default=1e-6
+        options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
+        % options.DiffMaxChange = 1e-0;  % Maximum change in variables for finite-difference gradients. Default=Inf.
+        % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
+        % options.TolCon        = 1e-3;  % Constraint violation tolerance
+        % options.MaxIter       = 100;   % Max iterations
+        % options.MaxFunEvals   = 1000;  % Max function evaluations
+        % options.PlotFcns      = {@optimplotx, @optimplotfval, @optimplotfunccount, @optimplotconstrviolation, @optimplotstepsize, @optimplotfirstorderopt};
+        % options.OutputFcn     = @outputFcn_global;
+        
+        % run otpimization
+        global target
+        target.DX = DX_target(i,:);
+        target.X  = X_res(i,:);
+        
+        startOpt  = tic;
+        [U_res(i,:),fval,exitflag,output] = fmincon(@(x) OptimalTracking_UNIFIER_obj(x),U_guess(i,:),[],[],[],[],lb(i,:),ub(i,:),[],options);
+        t_opt(i) = toc(startOpt);
+        fval_hist(i)                 = fval;
+        output_hist.iterations(i)    = output.iterations;
+        output_hist.funcCount(i)     = output.funcCount;
+        output_hist.stepsize(i)      = output.stepsize;
+        output_hist.firstorderopt(i) = output.firstorderopt;
+        
+        % evaluate accelerations
+        DX_res(i,:) = UNIFIER_ROMdyn_script(X_res(i,:),U_res(i,:));
     end
-    
-    % bounds
-    if i==1
-        ub(i,:) = Umax;
-        lb(i,:) = Umin;
-    else
-        ub(i,:) = min(U_res(i-1,:)+DUmax,Umax);
-        lb(i,:) = max(U_res(i-1,:)-DUmax,Umin);
-    end
-    
-    % set fmincon options
-    
-    options.Display       = 'off';
-    % options.Algorithm     = 'sqp';
-    options.Algorithm     = 'interior-point';
-    options.FunValCheck   = 'off';
-    options.ScaleProblem  = 'false';
-    options.FinDiffType   = 'forward';
-    options.TolX          = 1e-8;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-    options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
-    % options.DiffMaxChange = 1e-0;  % Maximum change in variables for finite-difference gradients. Default=Inf.
-    % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
-    % options.TolCon        = 1e-3;  % Constraint violation tolerance
-    % options.MaxIter       = 100;   % Max iterations
-    % options.MaxFunEvals   = 1000;  % Max function evaluations
-    % options.PlotFcns      = {@optimplotx, @optimplotfval, @optimplotfunccount, @optimplotconstrviolation, @optimplotstepsize, @optimplotfirstorderopt};
-    % options.OutputFcn     = @outputFcn_global;
-    
-    % run otpimization
-    
-    global target
-    target.DX = DX_target(i,:);
-    target.X  = X_res(i,:);
-    
-    startOpt  = tic;
-    [U_res(i,:),fval,exitflag,output] = fmincon(@(x) OptimalTracking_UNIFIER_obj(x),U_guess(i,:),[],[],[],[],lb(i,:),ub(i,:),[],options);
-    t_opt(i) = toc(startOpt);
-    fval_hist(i)                 = fval;
-    output_hist.iterations(i)    = output.iterations;
-    output_hist.funcCount(i)     = output.funcCount;
-    output_hist.stepsize(i)      = output.stepsize;
-    output_hist.firstorderopt(i) = output.firstorderopt;
-    
-    % evaluate accelerations
-    DX_res(i,:) = UNIFIER_ROMdyn_script(X_res(i,:),U_res(i,:));
 
     if rem(i,nsteps/20)==0
         fprintf('=')
@@ -95,14 +92,15 @@ for i=1:nsteps
 end
 t_total = toc(startLoop);
 
-%%
+%% Print Summary 
+
 fprintf('\n')
 fprintf('\n')
 fprintf('<<OPTIMIZATION COMPLETE>>')
 fprintf('\n')
 fprintf('\n')
 disp('PROCESSING TIME:');
-fprintf('Total                = %6.4f seconds\n',t_total);
+fprintf('Total                = %6.2f seconds\n',t_total);
 fprintf('Avg per Optimization = %6.4f seconds\n',mean(t_opt));
 fprintf('Max per Optimization = %6.4f seconds\n',max(t_opt));
 fprintf('Min per Optimization = %6.4f seconds\n',min(t_opt));
@@ -185,35 +183,23 @@ fig(2)=figure('Name','Convergence History','Position', [75 75 1400 380]);
 tiledlayout(1,3,"TileSpacing","tight","Padding","compact")
 
 nexttile
-plot(1:nsteps,fval_hist,'.-k')
+plot(1:nsteps-1,fval_hist,'.-k')
 grid on
 title('Objective Function Value')
 xlabel('Timestep')
 ylabel('Fval')
 
 nexttile
-plot(1:nsteps,output_hist.firstorderopt,'.-k')
+plot(1:nsteps-1,output_hist.firstorderopt,'.-k')
 grid on
 title('First Order Optimality')
 xlabel('Timestep')
 ylabel('Optimality')
 
 nexttile
-plot(1:nsteps,output_hist.iterations,'.-k')
+plot(1:nsteps-1,output_hist.iterations,'.-k')
 grid on
 title('No. of Iterations')
 xlabel('Timestep')
 ylabel('Iterations')
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -68,19 +68,19 @@ wf      = 0;
 thetaf  = deg2rad(1);
 qf      = deg2rad(0);
 
-xfu     = xf*1.2;
 zfu     = zf;
+xfu     = xf*1.2;
 ufu     = uf*1.2;
 wfu     = wf+3;
-thetafu = thetaf+deg2rad(3);
-qfu     = qf+deg2rad(1);
+thetafu = thetaf+deg2rad(1);
+qfu     = qf+deg2rad(0.5);
 
-xfl     = xf*0.8;
 zfl     = zf;
+xfl     = xf*0.8;
 ufl     = uf*0.8;
 wfl     = wf-3;
-thetafl = thetaf-deg2rad(3);
-qfl     = qf-deg2rad(1);
+thetafl = thetaf-deg2rad(1);
+qfl     = qf-deg2rad(0.5);
 
 %%
 
@@ -127,9 +127,6 @@ problem.states.xrConstraintTol = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1000;
 problem.states.xfl = [xfl zfl ufl wfl thetafl qfl]; 
 problem.states.xfu = [xfu zfu ufu wfu thetafu qfu]; 
 
-% problem.states.xfl = [xf zf uf wf thetaf qf]; 
-% problem.states.xfu = [xf zf uf wf thetaf qf]; 
-
 % Guess the state trajectories with [x0 xf]
 guess.states(:,1) = [x0 xf];
 guess.states(:,2) = [z0 zf];
@@ -151,22 +148,22 @@ problem.inputs.ul = [dElevmin DEPmin HTUmin dFlapmin];
 problem.inputs.uu = [dElevmax DEPmax HTUmax dFlapmax];
 
 % Initial input bounds
-problem.inputs.u0l = [dElev0 DEP0 HTU0 dFlap0];
-problem.inputs.u0u = [dElev0 DEP0 HTU0 dFlap0];
 % problem.inputs.u0l = [dElev0 DEP0 HTU0];
 % problem.inputs.u0u = [dElev0 DEP0 HTU0];
+problem.inputs.u0l = [dElev0 DEP0 HTU0 dFlap0];
+problem.inputs.u0u = [dElev0 DEP0 HTU0 dFlap0];
 
 % Input rate bounds
-problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7) -DUmax(4)];
-problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)  DUmax(4)];
 % problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7)];
 % problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)];
+problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7) -DUmax(4)];
+problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)  DUmax(4)];
 
 % Input constraint error bounds
-problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
-problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
 % problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1]/1000;
 % problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1]/1000;
+problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
+problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
 
 % Guess the input sequences with [u0 uf]
 guess.inputs(:,1) = [dElev0 dElev0];
@@ -186,10 +183,6 @@ problem.constraints.gTol_eq = [];
 problem.constraints.gl       = [0 0];
 problem.constraints.gu       = [inf inf];
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s') convvel(5,'ft/min','m/s')];
-
-% problem.constraints.gl       = [];
-% problem.constraints.gu       = [];
-% problem.constraints.gTol_neq = [];
 
 % % problem.constraints.g_neq_ActiveTime{1}=[guess.tf/2 guess.tf];
 % problem.constraints.g_neq_ActiveTime{1}=[0 guess.tf];
@@ -256,8 +249,7 @@ h  = x(:,2)*-1;
 h0 = x(1,2)*-1;
 k  = 1;
 % stageCost = k.*sqrt(Va.^2.*(h-h0).^2);
-stageCost = k.*Va.*sqrt((h-h0).^2);
-% stageCost = k.*Va.*(h-h0).^2;
+stageCost = k.*Va.^2.*(h-h0).^2);
 
 % stageCost = 0*t;
 

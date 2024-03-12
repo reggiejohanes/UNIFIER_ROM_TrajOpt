@@ -25,7 +25,8 @@ DX = UNIFIER_ROMdyn_script(X,U);
 
 %% Evaluate path constraints
 
-% constraint(s) violated when negative (c<0)
+% constraint(s) violated when negative (c<0), satisfied when positive
+% (c>=0)
 
 % max rate of descent
 rodmax = convvel(800,'ft/min','m/s');
@@ -35,4 +36,4 @@ c1     = rodmax-DX(:,2);
 rodmin = 0;
 c2     = DX(:,2)-rodmin;
 
-g_neq  = [c1,c2];
+g_neq  = c1;

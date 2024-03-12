@@ -10,9 +10,6 @@ function DX=UNIFIER_ROMdyn_script(X,U)
 % U = [-0.015298320692100, 0, 0.306978739246813, 0.271067256037969;...
 %      -0.015298320692100, 0, 0.306978739246813, 0.271067256037969];
 
-% X=
-% U=[-0.0147088595873634	0.0148091820854915	0.190332192026704	0.286393136644245];
-
 %% Constants
 
 load data/UNIFIER_LOAD_ROM.mat
@@ -33,9 +30,13 @@ q     = X(:,6); % rad/s
 
 % Controls
 dElev = U(:,1); % rad
-dFlap = U(:,2); % rad
-DEP   = U(:,3); % 0-1
-HTU   = U(:,4); % 0-1
+DEP   = U(:,2); % 0-1
+HTU   = U(:,3); % 0-1
+dFlap = U(:,4); % rad
+
+% dFlap = deg2rad(5);
+% global controls
+% dFlap = controls.dFlap;
 
 %% Intermediate Variables
 
