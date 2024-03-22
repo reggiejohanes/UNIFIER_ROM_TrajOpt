@@ -1,0 +1,100 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   341076
+Number of nonzeros in Lagrangian Hessian.............:   174960
+
+Total number of variables............................:     8982
+                     variables with only lower bounds:      998
+                variables with lower and upper bounds:     4991
+                     variables with only upper bounds:      997
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:    14979
+        inequality constraints with only lower bounds:     5991
+   inequality constraints with lower and upper bounds:     5994
+        inequality constraints with only upper bounds:     2994
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  5.3331841e+02 6.98e-01 8.19e+00   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  5.3331804e+02 6.98e-01 1.50e+02  -2.5 1.87e+02    -  1.43e-02 1.66e-06f  1
+   2  5.3336688e+02 6.97e-01 1.34e+03  -0.8 5.64e+01    -  3.82e-01 4.79e-04f  1
+   3  6.1476907e+02 5.07e-01 4.61e+03   0.7 4.28e+03    -  4.47e-02 1.26e-02f  1
+   4  4.0968997e+02 1.64e-01 8.41e+04  -0.4 3.91e+02    -  5.63e-02 3.82e-01h  1
+   5  4.0977290e+02 1.63e-01 4.21e+06   0.6 1.22e+00   2.0 9.99e-01 5.61e-03h  1
+   6  4.1004721e+02 1.64e-01 3.05e+09   2.4 1.02e+02   1.5 1.00e+00 2.15e-03f  1
+   7  2.8342145e+02 1.21e-01 2.57e+09   2.5 4.48e+02    -  2.35e-01 2.12e-01h  1
+   8  2.8345674e+02 1.20e-01 2.82e+09   2.5 1.56e+01   3.8 2.05e-02 6.59e-03h  1
+   9  2.8349932e+02 1.20e-01 4.10e+09   2.5 1.56e+01   4.2 3.26e-02 6.77e-03h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  2.7548731e+02 1.16e-01 5.22e+09   2.1 2.49e+02    -  2.45e-01 2.63e-02h  1
+  11  2.6569510e+02 1.13e-01 4.84e+09  -3.6 2.40e+02    -  3.06e-03 3.27e-02f  1
+  12  2.6561117e+02 1.13e-01 5.15e+09   2.5 1.22e+02    -  1.50e-02 6.42e-04h  1
+  13  2.6567816e+02 1.13e-01 6.69e+09   2.5 7.79e+01    -  1.06e-02 1.91e-03h  1
+  14  2.6567575e+02 1.12e-01 7.29e+09   2.5 2.64e+02    -  6.68e-04 4.97e-04h  1
+  15  2.6567601e+02 1.12e-01 5.40e+10   2.5 1.62e+02   4.6 2.51e-03 2.34e-04h  1
+  16  2.6566986e+02 1.12e-01 7.46e+10   1.4 2.76e+02    -  1.31e-03 3.97e-04h  1
+  17  2.6566571e+02 1.12e-01 1.96e+10   2.5 2.50e+02   5.0 4.55e-06 3.80e-04h  1
+  18  2.6566297e+02 1.12e-01 1.66e+11   2.5 2.70e+02   5.5 6.81e-04 1.87e-04h  1
+  19r 2.6566297e+02 1.12e-01 1.00e+03   2.5 0.00e+00    -  0.00e+00 3.43e-07R  5
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20r 2.6589566e+02 9.81e-02 1.52e+02  -3.7 4.11e-01    -  8.75e-01 9.51e-02f  1
+  21  2.6589568e+02 9.81e-02 7.94e+01  -2.6 5.04e+00    -  1.61e-05 1.35e-06f  1
+  22  2.6589577e+02 9.81e-02 2.52e+01  -2.6 2.60e+00    -  1.20e-04 6.94e-06f  1
+  23  2.6589585e+02 9.81e-02 6.23e+01  -2.6 1.90e+00    -  2.13e-05 5.60e-06f  1
+  24r 2.6589585e+02 9.81e-02 9.99e+02  -1.2 0.00e+00    -  0.00e+00 1.73e-07R  2
+  25r 2.6644476e+02 5.88e-02 9.95e+02  -2.8 4.79e+01    -  5.42e-03 1.18e-03f  1
+WARNING: Problem in step computation; switching to emergency mode.
+  26r 2.6644476e+02 5.88e-02 9.99e+02  -1.8 0.00e+00  19.3 0.00e+00 0.00e+00R  1
+WARNING: Problem in step computation; switching to emergency mode.
+Restoration phase is called at point that is almost feasible,
+  with constraint violation 1.759995e-15. Abort.
+Restoration phase in the restoration phase failed.
+
+Number of Iterations....: 26
+
+                                   (scaled)                 (unscaled)
+Objective...............:   2.6644476496420094e+02    2.6644476496420094e+02
+Dual infeasibility......:   8.0793101242617269e+01    8.0793101242617269e+01
+Constraint violation....:   1.4401109773087334e-02    5.8777794829431344e-02
+Complementarity.........:   6.1628367544445359e+02    6.1628367544445359e+02
+Overall NLP error.......:   6.1628367544445359e+02    6.1628367544445359e+02
+
+
+Number of objective function evaluations             = 34
+Number of objective gradient evaluations             = 27
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 34
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 29
+Number of Lagrangian Hessian evaluations             = 27
+Total CPU secs in IPOPT (w/o function evaluations)   =      2.500
+Total CPU secs in NLP function evaluations           =     57.529
+
+EXIT: Restoration Failed!
+computation time:
+   60.0754
+minimized cost:
+  266.4448
+Maximum absolute local error:
+    0.0658    0.1077    0.0112    0.2561    0.0030    0.0048
+Maximum relative local error:
+    0.0000    0.0001    0.0001    0.0419    0.0027    0.0038
+Maximum absolute constraint violation:
+  Columns 1 through 8
+         0         0         0         0    0.4967         0         0         0
+  Columns 9 through 16
+         0         0         0         0         0         0         0         0
+  Columns 17 through 24
+         0         0         0         0         0         0         0         0
+Number of active constraints:
+     2

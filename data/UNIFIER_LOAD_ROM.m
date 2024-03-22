@@ -50,16 +50,22 @@ xyz_DEP = [ -6.9629998	-6.9210000	-6.8660002	-6.8099999	-6.7540002	-6.6999998	-6
 % Max/min deflections
 umin(1) = -25; % Min aileron deflection  [deg]
 umax(1) = 25;  % Max aileron deflection  [deg]
+
 umin(2) = -30; % Min rudder deflection   [deg]
 umax(2) = 30;  % Max rudder deflection   [deg]
-umin(3) = -5; % Min elevator deflection [deg]
+
+umin(3) = -5;  % Min elevator deflection [deg]
 umax(3) = 20;  % Max elevator deflection [deg]
+
 umin(4) = 0;   % Min flap deflection     [deg]
 umax(4) = 25;  % Max flap deflection     [deg]
+
 umin(5) = 0;   % Min DEP_col             [-]
 umax(5) = 1;   % Max DEP_col             [-]
+
 umin(6) = -1;  % Min DEP_slope           [-]
 umax(6) = 1;   % Max DEP_slope           [-]
+
 umin(7) = 0;   % Min HTU                 [-]
 umax(7) = 1;   % Max HTU                 [-]
 

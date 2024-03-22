@@ -5,17 +5,24 @@ close all
 
 %% Load data
 
-load rundata_trajopt/UNIFIERLanding_20240219_003236.mat solution
-% load rundata_trajopt/UNIFIERLanding_20240312_124904.mat solution
+% load rundata_trajopt/UNIFIERLanding_20240219_003236.mat solution
+load rundata_trajopt/UNIFIERLanding_20240322_035130.mat solution
 load data/UNIFIER_LOAD_ROM.mat
 
 dt       = solution.T(2);    % timestep size
 X_target = solution.X;       % extract reference state trajectories
 nX       = size(X_target,2); % number of state variables
-nsteps   = size(X_target,1); % number of state variables
-Umax     = [umax(3) umax(4) umax(5) umax(7)];     % controls max value
-Umin     = [umin(3) umin(4) umin(5) umin(7)];     % controls min value
-DUmax    = [dumax(3) dumax(4) dumax(5) dumax(7)]; % control rate limits
+nsteps   = size(X_target,1); % number oftime steps
+Umax     = [umax(3) umax(5) umax(7)];    % controls max value
+Umin     = [umin(3) umin(5) umin(7)];    % controls min value
+DUmax    = [dumax(3) dumax(5) dumax(7)]; % control rate limits
+
+%% Set Flap Deflection
+
+dFlap = deg2rad(12);
+
+global controls
+controls.dFlap = dFlap;
 
 %% Optimization
 
@@ -25,7 +32,7 @@ fprintf('|START       COMPLETE|\n')
 fprintf(' ')
 
 startLoop = tic;
-nsteps=40;
+% nsteps=40;
 for i=1:nsteps
 
     % current state
@@ -41,7 +48,7 @@ for i=1:nsteps
     
         % guess control inputs, bounds
         if i==1
-            U_guess(i,:) = [deg2rad(-1) deg2rad(0.1) 0.31 0.25];
+            U_guess(i,:) = [deg2rad(-1) 0.31 0.25];
             ub(i,:) = Umax;
             lb(i,:) = Umin;
         else
@@ -58,7 +65,7 @@ for i=1:nsteps
         options.ScaleProblem  = 'false';
         options.FinDiffType   = 'forward';
         options.TolX          = 1e-8;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-        options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
+        options.DiffMinChange = 1e-7;  % Minimum change in variables for finite-difference gradients. Default=0.
         % options.DiffMaxChange = 1e-0;  % Maximum change in variables for finite-difference gradients. Default=Inf.
         % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
         % options.TolCon        = 1e-3;  % Constraint violation tolerance
@@ -82,7 +89,7 @@ for i=1:nsteps
         output_hist.firstorderopt(i) = output.firstorderopt;
         
         % evaluate accelerations
-        DX_res(i,:) = UNIFIER_ROMdyn_script(X_res(i,:),U_res(i,:));
+        DX_res(i,:) = UNIFIER_ROMdyn(X_res(i,:),U_res(i,:));
     end
 
     if rem(i,nsteps/20)==0
@@ -114,90 +121,157 @@ fprintf('\n');
 
 %% Plot Results
 
+nplot=nsteps;
+
+% calculate airspeed & angle of attack ------------------------------------
+Va_sol    = sqrt(solution.X(:,3).^2+solution.X(:,4).^2);
+alpha_sol = atan2(solution.X(:,4),solution.X(:,3));
+
+Va_res    = sqrt(X_res(:,3).^2+X_res(:,4).^2);
+alpha_res = atan2(X_res(:,4),X_res(:,3));
+
 % state histories ---------------------------------------------------------
-fig(1)=figure('Name','State Histories','Position', [75 75 1400 750]);
+fig(1)=figure('Name','State Histories','Position', [50 75 1000 650]);
 tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 
 nexttile
-plotx1=plot(solution.T(1:nsteps),solution.X(1:nsteps,1),'.-r');
+plotx1=plot(solution.T(1:nplot),solution.X(1:nplot,1),'.-r');
 hold on
-plotx2=plot(solution.T(1:nsteps),X_res(1:nsteps,1),'.-b');
+plotx2=plot(solution.T(1:nplot),X_res(1:nplot,1),'.-b');
 grid on
 legend([plotx1 plotx2],{'Reference','Tracking Result'},'Location','northwest');
 title('Horizontal Position')
-xlabel('x (m)')
-ylabel('t (s)')
+ylabel('x (m)')
+xlabel('t (s)')
 
 nexttile
-plotz1=plot(solution.T(1:nsteps),-1*solution.X(1:nsteps,2),'.-r');
+plotz1=plot(solution.T(1:nplot),-1*solution.X(1:nplot,2),'.-r');
 hold on
-plotz2=plot(solution.T(1:nsteps),-1*X_res(1:nsteps,2),'.-b');
+plotz2=plot(solution.T(1:nplot),-1*X_res(1:nplot,2),'.-b');
 grid on
-% legend([plotz1 plotz2],{'Reference','Tracking Result'},'Location','best');title('Equality Constraints')
 title('Altitude')
-xlabel('-z (m)')
-ylabel('t (s)')
+ylabel('-z (m)')
+xlabel('t (s)')
 
 nexttile
-plott1=plot(solution.T(1:nsteps),rad2deg(solution.X(1:nsteps,5)),'.-r');
+plott1=plot(solution.T(1:nplot),rad2deg(solution.X(1:nplot,5)),'.-r');
 hold on
-plott2=plot(solution.T(1:nsteps),rad2deg(X_res(1:nsteps,5)),'.-b');
+plott2=plot(solution.T(1:nplot),rad2deg(X_res(1:nplot,5)),'.-b');
 grid on
-% legend([plott1 plott2],{'Reference','Tracking Result'},'Location','best');
 title('Pitch Angle')
-xlabel('\theta (deg)')
-ylabel('t (s)')
+ylabel('\theta (deg)')
+xlabel('t (s)')
+
+% nexttile
+% plotu1=plot(solution.T(1:nplot),solution.X(1:nplot,3),'.-r');
+% hold on
+% plotu2=plot(solution.T(1:nplot),X_res(1:nplot,3),'.-b');
+% grid on
+% % legend([plotu1 plotu2],{'Reference','Tracking Result'},'Location','best');
+% title('Horizontal Speed (Body Axes)')
+% ylabel('u (m/s)')
+% xlabel('t (s)')
+% 
+% nexttile
+% plotw1=plot(solution.T(1:nplot),-1*solution.X(1:nplot,4),'.-r');
+% hold on
+% plotw2=plot(solution.T(1:nplot),-1*X_res(1:nplot,4),'.-b');
+% grid on
+% % legend([plotw1 plotz2],{'Reference','Tracking Result'},'Location','best');title('Equality Constraints')
+% title('Vertical Speed (Body Axes)')
+% ylabel('-w (m/s)')
+% xlabel('t (s)')
 
 nexttile
-plotu1=plot(solution.T(1:nsteps),solution.X(1:nsteps,3),'.-r');
+plotu1=plot(solution.T(1:nplot),Va_sol(1:nplot),'.-r');
 hold on
-plotu2=plot(solution.T(1:nsteps),X_res(1:nsteps,3),'.-b');
+plotu2=plot(solution.T(1:nplot),Va_res(1:nplot),'.-b');
 grid on
-% legend([plotu1 plotu2],{'Reference','Tracking Result'},'Location','best');
-title('Horizontal Speed (Body Axes)')
-xlabel('u (m/s)')
-ylabel('t (s)')
+title('Airspeed')
+ylabel('V_a (m/s)')
+xlabel('t (s)')
 
 nexttile
-plotw1=plot(solution.T(1:nsteps),-1*solution.X(1:nsteps,4),'.-r');
+plotw1=plot(solution.T(1:nplot),rad2deg(alpha_sol(1:nplot)),'.-r');
 hold on
-plotw2=plot(solution.T(1:nsteps),-1*X_res(1:nsteps,4),'.-b');
+plotw2=plot(solution.T(1:nplot),rad2deg(alpha_res(1:nplot)),'.-b');
 grid on
-% legend([plotw1 plotz2],{'Reference','Tracking Result'},'Location','best');title('Equality Constraints')
-title('Vertical Speed (Body Axes)')
-xlabel('-w (m/s)')
-ylabel('t (s)')
+title('Angle of Attack')
+ylabel('\alpha (deg)')
+xlabel('t (s)')
 
 nexttile
-plotq1=plot(solution.T(1:nsteps),rad2deg(solution.X(1:nsteps,6)),'.-r');
+plotq1=plot(solution.T(1:nplot),rad2deg(solution.X(1:nplot,6)),'.-r');
 hold on
-plotq2=plot(solution.T(1:nsteps),rad2deg(X_res(1:nsteps,6)),'.-b');
+plotq2=plot(solution.T(1:nplot),rad2deg(X_res(1:nplot,6)),'.-b');
 grid on
-% legend([plotq1 plotq2],{'Reference','Tracking Result'},'Location','best');title('Equality Constraints')
 title('Pitch Rate')
-xlabel('q (deg/s)')
-ylabel('t (s)')
+ylabel('q (deg/s)')
+xlabel('t (s)')
+
+% control histories ---------------------------------------------------------
+fig(2)=figure('Name','Control Histories','Position', [900 75 600 650]);
+tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
+
+nexttile
+plot(solution.T(1:nplot),solution.U(1:nplot,2),'.-r')
+hold on
+plot(solution.T(1:nplot-1),U_res(1:nplot-1,2),'.-b')
+title('DEP Thrust Level')
+xlabel('Time, s')
+ylabel('DEP_c_o_l, 0-1')
+grid on
+
+nexttile
+plotu1=plot(solution.T(1:nplot),solution.U(1:nplot,3),'.-r');
+hold on
+plotu2=plot(solution.T(1:nplot-1),U_res(1:nplot-1,3),'.-b');
+title('HTU Thrust Level')
+xlabel('Time, s')
+ylabel('HTU, 0-1')
+grid on
+legend([plotu1 plotu2],{'Reference','Tracking Result'},'Location','northeast');
+
+nexttile
+plot(solution.T(1:nplot),rad2deg(solution.U(1:nplot,1)),'.-r')
+hold on
+plot(solution.T(1:nplot-1),rad2deg(U_res(1:nplot-1,1)),'.-b')
+title('Elevator Deflection')
+xlabel('Time, s')
+ylabel('\delta_E_l_e_v, deg')
+yline(0,':b','LineWidth',1)
+grid on
+
+nexttile
+plot(solution.T(1:nplot),linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solution.T)),'.-k')
+% plot(solution.T,rad2deg(solution.U(:,4)),'.-k')
+title('Flap Deflection')
+xlabel('Time, s')
+ylabel('\delta_F_l_a_p, deg')
+ylim([-5 15])
+yline(0,':b','LineWidth',1)
+grid on
 
 % convergence history -----------------------------------------------------
 fig(2)=figure('Name','Convergence History','Position', [75 75 1400 380]);
 tiledlayout(1,3,"TileSpacing","tight","Padding","compact")
 
 nexttile
-plot(1:nsteps-1,fval_hist,'.-k')
+plot(1:nplot-1,fval_hist,'.-k')
 grid on
 title('Objective Function Value')
 xlabel('Timestep')
 ylabel('Fval')
 
 nexttile
-plot(1:nsteps-1,output_hist.firstorderopt,'.-k')
+plot(1:nplot-1,output_hist.firstorderopt,'.-k')
 grid on
 title('First Order Optimality')
 xlabel('Timestep')
 ylabel('Optimality')
 
 nexttile
-plot(1:nsteps-1,output_hist.iterations,'.-k')
+plot(1:nplot-1,output_hist.iterations,'.-k')
 grid on
 title('No. of Iterations')
 xlabel('Timestep')

@@ -21,18 +21,11 @@ function [DX,g_neq] = UNIFIERLanding_Dynamics_Internal(X,U,p,t,data)
 
 %% Evaluate accelerations
 
-DX = UNIFIER_ROMdyn_script(X,U);
+DX = UNIFIER_ROMdyn(X,U);
 
 %% Evaluate path constraints
 
-% constraint(s) violated when negative (c<0)
+alpha  = atan2(X(:,4),X(:,3));
+Va     = sqrt(X(:,3).^2+X(:,4).^2);
 
-% max rate of descent
-rodmax = convvel(800,'ft/min','m/s');
-c1     = rodmax-DX(:,2);
-
-% min rate of descent
-rodmin = 0;
-c2     = DX(:,2)-rodmin;
-
-g_neq  = [c1,c2];
+g_neq  = [DX(:,2) alpha Va];

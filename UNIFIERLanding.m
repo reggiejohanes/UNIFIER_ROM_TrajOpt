@@ -32,7 +32,7 @@ q0     = xstar(11);
 dElev0 = ustar(3);
 DEP0   = ustar(5);
 HTU0   = ustar(7);
-dFlap0 = deg2rad(5);
+% dFlap0 = deg2rad(5);
 % dFlap0 = ustar(4);
 
 % variable bounds
@@ -45,7 +45,7 @@ qmin     = deg2rad(-2);
 dElevmin = Umin(3);
 DEPmin   = Umin(5);
 HTUmin   = Umin(7);
-dFlapmin = deg2rad(4.999); 
+% dFlapmin = deg2rad(4.999); 
 % dFlapmin = Umin(4); 
 
 xmax     = inf;
@@ -57,7 +57,7 @@ qmax     = deg2rad(2);
 dElevmax = Umax(3);
 DEPmax   = Umax(5);
 HTUmax   = Umax(7);
-dFlapmax = deg2rad(5.001); 
+% dFlapmax = deg2rad(5.001); 
 % dFlapmax = Umax(4); 
 
 % terminal conditions
@@ -68,19 +68,19 @@ wf      = 0;
 thetaf  = deg2rad(1);
 qf      = deg2rad(0);
 
-xfu     = xf*1.2;
+xfu     = inf; %xf*1.2;
 zfu     = zf;
-ufu     = uf*1.2;
-wfu     = wf+3;
-thetafu = thetaf+deg2rad(3);
-qfu     = qf+deg2rad(1);
+ufu     = inf; %uf*1.2;
+wfu     = inf; %wf+3;
+thetafu = inf; %thetaf+deg2rad(3);
+qfu     = inf; %qf+deg2rad(1);
 
-xfl     = xf*0.8;
+xfl     = -inf; %xf*0.8;
 zfl     = zf;
-ufl     = uf*0.8;
-wfl     = wf-3;
-thetafl = thetaf-deg2rad(3);
-qfl     = qf-deg2rad(1);
+ufl     = -inf; %uf*0.8;
+wfl     = -inf; %wf-3;
+thetafl = -inf; %thetaf-deg2rad(3);
+qfl     = -inf; %qf-deg2rad(1);
 
 %%
 
@@ -116,12 +116,12 @@ problem.states.xrl = [-inf -inf -inf -inf -inf -inf];
 problem.states.xru = [ inf  inf  inf  inf  inf  inf]; 
 
 % State error bounds
-problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1000;
-problem.states.xErrorTol_integral = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1000;
+problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
+problem.states.xErrorTol_integral = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
 
 % State constraint error bounds
-problem.states.xConstraintTol  = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1000;
-problem.states.xrConstraintTol = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1000;
+problem.states.xConstraintTol  = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
+problem.states.xrConstraintTol = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
 
 % Terminal state bounds. xfl=< xf <=xfu
 problem.states.xfl = [xfl zfl ufl wfl thetafl qfl]; 
@@ -145,34 +145,34 @@ guess.states(:,6) = [q0 qf];
 problem.inputs.N = 0;       
       
 % Input bounds
-% problem.inputs.ul = [dElevmin DEPmin HTUmin];
-% problem.inputs.uu = [dElevmax DEPmax HTUmax];
-problem.inputs.ul = [dElevmin DEPmin HTUmin dFlapmin];
-problem.inputs.uu = [dElevmax DEPmax HTUmax dFlapmax];
+% problem.inputs.ul = [dElevmin DEPmin HTUmin dFlapmin];
+% problem.inputs.uu = [dElevmax DEPmax HTUmax dFlapmax];
+problem.inputs.ul = [dElevmin DEPmin HTUmin];
+problem.inputs.uu = [dElevmax DEPmax HTUmax];
 
 % Initial input bounds
-problem.inputs.u0l = [dElev0 DEP0 HTU0 dFlap0];
-problem.inputs.u0u = [dElev0 DEP0 HTU0 dFlap0];
-% problem.inputs.u0l = [dElev0 DEP0 HTU0];
-% problem.inputs.u0u = [dElev0 DEP0 HTU0];
+% problem.inputs.u0l = [dElev0 DEP0 HTU0 dFlap0];
+% problem.inputs.u0u = [dElev0 DEP0 HTU0 dFlap0];
+problem.inputs.u0l = [dElev0 DEP0 HTU0];
+problem.inputs.u0u = [dElev0 DEP0 HTU0];
 
 % Input rate bounds
-problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7) -DUmax(4)];
-problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)  DUmax(4)];
-% problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7)];
-% problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)];
+% problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7) -DUmax(4)];
+% problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)  DUmax(4)];
+problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7)];
+problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)];
 
 % Input constraint error bounds
-problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
-problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
-% problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1]/1000;
-% problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1]/1000;
+% problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
+% problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
+problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1]/1e6;
+problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1]/1e6;
 
 % Guess the input sequences with [u0 uf]
 guess.inputs(:,1) = [dElev0 dElev0];
 guess.inputs(:,2) = [DEP0   DEP0];
 guess.inputs(:,3) = [HTU0   HTU0];
-guess.inputs(:,4) = [dFlap0 dFlap0];
+% guess.inputs(:,4) = [dFlap0 dFlap0];
 
 % Choose the set-points if required
 problem.setpoints.states = [];
@@ -183,9 +183,17 @@ problem.setpoints.inputs = [];
 problem.constraints.ng_eq   = 0;
 problem.constraints.gTol_eq = [];
 
-problem.constraints.gl       = [0 0];
-problem.constraints.gu       = [inf inf];
-problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s') convvel(5,'ft/min','m/s')];
+problem.constraints.gl       = [0,...            % min rate of descent
+                                deg2rad(-15),... % min alpha
+                                35.85*1.3];      % min airspeed 35.85*1.3
+
+problem.constraints.gu       = [convvel(350,'ft/min','m/s'),... % max rate of descent
+                                deg2rad(10),...                 % max alpha
+                                inf];                           % max airspeed
+
+problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
+                                deg2rad(0.1),...
+                                0.001];
 
 % problem.constraints.gl       = [];
 % problem.constraints.gu       = [];
@@ -250,15 +258,19 @@ function stageCost = L_unscaled(x,xr,u,ur,p,t,vdat)
 
 %------------- BEGIN CODE --------------
 
+k   = 0.1;
 
-Va = sqrt(x(:,3).^2+x(:,4).^2);
-h  = x(:,2)*-1; 
-h0 = x(1,2)*-1;
-k  = 1;
+z   = x(:,2); 
+z0  = x(1,2);
+p  = exp(((z-z0)/z0).^2);
+
+Va  = sqrt(x(:,3).^2+x(:,4).^2);
+Va0 = sqrt(x(1,3).^2+x(1,4).^2);
+
+stageCost = k .* p .* Va/Va0;
+
 % stageCost = k.*sqrt(Va.^2.*(h-h0).^2);
-stageCost = k.*Va.*sqrt((h-h0).^2);
 % stageCost = k.*Va.*(h-h0).^2;
-
 % stageCost = 0*t;
 
 %------------- END OF CODE --------------
@@ -284,6 +296,9 @@ function boundaryCost=E_unscaled(x0,xf,u0,uf,p,t0,tf,data)
 %    boundaryCost - Scalar boundary cost
 %
 %------------- BEGIN CODE --------------
+
+% Va  = sqrt(xf(:,3).^2+xf(:,4).^2);
+% Va0 = sqrt(xf(1,3).^2+xf(1,4).^2);
 
 boundaryCost= tf;
 

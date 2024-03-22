@@ -1,4 +1,4 @@
-function DX=UNIFIER_ROMdyn_script(X,U)
+function DX=UNIFIER_ROMdyn(X,U)
 
 %% Test
 % clc
@@ -7,8 +7,15 @@ function DX=UNIFIER_ROMdyn_script(X,U)
 % 
 % X = [0, -1219, 72.731047032614440, 1.142307104518741, 0.015706052282666, 0;...
 %      0, -1219, 72.731047032614440, 1.142307104518741, 0.015706052282666, 0];
+% 
+% U = [-0.015298320692100, 0.306978739246813, 0.271067256037969;...
+%      0.015298320692100, 0.306978739246813, 0.271067256037969];
+
 % U = [-0.015298320692100, 0, 0.306978739246813, 0.271067256037969;...
 %      -0.015298320692100, 0, 0.306978739246813, 0.271067256037969];
+
+
+% U=[-0.030909732474324,0.306466616418674,0.275128721852146];
 
 %% Constants
 
@@ -32,11 +39,12 @@ q     = X(:,6); % rad/s
 dElev = U(:,1); % rad
 DEP   = U(:,2); % 0-1
 HTU   = U(:,3); % 0-1
-dFlap = U(:,4); % rad
+% dFlap = U(:,4); % rad
 
-% dFlap = deg2rad(5);
-% global controls
-% dFlap = controls.dFlap;
+% dFlap = deg2rad(0);
+global controls
+dFlap = controls.dFlap;
+dFlap = linspace(dFlap,dFlap,numel(x))';
 
 %% Intermediate Variables
 
