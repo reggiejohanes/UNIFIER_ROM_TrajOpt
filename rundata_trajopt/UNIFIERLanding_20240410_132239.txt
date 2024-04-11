@@ -1,0 +1,32 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:  1327096
+Number of nonzeros in Lagrangian Hessian.............:   701460
+
+Total number of variables............................:    35982
+                     variables with only lower bounds:     3998
+                variables with lower and upper bounds:    19991
+                     variables with only upper bounds:     3997
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:    55980
+        inequality constraints with only lower bounds:    15993
+   inequality constraints with lower and upper bounds:    27993
+        inequality constraints with only upper bounds:    11994
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  4.5505174e+02 6.60e+00 8.67e+00   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.5504629e+02 6.60e+00 1.88e+03  -2.6 6.79e+02    -  4.65e-02 7.29e-06f  1
+   2  4.5396340e+02 6.51e+00 2.57e+03  -1.7 8.56e+01    -  2.80e-01 1.13e-02f  1
+   3  4.1704944e+02 3.30e+00 1.35e+03  -1.7 8.34e+01    -  2.50e-01 3.96e-01f  1
+   4  4.1686664e+02 3.22e+00 2.99e+05   0.4 1.11e+01   2.0 9.78e-01 1.49e-02h  1

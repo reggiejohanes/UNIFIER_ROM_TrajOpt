@@ -10,11 +10,8 @@ function DX=UNIFIER_ROMdyn(X,U)
 % 
 % U = [-0.015298320692100, 0.306978739246813, 0.271067256037969;...
 %      0.015298320692100, 0.306978739246813, 0.271067256037969];
-
 % U = [-0.015298320692100, 0, 0.306978739246813, 0.271067256037969;...
 %      -0.015298320692100, 0, 0.306978739246813, 0.271067256037969];
-
-
 % U=[-0.030909732474324,0.306466616418674,0.275128721852146];
 
 %% Constants
@@ -41,7 +38,7 @@ DEP   = U(:,2); % 0-1
 HTU   = U(:,3); % 0-1
 % dFlap = U(:,4); % rad
 
-% dFlap = deg2rad(0);
+% dFlap = deg2rad(12);
 global controls
 dFlap = controls.dFlap;
 dFlap = linspace(dFlap,dFlap,numel(x))';
@@ -152,6 +149,8 @@ dtheta = q;
 %% Compile Accelerations
 
 DX = [dx dz du dw dtheta dq];
+
+% Xnew=X+DX;
 
 end
 

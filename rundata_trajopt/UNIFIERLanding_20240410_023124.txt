@@ -1,0 +1,20 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+There was an error! The message was:
+Number of elements must not change. Use [] as one of the size inputs to automatically calculate the appropriate size for that dimension. 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('directCollocation')" style="font-weight:bold">directCollocation</a>
+Error encountered when evaluating const function
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('constraintFunction', 'D:\Program Files\ICLOCS\src\functionHandle\constraintFunction.m', 42)" style="font-weight:bold">constraintFunction</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\functionHandle\constraintFunction.m',42,0)">line 42</a>)
+                constraints=directCollocation('const',z,data,1);
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('checkDynamics', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\checkDynamics.m', 29)" style="font-weight:bold">checkDynamics</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\checkDynamics.m',29,0)">line 29</a>)
+constraintFunction(z0,data);
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcribeOCP_eachPhase', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP_eachPhase.m', 1617)" style="font-weight:bold">transcribeOCP_eachPhase</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP_eachPhase.m',1617,0)">line 1617</a>)
+data=checkDynamics( infoNLP.z0,data );
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcribeOCP', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP.m', 44)" style="font-weight:bold">transcribeOCP</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP.m',44,0)">line 44</a>)
+[infoNLP,data,options]=transcribeOCP_eachPhase(problem,guess,options);
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('solveMyProblem', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m', 347)" style="font-weight:bold">solveMyProblem</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m',347,0)">line 347</a>)
+                    [infoNLP,data,options]=transcribeOCP(problem,guess,options); % Format for NLP solver
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 27)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',27,0)">line 27</a>)
+[solution,MRHistory] = solveMyProblem(problem,guess,options);} 
+diary off

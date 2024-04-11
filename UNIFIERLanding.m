@@ -115,13 +115,15 @@ problem.states.xu = [xmax zmax umax wmax thetamax qmax];
 problem.states.xrl = [-inf -inf -inf -inf -inf -inf]; 
 problem.states.xru = [ inf  inf  inf  inf  inf  inf]; 
 
+ebmult = 1e-1; % error bound multiplier
+
 % State error bounds
-problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
-problem.states.xErrorTol_integral = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
+problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]*ebmult;
+problem.states.xErrorTol_integral = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]*ebmult;
 
 % State constraint error bounds
-problem.states.xConstraintTol  = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
-problem.states.xrConstraintTol = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]/1e6;
+problem.states.xConstraintTol  = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]*ebmult;
+problem.states.xrConstraintTol = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]*ebmult;
 
 % Terminal state bounds. xfl=< xf <=xfu
 problem.states.xfl = [xfl zfl ufl wfl thetafl qfl]; 
@@ -165,8 +167,8 @@ problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)];
 % Input constraint error bounds
 % problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
 % problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1 deg2rad(0.5)]/1000;
-problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1]/1e6;
-problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1]/1e6;
+problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1]*ebmult;
+problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1]*ebmult;
 
 % Guess the input sequences with [u0 uf]
 guess.inputs(:,1) = [dElev0 dElev0];
@@ -187,13 +189,22 @@ problem.constraints.gl       = [0,...            % min rate of descent
                                 deg2rad(-15),... % min alpha
                                 35.85*1.3];      % min airspeed 35.85*1.3
 
-problem.constraints.gu       = [convvel(350,'ft/min','m/s'),... % max rate of descent
+problem.constraints.gu       = [inf,... % max rate of descent convvel(350,'ft/min','m/s')
                                 deg2rad(10),...                 % max alpha
                                 inf];                           % max airspeed
 
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
                                 deg2rad(0.1),...
                                 0.001];
+
+% problem.constraints.gl       = [deg2rad(-15),... % min alpha
+%                                 35.85*1.3];      % min airspeed 35.85*1.3
+% 
+% problem.constraints.gu       = [deg2rad(10),...                 % max alpha
+%                                 inf];                           % max airspeed
+% 
+% problem.constraints.gTol_neq = [deg2rad(0.1),...
+%                                 0.001];
 
 % problem.constraints.gl       = [];
 % problem.constraints.gu       = [];
@@ -226,7 +237,14 @@ problem.sim.inputU              = 1:length(problem.inputs.ul);
 problem.functions_unscaled      = {@L_unscaled,@E_unscaled,@f_unscaled,@g_unscaled,@avrc,@b_unscaled};
 problem.data.functions_unscaled = problem.functions_unscaled;
 problem.data.ng_eq              = problem.constraints.ng_eq;
-problem.constraintErrorTol      = [problem.constraints.gTol_eq,problem.constraints.gTol_neq,problem.constraints.gTol_eq,problem.constraints.gTol_neq,problem.states.xConstraintTol,problem.states.xConstraintTol,problem.inputs.uConstraintTol,problem.inputs.uConstraintTol];
+problem.constraintErrorTol      = [problem.constraints.gTol_eq,...
+                                   problem.constraints.gTol_neq,...
+                                   problem.constraints.gTol_eq,...
+                                   problem.constraints.gTol_neq,...
+                                   problem.states.xConstraintTol,...
+                                   problem.states.xConstraintTol,...
+                                   problem.inputs.uConstraintTol,...
+                                   problem.inputs.uConstraintTol];
 
 %------------- END OF CODE --------------
 

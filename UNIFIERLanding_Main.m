@@ -1,5 +1,5 @@
 
-clc
+% clc
 clear all;
 % close all;
 format compact;
@@ -23,7 +23,7 @@ controls.dFlap = dFlap;
 
 tic
 [problem,guess]      = UNIFIERLanding;        % Fetch the problem definition
-options              = problem.settings(500); % Get options and solver settings 
+options              = problem.settings(2200); % Get options and solver settings 
 [solution,MRHistory] = solveMyProblem(problem,guess,options);
 t_run=toc;
 

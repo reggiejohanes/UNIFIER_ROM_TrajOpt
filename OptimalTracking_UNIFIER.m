@@ -1,7 +1,7 @@
 
 clc
 clear all
-close all
+% close all
 
 %% Load data
 
