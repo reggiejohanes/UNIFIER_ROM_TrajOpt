@@ -1,0 +1,9 @@
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcribeOCP_eachPhase')" style="font-weight:bold">transcribeOCP_eachPhase</a>
+Rate constraints not supported with the chosen discretization method
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcribeOCP', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP.m', 44)" style="font-weight:bold">transcribeOCP</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP.m',44,0)">line 44</a>)
+[infoNLP,data,options]=transcribeOCP_eachPhase(problem,guess,options);
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('solveMyProblem', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m', 347)" style="font-weight:bold">solveMyProblem</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m',347,0)">line 347</a>)
+                    [infoNLP,data,options]=transcribeOCP(problem,guess,options); % Format for NLP solver
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 27)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',27,0)">line 27</a>)
+[solution,MRHistory] = solveMyProblem(problem,guess,options);} 
+diary off

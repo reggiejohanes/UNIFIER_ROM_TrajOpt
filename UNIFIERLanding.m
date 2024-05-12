@@ -75,7 +75,7 @@ wfu     = inf; %wf+3;
 thetafu = inf; %thetaf+deg2rad(3);
 qfu     = inf; %qf+deg2rad(1);
 
-xfl     = -inf; %xf*0.8;
+xfl     = -inf; %xf*0.8; -inf
 zfl     = zf;
 ufl     = -inf; %uf*0.8;
 wfl     = -inf; %wf-3;
@@ -115,7 +115,7 @@ problem.states.xu = [xmax zmax umax wmax thetamax qmax];
 problem.states.xrl = [-inf -inf -inf -inf -inf -inf]; 
 problem.states.xru = [ inf  inf  inf  inf  inf  inf]; 
 
-ebmult = 1e-1; % error bound multiplier
+ebmult = 1e3; % error bound multiplier
 
 % State error bounds
 problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]*ebmult;
@@ -185,12 +185,12 @@ problem.setpoints.inputs = [];
 problem.constraints.ng_eq   = 0;
 problem.constraints.gTol_eq = [];
 
-problem.constraints.gl       = [0,...            % min rate of descent
-                                deg2rad(-15),... % min alpha
+problem.constraints.gl       = [-inf,...   % min rate of descent convvel(0,'ft/min','m/s')
+                                deg2rad(-15),... % min alpha deg2rad(-15)
                                 35.85*1.3];      % min airspeed 35.85*1.3
 
 problem.constraints.gu       = [inf,... % max rate of descent convvel(350,'ft/min','m/s')
-                                deg2rad(10),...                 % max alpha
+                                deg2rad(10),...                 % max alpha deg2rad(10)
                                 inf];                           % max airspeed
 
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...

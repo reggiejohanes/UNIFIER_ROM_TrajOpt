@@ -15,15 +15,15 @@ diary on % start diary
 
 %% Set Flap Deflection
 
-dFlap = deg2rad(12);
+dFlap = deg2rad(5);
 global controls
 controls.dFlap = dFlap;
 
 %% Run Problem
 
 tic
-[problem,guess]      = UNIFIERLanding;        % Fetch the problem definition
-options              = problem.settings(2200); % Get options and solver settings 
+[problem,guess]      = UNIFIERLanding;       % Fetch the problem definition
+options              = problem.settings(2000); % Get options and solver settings %2 inputs for LGR
 [solution,MRHistory] = solveMyProblem(problem,guess,options);
 t_run=toc;
 
@@ -108,8 +108,8 @@ ylabel('Va, m/s')
 grid on
 vminlabel=['V_m_i_n= ' num2str(round(min(Va),2)) ' m/s'];
 yline(35.85*1.3,'-.r',{'V_s_t_a_l_l*1.3 = 46.6 m/s'},'LabelHorizontalAlignment','left','LabelVerticalAlignment','top','FontSize',8)
-yline(min(Va),'-.k',{vminlabel},'LabelHorizontalAlignment','left','LabelVerticalAlignment','top','FontSize',8)
-ylim([40 80])
+yline(min(Va),'-.k',{vminlabel},'LabelHorizontalAlignment','left','LabelVerticalAlignment','bottom','FontSize',8)
+ylim([45 75])
 nexttile
 plot(solution.T,rad2deg(alpha),'.-k')
 title('AoA')
