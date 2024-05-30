@@ -22,7 +22,7 @@ diary on % start diary
 %cruise
 Va_target = 72.74; % airspeed target [m/s] cruise=72.74m/s
 ze_target = 1219;  % altitude [m] cruise=1219m
-dFlap     = deg2rad(0); % flap deflection [deg]
+dFlap     = deg2rad(5); % flap deflection [deg]
 
 %test
 % Va_target = 55; % airspeed target [m/s] cruise=72.74m/s
@@ -42,8 +42,7 @@ x0 = [Va_target/100; % u [m/s]
       deg2rad(0)];   % theta [deg]
 
 % Initial control inputs
-u0 = [deg2rad(0); % Elevator deflection [deg]
-      0.5;         % DEP activity factor (collective) [0-1]
+u0 = [deg2rad(0);  % Elevator deflection [deg]
       0.5];        % HTU activity factor (collective) [0-1]
 
 init = 0;  % 0 = start from initial guess
@@ -71,7 +70,6 @@ ub=[inf,...          % u
     inf,...          % w
     deg2rad(10),...  % theta (pitch)
     umax(3),...      % dElevator
-    umax(5),...      % DEP_col
     umax(7)];        % HTU
 
 % lower bounds
@@ -79,7 +77,6 @@ lb=[-inf,...         % u
     -inf,...         % w
     -deg2rad(5),...  % theta (pitch)
     umin(3),...      % dElevator
-    umin(5),...      % DEP_col
     umin(7)];        % HTU
 
 % Set options -------------------------------------------------------------
@@ -91,7 +88,7 @@ options.FunValCheck   = 'off';
 options.ScaleProblem  = 'false';
 options.FinDiffType   = 'forward';
 options.TolX          = 1e-8;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-options.DiffMinChange = 1e-7;  % Minimum change in variables for finite-difference gradients. Default=0.
+options.DiffMinChange = 1e-6;  % Minimum change in variables for finite-difference gradients. Default=0.
 % options.DiffMaxChange = 1e-0;  % Maximum change in variables for finite-difference gradients. Default=Inf.
 % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
 % options.TolCon        = 1e-3;  % Constraint violation tolerance
@@ -137,9 +134,9 @@ ustar=[0;...            % dAil
        0;...            % dRud
        zstar(4);...     % dElev
        dFlap;...        % dFlap
-       zstar(5);...     % DEP_col
+       0;...            % DEP_col
        0;...            % DEP_slope
-       zstar(6)];       % HTU
+       zstar(5)];       % HTU
 
 vastar=sqrt(xstar(4)^2+xstar(6)^2);
 

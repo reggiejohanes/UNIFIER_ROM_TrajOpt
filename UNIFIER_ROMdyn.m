@@ -110,34 +110,34 @@ MDEP     = MDEP_x+MDEP_z;
 %% Aerodynamics
 
 % Coefficients (all dependencies) -----------------------------------------
-CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
-                     ROM.CL,...                        % table data
-                     dFlap,alpha,J,dElev);             % inputs
-CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-                     ROM.CD,...
-                     dFlap,alpha,J,dElev); 
-CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-                     ROM.CM,... 
-                     dFlap,alpha,J,dElev);
+% CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
+%                      ROM.CL,...                        % table data
+%                      dFlap,alpha,J,dElev);             % inputs
+% CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+%                      ROM.CD,...
+%                      dFlap,alpha,J,dElev); 
+% CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+%                      ROM.CM,... 
+%                      dFlap,alpha,J,dElev);
 
 % Coefficients (reduced dependencies) -------------------------------------
-% dFlap_fixed = deg2rad(5);
-% dElev_fixed = deg2rad(0);
-% J_fixed     = DEPVa2J(72.74,0.5); % J at Vcruise & DEP=0.5
-% 
-% dFlap_fixed = linspace(dFlap_fixed,dFlap_fixed,numel(x))';
-% dElev_fixed = linspace(dElev_fixed,dElev_fixed,numel(x))';
-% J_fixed     = linspace(J_fixed,J_fixed,numel(x))';
-% 
-% CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CL(alpha)
-%                      ROM.CL,...                              
-%                      dFlap_fixed,alpha,J_fixed,dElev_fixed);
-% CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CD(alpha)
-%                      ROM.CD,...
-%                      dFlap_fixed,alpha,J_fixed,dElev_fixed); 
-% CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CM(alpha,dElev)
-%                      ROM.CM,... 
-%                      dFlap_fixed,alpha,J_fixed,dElev);
+dFlap_fixed = deg2rad(5);
+dElev_fixed = deg2rad(0);
+J_fixed     = DEPVa2J(72.74,0.5); % J at Vcruise & DEP=0.5
+
+dFlap_fixed = linspace(dFlap_fixed,dFlap_fixed,numel(x))';
+dElev_fixed = linspace(dElev_fixed,dElev_fixed,numel(x))';
+J_fixed     = linspace(J_fixed,J_fixed,numel(x))';
+
+CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CL(alpha)
+                     ROM.CL,...                              
+                     dFlap_fixed,alpha,J_fixed,dElev_fixed);
+CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CD(alpha)
+                     ROM.CD,...
+                     dFlap_fixed,alpha,J_fixed,dElev_fixed); 
+CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CM(alpha,dElev)
+                     ROM.CM,... 
+                     dFlap_fixed,alpha,J_fixed,dElev);
 
 % Dimensionalize forces and moments ---------------------------------------
 L   = Q.*S.*CL;

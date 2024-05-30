@@ -1,0 +1,92 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   341094
+Number of nonzeros in Lagrangian Hessian.............:   174960
+
+Total number of variables............................:     8982
+                     variables with only lower bounds:      998
+                variables with lower and upper bounds:     4991
+                     variables with only upper bounds:      997
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:    14981
+        inequality constraints with only lower bounds:     2994
+   inequality constraints with lower and upper bounds:     6993
+        inequality constraints with only upper bounds:     2994
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  4.3288601e+02 1.01e+01 2.29e+00   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.3279901e+02 1.01e+01 7.33e+00  -4.7 4.58e+03    -  2.73e-01 9.46e-04f  1
+   2  4.3280391e+02 1.01e+01 1.29e+01  -0.7 4.97e+03    -  6.72e-01 5.78e-05f  1
+   3  3.3239322e+02 3.33e+00 4.96e+00  -1.4 5.54e+03    -  6.89e-01 8.23e-01f  1
+   4  3.2078483e+02 1.52e-01 9.58e-01  -1.7 3.58e+02    -  8.93e-01 1.00e+00f  1
+   5  2.6071758e+02 3.80e-01 2.03e-01  -2.0 4.49e+03    -  8.33e-01 7.82e-01f  1
+   6  2.2970039e+02 1.61e-01 3.36e+00  -2.0 2.18e+03    -  9.34e-01 9.15e-01f  1
+   7  2.1702864e+02 5.52e-02 1.95e-01  -2.2 9.37e+02    -  1.00e+00 9.57e-01h  1
+   8  2.1690678e+02 5.44e-02 5.44e+00  -3.1 5.85e+02    -  1.00e+00 1.34e-02h  1
+   9  2.1682595e+02 6.33e-04 1.47e-01  -3.3 9.44e+00    -  1.00e+00 9.88e-01h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  2.1650486e+02 1.89e-03 4.78e-03  -3.8 7.77e+01    -  1.00e+00 1.00e+00h  1
+  11  2.1559190e+02 2.45e-02 1.50e-02  -4.5 5.26e+02    -  1.00e+00 7.52e-01h  1
+  12  2.1559183e+02 2.44e-02 1.44e+03  -3.7 4.15e-02   2.0 1.00e+00 6.02e-03h  1
+  13  2.1559147e+02 1.99e-02 4.94e+02  -2.5 4.20e-02   1.5 1.00e+00 1.84e-01h  1
+Reallocating memory for MA57: lfact (1737527)
+Reallocating memory for MA57: lfact (3939661)
+Reallocating memory for MA57: lfact (5824136)
+Reallocating memory for MA57: lfact (7024682)
+WARNING: Problem in step computation; switching to emergency mode.
+  14r 2.1559147e+02 1.99e-02 9.99e+02  -1.3 0.00e+00  19.4 0.00e+00 0.00e+00R  1
+Reallocating memory for MA57: lfact (13641175)
+Reallocating memory for MA57: lfact (24084230)
+Reallocating memory for MA57: lfact (26900605)
+WARNING: Problem in step computation; switching to emergency mode.
+Restoration phase is called at point that is almost feasible,
+  with constraint violation 7.602508e-15. Abort.
+Restoration phase in the restoration phase failed.
+
+Number of Iterations....: 14
+
+                                   (scaled)                 (unscaled)
+Objective...............:   2.1559147074914105e+02    2.1559147074914105e+02
+Dual infeasibility......:   5.4928997095580359e+00    5.4928997095580359e+00
+Constraint violation....:   1.9877852323449012e-02    1.9877852323449012e-02
+Complementarity.........:   3.9851034152813374e-03    3.9851034152813374e-03
+Overall NLP error.......:   2.1498436817863058e+00    5.4928997095580359e+00
+
+
+Number of objective function evaluations             = 15
+Number of objective gradient evaluations             = 15
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 15
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 15
+Number of Lagrangian Hessian evaluations             = 15
+Total CPU secs in IPOPT (w/o function evaluations)   =    198.585
+Total CPU secs in NLP function evaluations           =     63.460
+
+EXIT: Restoration Failed!
+computation time:
+  262.0914
+minimized cost:
+  215.5915
+Maximum absolute local error:
+    0.0001    0.0006    0.0012    0.0490    0.0006    0.0042
+Maximum relative local error:
+    0.0000    0.0000    0.0000    0.0104    0.0006    0.0037
+Maximum absolute constraint violation:
+  Columns 1 through 15
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+  Columns 16 through 24
+     0     0     0     0     0     0     0     0     0
+Number of active constraints:
+    18

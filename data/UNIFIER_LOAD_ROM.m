@@ -81,7 +81,7 @@ dumax(7) = 2;  % HTU
 % Convert to rad
 umin(1:4)  = deg2rad(umin(1:4));
 umax(1:4)  = deg2rad(umax(1:4));
-dumax      = deg2rad(dumax);
+dumax(1:4) = deg2rad(dumax(1:4));
 
 %% Save to .mat
 

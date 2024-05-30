@@ -44,7 +44,7 @@ thetamin = deg2rad(-5);
 qmin     = deg2rad(-2);
 dElevmin = Umin(3);
 DEPmin   = Umin(5);
-HTUmin   = Umin(7);
+HTUmin   = -0.5; %Umin(7);
 % dFlapmin = deg2rad(4.999); 
 % dFlapmin = Umin(4); 
 
@@ -63,9 +63,9 @@ HTUmax   = Umax(7);
 % terminal conditions
 zf      = -5;
 xf      = -1*(z0-zf)/tand(3); % 3deg glide slope
-uf      = 40;
-wf      = 0;
-thetaf  = deg2rad(1);
+uf      = 35.85*1.3;
+wf      = 2;
+thetaf  = deg2rad(0);
 qf      = deg2rad(0);
 
 xfu     = inf; %xf*1.2;
@@ -186,11 +186,11 @@ problem.constraints.ng_eq   = 0;
 problem.constraints.gTol_eq = [];
 
 problem.constraints.gl       = [-inf,...   % min rate of descent convvel(0,'ft/min','m/s')
-                                deg2rad(-15),... % min alpha deg2rad(-15)
-                                35.85*1.3];      % min airspeed 35.85*1.3
+                                -inf,... % min alpha deg2rad(-15)
+                                -inf];      % min airspeed 35.85*1.3
 
 problem.constraints.gu       = [inf,... % max rate of descent convvel(350,'ft/min','m/s')
-                                deg2rad(10),...                 % max alpha deg2rad(10)
+                                inf,...                 % max alpha deg2rad(10)
                                 inf];                           % max airspeed
 
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
@@ -219,9 +219,14 @@ problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
 % problem.constraints.g_neq_ActiveTime{5}=[];
 
 % Bounds for boundary constraints bl =< b(x0,xf,u0,uf,p,t0,tf) =< bu
-problem.constraints.bl   = [];
-problem.constraints.bu   = [];
-problem.constraints.bTol = [];
+problem.constraints.bl   = [-inf,... % min final airspeed (m/s) 35.85*1.1
+                            convvel(200,'ft/min','m/s')];           % vertical speed (m/s) convvel(200,'ft/min','m/s')
+
+problem.constraints.bu   = [inf,... % max final airspeed 35.85*1.3
+                            convvel(350,'ft/min','m/s')];           % max veritcal speed (m/s) convvel(350,'ft/min','m/s')
+
+problem.constraints.bTol = [0.001,...
+                            convvel(5,'ft/min','m/s')];
 
 % store the necessary problem parameters used in the functions
 % problem.data = [];
@@ -245,6 +250,7 @@ problem.constraintErrorTol      = [problem.constraints.gTol_eq,...
                                    problem.states.xConstraintTol,...
                                    problem.inputs.uConstraintTol,...
                                    problem.inputs.uConstraintTol];
+
 
 %------------- END OF CODE --------------
 
@@ -276,20 +282,20 @@ function stageCost = L_unscaled(x,xr,u,ur,p,t,vdat)
 
 %------------- BEGIN CODE --------------
 
-k   = 0.1;
-
-z   = x(:,2); 
-z0  = x(1,2);
-p  = exp(((z-z0)/z0).^2);
-
-Va  = sqrt(x(:,3).^2+x(:,4).^2);
-Va0 = sqrt(x(1,3).^2+x(1,4).^2);
-
-stageCost = k .* p .* Va/Va0;
+% k   = 0.1;
+% 
+% z   = x(:,2); 
+% z0  = x(1,2);
+% p  = exp(((z-z0)/z0).^2);
+% 
+% Va  = sqrt(x(:,3).^2+x(:,4).^2);
+% Va0 = sqrt(x(1,3).^2+x(1,4).^2);
+% 
+% stageCost = k .* p .* Va/Va0;
 
 % stageCost = k.*sqrt(Va.^2.*(h-h0).^2);
 % stageCost = k.*Va.*(h-h0).^2;
-% stageCost = 0*t;
+stageCost = 0*t;
 
 %------------- END OF CODE --------------
 
@@ -314,9 +320,6 @@ function boundaryCost=E_unscaled(x0,xf,u0,uf,p,t0,tf,data)
 %    boundaryCost - Scalar boundary cost
 %
 %------------- BEGIN CODE --------------
-
-% Va  = sqrt(xf(:,3).^2+xf(:,4).^2);
-% Va0 = sqrt(xf(1,3).^2+xf(1,4).^2);
 
 boundaryCost= tf;
 
@@ -345,7 +348,13 @@ function bc=b_unscaled(x0,xf,u0,uf,p,t0,tf,vdat,varargin)
 %------------- BEGIN CODE --------------
 varargin=varargin{1};
 
-bc=[];
+Va_f    = sqrt(xf(3)^2+xf(4)^2);  % airspeed
+alpha_f = atan2(xf(4),xf(3));     % angle of attack
+gamma_f = xf(5)-alpha_f;          % glide slope
+dz_f    = Va_f*sin(gamma_f);      % vertical speed (flat earth frame)
+
+bc=[Va_f;...
+    dz_f];
 %------------- END OF CODE --------------
 % When adpative time interval add constraint on time
 %------------- BEGIN CODE --------------

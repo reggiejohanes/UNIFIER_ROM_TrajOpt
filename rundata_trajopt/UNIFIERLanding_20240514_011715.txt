@@ -1,0 +1,14 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcriptionMatrixRC')" style="font-weight:bold">transcriptionMatrixRC</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcribeOCP_eachPhase', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP_eachPhase.m', 1169)" style="font-weight:bold">transcribeOCP_eachPhase</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP_eachPhase.m',1169,0)">line 1169</a>)
+            data = transcriptionMatrixRC( data );
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('transcribeOCP', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP.m', 44)" style="font-weight:bold">transcribeOCP</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\transcribeOCP.m',44,0)">line 44</a>)
+[infoNLP,data,options]=transcribeOCP_eachPhase(problem,guess,options);
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('solveMyProblem', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m', 347)" style="font-weight:bold">solveMyProblem</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m',347,0)">line 347</a>)
+                    [infoNLP,data,options]=transcribeOCP(problem,guess,options); % Format for NLP solver
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 27)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',27,0)">line 27</a>)
+[solution,MRHistory] = solveMyProblem(problem,guess,options);} 
+diary off

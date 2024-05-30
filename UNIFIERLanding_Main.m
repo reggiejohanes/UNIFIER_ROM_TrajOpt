@@ -23,7 +23,7 @@ controls.dFlap = dFlap;
 
 tic
 [problem,guess]      = UNIFIERLanding;       % Fetch the problem definition
-options              = problem.settings(2000); % Get options and solver settings %2 inputs for LGR
+options              = problem.settings(1000); % Get options and solver settings %2 inputs for LGR
 [solution,MRHistory] = solveMyProblem(problem,guess,options);
 t_run=toc;
 
@@ -37,7 +37,7 @@ alpha = atan2(solution.X(:,4),solution.X(:,3));
 
 % physical trajectory -----------------------------------------------------
 
-fig(1)=figure('Name','Physical Trajectory and Airspeed','Position', [50 450 1200 400]);
+fig(1)=figure('Name','Physical Trajectory','Position', [50 450 1200 400]);
 plot(solution.X(:,1)/1000,-1*solution.X(:,2),'.-k')
 title('Altitude vs Horizontal Distance')
 xlabel('Horizontal Distance, km')
@@ -109,7 +109,7 @@ grid on
 vminlabel=['V_m_i_n= ' num2str(round(min(Va),2)) ' m/s'];
 yline(35.85*1.3,'-.r',{'V_s_t_a_l_l*1.3 = 46.6 m/s'},'LabelHorizontalAlignment','left','LabelVerticalAlignment','top','FontSize',8)
 yline(min(Va),'-.k',{vminlabel},'LabelHorizontalAlignment','left','LabelVerticalAlignment','bottom','FontSize',8)
-ylim([45 75])
+ylim([45 80])
 nexttile
 plot(solution.T,rad2deg(alpha),'.-k')
 title('AoA')

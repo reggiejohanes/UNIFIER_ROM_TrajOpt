@@ -1,0 +1,17 @@
+<strong><< OPTIMIZATION START >></strong>
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim')" style="font-weight:bold">UNIFIER_trim</a>
+Invalid setting in '<a href="matlab:open_and_hilite_hyperlink ('UNIFIER_dyn/Constant','error')">UNIFIER_dyn/Constant</a>' for parameter 'Value'.
+Caused by:
+    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim')" style="font-weight:bold">UNIFIER_trim</a>
+    Error evaluating parameter <a href="matlab:Simulink.internal.OpenBlockParamsDialog(['UNIFIER_dyn/Constant'],'Value');">'Value'</a> in '<a href="matlab:open_and_hilite_hyperlink ('UNIFIER_dyn/Constant','error')">UNIFIER_dyn/Constant</a>'
+        Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim')" style="font-weight:bold">UNIFIER_trim</a>
+        Unrecognized function or variable 'X'.
+            Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim')" style="font-weight:bold">UNIFIER_trim</a>
+            Variable 'X' does not exist.
+            Suggested Actions:
+                • Load a file into base workspace. - <a href="matlab:slprivate('robustVarRefHotlink_cb', 'loadFile', 'UNIFIER_dyn', 'X')">Fix</a>
+                • Create a new variable. - <a href="matlab:slprivate('robustVarRefHotlink_cb', 'createEntry', 'X', 'UNIFIER_dyn', '', 'normal', 'Value', 'UNIFIER_dyn/Constant', ' ')">Fix</a>
+} 
+open_and_hilite_hyperlink ('UNIFIER_dyn/Constant','error')
+UNIFIER_trim

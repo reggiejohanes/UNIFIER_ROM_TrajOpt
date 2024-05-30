@@ -22,9 +22,9 @@ u=[0;...        % dAil
    0;...        % dRud
    z(4);...     % dElev
    dFlap;...    % dFlap
-   z(5);...     % DEP_col
+   0;...        % DEP_col
    0;...        % DEP_slope
-   z(6)];       % HTU
+   z(5)];       % HTU
 
 % xdot = UNIFIER_dynamics(x,u);
 % xdot(1) = [];
