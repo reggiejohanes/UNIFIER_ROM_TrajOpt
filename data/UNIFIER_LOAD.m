@@ -81,20 +81,20 @@ sensor_delay_steps = 5;
 %% Control Limits/Saturation
 
 % Max/min deflections
-umin(1) = -25; % Min aileron deflection  [deg]
-umax(1) = 25;  % Max aileron deflection  [deg]
-umin(2) = -30; % Min rudder deflection   [deg]
-umax(2) = 30;  % Max rudder deflection   [deg]
-umin(3) = -30; % Min elevator deflection [deg]
-umax(3) = 30;  % Max elevator deflection [deg]
-umin(4) = 0;   % Min flap deflection     [deg]
-umax(4) = 25;  % Max flap deflection     [deg]
-umin(5) = 0;   % Min DEP_col             [-]
-umax(5) = 1;   % Max DEP_col             [-]
-umin(6) = -1;  % Min DEP_slope           [-]
-umax(6) = 1;   % Max DEP_slope           [-]
-umin(7) = 0;   % Min HTU                 [-]
-umax(7) = 1;   % Max HTU                 [-]
+umin(1) = -25;  % Min aileron deflection  [deg]
+umax(1) = 25;   % Max aileron deflection  [deg]
+umin(2) = -30;  % Min rudder deflection   [deg]
+umax(2) = 30;   % Max rudder deflection   [deg]
+umin(3) = -30;  % Min elevator deflection [deg]
+umax(3) = 30;   % Max elevator deflection [deg]
+umin(4) = 0;    % Min flap deflection     [deg]
+umax(4) = 25;   % Max flap deflection     [deg]
+umin(5) = 0;    % Min DEP_col             [-]
+umax(5) = 1;    % Max DEP_col             [-]
+umin(6) = -1;   % Min DEP_slope           [-]
+umax(6) = 1;    % Max DEP_slope           [-]
+umin(7) = -0.5; % Min HTU                 [-]
+umax(7) = 1;    % Max HTU                 [-]
 
 % Rate limits
 % dumax(1)   = 60; % Aileron    [deg/s]
@@ -109,4 +109,4 @@ umax(1:4)  = deg2rad(umax(1:4));
 
 %% Save to .mat
 
-% save UNIFIER_LOAD
+save UNIFIER_LOAD

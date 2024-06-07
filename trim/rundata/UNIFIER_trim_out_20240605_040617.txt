@@ -1,0 +1,84 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    2.414448e+01    0.000e+00    2.963e+03
+    1      25    5.648511e+00    0.000e+00    1.200e+03    1.913e-02
+    2      36    3.709947e+00    0.000e+00    2.537e+02    1.520e-02
+    3      49    2.499302e+00    0.000e+00    3.081e+02    1.913e-02
+    4      64    2.329913e+00    0.000e+00    1.980e+02    2.389e-03
+    5      72    2.184284e+00    0.000e+00    1.893e+02    1.194e-03
+    6      81    1.211371e+00    0.000e+00    1.602e+02    4.678e-02
+    7      95    3.373009e-01    0.000e+00    1.028e+02    3.211e-02
+    8     104    1.977213e-01    0.000e+00    2.254e+02    2.928e-02
+    9     111    7.985867e-03    0.000e+00    3.796e+01    3.038e-02
+   10     118    5.561565e-03    0.000e+00    3.674e+00    8.913e-02
+   11     125    1.358600e-03    0.000e+00    1.698e+01    6.562e-02
+   12     132    1.283836e-04    0.000e+00    4.730e+00    8.379e-03
+   13     139    1.691902e-05    0.000e+00    1.000e-01    2.300e-03
+   14     146    1.460273e-06    0.000e+00    2.029e-02    1.784e-03
+   15     153    6.987696e-08    0.000e+00    1.882e-02    8.244e-04
+   16     165    6.976550e-08    0.000e+00    1.529e-03    9.757e-07
+   17     172    6.573753e-08    0.000e+00    5.098e-03    2.105e-05
+   18     191    6.567283e-08    0.000e+00    4.986e-03    3.705e-09
+   19     210    6.567132e-08    0.000e+00    4.985e-03    1.013e-10
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 3.7524 seconds
+Avg. per Iteration   = 0.1876 seconds
+Avg. per Func. Eval. = 0.0179 seconds
+
+<strong>> Table 1 - States</strong>
+                         <strong>Value</strong> 
+                        <strong>_______</strong>
+
+    <strong>1) xe    [m]    </strong>     0.0000
+    <strong>2) ye    [m]    </strong>     0.0000
+    <strong>3) ze    [m]    </strong>    -5.0000
+    <strong>4) u     [m/s]  </strong>    59.9756
+    <strong>5) v     [m/s]  </strong>     0.0000
+    <strong>6) w     [m/s]  </strong>     1.7136
+    <strong>7) phi   [deg]  </strong>     0.0000
+    <strong>8) theta [deg]  </strong>     1.6366
+    <strong>9) psi   [deg]  </strong>     0.0000
+    <strong>10) p    [deg/s]</strong>     0.0000
+    <strong>11) q    [deg/s]</strong>     0.0000
+    <strong>12) r    [deg/s]</strong>     0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dAileron  [deg]</strong>     0.0000
+    <strong>2) dRudder   [deg]</strong>     0.0000
+    <strong>3) dElevator [deg]</strong>    -1.2307
+    <strong>4) dFlap     [deg]</strong>     5.0000
+    <strong>5) DEP_col   [deg]</strong>     0.0000
+    <strong>6) DEP_slope [deg]</strong>     0.0000
+    <strong>7) HTU       [deg]</strong>     0.4829
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    60.0001
+    <strong>2) yedot    [m/s]   </strong>     0.0000
+    <strong>3) zedot    [m/s]   </strong>     0.0000
+    <strong>4) udot     [m/s2]  </strong>     0.0000
+    <strong>5) vdot     [m/s2]  </strong>     0.0000
+    <strong>6) wdot     [m/s2]  </strong>     0.0001
+    <strong>7) phidot   [deg/s] </strong>     0.0000
+    <strong>8) thetadot [deg/s] </strong>     0.0000
+    <strong>9) psidot   [deg/s] </strong>     0.0000
+    <strong>10) pdot    [deg/s2]</strong>     0.0000
+    <strong>11) qdot    [deg/s2]</strong>    -0.0006
+    <strong>12) rdot    [deg/s2]</strong>     0.0000
+

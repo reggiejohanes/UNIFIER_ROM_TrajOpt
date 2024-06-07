@@ -15,7 +15,7 @@ diary on % start diary
 
 %% Set Flap Deflection
 
-dFlap = deg2rad(5);
+dFlap = deg2rad(12);
 global controls
 controls.dFlap = dFlap;
 
@@ -83,15 +83,15 @@ fig(3)=figure('Name','State Histories','Position', [50 75 1000 500]);
 tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 nexttile
 plot(solution.T,solution.X(:,1)/1000,'.-k')
-title('Horizontal Distance')
+title('Distance')
 xlabel('Time, s')
-ylabel('Horizontal Distance, km')
+ylabel('x, km')
 grid on
 nexttile
 plot(solution.T,-1*solution.X(:,2),'.-k')
 title('Altitude')
 xlabel('Time, s')
-ylabel('Altitude, m')
+ylabel('-z, m')
 grid on
 nexttile
 plot(solution.T,rad2deg(solution.X(:,5)),'.-k')

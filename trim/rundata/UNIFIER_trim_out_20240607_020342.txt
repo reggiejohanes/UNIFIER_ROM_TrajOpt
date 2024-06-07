@@ -1,0 +1,86 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    1.120512e+00    0.000e+00    1.557e+02
+Objective function returned NaN; trying a new point...
+    1      25    8.557960e-01    0.000e+00    4.401e+01    4.296e-03
+Objective function returned NaN; trying a new point...
+    2      32    7.876486e-01    0.000e+00    5.978e+01    3.908e-03
+Objective function returned NaN; trying a new point...
+    3      42    5.919836e-01    0.000e+00    8.593e+00    6.367e-03
+Objective function returned NaN; trying a new point...
+    4      49    4.780705e-01    0.000e+00    3.635e+01    1.162e-02
+    5      57    1.627781e-01    0.000e+00    7.861e+01    3.938e-02
+    6      63    4.710615e-02    0.000e+00    4.290e+01    6.257e-02
+    7      71    1.881958e-02    0.000e+00    2.181e+01    1.112e-01
+    8      78    3.216791e-03    0.000e+00    5.045e+00    4.899e-02
+    9      84    1.909003e-03    0.000e+00    1.368e+00    1.646e-02
+   10      90    1.522708e-03    0.000e+00    9.999e-02    3.488e-03
+   11      96    1.281167e-04    0.000e+00    2.302e-02    1.914e-02
+   12     102    1.809148e-07    0.000e+00    8.907e-04    7.672e-03
+   13     108    7.917263e-09    0.000e+00    2.002e-04    2.411e-04
+   14     114    1.096816e-11    0.000e+00    4.384e-06    6.127e-05
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 3.2305 seconds
+Avg. per Iteration   = 0.2019 seconds
+Avg. per Func. Eval. = 0.0252 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ze    [m]    </strong>    -1219.0000
+    <strong>3) u     [m/s]  </strong>       72.7318
+    <strong>4) w     [m/s]  </strong>       -1.0920
+    <strong>5) theta [deg]  </strong>       -0.8602
+    <strong>6) q     [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                          <strong>Value</strong> 
+                          <strong>______</strong>
+
+    <strong>1) dElevator [deg]</strong>    1.4370
+    <strong>2) DEP_col   [deg]</strong>    0.0000
+    <strong>3) HTU       [deg]</strong>    0.5460
+    <strong>4) dFlap     [deg]</strong>    5.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    72.7400
+    <strong>2) zedot    [m/s]   </strong>    -0.0000
+    <strong>3) udot     [m/s2]  </strong>    -0.0000
+    <strong>4) wdot     [m/s2]  </strong>    -0.0000
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>     0.0000
+
+
+Va_actual =
+
+   72.7400
+
+
+Va_error =
+
+  -1.5329e-06
+
+{Index exceeds the number of array elements.
+Index must not exceed 5.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimD_DEPoff_ROM', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimD_DEPoff_ROM.m', 210)" style="font-weight:bold">UNIFIER_trimD_DEPoff_ROM</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimD_DEPoff_ROM.m',210,0)">line 210</a>)
+          lb(6)];                   % HTU lower bound
+} 
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimD_DEPoff_ROM.m',210,0)
+UNIFIER_trimD_DEPoff_ROM

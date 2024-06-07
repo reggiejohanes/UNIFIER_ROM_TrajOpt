@@ -1,0 +1,97 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    9.752186e-01    0.000e+00    1.922e+02
+    1      24    8.576519e-01    0.000e+00    1.705e+02    8.650e-03
+    2      33    8.482198e-01    0.000e+00    1.676e+02    1.297e-03
+    3      41    5.272546e-01    0.000e+00    1.281e+02    4.671e-02
+    4      49    3.007890e-01    0.000e+00    1.409e+02    1.204e-01
+    5      57    2.319740e-01    0.000e+00    1.074e+02    6.491e-02
+    6      65    1.323219e-01    0.000e+00    7.104e+01    4.027e-02
+    7      71    7.250203e-02    0.000e+00    9.956e+00    2.090e-01
+    8      78    2.413719e-02    0.000e+00    1.905e+01    1.974e-01
+    9      84    6.240451e-03    0.000e+00    3.498e+00    4.831e-02
+   10      90    1.804286e-03    0.000e+00    3.905e+00    4.036e-03
+   11      96    1.551538e-03    0.000e+00    9.190e-01    9.984e-04
+   12     102    1.523792e-03    0.000e+00    1.000e-01    1.537e-04
+   13     108    8.997080e-05    0.000e+00    7.592e-02    2.036e-02
+   14     114    7.470285e-05    0.000e+00    2.000e-02    6.741e-04
+   15     120    3.442594e-07    0.000e+00    7.052e-02    5.727e-03
+   16     126    4.895844e-08    0.000e+00    1.272e-03    2.025e-04
+   17     143    4.866205e-08    0.000e+00    7.843e-04    2.294e-08
+   18     154    4.858865e-08    0.000e+00    1.142e-03    5.671e-08
+   19     160    4.608842e-08    0.000e+00    7.580e-03    1.409e-06
+   20     179    4.600222e-08    0.000e+00    7.537e-03    3.701e-09
+   21     194    4.599517e-08    0.000e+00    7.507e-03    8.024e-10
+   22     203    4.599453e-08    0.000e+00    7.514e-03    4.263e-10
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 3.6796 seconds
+Avg. per Iteration   = 0.1533 seconds
+Avg. per Func. Eval. = 0.0173 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ye    [m]    </strong>        0.0000
+    <strong>3) ze    [m]    </strong>    -1219.0000
+    <strong>4) u     [m/s]  </strong>       72.7317
+    <strong>5) v     [m/s]  </strong>        0.0000
+    <strong>6) w     [m/s]  </strong>       -1.0921
+    <strong>7) phi   [deg]  </strong>        0.0000
+    <strong>8) theta [deg]  </strong>       -0.8602
+    <strong>9) psi   [deg]  </strong>        0.0000
+    <strong>10) p    [deg/s]</strong>        0.0000
+    <strong>11) q    [deg/s]</strong>        0.0000
+    <strong>12) r    [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                          <strong>Value</strong> 
+                          <strong>______</strong>
+
+    <strong>1) dAileron  [deg]</strong>    0.0000
+    <strong>2) dRudder   [deg]</strong>    0.0000
+    <strong>3) dElevator [deg]</strong>    1.4393
+    <strong>4) dFlap     [deg]</strong>    5.0000
+    <strong>5) DEP_col   [deg]</strong>    0.0000
+    <strong>6) DEP_slope [deg]</strong>    0.0000
+    <strong>7) HTU       [deg]</strong>    0.5456
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    72.7399
+    <strong>2) yedot    [m/s]   </strong>     0.0000
+    <strong>3) zedot    [m/s]   </strong>    -0.0001
+    <strong>4) udot     [m/s2]  </strong>    -0.0001
+    <strong>5) vdot     [m/s2]  </strong>     0.0000
+    <strong>6) wdot     [m/s2]  </strong>    -0.0001
+    <strong>7) phidot   [deg/s] </strong>     0.0000
+    <strong>8) thetadot [deg/s] </strong>     0.0000
+    <strong>9) psidot   [deg/s] </strong>     0.0000
+    <strong>10) pdot    [deg/s2]</strong>     0.0000
+    <strong>11) qdot    [deg/s2]</strong>     0.0016
+    <strong>12) rdot    [deg/s2]</strong>     0.0000
+
+
+Va_actual =
+
+   72.7399
+
+
+Va_error =
+
+  -7.9506e-05
+

@@ -1,0 +1,87 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    2.464428e+00    0.000e+00    4.388e+02
+Objective function returned NaN; trying a new point...
+    1      26    2.030526e+00    0.000e+00    3.505e+02    9.437e-03
+Objective function returned NaN; trying a new point...
+    2      34    2.012748e+00    0.000e+00    3.538e+02    4.524e-03
+Objective function returned NaN; trying a new point...
+    3      45    9.919853e-01    0.000e+00    7.131e+01    9.668e-03
+Objective function returned NaN; trying a new point...
+    4      54    6.563764e-01    0.000e+00    5.749e+01    2.360e-02
+    5      62    2.893153e-01    0.000e+00    2.753e+01    5.019e-01
+    6      71    1.249264e-01    0.000e+00    1.767e+01    1.257e-01
+    7      79    1.484687e-01    0.000e+00    2.263e+01    3.702e-01
+    8      86    3.628045e-03    0.000e+00    1.196e+01    1.756e-01
+    9      93    5.594935e-04    0.000e+00    6.439e+00    3.409e-02
+   10     100    5.960533e-04    0.000e+00    1.446e+00    3.942e-03
+   11     107    7.444216e-04    0.000e+00    7.423e-01    1.574e-02
+   12     114    6.893200e-04    0.000e+00    7.278e-01    1.188e-02
+   13     121    6.121987e-04    0.000e+00    6.601e-01    2.526e-03
+   14     128    5.774595e-04    0.000e+00    1.712e-01    3.127e-04
+   15     135    5.831401e-04    0.000e+00    1.000e-01    5.135e-04
+   16     142    2.904108e-05    0.000e+00    2.775e-01    9.657e-03
+   17     149    2.616245e-05    0.000e+00    3.345e-02    6.942e-04
+   18     156    2.625775e-05    0.000e+00    2.000e-02    2.546e-04
+   19     163    1.165675e-06    0.000e+00    9.709e-03    2.171e-03
+   20     171    1.113685e-06    0.000e+00    5.716e-03    2.073e-04
+   21     183    1.107197e-06    0.000e+00    4.028e-03    6.650e-07
+   22     190    1.085077e-07    0.000e+00    6.950e-03    2.136e-03
+   23     197    3.849731e-08    0.000e+00    1.140e-03    1.241e-03
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 4.6578 seconds
+Avg. per Iteration   = 0.1863 seconds
+Avg. per Func. Eval. = 0.0213 seconds
+
+<strong>> Table 1 - States</strong>
+                         <strong>Value</strong> 
+                        <strong>_______</strong>
+
+    <strong>1) xe    [m]    </strong>     0.0000
+    <strong>2) ze    [m]    </strong>    -5.0000
+    <strong>3) u     [m/s]  </strong>    54.9994
+    <strong>4) w     [m/s]  </strong>     0.2561
+    <strong>5) theta [deg]  </strong>     0.2669
+    <strong>6) q     [deg/s]</strong>     0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dElevator [deg]</strong>    -1.0594
+    <strong>2) DEP_col   [deg]</strong>     0.4114
+    <strong>3) HTU       [deg]</strong>     0.0701
+    <strong>4) dFlap     [deg]</strong>    12.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    55.0000
+    <strong>2) zedot    [m/s]   </strong>    -0.0001
+    <strong>3) udot     [m/s2]  </strong>     0.0002
+    <strong>4) wdot     [m/s2]  </strong>    -0.0000
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>    -0.0000
+
+
+Va_actual =
+
+   55.0000
+
+
+Va_error =
+
+  -1.0754e-07
+
