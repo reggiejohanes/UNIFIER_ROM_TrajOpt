@@ -65,7 +65,7 @@ options.OutputFcn     = @outputFcn_global;
 
 % Run optimization --------------------------------------------------------
 
-[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimB_obj(x),z0,[],[],[],[],lb,ub,[],options);
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimB_loop_obj(x),z0,[],[],[],[],lb,ub,[],options);
 
 %% Process Results
 

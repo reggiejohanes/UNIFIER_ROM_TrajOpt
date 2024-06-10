@@ -16,27 +16,25 @@ problem.settings = @UNIFIERLanding_Settings;
 %%
 
 % Load data
-load trim/UNIFIER_trim_res.mat xstar ustar
-load data/UNIFIER_LOAD_ROM.mat umax umin dumax
-Umax  = umax;
-Umin  = umin;
-DUmax = dumax;
+global runconfig
 
 % initial conditions
-x0     = xstar(1);
-z0     = xstar(3);
-u0     = xstar(4);
-w0     = xstar(6);
-theta0 = xstar(8);
-q0     = xstar(11);
-dElev0 = ustar(3);
-DEP0   = ustar(5);
-HTU0   = ustar(7);
+x0     = runconfig.x0;
+z0     = runconfig.z0;
+u0     = runconfig.u0;
+w0     = runconfig.w0;
+theta0 = runconfig.theta0;
+q0     = runconfig.q0;
+dElev0 = runconfig.dElev0;
+DEP0   = runconfig.DEP0;
+HTU0   = runconfig.HTU0;
 % dFlap0 = deg2rad(5);
 % dFlap0 = ustar(4);
 
 % variable bounds
-xmin     = -inf;
+Umin  = runconfig.umin;
+
+xmin     = 0;
 zmin     = -inf;
 umin     = 0;
 wmin     = -inf;
@@ -44,10 +42,11 @@ thetamin = deg2rad(-5);
 qmin     = deg2rad(-2);
 dElevmin = Umin(3);
 DEPmin   = Umin(5);
-HTUmin   = -0.5; %Umin(7);
+HTUmin   = Umin(7);
 % dFlapmin = deg2rad(4.999); 
 % dFlapmin = Umin(4); 
 
+Umax  = runconfig.umax;
 xmax     = inf;
 zmax     = 0;
 umax     = inf;
@@ -61,26 +60,26 @@ HTUmax   = Umax(7);
 % dFlapmax = Umax(4); 
 
 % terminal conditions
-zf      = -5;
-xf      = -1*(z0-zf)/tand(3); % 3deg glide slope
-uf      = 35.85*1.3;
-wf      = 2;
-thetaf  = deg2rad(0);
-qf      = deg2rad(0);
+zf      = runconfig.zf;
+xf      = runconfig.xf;
+uf      = runconfig.uf;
+wf      = runconfig.wf;
+thetaf  = runconfig.thetaf;
+qf      = runconfig.qf;
 
-xfu     = inf; %xf*1.2;
-zfu     = zf;
-ufu     = inf; %uf*1.2;
-wfu     = inf; %wf+3;
-thetafu = inf; %thetaf+deg2rad(3);
-qfu     = inf; %qf+deg2rad(1);
+xfu     = runconfig.xfu;
+zfu     = runconfig.zfu;
+ufu     = runconfig.ufu;
+wfu     = runconfig.wfu;
+thetafu = runconfig.thetafu;
+qfu     = runconfig.qfu;
 
-xfl     = -inf; %xf*0.8; -inf
-zfl     = zf;
-ufl     = -inf; %uf*0.8;
-wfl     = -inf; %wf-3;
-thetafl = -inf; %thetaf-deg2rad(3);
-qfl     = -inf; %qf-deg2rad(1);
+xfl     = runconfig.xfl;
+zfl     = runconfig.zfl;
+ufl     = runconfig.ufl;
+wfl     = runconfig.wfl;
+thetafl = runconfig.thetafl;
+qfl     = runconfig.qfl;
 
 %%
 
@@ -92,8 +91,8 @@ guess.t0            = 0;
 
 % Final time. Let tf_min=tf_max if tf is fixed.
 guess.tf            = xf/(uf+(u0-uf)/2);
-problem.time.tf_min = guess.tf/2;     
-problem.time.tf_max = guess.tf*2; 
+problem.time.tf_min = 1; %guess.tf/2     
+problem.time.tf_max = inf; %guess.tf*2
 
 % Parameters bounds. pl=< p <=pu
 problem.parameters.pl = [];
@@ -115,7 +114,7 @@ problem.states.xu = [xmax zmax umax wmax thetamax qmax];
 problem.states.xrl = [-inf -inf -inf -inf -inf -inf]; 
 problem.states.xru = [ inf  inf  inf  inf  inf  inf]; 
 
-ebmult = 1e3; % error bound multiplier
+ebmult = runconfig.ebmult; % error bound multiplier
 
 % State error bounds
 problem.states.xErrorTol_local    = [1 1 0.5 0.5 deg2rad(1) deg2rad(0.5)]*ebmult;
@@ -159,6 +158,7 @@ problem.inputs.u0l = [dElev0 DEP0 HTU0];
 problem.inputs.u0u = [dElev0 DEP0 HTU0];
 
 % Input rate bounds
+DUmax = runconfig.dumax;
 % problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7) -DUmax(4)];
 % problem.inputs.uru = [ DUmax(3)  DUmax(5)  DUmax(7)  DUmax(4)];
 problem.inputs.url = [-DUmax(3) -DUmax(5) -DUmax(7)];
@@ -185,13 +185,13 @@ problem.setpoints.inputs = [];
 problem.constraints.ng_eq   = 0;
 problem.constraints.gTol_eq = [];
 
-problem.constraints.gl       = [-inf,...   % min rate of descent convvel(0,'ft/min','m/s')
-                                -inf,... % min alpha deg2rad(-15)
-                                -inf];      % min airspeed 35.85*1.3
+problem.constraints.gl = [runconfig.ineq_rodmin,... % min rate of descent convvel(0,'ft/min','m/s')
+                          runconfig.ineq_aoamin,... % min alpha deg2rad(-15)
+                          runconfig.ineq_Vamin];   % min airspeed 35.85*1.3
 
-problem.constraints.gu       = [inf,... % max rate of descent convvel(350,'ft/min','m/s')
-                                inf,...                 % max alpha deg2rad(10)
-                                inf];                           % max airspeed
+problem.constraints.gu = [runconfig.ineq_rodmax,... % max rate of descent convvel(350,'ft/min','m/s')
+                          runconfig.ineq_aoamax,... % max alpha deg2rad(10)
+                          runconfig.ineq_Vamax];    % max airspeed
 
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
                                 deg2rad(0.1),...
@@ -219,11 +219,11 @@ problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
 % problem.constraints.g_neq_ActiveTime{5}=[];
 
 % Bounds for boundary constraints bl =< b(x0,xf,u0,uf,p,t0,tf) =< bu
-problem.constraints.bl   = [-inf,... % min final airspeed (m/s) 35.85*1.1
-                            convvel(200,'ft/min','m/s')];           % vertical speed (m/s) convvel(200,'ft/min','m/s')
+problem.constraints.bl   = [runconfig.bndc_Vamin,... % min final airspeed (m/s) 35.85*1.1
+                            runconfig.bndc_rodmin];  % vertical speed (m/s) convvel(200,'ft/min','m/s')
 
-problem.constraints.bu   = [inf,... % max final airspeed 35.85*1.3
-                            convvel(350,'ft/min','m/s')];           % max veritcal speed (m/s) convvel(350,'ft/min','m/s')
+problem.constraints.bu   = [runconfig.bndc_Vamax,... % max final airspeed 35.85*1.3
+                            runconfig.bndc_rodmax];  % max veritcal speed (m/s) convvel(350,'ft/min','m/s')
 
 problem.constraints.bTol = [0.001,...
                             convvel(5,'ft/min','m/s')];
@@ -282,20 +282,23 @@ function stageCost = L_unscaled(x,xr,u,ur,p,t,vdat)
 
 %------------- BEGIN CODE --------------
 
-% k   = 0.1;
-% 
-% z   = x(:,2); 
-% z0  = x(1,2);
-% p  = exp(((z-z0)/z0).^2);
-% 
-% Va  = sqrt(x(:,3).^2+x(:,4).^2);
-% Va0 = sqrt(x(1,3).^2+x(1,4).^2);
-% 
-% stageCost = k .* p .* Va/Va0;
+global runconfig
+
+if runconfig.stagecost==1
+    k   = 0.1;
+    z   = x(:,2); 
+    z0  = x(1,2);
+    p  = exp(((z-z0)/z0).^2);
+    Va  = sqrt(x(:,3).^2+x(:,4).^2);
+    Va0 = sqrt(x(1,3).^2+x(1,4).^2);
+    stageCost = k .* p .* Va/Va0;
+else
+    stageCost = 0*t;
+end
 
 % stageCost = k.*sqrt(Va.^2.*(h-h0).^2);
 % stageCost = k.*Va.*(h-h0).^2;
-stageCost = 0*t;
+
 
 %------------- END OF CODE --------------
 
@@ -321,7 +324,15 @@ function boundaryCost=E_unscaled(x0,xf,u0,uf,p,t0,tf,data)
 %
 %------------- BEGIN CODE --------------
 
-boundaryCost= tf;
+global runconfig
+
+if runconfig.boundarycost==1
+    boundaryCost = tf;
+elseif runconfig.boundarycost==2
+    boundaryCost = xf(1);
+else
+    boundaryCost = tf;
+end
 
 %------------- END OF CODE --------------
 

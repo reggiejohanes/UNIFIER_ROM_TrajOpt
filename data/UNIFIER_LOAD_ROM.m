@@ -1,5 +1,5 @@
 
-% clear all
+clear all
 % close all
 % clc
 
@@ -11,7 +11,11 @@ gr = 9.80665;      % standard gravity
 
 load("dp_HTU.mat")
 load("dp_DEP.mat")
-load("UNIFIER_ROM.mat")
+% load("UNIFIER_ROM.mat")
+% load("UNIFIER_ROM_50.mat")
+% load("UNIFIER_ROM_v2.mat")
+load("UNIFIER_ROM_v2a.mat")
+
 
 % Mass case NO PASSENGERS, FULL FUEL: (aft C.G.)
 % m = 5423;
@@ -85,4 +89,7 @@ dumax(1:4) = deg2rad(dumax(1:4));
 
 %% Save to .mat
 
-save UNIFIER_LOAD_ROM
+% save UNIFIER_LOAD_ROM
+% save UNIFIER_LOAD_ROM_50
+% save UNIFIER_LOAD_ROM_v2
+save UNIFIER_LOAD_ROM_v2a

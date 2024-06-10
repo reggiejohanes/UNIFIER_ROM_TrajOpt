@@ -1,0 +1,8 @@
+uiimport('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\rundata_trajopt\UNIFIERLanding_20240524_162938.mat',1)
+Error: <a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',119,8)">File: UNIFIERLanding_Main.m Line: 119 Column: 8</a>
+Unsupported use of the '=' operator. To compare values
+for equality, use '=='. To specify name-value arguments,
+check that name is a valid identifier with no surrounding
+quotes.
+
+UNIFIERLanding_Main

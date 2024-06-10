@@ -12,30 +12,29 @@ logname   = 'rundata\UNIFIER_trim_out_' + timestamp; % name of diary & data log 
 diary (logname + '.txt')
 diary on % start diary
 
-%% Set target trim conditions
+%% Configure trim run
 
-Va_target = 72.74; % airspeed target [m/s] cruise=72.74m/s
-ze_target = 1219;  % altitude [m] cruise=1219m
-dFlap     = deg2rad(12); % flap deflection [deg]
+global trimconfig
 
-global target
-target.Va    = Va_target;
-target.ze    = ze_target;
-target.dFlap = dFlap;
+trimconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2a
+trimconfig.ROMset  = 2; % 1=all dependencies, 2=reduced dependencies
 
-global penalty
-penalty.zedot = 1;
-penalty.udot  = 1;
-penalty.wdot  = 1;
-penalty.qdot  = 10;
-penalty.Va    = 1;
+trimconfig.Va_target    = 72.74; % airspeed target (m/s) cruise=72.74m/s
+trimconfig.ze    = 1219;         % altitude (m) cruise=1219m
+trimconfig.dFlap = deg2rad(12);  % flap deflection (deg)
+
+trimconfig.penalty_zedot = 1;
+trimconfig.penalty_udot  = 1;
+trimconfig.penalty_wdot  = 1;
+trimconfig.penalty_qdot  = 10;
+trimconfig.penalty_Va    = 1;
 
 %% Initialize z_guess
 
 % Initial states
-x0 = [Va_target/100; % u [m/s]
-      0/100;         % w [m/s]
-      deg2rad(0)];   % theta [deg]
+x0 = [trimconfig.Va_target/100; % u [m/s]
+      0/100;                    % w [m/s]
+      deg2rad(0)];              % theta [deg]
 
 % Initial control inputs
 u0 = [deg2rad(0);  % Elevator deflection [deg]
@@ -113,16 +112,16 @@ fprintf('Avg. per Func. Eval. = %6.4f seconds\n',t_fmincon/output.funcCount);
 
 % Extract states & controls -----------------------------------------------
 
-xstar = [0;            % xe
-         -ze_target;   % ze
-         zstar(1)*100; % u
-         zstar(2)*100; % w
-         zstar(3);     % theta
-         0];           % q
-ustar = [zstar(4);     % dElev
-         0;            % DEP_col
-         zstar(5);     % HTU
-         dFlap];       % dFlap
+xstar = [0;                 % xe
+         -trimconfig.ze;    % ze
+         zstar(1)*100;      % u
+         zstar(2)*100;      % w
+         zstar(3);          % theta
+         0];                % q
+ustar = [zstar(4);          % dElev
+         0;                 % DEP_col
+         zstar(5);          % HTU
+         trimconfig.dFlap]; % dFlap
 
 vastar=sqrt(xstar(3)^2+xstar(4)^2);
 
@@ -182,32 +181,32 @@ disp(xdottable0)
 
 % Va results --------------------------------------------------------------
 Va_actual = vastar
-Va_error  = Va_actual-Va_target
+Va_error  = Va_actual-trimconfig.Va_target
 
 % Numerical Settings & Results --------------------------------------------
 % (for documentation purposes only)
 
 funcinfo = dbstack;
 
-numset = [options.TolX,...          % TolX
-          options.DiffMinChange,... % DiffMinChange
-          inf,...                   % DiffMaxChange
-          1e-6,...                  % TolFun
-          Va_target,...             % Va target (m/s)
-          ze_target,...             % Ze target (m)
-          x0(1)*100,...             % u (m/s) guess
-          x0(2)*100,...             % w (m/s) guess
-          rad2deg(x0(3)),...        % theta (deg) guess
-          rad2deg(u0(1)),...        % dElev (deg) guess
-          rad2deg(dFlap),...        % dFlap (deg) setting
-          0,...                     % DEP (0-1) setting
-          u0(2),...                 % HTU (0-1) guess
-          penalty.zedot,...         % zedot objective penalty
-          penalty.udot,...          % udot objective penalty
-          penalty.wdot,...          % wdot objective penalty
-          penalty.qdot,...          % qdot objective penalty
-          penalty.Va,...            % Va objective penalty
-          lb(5)];                   % HTU lower bound
+numset = [options.TolX,...              % TolX
+          options.DiffMinChange,...     % DiffMinChange
+          inf,...                       % DiffMaxChange
+          1e-6,...                      % TolFun
+          trimconfig.Va_target,...      % Va target (m/s)
+          trimconfig.ze,...             % Ze target (m)
+          x0(1)*100,...                 % u (m/s) guess
+          x0(2)*100,...                 % w (m/s) guess
+          rad2deg(x0(3)),...            % theta (deg) guess
+          rad2deg(u0(1)),...            % dElev (deg) guess
+          rad2deg(trimconfig.dFlap),... % dFlap (deg) setting
+          0,...                         % DEP (0-1) setting
+          u0(2),...                     % HTU (0-1) guess
+          trimconfig.penalty_zedot,...  % zedot objective penalty
+          trimconfig.penalty_udot,...   % udot objective penalty
+          trimconfig.penalty_wdot,...   % wdot objective penalty
+          trimconfig.penalty_qdot,...   % qdot objective penalty
+          trimconfig.penalty_Va,...     % Va objective penalty
+          lb(5)];                       % HTU lower bound
 
 numres = [fval,...                     % fval
           output.firstorderopt,...     % Optimality

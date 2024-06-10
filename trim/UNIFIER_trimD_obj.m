@@ -12,13 +12,14 @@ function f0=UNIFIER_trimD_obj(z)
 %       0.5];        % HTU activity factor [0-1]
 % z = [x0;u0];
 
-global target
-Va_target    = target.Va;
-ze_target    = target.ze;
-dFlap        = target.dFlap;
+global trimconfig
+
+Va_target    = trimconfig.Va_target;
+ze    = trimconfig.ze;
+dFlap        = trimconfig.dFlap;
 
 x=[0;          % xe
-   -ze_target; % ze
+   -ze; % ze
    z(1)*100;   % u
    z(2)*100;   % w
    z(3);       % theta
@@ -28,6 +29,7 @@ u=[z(4);       % dElev
    z(5);       % HTU
    dFlap];     % dFlap
 
+% xdot=UNIFIER_ROMdyn_trim_v2(x,u);
 xdot=UNIFIER_ROMdyn_trim(x,u);
 xdot(1)=[];
 
@@ -36,12 +38,11 @@ Va    = sqrt(x(3)^2+x(4)^2);
 Q = [xdot';
     Va-Va_target];
 
-global penalty
-zedot_penalty = penalty.zedot;
-udot_penalty  = penalty.udot;
-wdot_penalty  = penalty.wdot;
-qdot_penalty  = penalty.qdot;
-Va_penalty    = penalty.Va;
+zedot_penalty = trimconfig.penalty_zedot;
+udot_penalty  = trimconfig.penalty_udot;
+wdot_penalty  = trimconfig.penalty_wdot;
+qdot_penalty  = trimconfig.penalty_qdot;
+Va_penalty    = trimconfig.penalty_Va;
 
 H = diag(ones(1,numel(Q))); % penalty weight matrix
 H(1,1) = zedot_penalty; % penalty weight for zedot (rate of descent)
@@ -51,3 +52,4 @@ H(5,5) = qdot_penalty;  % qdot (pitch acceleration)
 H(6,6) = Va_penalty;    % Va (airspeed)
 
 f0 = Q'*H*Q;
+

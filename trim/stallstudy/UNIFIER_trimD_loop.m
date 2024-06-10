@@ -54,7 +54,7 @@ options.FunValCheck   = 'off';
 options.ScaleProblem  = 'false';
 options.FinDiffType   = 'forward';
 options.TolX          = 1e-10;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
+options.DiffMinChange = 1e-7;  % Minimum change in variables for finite-difference gradients. Default=0.
 % options.DiffMaxChange = 1e-0;  % Maximum change in variables for finite-difference gradients. Default=Inf.
 % options.TolFun        = 1e-8;  % Termination tolerance on the first-order optimality (aka optimalityTolerance). Default=1e-6. 
 % options.TolCon        = 1e-3;  % Constraint violation tolerance
@@ -65,7 +65,7 @@ options.OutputFcn     = @outputFcn_global;
 
 % Run optimization --------------------------------------------------------
 
-[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimD_obj(x),z0,[],[],[],[],lb,ub,[],options);
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimD_loop_obj(x),z0,[],[],[],[],lb,ub,[],options);
 
 %% Process Results
 
@@ -86,7 +86,7 @@ vastar=sqrt(xstar(3)^2+xstar(4)^2);
 
 % Evaluate accelerations --------------------------------------------------
 
-xdotstar = UNIFIER_ROMdyn_trim(xstar,ustar);
+xdotstar = UNIFIER_ROMdyn_trimloop(xstar,ustar);
 
 res.xdot = xdotstar;
 res.Va   = vastar;

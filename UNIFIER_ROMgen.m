@@ -1,7 +1,7 @@
 
 % clc
 clear
-close all
+% close all
 
 %% GET AIRCRAFT DATA
 
@@ -9,7 +9,7 @@ load data/UNIFIER_LOAD.mat c S
 
 %% SET FLIGHT CONDITIONS
 
-Va     = 72.74; % airspeed [m/s] cruise=72.74
+Va     = 50; % airspeed [m/s] cruise=72.74
 h      = 1219;  % altitude [m]
 
 [~,~,~,rho,nu] = atmosisa(h);
@@ -168,7 +168,7 @@ ROM.CT      = CT';
 ROM.J       = J';
 ROM.dElev   = dElev; 
 
-save data/UNIFIER_ROM.mat ROM
+save data/UNIFIER_ROM_50.mat ROM
 
 %% TEST INTERPOLATION
 
@@ -176,21 +176,22 @@ save data/UNIFIER_ROM.mat ROM
 % alpha_test = deg2rad(0);
 % J_test     = 1.7;
 % dElev_test = deg2rad(20);
-dFlap_test = 0;
-alpha_test = 0.0157;
-J_test     = 1.98;
-dElev_test = -0.0153;
-
-CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...   % breakpoints
-                     ROM.CL,...                                % table data
-                     dFlap_test,alpha_test,J_test,dElev_test); % inputs
-
-CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-                     ROM.CD,...
-                     dFlap_test,alpha_test,J_test,dElev_test);
+% dFlap_test = 0;
+% alpha_test = 0.0157;
+% J_test     = 1.98;
+% dElev_test = -0.0153;
+% 
+% CL_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...   % breakpoints
+%                      ROM.CL,...                                % table data
+%                      dFlap_test,alpha_test,J_test,dElev_test); % inputs
+% 
+% CD_test    = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+%                      ROM.CD,...
+%                      dFlap_test,alpha_test,J_test,dElev_test);
 
 %% PLOT RESULTS
 
+close all
 
 plotstyle = [".-m";".-r";".-g";".-c";".-b";".-k";
              ".-m";".-r";".-g";".-c";".-b";".-k";
@@ -198,10 +199,11 @@ plotstyle = [".-m";".-r";".-g";".-c";".-b";".-k";
              ".-m";".-r";".-g";".-c";".-b";".-k";
              ".-m";".-r";".-g";".-c";".-b";".-k"];
 
+% CL ----------------------------------------------------------------------
 figure('Name','Total Lift Coefficient','Position',[150 250 600 500])
 for i=1:dFlap_n
     dflaplegend(i) = strjoin(["\delta_{flap} =",num2str(dFlap_deg(i)),"\circ"]);
-    plot(alpha_deg,CL(i,:,1),plotstyle(i))
+    plot(alpha_deg,CL(i,:,1,2),plotstyle(i))
     hold on
 end
 title('Total Lift Coefficient')
@@ -213,9 +215,10 @@ xlabel('\alpha [deg]')
 set(get(gca,'ylabel'),'rotation',0)
 legend(dflaplegend,'Location','northwest')
 
+% CD ----------------------------------------------------------------------
 figure('Name','Total Drag Coefficient','Position',[800 250 600 500])
 for i=1:dFlap_n
-    plot(alpha_deg,CD(i,:,1),plotstyle(i))
+    plot(alpha_deg,CD(i,:,1,2),plotstyle(i))
     hold on
 end
 title('Total Drag Coefficient')
@@ -228,10 +231,10 @@ xlabel('\alpha [deg]')
 set(get(gca,'ylabel'),'rotation',0)
 legend(dflaplegend,'Location','northwest')
 
+% CM ----------------------------------------------------------------------
 figure('Name','Pitching Moment Coefficient','Position',[150 250 600 500])
 for i=1:dFlap_n
-    dflaplegend(i) = strjoin(["\delta_{flap} =",num2str(dFlap_deg(i)),"\circ"]);
-    plot(alpha_deg,CM(i,:,1),plotstyle(i))
+    plot(alpha_deg,CM(i,:,1,2),plotstyle(i))
     hold on
 end
 title('Pitching Moment Coefficient')

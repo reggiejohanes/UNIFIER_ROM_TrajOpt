@@ -17,6 +17,7 @@ function DX=UNIFIER_ROMdyn(X,U)
 %% Constants
 
 load data/UNIFIER_LOAD_ROM.mat
+% load data/UNIFIER_LOAD_ROM_50.mat
 
 prop_d  = 1.6;
 DEP_inc = deg2rad(-5);
@@ -38,9 +39,9 @@ DEP   = U(:,2); % 0-1
 HTU   = U(:,3); % 0-1
 % dFlap = U(:,4); % rad
 
-% dFlap = deg2rad(12);
-global controls
-dFlap = controls.dFlap;
+% dFlap = deg2rad(0);
+global runconfig
+dFlap = runconfig.dFlap;
 dFlap = linspace(dFlap,dFlap,numel(x))';
 
 %% Intermediate Variables
@@ -109,35 +110,42 @@ MDEP     = MDEP_x+MDEP_z;
 
 %% Aerodynamics
 
+if runconfig.ROMset==1
+
 % Coefficients (all dependencies) -----------------------------------------
-% CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
-%                      ROM.CL,...                        % table data
-%                      dFlap,alpha,J,dElev);             % inputs
-% CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-%                      ROM.CD,...
-%                      dFlap,alpha,J,dElev); 
-% CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-%                      ROM.CM,... 
-%                      dFlap,alpha,J,dElev);
+    CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
+                         ROM.CL,...                        % table data
+                         dFlap,alpha,J,dElev);             % inputs
+    CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+                         ROM.CD,...
+                         dFlap,alpha,J,dElev); 
+    CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+                         ROM.CM,... 
+                         dFlap,alpha,J,dElev);
+    
+else
 
-% Coefficients (reduced dependencies) -------------------------------------
-dFlap_fixed = deg2rad(5);
-dElev_fixed = deg2rad(0);
-J_fixed     = DEPVa2J(72.74,0.5); % J at Vcruise & DEP=0.5
+    % Coefficients (reduced dependencies) -------------------------------------
+    dFlap_fixed = deg2rad(5);
+    dElev_fixed = deg2rad(0);
+    % J_fixed     = DEPVa2J(72,74,0.5); % J at Vcruise & DEP=0.5
+    J_fixed     = DEPVa2J(50,0.5); % J at Vcruise & DEP=0.5
+    
+    dFlap_fixed = linspace(dFlap_fixed,dFlap_fixed,numel(x))';
+    dElev_fixed = linspace(dElev_fixed,dElev_fixed,numel(x))';
+    J_fixed     = linspace(J_fixed,J_fixed,numel(x))';
+    
+    CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CL(alpha)
+                         ROM.CL,...                              
+                         dFlap_fixed,alpha,J_fixed,dElev_fixed);
+    CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CD(alpha)
+                         ROM.CD,...
+                         dFlap_fixed,alpha,J_fixed,dElev_fixed); 
+    CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CM(alpha,dElev)
+                         ROM.CM,... 
+                         dFlap_fixed,alpha,J_fixed,dElev);
 
-dFlap_fixed = linspace(dFlap_fixed,dFlap_fixed,numel(x))';
-dElev_fixed = linspace(dElev_fixed,dElev_fixed,numel(x))';
-J_fixed     = linspace(J_fixed,J_fixed,numel(x))';
-
-CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CL(alpha)
-                     ROM.CL,...                              
-                     dFlap_fixed,alpha,J_fixed,dElev_fixed);
-CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CD(alpha)
-                     ROM.CD,...
-                     dFlap_fixed,alpha,J_fixed,dElev_fixed); 
-CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CM(alpha,dElev)
-                     ROM.CM,... 
-                     dFlap_fixed,alpha,J_fixed,dElev);
+end
 
 % Dimensionalize forces and moments ---------------------------------------
 L   = Q.*S.*CL;

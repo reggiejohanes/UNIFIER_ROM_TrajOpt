@@ -15,9 +15,9 @@ ze_cruise   = 1219;
 ze_landing  = 5;
 
 Va_max      = 80;
-Va_min      = 50;
-Va_interval = 2.5;
-Va_n        = (Va_max-Va_min)/Va_interval+1;
+Va_min      = 35;
+Va_inc      = 2.5;
+Va_n        = (Va_max-Va_min)/Va_inc+1;
 Va_range    = linspace(Va_min,Va_max,Va_n);
 
 dFlap_range = [0 5 12];

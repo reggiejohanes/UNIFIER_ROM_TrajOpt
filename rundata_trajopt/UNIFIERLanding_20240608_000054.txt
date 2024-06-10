@@ -1,0 +1,49 @@
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+
+EXIT: Problem has inconsistent variable bounds or constraint sides.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('solveSingleNLP_DirectCollocation')" style="font-weight:bold">solveSingleNLP_DirectCollocation</a>
+Error encountered when post-processing the solution.
+Please ensure the NLP solve has been terminated
+successfully, and the error tolerances have been
+correctly configured
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('solveNLP', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveNLP.m', 239)" style="font-weight:bold">solveNLP</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveNLP.m',239,0)">line 239</a>)
+            [solution,status,data]=solveSingleNLP_DirectCollocation(NLP,data);
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('solveMyProblem', 'D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m', 350)" style="font-weight:bold">solveMyProblem</a> (<a href="matlab: opentoline('D:\Program Files\ICLOCS\src\problemTranscriptionSolve\solveMyProblem.m',350,0)">line 350</a>)
+                [solution,status,data] = solveNLP(infoNLP,data);      % Solve the NLP
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 130)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',130,0)">line 130</a>)
+[solution,MRHistory] = solveMyProblem(problem,guess,options);} 
+runconfig.bndc_Vamin
+ans =
+  -Inf
+runconfig.bndc_rodmin
+ans =
+     0
+runconfig.bndc_Vamax
+ans =
+   Inf
+runconfig.bndc_rodmax
+ans =
+    1.7780
+runconfig.boundarycost
+ans =
+     1
+runconfig.x0
+ans =
+     0
+clear
+Error: <a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding.m',386,1)">File: UNIFIERLanding.m Line: 386 Column: 1</a>
+All functions in a script must be closed with an 'end'.
+
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding.m',386,1)
+UNIFIERLanding_Main
