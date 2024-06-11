@@ -1,0 +1,7 @@
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+Unable to find file or directory
+'data/UNIFIER_LOAD_ROM.mat'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 52)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',52,0)">line 52</a>)
+load(loadfile,"umax","umin","dumax")} 
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',52,0)
+diary off

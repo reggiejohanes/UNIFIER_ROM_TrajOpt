@@ -1,20 +1,38 @@
 function DX=UNIFIER_ROMdyn_trim(X,U)
 
 % Test
-% clc
 % clear
-% close all
+% global trimconfig
 % 
-% X=[0;   % xe
-%    -5;  % ze
-%    50;  % u
-%    0;   % w
-%    0;   % theta
-%    0];  % q
-% U=[0;   % dElev
-%    0.5; % DEP_col
-%    0.5; % HTU
-%    0];  % dFlap
+% trimconfig.DEPset  = 0; % 1=DEP on, 0=DEP off
+% trimconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2a
+% trimconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
+% 
+% trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
+% trimconfig.ze        = 1219;        % altitude (m) cruise=1219m
+% trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
+% 
+% % X=[0;   % xe
+% %    -trimconfig.ze;  % ze
+% %    trimconfig.Va_target;  % u
+% %    0;   % w
+% %    0;   % theta
+% %    0];  % q
+% % U=[0;   % dElev
+% %    0.5; % DEP_col
+% %    0.5; % HTU
+% %    trimconfig.dFlap];  % dFlap
+% 
+% X=[0;
+% -1219;
+% 49.8326034443374;
+% 7.80070528673805;
+% 0.140715081996290;
+% 0];
+% U=[-0.200966577518637;
+% 0;
+% -0.494729321095230;
+% 0];
 
 
 %% Constants
@@ -22,11 +40,11 @@ function DX=UNIFIER_ROMdyn_trim(X,U)
 global trimconfig
 
 if trimconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM.mat     % v1 at 72.74 m/s
+    load data/UNIFIER_LOAD_ROM_72.mat     % v1 at 72.74 m/s
 elseif trimconfig.ROMfile==2
     load data/UNIFIER_LOAD_ROM_50.mat  % v1 at 50 m/s
 elseif trimconfig.ROMfile==3
-    load data/UNIFIER_LOAD_ROM_v2a.mat % v2
+    load data/UNIFIER_LOAD_ROM_v2.mat % v2
 else
     error("Invalid ROM file setting")
 end
@@ -121,7 +139,7 @@ MDEP     = MDEP_x+MDEP_z;
 %% Aerodynamics
 
 if trimconfig.ROMfile==1 || trimconfig.ROMfile==2 % v1 ROMs
-    if trimconfig.ROMset==1
+    if trimconfig.ROMdep==1
         % Coefficients (all dependencies) ---------------------------------
         CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
                              ROM.CL,...                        % table data
@@ -132,7 +150,7 @@ if trimconfig.ROMfile==1 || trimconfig.ROMfile==2 % v1 ROMs
         CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
                              ROM.CM,... 
                              dFlap,alpha,J,dElev);
-    elseif trimconfig.ROMset==2
+    elseif trimconfig.ROMdep==2
         % Coefficients (reduced dependencies) -----------------------------
         dElev_fixed = deg2rad(0);
         if trimconfig.ROMfile==1
@@ -157,7 +175,7 @@ if trimconfig.ROMfile==1 || trimconfig.ROMfile==2 % v1 ROMs
         error("Invalid ROM dependency setting")
     end
 elseif trimconfig.ROMfile==3 % v2 ROM
-    if trimconfig.ROMset==1
+    if trimconfig.ROMdep==1
         % Coefficients (all dependencies) ---------------------------------
         CL    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,... % breakpoints
                              ROM.CL,...                                      % table data
@@ -168,7 +186,7 @@ elseif trimconfig.ROMfile==3 % v2 ROM
         CM    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...
                              ROM.CM,...
                              dFlap,dElev,DEP,Va,alpha);
-    elseif trimconfig.ROMset==2
+    elseif trimconfig.ROMdep==2
         % Coefficients (reduced dependencies) -----------------------------
         dElev_fixed = deg2rad(0);
         DEP_fixed   = 0.5;

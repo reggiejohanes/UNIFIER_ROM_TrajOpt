@@ -17,4 +17,3 @@ function [DX] = UNIFIERLanding_Dynamics_Sim(X,U,p,t,data)
 %%
 
 DX = UNIFIER_ROMdyn(X,U);
-% DX = UNIFIER_ROMdyn_v2(X,U);

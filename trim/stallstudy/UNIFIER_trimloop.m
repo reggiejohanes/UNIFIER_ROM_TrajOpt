@@ -1,6 +1,6 @@
 
 % clc
-clear
+clear all
 close all
 
 %% Documentation
@@ -23,6 +23,40 @@ Va_range    = linspace(Va_min,Va_max,Va_n);
 dFlap_range = [0 5 12];
 dFlap_range = deg2rad(dFlap_range);
 
+%% Set numerical parameters
+
+% Case A - HFM, DEP on
+dmcA           = 1e-7;
+penaltyA.zedot = 1;
+penaltyA.udot  = 1;
+penaltyA.wdot  = 1;
+penaltyA.qdot  = 100;
+penaltyA.Va    = 1;
+
+% Case B - HFM, DEP off
+dmcB           = 1e-5;
+penaltyB.zedot = 1;
+penaltyB.udot  = 1;
+penaltyB.wdot  = 1;
+penaltyB.qdot  = 100;
+penaltyB.Va    = 1;
+
+% Case C - ROM, DEP on
+dmcC           = 1e-8;
+penaltyC.zedot = 1;
+penaltyC.udot  = 1;
+penaltyC.wdot  = 1;
+penaltyC.qdot  = 100;
+penaltyC.Va    = 1;
+
+% Case D - ROM, DEP off
+dmcD           = 1e-8;
+penaltyD.zedot = 1;
+penaltyD.udot  = 1;
+penaltyD.wdot  = 1;
+penaltyD.qdot  = 10;
+penaltyD.Va    = 1;
+
 %% Calculate trim accelerations
 
 fprintf('\n');
@@ -39,32 +73,31 @@ for i=1:numel(dFlap_range)
     for j=1:Va_n
 
         % Case A - HFM, DEP on
-        resA = UNIFIER_trimA_loop(ze_landing,Va_range(j),dFlap_range(i));
+        resA = UNIFIER_trimHFM_loop(1,Va_range(j),ze_landing,dFlap_range(i),penaltyA,dmcA);
         zedotA(i,j) = resA.xdot(3);
         wdotA(i,j)  = resA.xdot(6);
         fvalA(i,j)  = resA.fval;
         
         % Case B - HFM, DEP off
-        resB = UNIFIER_trimB_loop(ze_cruise,Va_range(j),dFlap_range(i));
+        resB = UNIFIER_trimHFM_loop(0,Va_range(j),ze_cruise,dFlap_range(i),penaltyB,dmcB);
         zedotB(i,j) = resB.xdot(3);
         wdotB(i,j)  = resB.xdot(6);
         fvalB(i,j)  = resB.fval;
 
         % Case C - ROM, DEP on
-        resC = UNIFIER_trimC_loop(ze_landing,Va_range(j),dFlap_range(i));
+        resC = UNIFIER_trimROM_loop(1,3,1,Va_range(j),ze_landing,dFlap_range(i),penaltyC,dmcC);
         zedotC(i,j) = resC.xdot(3);
         wdotC(i,j)  = resC.xdot(6);
         fvalC(i,j)  = resC.fval;
 
         % Case D - ROM, DEP off
-        resD = UNIFIER_trimD_loop(ze_cruise,Va_range(j),dFlap_range(i));
+        resD = UNIFIER_trimROM_loop(0,3,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyD,dmcD);
         zedotD(i,j) = resD.xdot(3);
         wdotD(i,j)  = resD.xdot(6);
         fvalD(i,j)  = resD.fval;
-        
-        fprintf('.')
 
     end
+    fprintf('.')
 end
 
 UNIFIER_dyn([],[],[],'term')
@@ -76,7 +109,7 @@ fprintf('\n');
 fprintf('\n');
 
 t_eval = toc;
-evals  = Va_n*numel(dFlap_range);
+evals  = Va_n*numel(dFlap_range)*4;
 fprintf('Total               = %6.4f seconds\n',t_eval);
 fprintf('Avg. per Evaluation = %6.4f seconds\n',t_eval/evals);
 fprintf('\n');

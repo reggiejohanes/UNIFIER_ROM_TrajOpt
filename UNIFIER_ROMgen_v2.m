@@ -5,16 +5,12 @@ clear
 
 %% GET AIRCRAFT DATA
 
-load data/UNIFIER_LOAD.mat c S
+load data/UNIFIER_LOAD.mat c S umax umin
 
 %% SET FLIGHT CONDITIONS
 
 h      = 1219;  % altitude [m]
 [~,~,~,rho,nu] = atmosisa(h);
-
-% Va     = 50; % airspeed [m/s] cruise=72.74
-% Re             = Va*c/nu;
-% qS             = 0.5*rho*Va^2*S;
 
 %% SET SWEEP RANGES
 
@@ -27,23 +23,23 @@ alpha_deg = linspace(alpha_min,alpha_max,alpha_n)';
 alpha     = deg2rad(alpha_deg);
 
 % Flap deflection
-dFlap_min = 0;
-dFlap_max = 25;
+dFlap_min = rad2deg(umin(4));
+dFlap_max = rad2deg(umax(4));
 dFlap_inc = 5;
 dFlap_n   = (dFlap_max-dFlap_min)/dFlap_inc+1;
 dFlap_deg = linspace(dFlap_min,dFlap_max,dFlap_n)';
 dFlap     = deg2rad(dFlap_deg);
 
 % DEP thrust setting
-DEP_min = 0;
-DEP_max = 1;
+DEP_min = umin(5);
+DEP_max = umax(5);
 DEP_inc = 0.1;
 DEP_n   = (DEP_max-DEP_min)/DEP_inc+1;
-DEP_col = linspace(DEP_min,DEP_max,DEP_n)';
+DEP_col = linspace(DEP_max,DEP_min,DEP_n)';
 
 % Elevator deflection
-dElev_min = -5;
-dElev_max = 20;
+dElev_min = rad2deg(umin(3));
+dElev_max = rad2deg(umax(3));
 dElev_inc = 5;
 dElev_n   = (dElev_max-dElev_min)/dElev_inc+1;
 dElev_deg = linspace(dElev_min,dElev_max,dElev_n)';
@@ -55,12 +51,6 @@ Va_max = 90;
 Va_inc = 5;
 Va_n   = (Va_max-Va_min)/Va_inc+1;
 Va     = linspace(Va_min,Va_max,Va_n)';
-
-% Initialize vectors 
-% L  = zeros(Re_n,alpha_n);
-% D  = zeros(Re_n,alpha_n);
-% CL = zeros(Re_n,alpha_n);
-% CD = zeros(Re_n,alpha_n);
 
 %% EVALUATE FORCES & MOMENTS
 
@@ -111,15 +101,15 @@ for i=1:dFlap_n
                               0               1  0;
                               -sin(alpha(m))  0  cos(alpha(m))];
                     F_ae_w = rot*F_ae_b;
-                    L(i,j,k,l,m)   = -F_ae_w(3);
-                    D(i,j,k,l,m)   = -F_ae_w(1);
-                   
-                    My(i,j,k,l,m)  = out(21);
+
+                    L   = -F_ae_w(3);
+                    D   = -F_ae_w(1);
+                    My  = out(21);
                     
                     % Calculate coefficients
-                    CL(i,j,k,l,m) = L(i,j,k,l,m)/qS;
-                    CD(i,j,k,l,m) = D(i,j,k,l,m)/qS;
-                    CM(i,j,k,l,m) = My(i,j,k,l,m)/(qS*c);
+                    CL(i,j,k,l,m) = L/qS;
+                    CD(i,j,k,l,m) = D/qS;
+                    CM(i,j,k,l,m) = My/(qS*c);
                 end
             end
         end
@@ -152,7 +142,7 @@ ROM.alpha   = alpha;
 ROM.DEP_col = DEP_col;
 ROM.dElev   = dElev; 
 
-save data/UNIFIER_ROM_v2a.mat ROM
+save data/UNIFIER_ROM_v2.mat ROM
 
 %% TEST INTERPOLATION
 

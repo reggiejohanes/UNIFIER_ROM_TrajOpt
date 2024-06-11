@@ -22,7 +22,6 @@ function [DX,g_neq] = UNIFIERLanding_Dynamics_Internal(X,U,p,t,data)
 %% Evaluate accelerations
 
 DX = UNIFIER_ROMdyn(X,U);
-% DX = UNIFIER_ROMdyn_v2(X,U);
 
 %% Evaluate path constraints
 

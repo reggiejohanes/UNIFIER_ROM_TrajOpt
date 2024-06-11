@@ -15,7 +15,7 @@ diary on % start diary
 
 %% Configure Run
 
-mpoints = 500;
+mpoints = 100;
 
 global runconfig
 
@@ -43,11 +43,12 @@ runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
 runconfig.bndc_Vamin  = -inf;
 runconfig.bndc_Vamax  = inf;
 
-% ROM dependency
-runconfig.ROMset = 0; % 1 = all dependencies
+% ROM settings
+runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2
+runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
 
 % control & rate limits
-loadfile='data/UNIFIER_LOAD_ROM.mat';
+loadfile='data/UNIFIER_LOAD_ROM_72.mat';
 load(loadfile,"umax","umin","dumax")
 runconfig.umax  = umax;
 runconfig.umin  = umin;
@@ -55,9 +56,9 @@ runconfig.dumax = dumax;
 
 % initial conditions
 % trimname="20240607_200221"; %ROM v2a, cruise, 5deg flap, DEP off 
-% trimname="20240608_174341"; %ROM 50, cruise, 5deg flap, DEP off
+trimname="20240608_174341"; %ROM 50, cruise, 5deg flap, DEP off
 % trimname="20240607_023005"; %ROM 72.74, cruise, 5deg flap, DEP off
-trimname="20240609_210811"; %ROM 50, reduced depencencies, cruise, 12deg flap, DEP off
+% trimname="20240609_210811"; %ROM 50, reduced depencencies, cruise, 12deg flap, DEP off
 trimfile='trim/rundata/UNIFIER_trim_out_'+trimname+'.mat';
 load(trimfile,"xstar","ustar")
 
@@ -104,7 +105,7 @@ runconfig.thetafl = -inf; %thetaf-deg2rad(3);
 runconfig.qfl     = -inf; %qf-deg2rad(1);
 
 % error bound multiplier
-runconfig.ebmult = 1;
+runconfig.ebmult = 1e3;
 
 numset = [timestamp,...
           mpoints,...
@@ -120,7 +121,8 @@ numset = [timestamp,...
           runconfig.bndc_Vamax,...
           convvel(runconfig.bndc_rodmin,'m/s','ft/min'),...
           convvel(runconfig.bndc_rodmax,'m/s','ft/min'),...
-          runconfig.ROMset,...
+          runconfig.ROMfile,...
+          runconfig.ROMdep,...
           rad2deg(runconfig.dFlap),...
           runconfig.ebmult,...
           trimname];
@@ -144,6 +146,9 @@ for i=1:mpoints-1
     rod(i)=(solution.X(i+1,2)-solution.X(i,2))/(solution.T(i+1)-solution.T(i));
 end
 rodft=convvel(rod,'m/s','ft/min');
+
+% average glide slope
+avgglideslope = atan2d(solution.X(1,2)*-1,solution.X(end,1))
 
 %documentation
 numres = [t_run,...
