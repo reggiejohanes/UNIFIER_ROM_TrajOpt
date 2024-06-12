@@ -18,15 +18,34 @@ function DX=UNIFIER_ROMdyn(X,U)
 
 global runconfig
 
-if runconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
-elseif runconfig.ROMfile==2
-    load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
-elseif runconfig.ROMfile==3
-    load data/UNIFIER_LOAD_ROM_v2.mat % v2
-else
-    error("Invalid ROM file setting")
-end
+% if runconfig.ROMfile==1
+%     load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
+% elseif runconfig.ROMfile==2
+%     load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
+% elseif runconfig.ROMfile==3
+%     load data/UNIFIER_LOAD_ROM_v2.mat % v2
+% else
+%     error("Invalid ROM file setting")
+% end
+
+global ROMLOAD
+I         = ROMLOAD.I;
+Iyy       = ROMLOAD.Iyy;
+ROM       = ROMLOAD.ROM;
+S         = ROMLOAD.S;
+b         = ROMLOAD.b;
+c         = ROMLOAD.c;
+dp_DEP    = ROMLOAD.dp_DEP;
+dp_HTU    = ROMLOAD.dp_HTU;
+dumax     = ROMLOAD.dumax;
+gr        = ROMLOAD.gr;
+m         = ROMLOAD.m;
+umax      = ROMLOAD.umax;
+umin      = ROMLOAD.umin;
+xyz_DEP   = ROMLOAD.xyz_DEP;
+xyz_cg    = ROMLOAD.xyz_cg;
+xyz_cg_12 = ROMLOAD.xyz_cg_12;
+
 
 prop_d  = 1.6;
 DEP_inc = deg2rad(-5);
@@ -119,11 +138,13 @@ MDEP     = MDEP_x+MDEP_z;
 %% Aerodynamics
 
 % apply lookup input saturation limits
-alpha_sat = max(min(alpha,max(ROM.alpha)),min(ROM.alpha));
-Va_sat    = max(min(Va,max(ROM.Va)),min(ROM.Va));
-DEP_sat   = max(min(DEP,max(ROM.DEP_col)),min(ROM.DEP_col));
-dElev_sat = max(min(dElev,max(ROM.dElev)),min(ROM.dElev));
-dFlap_sat = max(min(dFlap,max(ROM.dFlap)),min(ROM.dFlap));
+if runconfig.ROMfile~=4
+    alpha_sat = max(min(alpha,max(ROM.alpha)),min(ROM.alpha));
+    Va_sat    = max(min(Va,max(ROM.Va)),min(ROM.Va));
+    DEP_sat   = max(min(DEP,max(ROM.DEP_col)),min(ROM.DEP_col));
+    dElev_sat = max(min(dElev,max(ROM.dElev)),min(ROM.dElev));
+    dFlap_sat = max(min(dFlap,max(ROM.dFlap)),min(ROM.dFlap));
+end
 
 % lookup coefficients
 if runconfig.ROMfile==1 || runconfig.ROMfile==2 % v1 ROMs
@@ -202,6 +223,19 @@ elseif runconfig.ROMfile==3 % v2 ROM
     else
         error("Invalid ROM dependency setting")
     end
+elseif runconfig.ROMfile==4 % v3
+        % Coefficients (all dependencies) ---------------------------------
+        CL = interp1(ROM.alpha,... % breakpoints
+                     ROM.CL,...    % table data
+                     alpha);       % inputs
+
+        CD = interp1(ROM.alpha,... % breakpoints
+                     ROM.CD,...    % table data
+                     alpha);       % inputs
+
+        CM = interpn(ROM.alpha,ROM.dElev,... % breakpoints
+                     ROM.CM,...              % table data
+                     alpha,dElev);           % inputs
 else
     error("Invalid ROM file setting")
 end

@@ -1,0 +1,3 @@
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main')" style="font-weight:bold">UNIFIERLanding_Main</a>
+Invalid ROM file setting} 
+UNIFIER_trimROM

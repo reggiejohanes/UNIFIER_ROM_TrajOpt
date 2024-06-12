@@ -1,27 +1,57 @@
 
 % clc
 clear all;
-% close all;
+close all;
 format compact;
 
 %% Documentation
 
-starttime = datetime; % start date & time
-timestamp = string(starttime,"yyyyMMdd_HHmmss");
-logname   = 'rundata_trajopt\UNIFIERLanding_' + timestamp; % name of diary & data log file
+starttime    = datetime; % start date & time
+timestamprun = string(starttime,"yyyyMMdd_HHmmss");
+logname      = 'rundata_trajopt\UNIFIERLanding_' + timestamprun; % name of diary & data log file
 
 diary (logname + '.txt')
 diary on % start diary
 
 %% Configure Run
 
-mpoints = 100;
+mpoints = 250;
 
 global runconfig
 
 % ROM settings
-runconfig.ROMfile = 3; % 1=72.74, 2=50, 3=v2
+runconfig.ROMfile = 4; % 1=72.74, 2=50, 3=v2
 runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
+
+if runconfig.ROMfile==1
+    load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
+elseif runconfig.ROMfile==2
+    load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
+elseif runconfig.ROMfile==3
+    load data/UNIFIER_LOAD_ROM_v2.mat % v2
+elseif runconfig.ROMfile==4
+    load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3, subset v1-50
+else
+    error("Invalid ROM file setting")
+end
+
+global ROMLOAD
+ROMLOAD.I         = I;
+ROMLOAD.Iyy       = Iyy;
+ROMLOAD.ROM       = ROM;
+ROMLOAD.S         = S;
+ROMLOAD.b         = b;
+ROMLOAD.c         = c;
+ROMLOAD.dp_DEP    = dp_DEP;
+ROMLOAD.dp_HTU    = dp_HTU;
+ROMLOAD.dumax     = dumax;
+ROMLOAD.gr        = gr;
+ROMLOAD.m         = m;
+ROMLOAD.umax      = umax;
+ROMLOAD.umin      = umin;
+ROMLOAD.xyz_DEP   = xyz_DEP;
+ROMLOAD.xyz_cg    = xyz_cg;
+ROMLOAD.xyz_cg_12 = xyz_cg_12;
 
 % flap deflection
 dFlap = deg2rad(12);
@@ -48,8 +78,6 @@ runconfig.bndc_Vamin  = -inf;
 runconfig.bndc_Vamax  = inf;
 
 % control & rate limits
-loadfile='data/UNIFIER_LOAD_ROM_72.mat';
-load(loadfile,"umax","umin","dumax")
 
 runconfig.dumax = dumax;
 
@@ -62,7 +90,7 @@ runconfig.qmin     = deg2rad(-2);
 runconfig.dElevmin = umin(3);
 runconfig.DEPmin   = umin(5);
 runconfig.HTUmin   = umin(7);
-runconfig.dFlapmin = Umin(4); 
+runconfig.dFlapmin = umin(4); 
 
 runconfig.xmax     = inf;
 runconfig.zmax     = 0;
@@ -73,41 +101,67 @@ runconfig.qmax     = deg2rad(2);
 runconfig.dElevmax = umax(3);
 runconfig.DEPmax   = umax(5);
 runconfig.HTUmax   = umax(7);
-runconfig.dFlapmax = Umax(4); 
+runconfig.dFlapmax = umax(4); 
 
 % initial conditions
 if runconfig.ROMfile==1 
-    trimname="20240607_023005"; %ROM1-1, cruise, 5deg flap
+    trimname0="20240607_023005"; %ROM1-1, cruise, 5deg flap
 elseif runconfig.ROMfile==2
-    % trimname="20240608_174341"; %ROM2-1, cruise, 5deg flap
-    trimname="20240609_210811"; %ROM2-2, cruise, 12deg flap
+    % trimname0="20240612_055958"; %ROM2-1, cruise, 0deg flap
+    % trimname0="20240612_060030"; %ROM2-1, cruise, 5deg flap
+    % trimname0="20240612_060050"; %ROM2-1, cruise, 12deg flap
+    % trimname0="20240612_060119"; %ROM2-2, cruise, 0deg flap
+    % trimname0="20240612_060138"; %ROM2-2, cruise, 5deg flap
+    trimname0="20240612_060153"; %ROM2-2, cruise, 12deg flap
 elseif runconfig.ROMfile==3
-    trimname="20240612_035139"; %ROM3-1, cruise, 0deg flap
-    % trimname="20240612_035214"; %ROM3-1, cruise, 5deg flap
-    trimname="20240612_035256"; %ROM3-1, cruise, 12deg flap
+    % trimname0="20240612_035139"; %ROM3-1, cruise, 0deg flap
+    trimname0="20240612_035214"; %ROM3-1, cruise, 5deg flap
+    % trimname0="20240612_035256"; %ROM3-1, cruise, 12deg flap
+elseif runconfig.ROMfile==4
+    trimname0="20240613_002923"; %ROM4 (subset ROM2)
 else
     error("Invalid ROM file setting")
 end
-trimfile='trim/rundata/UNIFIER_trim_out_'+trimname+'.mat';
-load(trimfile,"xstar","ustar")
+trimfile0='trim/rundata/UNIFIER_trim_out_'+trimname0+'.mat';
+load(trimfile0,"xstar","ustar")
+xstar0=xstar;
+ustar0=ustar;
 
-runconfig.x0     = xstar(1);
-runconfig.z0     = xstar(2);
-runconfig.u0     = xstar(3);
-runconfig.w0     = xstar(4);
-runconfig.theta0 = xstar(5);
-runconfig.q0     = xstar(6);
-runconfig.dElev0 = ustar(1);
-runconfig.DEP0   = ustar(2);
-runconfig.HTU0   = ustar(3);
+runconfig.x0     = xstar0(1);
+runconfig.z0     = xstar0(2);
+runconfig.u0     = xstar0(3);
+runconfig.w0     = xstar0(4);
+runconfig.theta0 = xstar0(5);
+runconfig.q0     = xstar0(6);
+runconfig.dElev0 = ustar0(1);
+runconfig.DEP0   = ustar0(2);
+runconfig.HTU0   = ustar0(3);
 
 % terminal conditions
-runconfig.zf      = -5;
-runconfig.xf      = -1*(xstar(2)-runconfig.zf)/tand(3); % 3deg glide slope
-runconfig.uf      = 35.85*1.3;
-runconfig.wf      = 2;
-runconfig.thetaf  = deg2rad(0);
-runconfig.qf      = deg2rad(0);
+if runconfig.ROMfile==1 
+    error("landing trimfile unavailable")
+elseif runconfig.ROMfile==2
+    % trimname_f="20240612_060927"; %ROM2-2, landing, 0deg flap
+    % trimname_f="20240612_061004"; %ROM2-2, landing, 5deg flap
+    trimname_f="20240612_061021"; %ROM2-2, landing, 12deg flap
+elseif runconfig.ROMfile==3
+    error("landing trimfile unavailable")
+elseif runconfig.ROMfile==4
+    trimname_f="20240613_003604"; %ROM4, landing, 5deg flap
+else
+    error("Invalid ROM file setting")
+end
+trimfile_f='trim/rundata/UNIFIER_trim_out_'+trimname_f+'.mat';
+load(trimfile_f,"xstar","ustar")
+xstarf=xstar;
+ustarf=ustar;
+
+runconfig.zf      = xstarf(2);
+runconfig.xf      = -1*(xstar0(2)-runconfig.zf)/tand(3); % 3deg glide slope
+runconfig.uf      = xstarf(3); %35.85*1.3
+runconfig.wf      = xstarf(4);
+runconfig.thetaf  = xstarf(5);
+runconfig.qf      = xstarf(6);
 
 runconfig.xfu     = inf; %xf*1.2;
 runconfig.zfu     = runconfig.zf;
@@ -123,10 +177,14 @@ runconfig.wfl     = -inf; %wf-3;
 runconfig.thetafl = -inf; %thetaf-deg2rad(3);
 runconfig.qfl     = -inf; %qf-deg2rad(1);
 
+runconfig.dElev_f = ustarf(1);
+runconfig.DEP_f   = ustarf(2);
+runconfig.HTU_f   = ustarf(3);
+
 % error bound multiplier
 runconfig.ebmult = 1;
 
-numset = [timestamp,...
+numset = [timestamprun,...
           mpoints,...
           runconfig.boundarycost,...
           runconfig.stagecost,...
@@ -144,7 +202,11 @@ numset = [timestamp,...
           runconfig.ROMdep,...
           rad2deg(runconfig.dFlap),...
           runconfig.ebmult,...
-          trimname];
+          trimname0];
+
+if runconfig.ROMfile==4
+    numset(16)='-';
+end
 
 %% Run Problem
 

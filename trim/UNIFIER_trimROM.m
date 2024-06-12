@@ -21,18 +21,18 @@ diary on % start diary
 
 global trimconfig
 
-trimconfig.DEPset  = 0; % 1=DEP on, 0=DEP off
-trimconfig.ROMfile = 3; % 1=72.74, 2=50, 3=v2a
-trimconfig.ROMdep  = 2; % 1=all dependencies, 2=reduced dependencies
+trimconfig.DEPset  = 1; % 1=DEP on, 0=DEP off
+trimconfig.ROMfile = 4; % 1=72.74, 2=50, 3=v2a, 4=v3
+trimconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
 
-trimconfig.Va_target = 72.74;       % airspeed target (m/s) cruise=72.74m/s
-trimconfig.ze        = 1219;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
+trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
+trimconfig.ze        = 5;        % altitude (m) cruise=1219m
+trimconfig.dFlap     = deg2rad(5); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;
 trimconfig.penalty_wdot  = 1;
-trimconfig.penalty_qdot  = 1000;
+trimconfig.penalty_qdot  = 1;
 trimconfig.penalty_Va    = 1;
 
 %% Initialize z_guess
@@ -66,7 +66,7 @@ end
 % Set options -------------------------------------------------------------
 
 options.TolX          = 1e-10;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-options.DiffMinChange = 1e-6;  % Minimum change in variables for finite-difference gradients. Default=0.
+options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
 
 options.Display       = 'iter-detailed';
 % options.Algorithm     = 'sqp';
@@ -294,6 +294,10 @@ numall(44) = '-';
 
 if trimconfig.DEPset==0
     numall(13)='-';
+end
+
+if trimconfig.ROMfile==4
+    numall(23)='-';
 end
 
 %% Save results

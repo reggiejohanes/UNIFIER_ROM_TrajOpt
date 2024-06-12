@@ -117,7 +117,7 @@ vastar=sqrt(xstar(3)^2+xstar(4)^2);
 
 % Evaluate accelerations --------------------------------------------------
 
-xdotstar = UNIFIER_ROMdyn_trim(xstar,ustar);
+xdotstar = UNIFIER_ROMdyn_trim_loop(xstar,ustar);
 
 res.xdot = xdotstar;
 res.Va   = vastar;

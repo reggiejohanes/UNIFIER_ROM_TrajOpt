@@ -1,0 +1,107 @@
+if system_dependent('IsDebugMode')==1, dbcont; end
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:    33294
+Number of nonzeros in Lagrangian Hessian.............:    17010
+
+Total number of variables............................:      882
+                     variables with only lower bounds:       99
+                variables with lower and upper bounds:      686
+                     variables with only upper bounds:       97
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:     1481
+        inequality constraints with only lower bounds:      294
+   inequality constraints with lower and upper bounds:      594
+        inequality constraints with only upper bounds:      294
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  4.2310750e+02 8.68e+01 3.15e+00   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.2310750e+02 8.68e+01 2.12e+02   0.5 1.57e+03    -  1.59e-01 1.82e-09f  1
+   2  4.2724102e+02 8.64e+01 4.61e+02   2.4 3.05e+04    -  4.97e-02 3.79e-03f  1
+   3  4.2685929e+02 7.76e+01 2.42e+04   1.9 1.90e+01   2.0 9.95e-01 1.02e-01f  1
+   4  4.2702657e+02 6.59e+01 1.13e+04   2.9 2.13e+01   1.5 6.38e-01 1.51e-01f  1
+   5  3.9776303e+02 3.15e+00 4.17e+03   1.0 2.95e+03    -  6.99e-01 1.00e+00h  1
+   6  4.3552968e+02 1.36e+00 7.75e+02   1.3 2.12e+03    -  9.62e-01 1.00e+00f  1
+   7  4.3755665e+02 8.08e-03 8.32e+00  -0.2 1.31e+02    -  9.94e-01 1.00e+00h  1
+   8  1.7569537e+02 1.47e+01 1.04e+01  -2.3 1.60e+04    -  5.64e-01 8.94e-01f  1
+   9  2.6065249e+02 6.77e+00 3.53e+00  -0.5 6.07e+03    -  1.00e+00 7.96e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  2.0985986e+02 3.11e+00 1.59e+00  -1.1 2.36e+03    -  9.25e-01 1.00e+00f  1
+  11  2.0239515e+02 6.35e-01 4.66e-01  -1.3 2.32e+02    -  1.00e+00 8.73e-01h  1
+  12  1.9003513e+02 4.79e-01 3.28e-01  -2.0 7.42e+02    -  1.00e+00 9.08e-01f  1
+  13  1.8927443e+02 1.17e-01 5.49e-01  -2.1 9.04e+01    -  1.00e+00 7.83e-01h  1
+  14  1.8706137e+02 3.09e-02 2.30e-02  -2.7 1.30e+02    -  1.00e+00 1.00e+00f  1
+  15  1.8670213e+02 7.33e-03 5.42e-01  -3.4 2.59e+01    -  9.97e-01 8.01e-01h  1
+  16  1.8654478e+02 1.10e-02 1.47e-01  -3.9 9.24e+00    -  1.00e+00 9.19e-01h  1
+  17  1.8652806e+02 1.45e-02 1.06e-02  -3.9 1.05e+00    -  1.00e+00 9.75e-01h  1
+  18  1.8651198e+02 2.61e-03 1.65e-03  -4.1 1.00e+00    -  9.98e-01 1.00e+00h  1
+  19  1.8649836e+02 4.37e-03 4.80e-02  -4.5 8.96e-01    -  1.00e+00 8.25e-01h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20  1.8649489e+02 1.95e-04 2.66e-03  -4.5 2.11e-01    -  1.00e+00 9.94e-01h  1
+  21  1.8649040e+02 3.26e-04 1.22e-03  -4.9 2.62e-01    -  9.94e-01 1.00e+00h  1
+Reallocating memory for MA57: lfact (216395)
+Reallocating memory for MA57: lfact (308196)
+Reallocating memory for MA57: lfact (568433)
+Reallocating memory for MA57: lfact (1139388)
+Reallocating memory for MA57: lfact (1653649)
+Reallocating memory for MA57: lfact (1743495)
+WARNING: Problem in step computation; switching to emergency mode.
+  22r 1.8649040e+02 3.26e-04 9.99e+02  -3.5 0.00e+00  19.4 0.00e+00 0.00e+00R  1
+Reallocating memory for MA57: lfact (2050493)
+Reallocating memory for MA57: lfact (2209445)
+WARNING: Problem in step computation; switching to emergency mode.
+Restoration phase is called at point that is almost feasible,
+  with constraint violation 7.696613e-20. Abort.
+Restoration phase in the restoration phase failed.
+
+Number of Iterations....: 22
+
+                                   (scaled)                 (unscaled)
+Objective...............:   1.8649039558822594e+02    1.8649039558822594e+02
+Dual infeasibility......:   1.7523902366851944e-05    1.7523902366851944e-05
+Constraint violation....:   3.2552173584823001e-04    3.2552173584823001e-04
+Complementarity.........:   1.6022758784908478e-05    1.6022758784908478e-05
+Overall NLP error.......:   3.2552173584823001e-04    3.2552173584823001e-04
+
+
+Number of objective function evaluations             = 23
+Number of objective gradient evaluations             = 23
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 23
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 23
+Number of Lagrangian Hessian evaluations             = 23
+Total CPU secs in IPOPT (w/o function evaluations)   =      4.235
+Total CPU secs in NLP function evaluations           =      6.282
+
+EXIT: Restoration Failed!
+computation time:
+   10.5319
+minimized cost:
+  186.4904
+Maximum absolute local error:
+    0.5141    0.1662    2.4705   48.8442    0.8933    0.4310
+Maximum relative local error:
+    0.0001    0.0001    0.0335   12.3621    0.8216    0.2033
+Maximum absolute constraint violation:
+  Columns 1 through 8
+         0         0         0         0         0         0         0         0
+  Columns 9 through 16
+         0         0         0    0.6747         0         0         0         0
+  Columns 17 through 24
+    0.0054    0.3306         0         0         0         0         0         0
+Number of active constraints:
+     7
+avgglideslope =
+    7.2217

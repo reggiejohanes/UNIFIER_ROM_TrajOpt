@@ -39,11 +39,13 @@ function DX=UNIFIER_ROMdyn_trim(X,U)
 global trimconfig
 
 if trimconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
+    load data/UNIFIER_LOAD_ROM_72.mat % v1, 72.74 m/s
 elseif trimconfig.ROMfile==2
-    load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
+    load data/UNIFIER_LOAD_ROM_50.mat % v1, 50 m/s
 elseif trimconfig.ROMfile==3
     load data/UNIFIER_LOAD_ROM_v2.mat % v2
+elseif trimconfig.ROMfile==4
+    load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3, subset v1-50
 else
     error("Invalid ROM file setting")
 end
@@ -218,6 +220,19 @@ elseif trimconfig.ROMfile==3 % v2 ROM
     else
         error("Invalid ROM dependency setting")
     end
+elseif trimconfig.ROMfile==4 % v3
+        % Coefficients (all dependencies) ---------------------------------
+        CL = interp1(ROM.alpha,... % breakpoints
+                     ROM.CL,...    % table data
+                     alpha);       % inputs
+
+        CD = interp1(ROM.alpha,... % breakpoints
+                     ROM.CD,...    % table data
+                     alpha);       % inputs
+
+        CM = interpn(ROM.alpha,ROM.dElev,... % breakpoints
+                     ROM.CM,...              % table data
+                     alpha,dElev);           % inputs
 else
     error("Invalid ROM file setting")
 end

@@ -76,6 +76,10 @@ wfl     = runconfig.wfl;
 thetafl = runconfig.thetafl;
 qfl     = runconfig.qfl;
 
+dElev_f = runconfig.dElev_f;
+DEP_f   = runconfig.DEP_f;
+HTU_f   = runconfig.HTU_f;
+
 %%
 
 %Initial Time. t0<tf
@@ -166,9 +170,9 @@ problem.inputs.uConstraintTol  = [deg2rad(0.5) 0.1 0.1]*ebmult;
 problem.inputs.urConstraintTol = [deg2rad(0.5) 0.1 0.1]*ebmult;
 
 % Guess the input sequences with [u0 uf]
-guess.inputs(:,1) = [dElev0 dElev0];
-guess.inputs(:,2) = [DEP0   DEP0];
-guess.inputs(:,3) = [HTU0   HTU0];
+guess.inputs(:,1) = [dElev0 dElev_f];
+guess.inputs(:,2) = [DEP0   DEP_f];
+guess.inputs(:,3) = [HTU0   HTU_f];
 % guess.inputs(:,4) = [dFlap0 dFlap0];
 
 % Choose the set-points if required
