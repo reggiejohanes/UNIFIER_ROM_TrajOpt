@@ -20,12 +20,12 @@ trimconfig.DEPset    = 0; % 1=DEP on, 0=DEP off
 
 trimconfig.Va_target = 72.74;       % airspeed target (m/s) cruise=72.74m/s
 trimconfig.ze        = 1219;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(12); % flap deflection (deg)
+trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;
 trimconfig.penalty_wdot  = 1;
-trimconfig.penalty_qdot  = 100;
+trimconfig.penalty_qdot  = 1000;
 trimconfig.penalty_Va    = 1;
 
 %% Initialize z_guess
@@ -59,7 +59,7 @@ end
 % Set options -------------------------------------------------------------
 
 options.TolX          = 1e-10;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-options.DiffMinChange = 1e-5;  % Minimum change in variables for finite-difference gradients. Default=0.
+options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
 
 options.Display       = 'iter-detailed';
 % options.Algorithm     = 'sqp';
@@ -80,20 +80,20 @@ options.OutputFcn     = @outputFcn_global;
 load UNIFIER_LOAD umin umax
 
 % upper bounds
-ub=[inf,...          % u
-    inf,...          % w
-    deg2rad(10),...  % theta (pitch)
-    umax(3),...      % dElevator
-    umax(5),...      % DEP_col
-    umax(7)];        % HTU
+ub=[75/100,...          % u
+    75*sind(20)/100,... % w
+    deg2rad(10),...     % theta (pitch)
+    umax(3),...         % dElevator
+    umax(5),...         % DEP_col
+    umax(7)];           % HTU
 
 % lower bounds
-lb=[0,...            % u
-    -inf,...         % w
-    -deg2rad(5),...  % theta (pitch)
-    umin(3),...      % dElevator
-    umin(5),...      % DEP_col
-    umin(7)];        % HTU
+lb=[35*cosd(20)/100,...  % u
+    -75*sind(20)/100,... % w
+    -deg2rad(5),...      % theta (pitch)
+    umin(3),...          % dElevator
+    umin(5),...          % DEP_col
+    umin(7)];            % HTU
 
 if trimconfig.DEPset==0
     ub(5)=[];

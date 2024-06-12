@@ -28,36 +28,31 @@ q0     = runconfig.q0;
 dElev0 = runconfig.dElev0;
 DEP0   = runconfig.DEP0;
 HTU0   = runconfig.HTU0;
-% dFlap0 = deg2rad(5);
-% dFlap0 = ustar(4);
+% dFlap0 = runconfig.dFlap0;
 
 % variable bounds
-Umin  = runconfig.umin;
 
-xmin     = 0;
-zmin     = -inf;
-umin     = 0;
-wmin     = -inf;
-thetamin = deg2rad(-5);
-qmin     = deg2rad(-2);
-dElevmin = Umin(3);
-DEPmin   = Umin(5);
-HTUmin   = Umin(7);
-% dFlapmin = deg2rad(4.999); 
-% dFlapmin = Umin(4); 
+xmin     = runconfig.xmin;
+zmin     = runconfig.zmin;
+umin     = runconfig.umin;
+wmin     = runconfig.wmin;
+thetamin = runconfig.thetamin;
+qmin     = runconfig.qmin;
+dElevmin = runconfig.dElevmin;
+DEPmin   = runconfig.DEPmin;
+HTUmin   = runconfig.HTUmin;
+% dFlapmin = runconfig.dFlapmin; 
 
-Umax  = runconfig.umax;
-xmax     = inf;
-zmax     = 0;
-umax     = inf;
-wmax     = inf;
-thetamax = deg2rad(5);
-qmax     = deg2rad(2);
-dElevmax = Umax(3);
-DEPmax   = Umax(5);
-HTUmax   = Umax(7);
-% dFlapmax = deg2rad(5.001); 
-% dFlapmax = Umax(4); 
+xmax     = runconfig.xmax;
+zmax     = runconfig.zmax;
+umax     = runconfig.umax;
+wmax     = runconfig.wmax;
+thetamax = runconfig.thetamax;
+qmax     = runconfig.qmax;
+dElevmax = runconfig.dElevmax;
+DEPmax   = runconfig.DEPmax;
+HTUmax   = runconfig.HTUmax;
+% dFlapmax = runconfig.dFlapmax; 
 
 % terminal conditions
 zf      = runconfig.zf;

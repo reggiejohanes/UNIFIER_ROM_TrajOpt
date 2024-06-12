@@ -19,12 +19,16 @@ mpoints = 100;
 
 global runconfig
 
+% ROM settings
+runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2
+runconfig.ROMdep  = 2; % 1=all dependencies, 2=reduced dependencies
+
 % flap deflection
-dFlap = deg2rad(5);
+dFlap = deg2rad(12);
 runconfig.dFlap = dFlap;
 
 % cost function
-runconfig.stagecost    = 0; % 1 = stage cost on
+runconfig.stagecost    = 1; % 1 = stage cost on
 runconfig.boundarycost = 1; % 1 = tf
                             % 2 = xf(1)
                             % 3 = -
@@ -43,22 +47,45 @@ runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
 runconfig.bndc_Vamin  = -inf;
 runconfig.bndc_Vamax  = inf;
 
-% ROM settings
-runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2
-runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
-
 % control & rate limits
 loadfile='data/UNIFIER_LOAD_ROM_72.mat';
 load(loadfile,"umax","umin","dumax")
-runconfig.umax  = umax;
-runconfig.umin  = umin;
+
 runconfig.dumax = dumax;
 
+runconfig.xmin     = 0;
+runconfig.zmin     = -inf;
+runconfig.umin     = 35*cosd(20);
+runconfig.wmin     = -75*sind(20);
+runconfig.thetamin = deg2rad(-5);
+runconfig.qmin     = deg2rad(-2);
+runconfig.dElevmin = umin(3);
+runconfig.DEPmin   = umin(5);
+runconfig.HTUmin   = umin(7);
+runconfig.dFlapmin = Umin(4); 
+
+runconfig.xmax     = inf;
+runconfig.zmax     = 0;
+runconfig.umax     = 75;
+runconfig.wmax     = 75*sind(20);
+runconfig.thetamax = deg2rad(5);
+runconfig.qmax     = deg2rad(2);
+runconfig.dElevmax = umax(3);
+runconfig.DEPmax   = umax(5);
+runconfig.HTUmax   = umax(7);
+runconfig.dFlapmax = Umax(4); 
+
 % initial conditions
-% trimname="20240607_200221"; %ROM v2a, cruise, 5deg flap, DEP off 
-trimname="20240608_174341"; %ROM 50, cruise, 5deg flap, DEP off
-% trimname="20240607_023005"; %ROM 72.74, cruise, 5deg flap, DEP off
-% trimname="20240609_210811"; %ROM 50, reduced depencencies, cruise, 12deg flap, DEP off
+if runconfig.ROMfile==1 
+    trimname="20240607_023005"; %ROM 72.74, cruise, 5deg flap, DEP off
+elseif runconfig.ROMfile==2
+    % trimname="20240608_174341"; %ROM 50, cruise, 5deg flap, DEP off
+    trimname="20240609_210811"; %ROM 50, reduced depencencies, cruise, 12deg flap, DEP off
+elseif runconfig.ROMfile==3
+    trimname="20240607_200221"; %ROM v2a, cruise, 5deg flap, DEP off
+else
+    error("Invalid ROM file setting")
+end
 trimfile='trim/rundata/UNIFIER_trim_out_'+trimname+'.mat';
 load(trimfile,"xstar","ustar")
 
@@ -71,16 +98,6 @@ runconfig.q0     = xstar(6);
 runconfig.dElev0 = ustar(1);
 runconfig.DEP0   = ustar(2);
 runconfig.HTU0   = ustar(3);
-
-% runconfig.x0     = xstar(1);
-% runconfig.z0     = xstar(3);
-% runconfig.u0     = xstar(4);
-% runconfig.w0     = xstar(6);
-% runconfig.theta0 = xstar(8);
-% runconfig.q0     = xstar(11);
-% runconfig.dElev0 = ustar(3);
-% runconfig.DEP0   = ustar(5);
-% runconfig.HTU0   = ustar(7);
 
 % terminal conditions
 runconfig.zf      = -5;
@@ -105,7 +122,7 @@ runconfig.thetafl = -inf; %thetaf-deg2rad(3);
 runconfig.qfl     = -inf; %qf-deg2rad(1);
 
 % error bound multiplier
-runconfig.ebmult = 1e3;
+runconfig.ebmult = 1;
 
 numset = [timestamp,...
           mpoints,...

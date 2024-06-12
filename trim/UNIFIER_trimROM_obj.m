@@ -71,3 +71,5 @@ H(6,6) = trimconfig.penalty_Va;    % Va (airspeed)
 
 f0 = Q'*H*Q;
 
+% global check3
+% check3(end+1)=f0;

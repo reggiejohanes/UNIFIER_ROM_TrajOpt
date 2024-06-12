@@ -118,54 +118,68 @@ MDEP     = MDEP_x+MDEP_z;
 
 %% Aerodynamics
 
+% apply lookup input saturation limits
+alpha_sat = max(min(alpha,max(ROM.alpha)),min(ROM.alpha));
+Va_sat    = max(min(Va,max(ROM.Va)),min(ROM.Va));
+DEP_sat   = max(min(DEP,max(ROM.DEP_col)),min(ROM.DEP_col));
+dElev_sat = max(min(dElev,max(ROM.dElev)),min(ROM.dElev));
+dFlap_sat = max(min(dFlap,max(ROM.dFlap)),min(ROM.dFlap));
+
+% lookup coefficients
 if runconfig.ROMfile==1 || runconfig.ROMfile==2 % v1 ROMs
     if runconfig.ROMdep==1
         % Coefficients (all dependencies) ---------------------------------
-        CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
-                             ROM.CL,...                        % table data
-                             dFlap,alpha,J,dElev);             % inputs
-        CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-                             ROM.CD,...
-                             dFlap,alpha,J,dElev); 
-        CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
-                             ROM.CM,... 
-                             dFlap,alpha,J,dElev);
+        if runconfig.ROMfile==1 %rom72
+            J_lim = max(min(J,DEPVa2J(72.74,min(ROM.DEP_col))),DEPVa2J(72.74,max(ROM.DEP_col)));
+        elseif runconfig.ROMfile==2 %rom50
+            J_lim = max(min(J,DEPVa2J(50,min(ROM.DEP_col))),DEPVa2J(50,max(ROM.DEP_col)));
+        end
+        
+        CL = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
+                     ROM.CL,...                              % table data
+                     dFlap_sat,alpha_sat,J_lim,dElev_sat);   % inputs
+        CD = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+                     ROM.CD,...
+                     dFlap_sat,alpha_sat,J_lim,dElev_sat); 
+        CM = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...
+                     ROM.CM,... 
+                     dFlap_sat,alpha_sat,J_lim,dElev_sat);
     elseif runconfig.ROMdep==2
         % Coefficients (reduced dependencies) -----------------------------
         dElev_fixed = deg2rad(0);
         if runconfig.ROMfile==1
-            J_fixed     = DEPVa2J(72.74,0.5); % J at Vcruise & DEP=0.5
+            J_fixed = DEPVa2J(72.74,0.5); % J at Vcruise & DEP=0.5
         elseif runconfig.ROMfile==2
-            J_fixed     = DEPVa2J(50,0.5); % J at Vcruise & DEP=0.5
+            J_fixed = DEPVa2J(50,0.5); % J at Vcruise & DEP=0.5
         end
         
         dElev_fixed = linspace(dElev_fixed,dElev_fixed,numel(x))';
         J_fixed     = linspace(J_fixed,J_fixed,numel(x))';
         
-        CL   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CL(alpha)
-                             ROM.CL,...                              
-                             dFlap,alpha,J_fixed,dElev_fixed);
-        CD   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CD(alpha)
-                             ROM.CD,...
-                             dFlap,alpha,J_fixed,dElev_fixed); 
-        CM   = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,...       % CM(alpha,dElev)
-                             ROM.CM,... 
-                             dFlap,alpha,J_fixed,dElev);
+        CL = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % CL(alpha)
+                     ROM.CL,...                              
+                     dFlap_sat,alpha_sat,J_fixed,dElev_fixed);
+        CD = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % CD(alpha)
+                     ROM.CD,...
+                     dFlap_sat,alpha_sat,J_fixed,dElev_fixed); 
+        CM = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % CM(alpha,dElev)
+                     ROM.CM,... 
+                     dFlap_sat,alpha_sat,J_fixed,dElev);
     else
         error("Invalid ROM dependency setting")
     end
 elseif runconfig.ROMfile==3 % v2 ROM
     if runconfig.ROMdep==1
         % Coefficients (all dependencies) ---------------------------------
-        CL    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,... % breakpoints
-                             ROM.CL,...                                      % table data
-                             dFlap,dElev,DEP,Va,alpha);                      % inputs
-        CD    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...
-                             ROM.CD,...
-                             dFlap,dElev,DEP,Va,alpha);
-        CM    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...
-                             ROM.CM,...
-                             dFlap,dElev,DEP,Va,alpha);
+        CL = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,... % breakpoints
+                     ROM.CL,...                                           % table data
+                     dFlap_sat,dElev_sat,DEP_sat,Va_sat,alpha_sat);       % inputs
+        CD = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...
+                     ROM.CD,...
+                     dFlap_sat,dElev_sat,DEP_sat,Va_sat,alpha_sat);
+        CM = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...
+                     ROM.CM,...
+                     dFlap_sat,dElev_sat,DEP_sat,Va_sat,alpha_sat);
     elseif runconfig.ROMdep==2
         % Coefficients (reduced dependencies) -----------------------------
         dElev_fixed = deg2rad(0);
@@ -176,15 +190,15 @@ elseif runconfig.ROMfile==3 % v2 ROM
         DEP_fixed = linspace(DEP_fixed,DEP_fixed,numel(x))';
         Va_fixed = linspace(Va_fixed,Va_fixed,numel(x))';
         
-        CL    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...   % CL(alpha)
-                             ROM.CL,...                                      
-                             dFlap,dElev_fixed,DEP_fixed,Va_fixed,alpha);     
-        CD    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...   % CD(alpha)
-                             ROM.CD,...
-                             dFlap,dElev_fixed,DEP_fixed,Va_fixed,alpha);
-        CM    = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,...   % CM(dElev, alpha)
-                             ROM.CM,...
-                             dFlap,dElev,DEP_fixed,Va_fixed,alpha);  
+        CL = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,... % CL(alpha)
+                     ROM.CL,...                                      
+                     dFlap_sat,dElev_fixed,DEP_fixed,Va_fixed,alpha_sat);     
+        CD = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,... % CD(alpha)
+                     ROM.CD,...
+                     dFlap_sat,dElev_fixed,DEP_fixed,Va_fixed,alpha_sat);
+        CM = interpn(ROM.dFlap,ROM.dElev,ROM.DEP_col,ROM.Va,ROM.alpha,... % CM(dElev, alpha)
+                     ROM.CM,...
+                     dFlap_sat,dElev_fixed,DEP_fixed,Va_fixed,alpha_sat);  
     else
         error("Invalid ROM dependency setting")
     end

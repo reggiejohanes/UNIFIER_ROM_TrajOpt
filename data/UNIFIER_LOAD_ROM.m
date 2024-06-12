@@ -13,8 +13,8 @@ load("dp_HTU.mat")
 load("dp_DEP.mat")
 load UNIFIER_LOAD.mat m xyz_cg I c S b xyz_DEP umax umin
 % load("UNIFIER_ROM_72.mat")
-% load("UNIFIER_ROM_50.mat")
-load("UNIFIER_ROM_v2.mat")
+load("UNIFIER_ROM_50.mat")
+% load("UNIFIER_ROM_v2.mat")
 
 
 % Mass case NO PASSENGERS, FULL FUEL: (aft C.G.)
@@ -90,5 +90,5 @@ dumax(1:4) = deg2rad(dumax(1:4));
 %% Save to .mat
 
 % save UNIFIER_LOAD_ROM_72
-% save UNIFIER_LOAD_ROM_50
-save UNIFIER_LOAD_ROM_v2
+save UNIFIER_LOAD_ROM_50
+% save UNIFIER_LOAD_ROM_v2

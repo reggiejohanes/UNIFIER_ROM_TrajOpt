@@ -4,7 +4,9 @@ clear
 % close all
 
 % global check1
-% check1 =[0;0;0;0;0];
+% check1 = [0;0;0;0;0];
+% global check3
+% check3 = 0;
 
 %% Documentation
 
@@ -85,20 +87,20 @@ options.OutputFcn     = @outputFcn_global;
 load UNIFIER_LOAD umin umax
 
 % upper bounds
-ub=[inf,...          % u
-    inf,...          % w
-    deg2rad(10),...  % theta (pitch)
-    umax(3),...      % dElevator
-    umax(5),...      % DEP_col
-    umax(7)];        % HTU
+ub=[75/100,...          % u
+    75*sind(20)/100,... % w
+    deg2rad(10),...     % theta (pitch)
+    umax(3),...         % dElevator
+    umax(5),...         % DEP_col
+    umax(7)];           % HTU
 
 % lower bounds
-lb=[0,...            % u
-    -inf,...         % w
-    -deg2rad(5),...  % theta (pitch)
-    umin(3),...      % dElevator
-    umin(5),...      % DEP_col
-    umin(7)];        % HTU
+lb=[35*cosd(20)/100,...  % u
+    -75*sind(20)/100,... % w
+    -deg2rad(5),...      % theta (pitch)
+    umin(3),...          % dElevator
+    umin(5),...          % DEP_col
+    umin(7)];            % HTU
 
 if trimconfig.DEPset==0
     ub(5)=[];
@@ -129,12 +131,12 @@ fprintf('Avg. per Func. Eval. = %6.4f seconds\n',t_fmincon/output.funcCount);
 
 % Get intermediate results ------------------------------------------------
 
-% check2(1,:)=check1(1,:)*100;
-% check2(2,:)=check1(2,:)*100;
-% check2(3,:)=rad2deg(check1(3,:));
-% check2(4,:)=rad2deg(check1(4,:));
-% check2(5,:)=check1(5,:);
-% global outputFcn_global_data;
+check2(1,:)=check1(1,:)*100;
+check2(2,:)=check1(2,:)*100;
+check2(3,:)=rad2deg(check1(3,:));
+check2(4,:)=rad2deg(check1(4,:));
+check2(5,:)=check1(5,:);
+global outputFcn_global_data;
 
 % Extract states & controls -----------------------------------------------
 

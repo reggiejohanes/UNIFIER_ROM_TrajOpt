@@ -1,6 +1,6 @@
 
 % clc
-clear
+clear all
 % close all
 
 %% GET AIRCRAFT DATA
@@ -9,18 +9,33 @@ load data/UNIFIER_LOAD.mat c S umax umin
 
 %% SET FLIGHT CONDITIONS
 
-h      = 1219;  % altitude [m]
+h              = 1219;  % altitude [m]
 [~,~,~,rho,nu] = atmosisa(h);
 
 %% SET SWEEP RANGES
 
 % Angle of attack
-alpha_min = -20; % minimum alpha
-alpha_max = 20;  % maximum alpha
+alpha_min = -40; % minimum alpha
+alpha_max = 40;  % maximum alpha
 alpha_inc = 1;   % alpha increment
 alpha_n   = (alpha_max-alpha_min)/alpha_inc+1;
 alpha_deg = linspace(alpha_min,alpha_max,alpha_n)';
 alpha     = deg2rad(alpha_deg);
+
+% Airspeed
+Va_min = 30;
+Va_max = 80;
+Va_inc = 5;
+Va_n   = (Va_max-Va_min)/Va_inc+1;
+Va     = linspace(Va_min,Va_max,Va_n)';
+
+% Elevator deflection
+dElev_min = rad2deg(umin(3));
+dElev_max = rad2deg(umax(3));
+dElev_inc = 5;
+dElev_n   = (dElev_max-dElev_min)/dElev_inc+1;
+dElev_deg = linspace(dElev_min,dElev_max,dElev_n)';
+dElev     = deg2rad(dElev_deg);
 
 % Flap deflection
 dFlap_min = rad2deg(umin(4));
@@ -36,21 +51,6 @@ DEP_max = umax(5);
 DEP_inc = 0.1;
 DEP_n   = (DEP_max-DEP_min)/DEP_inc+1;
 DEP_col = linspace(DEP_max,DEP_min,DEP_n)';
-
-% Elevator deflection
-dElev_min = rad2deg(umin(3));
-dElev_max = rad2deg(umax(3));
-dElev_inc = 5;
-dElev_n   = (dElev_max-dElev_min)/dElev_inc+1;
-dElev_deg = linspace(dElev_min,dElev_max,dElev_n)';
-dElev     = deg2rad(dElev_deg);
-
-% Airspeed
-Va_min = 20;
-Va_max = 90;
-Va_inc = 5;
-Va_n   = (Va_max-Va_min)/Va_inc+1;
-Va     = linspace(Va_min,Va_max,Va_n)';
 
 %% EVALUATE FORCES & MOMENTS
 

@@ -28,36 +28,31 @@ q0     = runconfig.q0;
 dElev0 = runconfig.dElev0;
 DEP0   = runconfig.DEP0;
 HTU0   = runconfig.HTU0;
-% dFlap0 = deg2rad(5);
-% dFlap0 = ustar(4);
+% dFlap0 = runconfig.dFlap0;
 
 % variable bounds
-Umin  = runconfig.umin;
 
-xmin     = -inf;
-zmin     = -inf;
-umin     = 0;
-wmin     = -inf;
-thetamin = deg2rad(-5);
-qmin     = deg2rad(-2);
-dElevmin = Umin(3);
-DEPmin   = Umin(5);
-HTUmin   = Umin(7);
-% dFlapmin = deg2rad(4.999); 
-% dFlapmin = Umin(4); 
+xmin     = runconfig.xmin;
+zmin     = runconfig.zmin;
+umin     = runconfig.umin;
+wmin     = runconfig.wmin;
+thetamin = runconfig.thetamin;
+qmin     = runconfig.qmin;
+dElevmin = runconfig.dElevmin;
+DEPmin   = runconfig.DEPmin;
+HTUmin   = runconfig.HTUmin;
+% dFlapmin = runconfig.dFlapmin; 
 
-Umax  = runconfig.umax;
-xmax     = inf;
-zmax     = 0;
-umax     = inf;
-wmax     = inf;
-thetamax = deg2rad(5);
-qmax     = deg2rad(2);
-dElevmax = Umax(3);
+xmax     = runconfig.xmax;
+zmax     = runconfig.zmax;
+umax     = runconfig.umax;
+wmax     = runconfig.wmax;
+thetamax = runconfig.thetamax;
+qmax     = runconfig.qmax;
+dElevmax = runconfig.dElevmax;
 DEPmax   = Umax(5);
 HTUmax   = Umax(7);
-% dFlapmax = deg2rad(5.001); 
-% dFlapmax = Umax(4); 
+% dFlapmax = runconfig.dFlapmax; 
 
 % terminal conditions
 zf      = runconfig.zf;
@@ -91,8 +86,8 @@ guess.t0            = 0;
 
 % Final time. Let tf_min=tf_max if tf is fixed.
 guess.tf            = xf/(uf+(u0-uf)/2);
-problem.time.tf_min = guess.tf/2;     
-problem.time.tf_max = guess.tf*2; 
+problem.time.tf_min = 1; %guess.tf/2     
+problem.time.tf_max = inf; %guess.tf*2
 
 % Parameters bounds. pl=< p <=pu
 problem.parameters.pl = [];
@@ -186,11 +181,11 @@ problem.constraints.ng_eq   = 0;
 problem.constraints.gTol_eq = [];
 
 problem.constraints.gl = [runconfig.ineq_rodmin,... % min rate of descent convvel(0,'ft/min','m/s')
-                          runconfig.ineq_rodmin,... % min alpha deg2rad(-15)
-                          runconfig.ineq_rodmin];   % min airspeed 35.85*1.3
+                          runconfig.ineq_aoamin,... % min alpha deg2rad(-15)
+                          runconfig.ineq_Vamin];   % min airspeed 35.85*1.3
 
-problem.constraints.gu = [runconfig.ineq_rodmin,... % max rate of descent convvel(350,'ft/min','m/s')
-                          runconfig.ineq_rodmin,... % max alpha deg2rad(10)
+problem.constraints.gu = [runconfig.ineq_rodmax,... % max rate of descent convvel(350,'ft/min','m/s')
+                          runconfig.ineq_aoamax,... % max alpha deg2rad(10)
                           runconfig.ineq_Vamax];    % max airspeed
 
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...

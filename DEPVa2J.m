@@ -1,6 +1,6 @@
 function J=DEPVa2J(Va,DEP)
 
-load data/UNIFIER_LOAD_ROM.mat
+load data/dp_DEP.mat
 
 T_DEP_req = DEP.*800;
 rpm_cmd   = interpn(dp_DEP.rpm_lookup.V_vec,...
