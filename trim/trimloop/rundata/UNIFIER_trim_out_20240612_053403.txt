@@ -1,0 +1,30 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    7.772344e-01    0.000e+00    1.003e+02
+    1      21    7.756374e-01    0.000e+00    1.062e+02    7.976e-03
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_ROMdyn_trim')" style="font-weight:bold">UNIFIER_ROMdyn_trim</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimROM_obj', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM_obj.m', 57)" style="font-weight:bold">UNIFIER_trimROM_obj</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM_obj.m',57,0)">line 57</a>)
+xdot=UNIFIER_ROMdyn_trim(x,u);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimROM>@(x)UNIFIER_trimROM_obj(x)', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM.m', 117)" style="font-weight:bold">UNIFIER_trimROM>@(x)UNIFIER_trimROM_obj(x)</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM.m',117,0)">line 117</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimROM_obj(x),z0,[],[],[],[],lb,ub,[],options);
+
+In finDiffEvalAndChkErr
+
+In finitedifferences
+
+In computeFinDiffGradAndJac
+
+In barrier
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m', 891)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m',891,0)">line 891</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = barrier(funfcn,X,A,B,Aeq,Beq,l,u,confcn,options.HessFcn, ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimROM', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM.m', 117)" style="font-weight:bold">UNIFIER_trimROM</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM.m',117,0)">line 117</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimROM_obj(x),z0,[],[],[],[],lb,ub,[],options);
+} 
+diary off

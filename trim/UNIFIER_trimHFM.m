@@ -1,7 +1,7 @@
 
-clc
+% clc
 clear
-close all
+% close all
 
 %% Documentation
 
@@ -18,9 +18,9 @@ global trimconfig
 
 trimconfig.DEPset    = 1; % 1=DEP on, 0=DEP off
 
-trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
+trimconfig.Va_target = 75;       % airspeed target (m/s) cruise=72.74m/s
 trimconfig.ze        = 5;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(12); % flap deflection (deg)
+trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;

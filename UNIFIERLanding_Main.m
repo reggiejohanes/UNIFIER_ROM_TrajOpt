@@ -20,8 +20,8 @@ mpoints = 100;
 global runconfig
 
 % ROM settings
-runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2
-runconfig.ROMdep  = 2; % 1=all dependencies, 2=reduced dependencies
+runconfig.ROMfile = 3; % 1=72.74, 2=50, 3=v2
+runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
 
 % flap deflection
 dFlap = deg2rad(12);
@@ -77,12 +77,14 @@ runconfig.dFlapmax = Umax(4);
 
 % initial conditions
 if runconfig.ROMfile==1 
-    trimname="20240607_023005"; %ROM 72.74, cruise, 5deg flap, DEP off
+    trimname="20240607_023005"; %ROM1-1, cruise, 5deg flap
 elseif runconfig.ROMfile==2
-    % trimname="20240608_174341"; %ROM 50, cruise, 5deg flap, DEP off
-    trimname="20240609_210811"; %ROM 50, reduced depencencies, cruise, 12deg flap, DEP off
+    % trimname="20240608_174341"; %ROM2-1, cruise, 5deg flap
+    trimname="20240609_210811"; %ROM2-2, cruise, 12deg flap
 elseif runconfig.ROMfile==3
-    trimname="20240607_200221"; %ROM v2a, cruise, 5deg flap, DEP off
+    trimname="20240612_035139"; %ROM3-1, cruise, 0deg flap
+    % trimname="20240612_035214"; %ROM3-1, cruise, 5deg flap
+    trimname="20240612_035256"; %ROM3-1, cruise, 12deg flap
 else
     error("Invalid ROM file setting")
 end

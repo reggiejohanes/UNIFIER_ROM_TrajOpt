@@ -15,7 +15,7 @@ ze_cruise   = 1219;
 ze_landing  = 5;
 
 Va_max      = 75;
-Va_min      = 35;
+Va_min      = 75;
 Va_inc      = 2.5;
 Va_n        = (Va_max-Va_min)/Va_inc+1;
 Va_range    = linspace(Va_min,Va_max,Va_n);
@@ -93,24 +93,31 @@ numall=[timestamp numset];
 %% Calculate trim accelerations
 
 fprintf('\n');
-fprintf('<strong><< LOOP START >></strong>');
+fprintf('<strong><< STARTING LOOP >></strong>');
 fprintf('\n');
 fprintf('\n');
-fprintf('<strong>CALCULATING..</strong>');
+% fprintf('<strong>START         END</strong>');
+% fprintf('\n');
+% fprintf('<strong>|---------------|</strong>');
+% fprintf('\n');
 
-tic
+startloop=tic;
 set_param('UNIFIER_dyn','SimulationMode','rapid-accelerator')
 UNIFIER_dyn([],[],[],'compile')
+count=0;
 
 for i=1:numel(dFlap_range)
     for j=1:Va_n
+        
+        count=count+1;
+        startstep=tic;
 
         % Case A - HFM, DEP on
         resA = UNIFIER_trimHFM_loop(1,Va_range(j),ze_landing,dFlap_range(i),penaltyA,dmcA);
         zedotA(i,j) = resA.xdot(3);
         wdotA(i,j)  = resA.xdot(6);
         fvalA(i,j)  = resA.fval;
-        
+
         % Case B - HFM, DEP off
         resB = UNIFIER_trimHFM_loop(0,Va_range(j),ze_cruise,dFlap_range(i),penaltyB,dmcB);
         zedotB(i,j) = resB.xdot(3);
@@ -129,19 +136,22 @@ for i=1:numel(dFlap_range)
         wdotD(i,j)  = resD.xdot(6);
         fvalD(i,j)  = resD.fval;
 
+        t_step=toc(startstep);
+        fprintf(num2str(count))
+        fprintf('/')
+        fprintf(num2str(Va_n*numel(dFlap_range)))
+        fprintf(' %6.4f s\n',t_step);
     end
-    fprintf('.')
 end
 
 UNIFIER_dyn([],[],[],'term')
 
 fprintf('\n');
-fprintf('\n');
-fprintf('<strong><< LOOP END >></strong>');
+fprintf('<strong><< LOOP COMPLETED >></strong>');
 fprintf('\n');
 fprintf('\n');
 
-t_eval = toc;
+t_eval = toc(startloop);
 evals  = Va_n*numel(dFlap_range)*4;
 fprintf('Total               = %6.4f seconds\n',t_eval);
 fprintf('Avg. per Evaluation = %6.4f seconds\n',t_eval/evals);
@@ -170,7 +180,7 @@ ylabel('Rate of Climb, ft/min')
 legend([roc1 roc2 roc3],...
        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 5 deg','\delta_F_l_a_p = 12 deg'},...
        'Location','southeast');
-ylim([-250 250])
+ylim([-250 50])
 
 fig(2)=figure('Name','RoC vs Va, Case B','Position', [250 200 500 500]);
 roc1=plot(Va_range,zedotconvB(1,:),'.-r');
@@ -184,7 +194,7 @@ ylabel('Rate of Climb, ft/min')
 legend([roc1 roc2 roc3],...
        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 5 deg','\delta_F_l_a_p = 12 deg'},...
        'Location','southeast');
-ylim([-250 250])
+ylim([-250 50])
 
 fig(3)=figure('Name','RoC vs Va, Case C','Position', [450 200 500 500]);
 roc1=plot(Va_range,zedotconvC(1,:),'.-r');
@@ -198,7 +208,7 @@ ylabel('Rate of Climb, ft/min')
 legend([roc1 roc2 roc3],...
        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 5 deg','\delta_F_l_a_p = 12 deg'},...
        'Location','southeast');
-ylim([-250 250])
+ylim([-250 50])
 
 fig(4)=figure('Name','RoC vs Va, Case D','Position', [650 200 500 500]);
 roc1=plot(Va_range,zedotconvD(1,:),'.-r');
@@ -212,7 +222,7 @@ ylabel('Rate of Climb, ft/min')
 legend([roc1 roc2 roc3],...
        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 5 deg','\delta_F_l_a_p = 12 deg'},...
        'Location','southeast');
-ylim([-250 250])
+ylim([-250 50])
 
 %% Save results
 

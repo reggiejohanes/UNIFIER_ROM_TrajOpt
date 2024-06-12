@@ -60,7 +60,7 @@ options.OutputFcn     = @outputFcn_global;
 load UNIFIER_LOAD umin umax
 
 % upper bounds
-ub=[75/100,...          % u
+ub=[76/100,...          % u
     75*sind(20)/100,... % w
     deg2rad(10),...     % theta (pitch)
     umax(3),...         % dElevator
