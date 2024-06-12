@@ -16,16 +16,16 @@ diary on % start diary
 
 global trimconfig
 
-trimconfig.DEPset    = 0; % 1=DEP on, 0=DEP off
+trimconfig.DEPset    = 1; % 1=DEP on, 0=DEP off
 
-trimconfig.Va_target = 72.74;       % airspeed target (m/s) cruise=72.74m/s
-trimconfig.ze        = 1219;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
+trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
+trimconfig.ze        = 5;        % altitude (m) cruise=1219m
+trimconfig.dFlap     = deg2rad(12); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;
 trimconfig.penalty_wdot  = 1;
-trimconfig.penalty_qdot  = 1000;
+trimconfig.penalty_qdot  = 100;
 trimconfig.penalty_Va    = 1;
 
 %% Initialize z_guess
@@ -59,7 +59,7 @@ end
 % Set options -------------------------------------------------------------
 
 options.TolX          = 1e-10;  % Termination tolerance on x (aka step tolerance) Default=1e-6
-options.DiffMinChange = 1e-8;  % Minimum change in variables for finite-difference gradients. Default=0.
+options.DiffMinChange = 1e-7;  % Minimum change in variables for finite-difference gradients. Default=0.
 
 options.Display       = 'iter-detailed';
 % options.Algorithm     = 'sqp';
@@ -241,6 +241,12 @@ disp(xdottable0)
 Va_actual = vastar
 Va_error  = Va_actual-trimconfig.Va_target
 
+% f0 without penalties ----------------------------------------------------
+Q = [xdotstar(2:12);
+    vastar-trimconfig.Va_target];
+H = diag(ones(1,numel(Q))); % penalty weight matrix
+f0 = Q'*H*Q
+
 % Numerical Settings & Results --------------------------------------------
 % (for documentation purposes only)
 
@@ -274,15 +280,16 @@ if trimconfig.DEPset==1
     numset(13)=u0(3);
     numset(19)=lb(6);
 end
-
-numres = [fval,...                  % fval
-          output.firstorderopt,...     % Optimality
-          0,...                        % Step length
-          output.stepsize,...          % Norm of step
-          output.iterations,...        % Iterartions
-          output.funcCount,...         % Function evaluations
-          t_fmincon,...                % Total time
-          t_fmincon/output.funcCount]; % Avg. per func. eval (s)
+    
+numres = [fval,...                       % fval
+          output.firstorderopt,...       % Optimality
+          0,...                          % Step length
+          output.stepsize,...            % Norm of step
+          output.iterations,...          % Iterartions
+          output.funcCount,...           % Function evaluations
+          t_fmincon,...                  % Total time
+          t_fmincon/output.funcCount,... % Avg. per func. eval (s)
+          f0];                           % fval w/o penalties
 
 numall = [timestamp numset numres xdotstardisp' Va_actual Va_error funcinfo.name];
 

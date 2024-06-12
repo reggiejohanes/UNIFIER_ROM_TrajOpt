@@ -38,7 +38,7 @@ penaltyA.qdot  = 100;
 penaltyA.Va    = 1;
 
 % Case B - HFM, DEP off
-dmcB           = 1e-5;
+dmcB           = 1e-6;
 penaltyB.zedot = 1;
 penaltyB.udot  = 1;
 penaltyB.wdot  = 1;
@@ -58,7 +58,7 @@ dmcD           = 1e-8;
 penaltyD.zedot = 1;
 penaltyD.udot  = 1;
 penaltyD.wdot  = 1;
-penaltyD.qdot  = 10;
+penaltyD.qdot  = 100;
 penaltyD.Va    = 1;
 
 % Documentation

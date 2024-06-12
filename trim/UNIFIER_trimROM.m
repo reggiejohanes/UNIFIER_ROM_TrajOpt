@@ -21,18 +21,18 @@ diary on % start diary
 
 global trimconfig
 
-trimconfig.DEPset  = 0; % 1=DEP on, 0=DEP off
+trimconfig.DEPset  = 1; % 1=DEP on, 0=DEP off
 trimconfig.ROMfile = 3; % 1=72.74, 2=50, 3=v2a
 trimconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
 
 trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
-trimconfig.ze        = 1219;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
+trimconfig.ze        = 5;        % altitude (m) cruise=1219m
+trimconfig.dFlap     = deg2rad(12); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;
 trimconfig.penalty_wdot  = 1;
-trimconfig.penalty_qdot  = 10;
+trimconfig.penalty_qdot  = 100;
 trimconfig.penalty_Va    = 1;
 
 %% Initialize z_guess
@@ -131,12 +131,12 @@ fprintf('Avg. per Func. Eval. = %6.4f seconds\n',t_fmincon/output.funcCount);
 
 % Get intermediate results ------------------------------------------------
 
-check2(1,:)=check1(1,:)*100;
-check2(2,:)=check1(2,:)*100;
-check2(3,:)=rad2deg(check1(3,:));
-check2(4,:)=rad2deg(check1(4,:));
-check2(5,:)=check1(5,:);
-global outputFcn_global_data;
+% check2(1,:)=check1(1,:)*100;
+% check2(2,:)=check1(2,:)*100;
+% check2(3,:)=rad2deg(check1(3,:));
+% check2(4,:)=rad2deg(check1(4,:));
+% check2(5,:)=check1(5,:);
+% global outputFcn_global_data;
 
 % Extract states & controls -----------------------------------------------
 
@@ -221,6 +221,12 @@ disp(xdottable0)
 Va_actual = vastar
 Va_error  = Va_actual-trimconfig.Va_target
 
+% f0 without penalties ----------------------------------------------------
+Q = [xdotstar(2:6)';
+    vastar-trimconfig.Va_target];
+H = diag(ones(1,numel(Q))); % penalty weight matrix
+f0 = Q'*H*Q
+
 % Numerical Settings & Results --------------------------------------------
 % (for documentation purposes only)
 
@@ -255,35 +261,36 @@ if trimconfig.DEPset==1
     numset(19)=lb(6);
 end
 
-numres = [fval,...                     % 24 fval
-          output.firstorderopt,...     % 25 Optimality
-          0,...                        % 26 Step length
-          output.stepsize,...          % 27 Norm of step
-          output.iterations,...        % 28 Iterartions
-          output.funcCount,...         % 29 Function evaluations
-          t_fmincon,...                % 30 Total time
-          t_fmincon/output.funcCount]; % 31 Avg. per func. eval (s)
+numres = [fval,...                       % 24 fval
+          output.firstorderopt,...       % 25 Optimality
+          0,...                          % 26 Step length
+          output.stepsize,...            % 27 Norm of step
+          output.iterations,...          % 28 Iterartions
+          output.funcCount,...           % 29 Function evaluations
+          t_fmincon,...                  % 30 Total time
+          t_fmincon/output.funcCount,... % 31 Avg. per func. eval (s)
+          f0];                           % 32 fval w/o penalties
 
-xdotfill = [xdotstardisp(1),... % 32 x
-            0,...               % 33 y
-            xdotstardisp(2),... % 34 z
-            xdotstardisp(3),... % 35 u
-            0,...               % 36 v
-            xdotstardisp(4),... % 37 w
-            0,...               % 38 phi
-            xdotstardisp(5),... % 39 theta
-            0,...               % 40 psi
-            0,...               % 41 p 
-            xdotstardisp(6),... % 42 q
-            0];                 % 43 r
+xdotfill = [xdotstardisp(1),... % 33 x
+            0,...               % 34 y
+            xdotstardisp(2),... % 35 z
+            xdotstardisp(3),... % 36 u
+            0,...               % 37 v
+            xdotstardisp(4),... % 38 w
+            0,...               % 39 phi
+            xdotstardisp(5),... % 40 theta
+            0,...               % 41 psi
+            0,...               % 42 p 
+            xdotstardisp(6),... % 43 q
+            0];                 % 44 r
 
 numall = [timestamp numset numres xdotfill Va_actual Va_error funcinfo.name];
-numall(33) = '-'; 
-numall(36) = '-';  
-numall(38) = '-'; 
-numall(40) = '-';
-numall(41) = '-'; 
-numall(43) = '-';
+numall(34) = '-'; 
+numall(37) = '-';  
+numall(39) = '-'; 
+numall(41) = '-';
+numall(42) = '-'; 
+numall(44) = '-';
 
 if trimconfig.DEPset==0
     numall(13)='-';

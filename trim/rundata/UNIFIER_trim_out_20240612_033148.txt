@@ -1,0 +1,125 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    1.898195e+01    0.000e+00    4.505e+02
+    1      19    1.220936e+01    0.000e+00    2.935e+02    3.279e-02
+    2      26    1.146943e+01    0.000e+00    2.866e+02    7.913e-03
+    3      34    1.063374e+01    0.000e+00    1.671e+02    1.322e-01
+    4      43    7.316590e+00    0.000e+00    3.693e+02    8.264e-02
+    5      49    4.420960e-01    0.000e+00    1.765e+02    2.343e-01
+    6      55    4.188191e-01    0.000e+00    1.413e+02    2.059e-01
+    7      63    2.814667e-01    0.000e+00    8.623e+01    1.059e-01
+    8      70    1.221189e-01    0.000e+00    4.267e+01    9.686e-02
+    9      77    6.757937e-02    0.000e+00    5.148e+01    3.164e-01
+   10      83    5.678347e-03    0.000e+00    1.312e+01    1.193e-01
+   11      89    1.311761e-02    0.000e+00    5.267e+00    2.516e-02
+   12      95    3.755552e-03    0.000e+00    1.212e+00    1.862e-02
+   13     101    3.889404e-03    0.000e+00    2.433e-01    1.143e-03
+   14     107    2.222572e-04    0.000e+00    5.793e-01    2.148e-02
+   15     113    1.882294e-04    0.000e+00    8.511e-02    1.216e-03
+   16     119    1.825609e-04    0.000e+00    2.193e-02    9.197e-05
+   17     125    1.815960e-04    0.000e+00    2.624e-02    6.089e-05
+   18     136    1.787679e-04    0.000e+00    1.833e-02    1.046e-05
+   19     142    7.314847e-06    0.000e+00    1.570e-01    5.230e-03
+   20     148    8.095256e-06    0.000e+00    4.115e-02    2.254e-05
+   21     154    8.147719e-06    0.000e+00    7.374e-03    6.955e-05
+   22     160    7.970695e-06    0.000e+00    5.865e-03    4.124e-06
+   23     167    7.998273e-06    0.000e+00    4.236e-03    1.271e-06
+   24     183    7.998009e-06    0.000e+00    3.668e-03    5.956e-08
+   25     192    6.891545e-06    0.000e+00    2.489e-01    1.305e-04
+   26     199    1.756708e-06    0.000e+00    2.898e-01    1.709e-03
+   27     205    1.222528e-06    0.000e+00    6.071e-02    6.692e-04
+   28     211    1.135005e-06    0.000e+00    5.148e-02    4.688e-05
+   29     217    6.450692e-07    0.000e+00    2.787e-02    2.822e-04
+   30     223    5.167882e-07    0.000e+00    3.793e-03    2.057e-04
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+   31     229    4.985625e-07    0.000e+00    3.463e-03    1.338e-05
+   32     235    4.454935e-07    0.000e+00    9.119e-04    1.467e-05
+   33     249    4.454190e-07    0.000e+00    7.698e-04    4.355e-07
+   34     255    1.180403e-07    0.000e+00    2.940e-02    1.908e-04
+   35     262    7.323018e-08    0.000e+00    9.402e-03    5.606e-05
+   36     268    7.849305e-08    0.000e+00    2.438e-03    3.458e-05
+   37     274    7.700732e-08    0.000e+00    1.099e-03    2.358e-06
+   38     282    7.701528e-08    0.000e+00    9.182e-04    1.132e-06
+   39     300    7.699789e-08    0.000e+00    2.449e-04    1.579e-09
+   40     306    4.867578e-08    0.000e+00    7.999e-03    4.881e-05
+   41     327    4.859990e-08    0.000e+00    5.879e-03    3.985e-09
+   42     343    4.859514e-08    0.000e+00    5.871e-03    4.363e-10
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 5.9827 seconds
+Avg. per Iteration   = 0.1360 seconds
+Avg. per Func. Eval. = 0.0169 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ye    [m]    </strong>        0.0000
+    <strong>3) ze    [m]    </strong>    -1219.0000
+    <strong>4) u     [m/s]  </strong>       72.5913
+    <strong>5) v     [m/s]  </strong>        0.0000
+    <strong>6) w     [m/s]  </strong>       -4.6470
+    <strong>7) phi   [deg]  </strong>        0.0000
+    <strong>8) theta [deg]  </strong>       -3.6628
+    <strong>9) psi   [deg]  </strong>        0.0000
+    <strong>10) p    [deg/s]</strong>        0.0000
+    <strong>11) q    [deg/s]</strong>        0.0000
+    <strong>12) r    [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dAileron  [deg]</strong>     0.0000
+    <strong>2) dRudder   [deg]</strong>     0.0000
+    <strong>3) dElevator [deg]</strong>     4.3973
+    <strong>4) dFlap     [deg]</strong>    12.0000
+    <strong>5) DEP_col   [deg]</strong>     0.0000
+    <strong>6) DEP_slope [deg]</strong>     0.0000
+    <strong>7) HTU       [deg]</strong>     0.5832
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    72.7399
+    <strong>2) yedot    [m/s]   </strong>     0.0000
+    <strong>3) zedot    [m/s]   </strong>    -0.0001
+    <strong>4) udot     [m/s2]  </strong>    -0.0000
+    <strong>5) vdot     [m/s2]  </strong>     0.0000
+    <strong>6) wdot     [m/s2]  </strong>    -0.0001
+    <strong>7) phidot   [deg/s] </strong>     0.0000
+    <strong>8) thetadot [deg/s] </strong>     0.0000
+    <strong>9) psidot   [deg/s] </strong>     0.0000
+    <strong>10) pdot    [deg/s2]</strong>     0.0000
+    <strong>11) qdot    [deg/s2]</strong>     0.0019
+    <strong>12) rdot    [deg/s2]</strong>     0.0000
+
+
+Va_actual =
+
+   72.7399
+
+
+Va_error =
+
+  -1.2943e-04
+
+
+f0 =
+
+   3.9178e-08
+
