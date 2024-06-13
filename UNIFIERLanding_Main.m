@@ -1,7 +1,7 @@
 
 % clc
 clear all;
-close all;
+% close all;
 format compact;
 
 %% Documentation
@@ -19,22 +19,38 @@ mpoints = 250;
 
 global runconfig
 
-% ROM settings
-runconfig.ROMfile = 4; % 1=72.74, 2=50, 3=v2
-runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
+% cost function
+runconfig.boundarycost = 2; % 1 = tf
+                            % 2 = xf(1)
+                            % 3 = -
+runconfig.stagecost    = 1; % 1 = stage cost on
 
+% ROM settings
+runconfig.ROMfile = 5; % 1=72.74, 2=50, 3=v2
+runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
+                            
+% flap deflection
+dFlap = deg2rad(5);
+runconfig.dFlap = dFlap;
+
+% ICLOCS settings
+runconfig.ipopttol = 7.5e-2; %default=1e-8
+runconfig.scaling  = 1; %1=on, 0=off
+
+% Load ROM
 if runconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
+    load data/UNIFIER_LOAD_ROM_72.mat % v1, 72.74 m/s
 elseif runconfig.ROMfile==2
-    load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
+    load data/UNIFIER_LOAD_ROM_50.mat % v1, 50 m/s
 elseif runconfig.ROMfile==3
     load data/UNIFIER_LOAD_ROM_v2.mat % v2
 elseif runconfig.ROMfile==4
     load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3, subset v1-50
+elseif runconfig.ROMfile==5
+    load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat % v4, subset v1-10
 else
     error("Invalid ROM file setting")
 end
-
 global ROMLOAD
 ROMLOAD.I         = I;
 ROMLOAD.Iyy       = Iyy;
@@ -53,22 +69,15 @@ ROMLOAD.xyz_DEP   = xyz_DEP;
 ROMLOAD.xyz_cg    = xyz_cg;
 ROMLOAD.xyz_cg_12 = xyz_cg_12;
 
-% flap deflection
-dFlap = deg2rad(12);
-runconfig.dFlap = dFlap;
-
-% cost function
-runconfig.stagecost    = 1; % 1 = stage cost on
-runconfig.boundarycost = 1; % 1 = tf
-                            % 2 = xf(1)
-                            % 3 = -
+% Error bound multiplier
+runconfig.ebmult = 1;
 
 % inequality constraints
-runconfig.ineq_rodmin = convvel(-inf,'ft/min','m/s');
-runconfig.ineq_rodmax = convvel(inf,'ft/min','m/s');
-runconfig.ineq_aoamin = deg2rad(-inf);
-runconfig.ineq_aoamax = deg2rad(inf);
-runconfig.ineq_Vamin  = 35.85*1.3*-inf;
+runconfig.ineq_rodmin = convvel(0,'ft/min','m/s');
+runconfig.ineq_rodmax = convvel(350,'ft/min','m/s');
+runconfig.ineq_aoamin = deg2rad(-15);
+runconfig.ineq_aoamax = deg2rad(10);
+runconfig.ineq_Vamin  = 35.85*1.3;
 runconfig.ineq_Vamax  = inf;
 
 % boundary constraints
@@ -105,20 +114,28 @@ runconfig.dFlapmax = umax(4);
 
 % initial conditions
 if runconfig.ROMfile==1 
+    % trimname0="20240613_051929"; %ROM1-1, cruise, 0deg flap
     trimname0="20240607_023005"; %ROM1-1, cruise, 5deg flap
+    % trimname0="20240613_051912"; %ROM1-1, cruise, 12deg flap
 elseif runconfig.ROMfile==2
     % trimname0="20240612_055958"; %ROM2-1, cruise, 0deg flap
-    % trimname0="20240612_060030"; %ROM2-1, cruise, 5deg flap
+    trimname0="20240612_060030"; %ROM2-1, cruise, 5deg flap
     % trimname0="20240612_060050"; %ROM2-1, cruise, 12deg flap
     % trimname0="20240612_060119"; %ROM2-2, cruise, 0deg flap
     % trimname0="20240612_060138"; %ROM2-2, cruise, 5deg flap
-    trimname0="20240612_060153"; %ROM2-2, cruise, 12deg flap
+    % trimname0="20240612_060153"; %ROM2-2, cruise, 12deg flap
 elseif runconfig.ROMfile==3
     % trimname0="20240612_035139"; %ROM3-1, cruise, 0deg flap
     trimname0="20240612_035214"; %ROM3-1, cruise, 5deg flap
     % trimname0="20240612_035256"; %ROM3-1, cruise, 12deg flap
 elseif runconfig.ROMfile==4
-    trimname0="20240613_002923"; %ROM4 (subset ROM2)
+    % trimname0="20240613_050426"; %ROM4 (subset ROM2), cruise, 0deg flap
+    trimname0="20240613_002923"; %ROM4 (subset ROM2), cruise, 5deg flap
+    % trimname0="20240613_050411"; %ROM4 (subset ROM2), cruise, 12deg flap
+elseif runconfig.ROMfile==5
+    % trimname0="20240613_054253"; %ROM5 (subset ROM2), cruise, 0deg flap
+    trimname0="20240613_054350"; %ROM5 (subset ROM2), cruise, 5deg flap
+    % trimname0="20240613_054428"; %ROM5 (subset ROM2), cruise, 12deg flap
 else
     error("Invalid ROM file setting")
 end
@@ -139,15 +156,28 @@ runconfig.HTU0   = ustar0(3);
 
 % terminal conditions
 if runconfig.ROMfile==1 
-    error("landing trimfile unavailable")
+    % trimname_f="20240613_051817"; %ROM1-1, landing, 0deg flap
+    trimname_f="20240613_051838"; %ROM1-1, landing, 5deg flap
+    % trimname_f="20240613_051852"; %ROM1-1, landing, 12deg flap
 elseif runconfig.ROMfile==2
+    % trimname_f="20240613_051046"; %ROM2-1, landing, 0deg flap
+    trimname_f="20240613_051102"; %ROM2-1, landing, 5deg flap
+    % trimname_f="20240613_051121"; %ROM2-1, landing, 12deg flap
     % trimname_f="20240612_060927"; %ROM2-2, landing, 0deg flap
     % trimname_f="20240612_061004"; %ROM2-2, landing, 5deg flap
-    trimname_f="20240612_061021"; %ROM2-2, landing, 12deg flap
+    % trimname_f="20240612_061021"; %ROM2-2, landing, 12deg flap
 elseif runconfig.ROMfile==3
-    error("landing trimfile unavailable")
+    % trimname_f="20240613_051504"; %ROM3-1, landing, 0deg flap
+    trimname_f="20240613_051424"; %ROM3-1, landing, 5deg flap
+    % trimname_f="20240613_051333"; %ROM3-1, landing, 12deg flap
 elseif runconfig.ROMfile==4
+    % trimname_f="20240613_045931"; %ROM4, landing, 0deg flap
     trimname_f="20240613_003604"; %ROM4, landing, 5deg flap
+    % trimname_f="20240613_050346"; %ROM4, landing, 12deg flap
+elseif runconfig.ROMfile==5
+    % trimname_f="20240613_054608"; %ROM5, landing, 0deg flap
+    trimname_f="20240613_054553"; %ROM5, landing, 5deg flap
+    % trimname_f="20240613_054520"; %ROM5, landing, 12deg flap
 else
     error("Invalid ROM file setting")
 end
@@ -157,7 +187,7 @@ xstarf=xstar;
 ustarf=ustar;
 
 runconfig.zf      = xstarf(2);
-runconfig.xf      = -1*(xstar0(2)-runconfig.zf)/tand(3); % 3deg glide slope
+runconfig.xf      = -1*(xstar0(2)-runconfig.zf)/tand(1); % 3deg glide slope
 runconfig.uf      = xstarf(3); %35.85*1.3
 runconfig.wf      = xstarf(4);
 runconfig.thetaf  = xstarf(5);
@@ -181,9 +211,6 @@ runconfig.dElev_f = ustarf(1);
 runconfig.DEP_f   = ustarf(2);
 runconfig.HTU_f   = ustarf(3);
 
-% error bound multiplier
-runconfig.ebmult = 1;
-
 numset = [timestamprun,...
           mpoints,...
           runconfig.boundarycost,...
@@ -202,9 +229,11 @@ numset = [timestamprun,...
           runconfig.ROMdep,...
           rad2deg(runconfig.dFlap),...
           runconfig.ebmult,...
+          runconfig.ipopttol,...
+          runconfig.scaling,...
           trimname0];
 
-if runconfig.ROMfile==4
+if runconfig.ROMfile==4 || runconfig.ROMfile==5
     numset(16)='-';
 end
 
@@ -228,11 +257,15 @@ for i=1:mpoints-1
 end
 rodft=convvel(rod,'m/s','ft/min');
 
-% average glide slope
+% preview results
 avgglideslope = atan2d(solution.X(1,2)*-1,solution.X(end,1))
+tf            = solution.tf
+xf            = max(solution.X(:,1))
 
 %documentation
 numres = [t_run,...
+          solution.tf,...
+          max(solution.X(:,1)),...
           solution.MaxConstVioError];
 numall = [numset '-' numres];
 
@@ -313,7 +346,7 @@ ylabel('Va, m/s')
 grid on
 vminlabel=['V_m_i_n= ' num2str(round(min(Va),2)) ' m/s'];
 yline(35.85*1.3,'-.r',{'V_s_t_a_l_l*1.3 = 46.6 m/s'},'LabelHorizontalAlignment','left','LabelVerticalAlignment','top','FontSize',8)
-yline(min(Va),'-.k',{vminlabel},'LabelHorizontalAlignment','left','LabelVerticalAlignment','bottom','FontSize',8)
+% yline(min(Va),'-.k',{vminlabel},'LabelHorizontalAlignment','left','LabelVerticalAlignment','bottom','FontSize',8)
 ylim([45 80])
 nexttile
 plot(solution.T,rad2deg(alpha),'.-k')

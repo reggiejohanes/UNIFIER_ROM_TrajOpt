@@ -146,7 +146,9 @@ options.NLPsolver='ipopt';
 
 % IPOPT settings (if required)
 %---------------------------------------
-options.ipopt.tol=1e-7;                        % Desired convergence tolerance (relative). The default value is  1e-8. 
+% global runconfig
+% options.ipopt.tol=runconfig.ipopttol; 
+options.ipopt.tol = 7.5e-2;          % Desired convergence tolerance (relative). The default value is  1e-8. 
 options.ipopt.print_level=5;                   % Print level. The valid range for this integer option is [0,12] and its default value is 5.
 options.ipopt.max_iter=7500;                   % Maximum number of iterations. The default value is 3000.
  
@@ -231,7 +233,8 @@ options.start='Cold';
 
 % Automatic scaling (recommended)
 %---------------------------------------
-options.scaling=0;
+options.scaling=1;
+% options.scaling=runconfig.scaling;
 
 % Reorder of LGR Method
 %---------------------------------------

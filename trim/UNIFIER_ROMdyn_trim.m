@@ -46,6 +46,8 @@ elseif trimconfig.ROMfile==3
     load data/UNIFIER_LOAD_ROM_v2.mat % v2
 elseif trimconfig.ROMfile==4
     load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3, subset v1-50
+elseif trimconfig.ROMfile==5
+    load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat % v4, subset v1-10
 else
     error("Invalid ROM file setting")
 end
@@ -222,17 +224,25 @@ elseif trimconfig.ROMfile==3 % v2 ROM
     end
 elseif trimconfig.ROMfile==4 % v3
         % Coefficients (all dependencies) ---------------------------------
-        CL = interp1(ROM.alpha,... % breakpoints
-                     ROM.CL,...    % table data
-                     alpha);       % inputs
-
-        CD = interp1(ROM.alpha,... % breakpoints
-                     ROM.CD,...    % table data
-                     alpha);       % inputs
-
+        CL = interp1(ROM.alpha,...           % breakpoints
+                     ROM.CL,...              % table data
+                     alpha_sat);             % inputs
+        CD = interp1(ROM.alpha,...           % breakpoints
+                     ROM.CD,...              % table data
+                     alpha_sat);             % inputs
         CM = interpn(ROM.alpha,ROM.dElev,... % breakpoints
                      ROM.CM,...              % table data
-                     alpha,dElev);           % inputs
+                     alpha_sat,dElev_sat);   % inputs
+elseif trimconfig.ROMfile==5 %v4
+        CL = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CL,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
+        CD = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CD,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
+        CM = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CM,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
 else
     error("Invalid ROM file setting")
 end

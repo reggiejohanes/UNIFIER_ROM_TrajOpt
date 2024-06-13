@@ -138,13 +138,11 @@ MDEP     = MDEP_x+MDEP_z;
 %% Aerodynamics
 
 % apply lookup input saturation limits
-if runconfig.ROMfile~=4
-    alpha_sat = max(min(alpha,max(ROM.alpha)),min(ROM.alpha));
-    Va_sat    = max(min(Va,max(ROM.Va)),min(ROM.Va));
-    DEP_sat   = max(min(DEP,max(ROM.DEP_col)),min(ROM.DEP_col));
-    dElev_sat = max(min(dElev,max(ROM.dElev)),min(ROM.dElev));
-    dFlap_sat = max(min(dFlap,max(ROM.dFlap)),min(ROM.dFlap));
-end
+alpha_sat = max(min(alpha,max(ROM.alpha)),min(ROM.alpha));
+Va_sat    = max(min(Va,max(ROM.Va)),min(ROM.Va));
+DEP_sat   = max(min(DEP,max(ROM.DEP_col)),min(ROM.DEP_col));
+dElev_sat = max(min(dElev,max(ROM.dElev)),min(ROM.dElev));
+dFlap_sat = max(min(dFlap,max(ROM.dFlap)),min(ROM.dFlap));
 
 % lookup coefficients
 if runconfig.ROMfile==1 || runconfig.ROMfile==2 % v1 ROMs
@@ -225,17 +223,25 @@ elseif runconfig.ROMfile==3 % v2 ROM
     end
 elseif runconfig.ROMfile==4 % v3
         % Coefficients (all dependencies) ---------------------------------
-        CL = interp1(ROM.alpha,... % breakpoints
-                     ROM.CL,...    % table data
-                     alpha);       % inputs
-
-        CD = interp1(ROM.alpha,... % breakpoints
-                     ROM.CD,...    % table data
-                     alpha);       % inputs
-
+        CL = interp1(ROM.alpha,...           % breakpoints
+                     ROM.CL,...              % table data
+                     alpha_sat);             % inputs
+        CD = interp1(ROM.alpha,...           % breakpoints
+                     ROM.CD,...              % table data
+                     alpha_sat);             % inputs
         CM = interpn(ROM.alpha,ROM.dElev,... % breakpoints
                      ROM.CM,...              % table data
-                     alpha,dElev);           % inputs
+                     alpha_sat,dElev_sat);   % inputs
+elseif runconfig.ROMfile==5 %v4
+        CL = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CL,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
+        CD = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CD,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
+        CM = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CM,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
 else
     error("Invalid ROM file setting")
 end

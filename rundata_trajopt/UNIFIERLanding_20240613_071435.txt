@@ -1,0 +1,91 @@
+if system_dependent('IsDebugMode')==1, dbcont; end
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   170094
+Number of nonzeros in Lagrangian Hessian.............:    87210
+
+Total number of variables............................:     4482
+                     variables with only lower bounds:      499
+                variables with lower and upper bounds:     3486
+                     variables with only upper bounds:      497
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:     7481
+        inequality constraints with only lower bounds:     1993
+   inequality constraints with lower and upper bounds:     3992
+        inequality constraints with only upper bounds:     1494
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  1.2703547e+03 4.27e+00 1.55e+01   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  1.2688079e+03 4.26e+00 3.98e+01  -5.5 4.10e+02    -  7.04e-04 3.27e-03f  1
+   2  1.2683864e+03 4.25e+00 1.22e+02  -5.5 3.39e+02    -  1.40e-02 1.07e-03h  1
+   3  1.2683864e+03 4.25e+00 5.42e+02  -0.5 4.14e+00    -  4.70e-01 4.08e-07f  1
+   4  1.2495903e+03 3.90e+00 1.06e+03   0.3 2.01e+02    -  2.36e-02 8.06e-02f  1
+   5  1.2964323e+03 3.65e+00 1.14e+03   0.5 6.64e+02    -  1.09e-01 6.25e-02f  1
+   6  1.2920539e+03 2.92e+00 4.40e+04   0.7 1.75e+01   2.0 1.00e+00 2.01e-01f  1
+   7  1.2843162e+03 1.91e+00 6.69e+03   1.4 1.29e+01   1.5 1.00e+00 3.50e-01f  1
+   8  1.2780610e+03 7.45e-01 1.41e+04   1.9 3.99e+00   1.0 1.00e+00 6.16e-01f  1
+   9  1.3763285e+03 1.94e-01 5.18e+03   0.0 9.10e+01    -  8.55e-01 9.90e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  1.3637541e+03 1.38e-02 4.75e+02  -0.6 1.22e+01    -  9.88e-01 9.57e-01f  1
+  11  1.3637613e+03 1.07e-02 1.45e+05  -2.1 2.63e-02   2.4 1.00e+00 2.25e-01h  1
+  12  1.3637614e+03 1.06e-02 8.29e+07  -3.7 2.13e-02   2.8 1.00e+00 2.70e-03h  1
+  13  1.3637614e+03 1.06e-02 3.04e+12  -5.6 1.94e-02   2.3 1.00e+00 2.71e-05h  1
+  14  1.3637872e+03 6.19e-07 3.04e+10  -6.0 2.11e-02   2.7 9.90e-01 1.00e+00h  1
+  15  1.3637788e+03 6.92e-07 2.22e+08  -6.7 3.07e-03   2.3 9.93e-01 1.00e+00h  1
+  16  1.3637533e+03 7.66e-07 5.89e-01  -7.2 9.44e-03   1.8 1.00e+00 1.00e+00f  1
+
+Number of Iterations....: 16
+
+                                   (scaled)                 (unscaled)
+Objective...............:   1.3637533307292354e+03    1.3637533307292354e+03
+Dual infeasibility......:   5.8936888118415653e-01    5.8936888118415653e-01
+Constraint violation....:   5.9827693156062222e-07    7.6563799462561366e-07
+Complementarity.........:   9.5575682568707565e-06    9.5575682568707565e-06
+Overall NLP error.......:   9.5919816012955735e-03    5.8936888118415653e-01
+
+
+Number of objective function evaluations             = 17
+Number of objective gradient evaluations             = 17
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 17
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 17
+Number of Lagrangian Hessian evaluations             = 16
+Total CPU secs in IPOPT (w/o function evaluations)   =      0.770
+Total CPU secs in NLP function evaluations           =      6.544
+
+EXIT: Optimal Solution Found.
+computation time:
+    7.3265
+minimized cost:
+   1.3638e+03
+Maximum absolute local error:
+    0.3204    0.2294    0.2898    4.0532    0.0792    0.0305
+Maximum relative local error:
+    0.0000    0.0002    0.0039    0.8509    0.0758    0.0291
+Maximum absolute constraint violation:
+  Columns 1 through 8
+         0         0         0    0.0000         0         0         0         0
+  Columns 9 through 16
+         0         0         0         0         0         0         0         0
+  Columns 17 through 24
+         0    0.0104         0         0         0         0         0         0
+Number of active constraints:
+     4
+avgglideslope =
+    0.9364
+tf =
+   1.2290e+03
+xf =
+   7.4579e+04

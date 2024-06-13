@@ -6,52 +6,78 @@ format compact;
 
 %% Documentation
 
-starttime = datetime; % start date & time
-timestamp = string(starttime,"yyyyMMdd_HHmmss");
-logname   = 'rundata_trajopt\UNIFIERLanding_' + timestamp; % name of diary & data log file
+starttime    = datetime; % start date & time
+timestamprun = string(starttime,"yyyyMMdd_HHmmss");
+logname      = 'rundata_trajopt\UNIFIERLanding_' + timestamprun; % name of diary & data log file
 
 diary (logname + '.txt')
 diary on % start diary
 
 %% Configure Run
 
-mpoints = 500;
-%%
+mpoints = 250;
+
 global runconfig
 
+% cost function
+runconfig.boundarycost = 1; % 1 = tf
+                            % 2 = xf(1)
+                            % 3 = -
+runconfig.stagecost    = 1; % 1 = stage cost on
+
 % ROM settings
-runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2
-runconfig.ROMdep  = 2; % 1=all dependencies, 2=reduced dependencies
+runconfig.ROMfile = 4; % 1=72.74, 2=50, 3=v2
+runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
+                            
+% flap deflection
+dFlap = deg2rad(5);
+runconfig.dFlap = dFlap;
 
 if runconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
+    load data/UNIFIER_LOAD_ROM_72.mat % v1, 72.74 m/s
 elseif runconfig.ROMfile==2
-    load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
+    load data/UNIFIER_LOAD_ROM_50.mat % v1, 50 m/s
 elseif runconfig.ROMfile==3
     load data/UNIFIER_LOAD_ROM_v2.mat % v2
+elseif runconfig.ROMfile==4
+    load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3, subset v1-50
+elseif runconfig.ROMfile==5
+    load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat % v4, subset v1-10
 else
     error("Invalid ROM file setting")
 end
 
-global ROM
-ROM.I=I
-%%
-% flap deflection
-dFlap = deg2rad(12);
-runconfig.dFlap = dFlap;
+global ROMLOAD
+ROMLOAD.I         = I;
+ROMLOAD.Iyy       = Iyy;
+ROMLOAD.ROM       = ROM;
+ROMLOAD.S         = S;
+ROMLOAD.b         = b;
+ROMLOAD.c         = c;
+ROMLOAD.dp_DEP    = dp_DEP;
+ROMLOAD.dp_HTU    = dp_HTU;
+ROMLOAD.dumax     = dumax;
+ROMLOAD.gr        = gr;
+ROMLOAD.m         = m;
+ROMLOAD.umax      = umax;
+ROMLOAD.umin      = umin;
+ROMLOAD.xyz_DEP   = xyz_DEP;
+ROMLOAD.xyz_cg    = xyz_cg;
+ROMLOAD.xyz_cg_12 = xyz_cg_12;
 
-% cost function
-runconfig.stagecost    = 1; % 1 = stage cost on
-runconfig.boundarycost = 1; % 1 = tf
-                            % 2 = xf(1)
-                            % 3 = -
+% ICLOCS settings
+runconfig.ipopttol = 5e-1; %default=1e-8
+runconfig.scaling  = 1; %1=on, 0=off
+
+% Error bound multiplier
+runconfig.ebmult = 1;
 
 % inequality constraints
-runconfig.ineq_rodmin = convvel(-inf,'ft/min','m/s');
-runconfig.ineq_rodmax = convvel(inf,'ft/min','m/s');
-runconfig.ineq_aoamin = deg2rad(-inf);
-runconfig.ineq_aoamax = deg2rad(inf);
-runconfig.ineq_Vamin  = 35.85*1.3*-inf;
+runconfig.ineq_rodmin = convvel(0,'ft/min','m/s');
+runconfig.ineq_rodmax = convvel(350,'ft/min','m/s');
+runconfig.ineq_aoamin = deg2rad(-15);
+runconfig.ineq_aoamax = deg2rad(10);
+runconfig.ineq_Vamin  = 35.85*1.3;
 runconfig.ineq_Vamax  = inf;
 
 % boundary constraints
@@ -61,8 +87,6 @@ runconfig.bndc_Vamin  = -inf;
 runconfig.bndc_Vamax  = inf;
 
 % control & rate limits
-loadfile='data/UNIFIER_LOAD_ROM_72.mat';
-load(loadfile,"umax","umin","dumax")
 
 runconfig.dumax = dumax;
 
@@ -90,18 +114,28 @@ runconfig.dFlapmax = umax(4);
 
 % initial conditions
 if runconfig.ROMfile==1 
+    % trimname0="20240613_051929"; %ROM1-1, cruise, 0deg flap
     trimname0="20240607_023005"; %ROM1-1, cruise, 5deg flap
+    % trimname0="20240613_051912"; %ROM1-1, cruise, 12deg flap
 elseif runconfig.ROMfile==2
     % trimname0="20240612_055958"; %ROM2-1, cruise, 0deg flap
-    % trimname0="20240612_060030"; %ROM2-1, cruise, 5deg flap
+    trimname0="20240612_060030"; %ROM2-1, cruise, 5deg flap
     % trimname0="20240612_060050"; %ROM2-1, cruise, 12deg flap
     % trimname0="20240612_060119"; %ROM2-2, cruise, 0deg flap
     % trimname0="20240612_060138"; %ROM2-2, cruise, 5deg flap
-    trimname0="20240612_060153"; %ROM2-2, cruise, 12deg flap
+    % trimname0="20240612_060153"; %ROM2-2, cruise, 12deg flap
 elseif runconfig.ROMfile==3
     % trimname0="20240612_035139"; %ROM3-1, cruise, 0deg flap
     trimname0="20240612_035214"; %ROM3-1, cruise, 5deg flap
     % trimname0="20240612_035256"; %ROM3-1, cruise, 12deg flap
+elseif runconfig.ROMfile==4
+    % trimname0="20240613_050426"; %ROM4 (subset ROM2), cruise, 0deg flap
+    trimname0="20240613_002923"; %ROM4 (subset ROM2), cruise, 5deg flap
+    % trimname0="20240613_050411"; %ROM4 (subset ROM2), cruise, 12deg flap
+elseif runconfig.ROMfile==5
+    % trimname0="20240613_054253"; %ROM5 (subset ROM2), cruise, 0deg flap
+    trimname0="20240613_054350"; %ROM5 (subset ROM2), cruise, 5deg flap
+    % trimname0="20240613_054428"; %ROM5 (subset ROM2), cruise, 12deg flap
 else
     error("Invalid ROM file setting")
 end
@@ -122,13 +156,26 @@ runconfig.HTU0   = ustar0(3);
 
 % terminal conditions
 if runconfig.ROMfile==1 
-    error("landing trimfile unavailable")
+    % trimname_f="20240613_051817"; %ROM1-1, landing, 0deg flap
+    trimname_f="20240613_051838"; %ROM1-1, landing, 5deg flap
+    % trimname_f="20240613_051852"; %ROM1-1, landing, 12deg flap
 elseif runconfig.ROMfile==2
+    % trimname_f="20240613_051046"; %ROM2-1, landing, 0deg flap
+    trimname_f="20240613_051102"; %ROM2-1, landing, 5deg flap
+    % trimname_f="20240613_051121"; %ROM2-1, landing, 12deg flap
     % trimname_f="20240612_060927"; %ROM2-2, landing, 0deg flap
     % trimname_f="20240612_061004"; %ROM2-2, landing, 5deg flap
-    trimname_f="20240612_061021"; %ROM2-2, landing, 12deg flap
+    % trimname_f="20240612_061021"; %ROM2-2, landing, 12deg flap
 elseif runconfig.ROMfile==3
-    error("landing trimfile unavailable")
+    % trimname_f="20240613_051504"; %ROM3-1, landing, 0deg flap
+    trimname_f="20240613_051424"; %ROM3-1, landing, 5deg flap
+    % trimname_f="20240613_051333"; %ROM3-1, landing, 12deg flap
+elseif runconfig.ROMfile==4
+    % trimname_f="20240613_054608"; %ROM4, landing, 0deg flap
+    trimname_f="20240613_054553"; %ROM4, landing, 5deg flap
+    % trimname_f="20240613_054520"; %ROM4, landing, 12deg flap
+elseif runconfig.ROMfile==5
+    load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat % v4, subset v1-10
 else
     error("Invalid ROM file setting")
 end
@@ -162,10 +209,7 @@ runconfig.dElev_f = ustarf(1);
 runconfig.DEP_f   = ustarf(2);
 runconfig.HTU_f   = ustarf(3);
 
-% error bound multiplier
-runconfig.ebmult = 1;
-
-numset = [timestamp,...
+numset = [timestamprun,...
           mpoints,...
           runconfig.boundarycost,...
           runconfig.stagecost,...
@@ -183,7 +227,13 @@ numset = [timestamp,...
           runconfig.ROMdep,...
           rad2deg(runconfig.dFlap),...
           runconfig.ebmult,...
+          runconfig.ipopttol,...
+          runconfig.scaling,...
           trimname0];
+
+if runconfig.ROMfile==4
+    numset(16)='-';
+end
 
 %% Run Problem
 

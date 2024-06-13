@@ -1,0 +1,75 @@
+if system_dependent('IsDebugMode')==1, dbcont; end
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   683094
+Number of nonzeros in Lagrangian Hessian.............:   350460
+
+Total number of variables............................:    17982
+                     variables with only lower bounds:     1999
+                variables with lower and upper bounds:    13986
+                     variables with only upper bounds:     1997
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:    29981
+        inequality constraints with only lower bounds:     5994
+   inequality constraints with lower and upper bounds:    11994
+        inequality constraints with only upper bounds:     5994
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  4.2310508e+02 3.00e-01 1.68e+01   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.2310511e+02 3.00e-01 3.22e+02  -2.1 4.07e+01    -  1.77e-01 1.21e-06f  2
+   2  4.6999976e+02 1.76e-01 3.21e+02  -0.5 1.03e+02    -  6.44e-01 4.55e-01f  1
+   3  4.6802199e+02 4.09e-02 2.03e+05  -0.4 2.01e+00   2.0 2.51e-01 7.85e-01h  1
+   4  4.6882980e+02 6.46e-03 1.01e+03  -0.1 8.35e-01   1.5 1.00e+00 1.00e+00h  1
+   5  4.6883569e+02 1.94e-07 2.44e+02  -2.2 5.49e-03   2.9 9.92e-01 1.00e+00h  1
+   6  4.6883507e+02 0.00e+00 1.99e-01  -2.5 8.39e-04   2.4 1.00e+00 1.00e+00h  1
+   7  4.6883304e+02 0.00e+00 1.41e-01  -8.5 1.79e-03   1.9 9.96e-01 1.00e+00f  1
+
+Number of Iterations....: 7
+
+                                   (scaled)                 (unscaled)
+Objective...............:   4.6883304494123507e+02    4.6883304494123507e+02
+Dual infeasibility......:   1.4138799853798087e-01    1.4138799853798087e-01
+Constraint violation....:   0.0000000000000000e+00    0.0000000000000000e+00
+Complementarity.........:   1.1033582839853453e-05    1.1033582839853453e-05
+Overall NLP error.......:   5.3401004967830012e-02    1.4138799853798087e-01
+
+
+Number of objective function evaluations             = 9
+Number of objective gradient evaluations             = 8
+Number of equality constraint evaluations            = 0
+Number of inequality constraint evaluations          = 9
+Number of equality constraint Jacobian evaluations   = 0
+Number of inequality constraint Jacobian evaluations = 8
+Number of Lagrangian Hessian evaluations             = 7
+Total CPU secs in IPOPT (w/o function evaluations)   =      1.265
+Total CPU secs in NLP function evaluations           =      7.628
+
+EXIT: Optimal Solution Found.
+computation time:
+    8.9079
+minimized cost:
+  468.8330
+Maximum absolute local error:
+    0.0005    0.0009    0.0142    0.1593    0.0022    0.0027
+Maximum relative local error:
+    0.0000    0.0000    0.0002    0.0244    0.0020    0.0023
+Maximum absolute constraint violation:
+  Columns 1 through 17
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+  Columns 18 through 24
+     0     0     0     0     0     0     0
+Number of active constraints:
+     6
+avgglideslope =
+    2.9817

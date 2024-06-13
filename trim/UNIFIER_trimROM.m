@@ -22,17 +22,17 @@ diary on % start diary
 global trimconfig
 
 trimconfig.DEPset  = 1; % 1=DEP on, 0=DEP off
-trimconfig.ROMfile = 4; % 1=72.74, 2=50, 3=v2a, 4=v3
+trimconfig.ROMfile = 5; % 1=72.74, 2=50, 3=v2a, 4=v3
 trimconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
 
 trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
 trimconfig.ze        = 5;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(5); % flap deflection (deg)
+trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;
 trimconfig.penalty_wdot  = 1;
-trimconfig.penalty_qdot  = 1;
+trimconfig.penalty_qdot  = 100;
 trimconfig.penalty_Va    = 1;
 
 %% Initialize z_guess

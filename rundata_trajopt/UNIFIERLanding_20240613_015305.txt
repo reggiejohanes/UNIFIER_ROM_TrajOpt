@@ -1,0 +1,8 @@
+if system_dependent('IsDebugMode')==1, dbcont; end
+{Unrecognized field name "ipoptol".
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Settings', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Settings.m', 150)" style="font-weight:bold">UNIFIERLanding_Settings</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Settings.m',150,0)">line 150</a>)
+options.ipopt.tol=runconfig.ipoptol;           % Desired convergence tolerance (relative). The default value is  1e-8.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 221)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',221,0)">line 221</a>)
+options              = problem.settings(mpoints); % Get options and solver settings %2 inputs for LGR} 
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Settings.m',150,0)
+UNIFIERLanding_Main

@@ -1,0 +1,4 @@
+{Unrecognized function or variable 'trimname_f'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 182)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',182,0)">line 182</a>)
+trimfile_f='trim/rundata/UNIFIER_trim_out_'+trimname_f+'.mat';} 
+UNIFIERLanding_Main
