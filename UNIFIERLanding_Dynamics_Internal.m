@@ -29,4 +29,5 @@ alpha  = atan2(X(:,4),X(:,3));
 Va     = sqrt(X(:,3).^2+X(:,4).^2);
 
 g_neq  = [DX(:,2) alpha Va];
+% g_neq  = [DX(:,2) alpha];
 % g_neq  = [alpha Va];

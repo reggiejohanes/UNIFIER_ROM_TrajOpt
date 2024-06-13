@@ -1,0 +1,5 @@
+{Unrecognized field name "ineq_Vamin".
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 220)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',220,0)">line 220</a>)
+          runconfig.ineq_Vamin,...} 
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',220,0)
+UNIFIERLanding_Main

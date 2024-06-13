@@ -187,11 +187,9 @@ problem.constraints.gTol_eq = [];
 problem.constraints.gl = [runconfig.ineq_rodmin,... % min rate of descent convvel(0,'ft/min','m/s')
                           runconfig.ineq_aoamin,... % min alpha deg2rad(-15)
                           runconfig.ineq_Vamin];   % min airspeed 35.85*1.3
-
 problem.constraints.gu = [runconfig.ineq_rodmax,... % max rate of descent convvel(350,'ft/min','m/s')
                           runconfig.ineq_aoamax,... % max alpha deg2rad(10)
                           runconfig.ineq_Vamax];    % max airspeed
-
 problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
                                 deg2rad(0.1),...
                                 0.001];

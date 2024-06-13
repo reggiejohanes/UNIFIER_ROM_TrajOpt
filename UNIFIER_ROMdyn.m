@@ -46,7 +46,6 @@ xyz_DEP   = ROMLOAD.xyz_DEP;
 xyz_cg    = ROMLOAD.xyz_cg;
 xyz_cg_12 = ROMLOAD.xyz_cg_12;
 
-
 prop_d  = 1.6;
 DEP_inc = deg2rad(-5);
 n_prop  = 12;

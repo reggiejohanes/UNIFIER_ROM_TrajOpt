@@ -20,13 +20,13 @@ mpoints = 250;
 global runconfig
 
 % cost function
-runconfig.boundarycost = 2; % 1 = tf
+runconfig.boundarycost = 1; % 1 = tf
                             % 2 = xf(1)
                             % 3 = -
 runconfig.stagecost    = 1; % 1 = stage cost on
 
 % ROM settings
-runconfig.ROMfile = 5; % 1=72.74, 2=50, 3=v2
+runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2, 4=v3, 5=v4
 runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
                             
 % flap deflection
@@ -34,7 +34,7 @@ dFlap = deg2rad(5);
 runconfig.dFlap = dFlap;
 
 % ICLOCS settings
-runconfig.ipopttol = 7.5e-2; %default=1e-8
+runconfig.ipopttol = 5e-3; %default = 1e-8
 runconfig.scaling  = 1; %1=on, 0=off
 
 % Load ROM
@@ -77,14 +77,16 @@ runconfig.ineq_rodmin = convvel(0,'ft/min','m/s');
 runconfig.ineq_rodmax = convvel(350,'ft/min','m/s');
 runconfig.ineq_aoamin = deg2rad(-15);
 runconfig.ineq_aoamax = deg2rad(10);
-runconfig.ineq_Vamin  = 35.85*1.3;
-runconfig.ineq_Vamax  = inf;
+runconfig.ineq_Vamin = 35.85*1.1;
+runconfig.ineq_Vamax = 80;
 
 % boundary constraints
 runconfig.bndc_rodmin = convvel(-inf,'ft/min','m/s');
 runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
 runconfig.bndc_Vamin  = -inf;
 runconfig.bndc_Vamax  = inf;
+% runconfig.bndc_Vamin  = 35.85*1.1;
+% runconfig.bndc_Vamax  = 35.85*1.3;
 
 % control & rate limits
 
@@ -345,7 +347,7 @@ xlabel('Time, s')
 ylabel('Va, m/s')
 grid on
 vminlabel=['V_m_i_n= ' num2str(round(min(Va),2)) ' m/s'];
-yline(35.85*1.3,'-.r',{'V_s_t_a_l_l*1.3 = 46.6 m/s'},'LabelHorizontalAlignment','left','LabelVerticalAlignment','top','FontSize',8)
+yline(35.85*1.1,'-.r',{'V_s_t_a_l_l*1.3 = 39.4 m/s'},'LabelHorizontalAlignment','left','LabelVerticalAlignment','top','FontSize',8)
 % yline(min(Va),'-.k',{vminlabel},'LabelHorizontalAlignment','left','LabelVerticalAlignment','bottom','FontSize',8)
 ylim([45 80])
 nexttile

@@ -81,13 +81,13 @@ for i=1:dFlap_n
                      deg2rad(0);          % 10) p [rad/s]
                      deg2rad(0);          % 11) q [rad/s]
                      deg2rad(0)];         % 12) r [rad/s]
-                u = [deg2rad(0);          % 13) dAil [rad]
-                     deg2rad(0);          % 14) dRud [rad]
-                     dElev(m);            % 15) dElev [rad]
-                     dFlap(i);            % 16) dFlap [rad] 
-                     DEP_col(k);          % 17) DEP_col [0-1]
-                     0.0;                 % 18) DEP_slope [0-1]
-                     0.0];                % 19) HTU [0-1]
+                u = [deg2rad(0);          % 13) dAil [rad] 1
+                     deg2rad(0);          % 14) dRud [rad] 2
+                     dElev(m);            % 15) dElev [rad] 3
+                     dFlap(i);            % 16) dFlap [rad] 4
+                     DEP_col(k);          % 17) DEP_col [0-1] 5
+                     0.0;                 % 18) DEP_slope [0-1] 6
+                     0.0];                % 19) HTU [0-1] 7
                 
                 % Call dynamics function
                 out = UNIFIER_dyn(0,[],[x;u],'outputs');
@@ -106,7 +106,7 @@ for i=1:dFlap_n
                 
                 % Convert forces to wind axis
                 rot    = [cos(alpha(j))   0  sin(alpha(j));  
-                          0             1  0;
+                          0               1  0;
                           -sin(alpha(j))  0  cos(alpha(j))];
                 F_ae_w = rot*F_ae_b;
 

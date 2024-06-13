@@ -1,0 +1,4 @@
+if system_dependent('IsDebugMode')==1, dbquit; end
+uiimport('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\rundata_trajopt\UNIFIERLanding_20240613_192511.mat',1)
+clear
+UNIFIERLanding_Main
