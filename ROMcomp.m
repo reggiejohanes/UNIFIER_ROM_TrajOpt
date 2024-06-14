@@ -127,6 +127,7 @@ forcecomp = [Lcomp Dcomp Mcomp];
 
 %% Compare trim controls
 
+% load trim results
 load trim/rundata/UNIFIER_trim_out_20240612_060030 xstar ustar xdotstar% ROM2-1 cruise 5 deg flap
 xstarv1=xstar;
 ustarv1=ustar;
@@ -151,8 +152,7 @@ clear xdotstar
 clear xstar
 clear ustar
 
-%%
-
+%compile
 ucomp=[xstarhfm(4); xstarv1(3); xstarv2(3); xstarv3(3)];
 wcomp=[xstarhfm(6); xstarv1(4); xstarv2(4); xstarv3(4)];
 

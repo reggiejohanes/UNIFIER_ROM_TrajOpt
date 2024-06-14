@@ -126,14 +126,14 @@ for i=1:numel(dFlap_range)
 
         % Case C - ROM, DEP on
         resC = UNIFIER_trimROM_loop(1,ROMfile,ROMdep,Va_range(j),ze_landing,dFlap_range(i),penaltyC,dmcC);
-        zedotC(i,j) = resC.xdot(3);
-        wdotC(i,j)  = resC.xdot(6);
+        zedotC(i,j) = resC.xdot(2);
+        wdotC(i,j)  = resC.xdot(4);
         fvalC(i,j)  = resC.fval;
 
         % Case D - ROM, DEP off
         resD = UNIFIER_trimROM_loop(0,ROMfile,ROMdep,Va_range(j),ze_cruise,dFlap_range(i),penaltyD,dmcD);
-        zedotD(i,j) = resD.xdot(3);
-        wdotD(i,j)  = resD.xdot(6);
+        zedotD(i,j) = resD.xdot(2);
+        wdotD(i,j)  = resD.xdot(4);
         fvalD(i,j)  = resD.fval;
 
         t_step=toc(startstep);

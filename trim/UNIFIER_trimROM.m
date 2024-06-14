@@ -21,13 +21,13 @@ diary on % start diary
 
 global trimconfig
 
-trimconfig.DEPset  = 1; % 1=DEP on, 0=DEP off
-trimconfig.ROMfile = 5; % 1=72.74, 2=50, 3=v2a, 4=v3
-trimconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
+trimconfig.DEPset  = 0; % 1=DEP on, 0=DEP off
+trimconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2a, 4=v3
+trimconfig.ROMdep  = 2; % 1=all dependencies, 2=reduced dependencies
 
-trimconfig.Va_target = 50;       % airspeed target (m/s) cruise=72.74m/s
-trimconfig.ze        = 5;        % altitude (m) cruise=1219m
-trimconfig.dFlap     = deg2rad(0); % flap deflection (deg)
+trimconfig.Va_target = 72.74;       % airspeed target (m/s) cruise=72.74m/s
+trimconfig.ze        = 1219;        % altitude (m) cruise=1219m
+trimconfig.dFlap     = deg2rad(5); % flap deflection (deg)
 
 trimconfig.penalty_zedot = 1;
 trimconfig.penalty_udot  = 1;

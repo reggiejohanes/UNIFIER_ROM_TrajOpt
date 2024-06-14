@@ -39,11 +39,15 @@ function DX=UNIFIER_ROMdyn_trim_loop(X,U)
 global trimconfig
 
 if trimconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM_72.mat % v1 at 72.74 m/s
+    load data/UNIFIER_LOAD_ROM_72.mat % v1 (ROM1), 72.74 m/s
 elseif trimconfig.ROMfile==2
-    load data/UNIFIER_LOAD_ROM_50.mat % v1 at 50 m/s
+    load data/UNIFIER_LOAD_ROM_50.mat % v1 (ROM2), 50 m/s
 elseif trimconfig.ROMfile==3
-    load data/UNIFIER_LOAD_ROM_v2.mat % v2
+    load data/UNIFIER_LOAD_ROM_v2.mat % v2 (ROM3)
+elseif trimconfig.ROMfile==4
+    load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3 (ROM4), subset v1-50
+elseif trimconfig.ROMfile==5
+    load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat % v4 (ROM5), subset v1-10
 else
     error("Invalid ROM file setting")
 end
@@ -218,6 +222,27 @@ elseif trimconfig.ROMfile==3 % v2 ROM
     else
         error("Invalid ROM dependency setting")
     end
+elseif trimconfig.ROMfile==4 % v3
+        % Coefficients (all dependencies) ---------------------------------
+        CL = interp1(ROM.alpha,...           % breakpoints
+                     ROM.CL,...              % table data
+                     alpha_sat);             % inputs
+        CD = interp1(ROM.alpha,...           % breakpoints
+                     ROM.CD,...              % table data
+                     alpha_sat);             % inputs
+        CM = interpn(ROM.alpha,ROM.dElev,... % breakpoints
+                     ROM.CM,...              % table data
+                     alpha_sat,dElev_sat);   % inputs
+elseif trimconfig.ROMfile==5 %v4
+        CL = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CL,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
+        CD = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CD,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
+        CM = interpn(ROM.alpha,ROM.dElev,ROM.dFlap,... % breakpoints
+                     ROM.CM,...                        % table data
+                     alpha_sat,dElev_sat,dFlap_sat);   % inputs
 else
     error("Invalid ROM file setting")
 end
