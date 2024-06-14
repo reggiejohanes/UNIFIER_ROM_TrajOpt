@@ -57,19 +57,19 @@ xyz_DEP = [ -6.9629998	-6.9210000	-6.8660002	-6.8099999	-6.7540002	-6.6999998	-6
 % Init:
 fcc.dt = 1/100;
 ground_alt = 0;
-omegab0 = [0,0,0];
+% omegab0 = [0,0,0];
 % Vb0 = [52.6789583501891, 0, 2.71559652634250];
-Vb0 = [72.731047032614440, 0, 1.142307104518741];
+% Vb0 = [72.731047032614440, 0, 1.142307104518741];
 u1_0 = [2.1112539e-05, -2.1112539e-05, -0.085004635, -0.084972650, 0.19720161, 0.19720161];
 u2_0 = ones(1,12) .* 0.4252;
 u3_0 = 0.089689;
 u4_0 = 0;
 % Xe0 = [0,0,-1100];
-Xe0 = [0,0,-1219];
+% Xe0 = [0,0,-1219];
 latlong0 = [45.466148, 6.692235];
 % Euler0 = [3.43106170068520e-06, 0.0515008506277664, -2.79252663434261];
 % Euler0 = [0, 0.015706052282666, 0];
-Euler0 = [0, 0, 0];
+% Euler0 = [0, 0, 0];
 
 DEP_PID_IC = 163.487227;
 DEP_INTEG_IC = 117.49388;
@@ -79,7 +79,7 @@ sensor_delay_steps = 5;
 %%------------------------------------------------------------
 
 % Trim condition
-load UNIFIER_trim_out_20240612_032607 ustar
+load UNIFIER_trim_out_20240612_032607 ustar xstar
 u_trim=ustar;
 % u_trim = [0.0;                   % ail
 %           0.0;                   % rud
@@ -89,10 +89,15 @@ u_trim=ustar;
 %           0.0;                   % DEP_slp
 %           0.5456332359332103];   % HTU
 
+Xe0     = xstar(1:3)';
+Vb0     = xstar(4:6)';
+Euler0  = xstar(7:9)';
+omegab0 = xstar(10:12)';
+
 % Tracking reference
-load UNIFIERLanding_20240613_232402.mat solution Va alpha rodft % v1
+% load UNIFIERLanding_20240613_232402.mat solution Va alpha rodft % v1
 % load UNIFIERLanding_20240613_192010.mat solution Va alpha rodft % v2
-% load UNIFIERLanding_20240613_190735.mat solution Va alpha rodft % v3
+load UNIFIERLanding_20240613_190735.mat solution Va alpha rodft % v3
 dFlap=deg2rad(5);
 t_sim=solution.tf;
 

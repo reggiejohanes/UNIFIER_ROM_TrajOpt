@@ -42,8 +42,10 @@ mpoints=250;
 
 % states ------------------------------------------------------------------
 
-fig(1)=figure('Name','State Histories','Position', [5 75 400 1250]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(1)=figure('Name','State Histories','Position', [5 75 400 1250]);
+% tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+fig(1)=figure('Name','State Histories','Position', [5 75 1200 600]);
+tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 
 nexttile
 p1=plot(solutionv1.X(:,1)/1000,-1*solutionv1.X(:,2),'-b','LineWidth',0.5);
@@ -90,7 +92,7 @@ hold on
 plot(solutionv2.X(:,1)/1000,rad2deg(alphav2),'-m','LineWidth',0.5)
 plot(solutionv3.X(:,1)/1000,rad2deg(alphav3),'-r','LineWidth',0.5)
 % title('AoA')
-% xlabel('Distance, km')
+xlabel('Distance, km')
 ylabel('Angle of Attack, deg')
 % yline(0,':b','LineWidth',1)
 grid on
@@ -112,15 +114,17 @@ hold on
 plot(solutionv2.X(:,1)/1000,rad2deg(solutionv2.X(:,6)),'-m','LineWidth',0.5)
 plot(solutionv3.X(:,1)/1000,rad2deg(solutionv3.X(:,6)),'-r','LineWidth',0.5)
 % title('Pitch Rate')
-xlabel('Distance, km')
+% xlabel('Distance, km')
 ylabel('Pitch Rate, deg/s')
 % yline(0,':b','LineWidth',1)
 grid on
 
 % controls ----------------------------------------------------------------
 
-fig(2)=figure('Name','Control Histories','Position', [5 75 400 900]);
-tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+% fig(2)=figure('Name','Control Histories','Position', [5 75 400 900]);
+% tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+fig(2)=figure('Name','Control Histories','Position', [5 75 800 600]);
+tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
 
 nexttile
 p1=plot(solutionv1.X(:,1)/1000,solutionv1.U(:,2),'-b','LineWidth',0.5);
@@ -173,14 +177,14 @@ grid on
 
 % save results -----------------------------------------------------------
 
-% save figures
-saveas(fig(1),'figures\trajoptres_states','jpg')
-saveas(fig(2),'figures\trajoptres_controls','jpg')
-savefig(fig,'figures\trajoptrescomp_figs');
-clear fig
-
-% save workspace
-save('figures\trajoptrescomp')
+% % save figures
+% saveas(fig(1),'figures\trajoptres_states','jpg')
+% saveas(fig(2),'figures\trajoptres_controls','jpg')
+% savefig(fig,'figures\trajoptrescomp_figs');
+% clear fig
+% 
+% % save workspace
+% save('figures\trajoptrescomp')
 
 
 

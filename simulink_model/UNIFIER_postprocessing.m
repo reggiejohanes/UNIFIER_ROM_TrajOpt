@@ -37,6 +37,8 @@ close all
 % state trajectories ------------------------------------------------------
 fig(1)=figure('Name','State Trajectories','Position', [5 75 400 1250]);
 tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
+% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 
 % altitude
 nexttile
@@ -86,7 +88,7 @@ plot(solution.X(:,1)/1000,rad2deg(alpha),'r')
 hold on
 plot(res.x/1000,rad2deg(res.alpha),'b')
 % title('AoA')
-% xlabel('x, km')
+% xlabel('Distance, km')
 ylabel('Angle of Attack, deg')
 yline(0,':k','LineWidth',1)
 grid on

@@ -35,8 +35,10 @@ res.flap          = out.u_cmd_trim_lim(:,4);
 close all
 
 % state trajectories ------------------------------------------------------
-fig(1)=figure('Name','State Trajectories','Position', [50 70 500 800]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(1)=figure('Name','State Trajectories','Position', [5 75 400 1250]);
+% tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
+tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 
 % altitude
 nexttile
