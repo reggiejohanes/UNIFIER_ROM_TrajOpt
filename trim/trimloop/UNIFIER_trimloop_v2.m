@@ -183,6 +183,8 @@ xlim([35 75])
 % ylabel('Norm of Residuals')
 grid on
 
+%----------------------------------------------------
+
 fig(2)=figure('Name','Approximate Stall Speed vs Flap Deflection','Position',[750 200 600 400]);
 st1=plot(rad2deg(dFlap_range),[52 49 48 47 43 43],'.-k'); %HFM
 hold on
@@ -202,6 +204,8 @@ grid on
 %% Save results
 
 % save figures
+saveas(fig(1),'figures\residual','jpg')
+saveas(fig(2),'figures\stallspeed','jpg')
 savefig(fig,logname + '_figs');
 clear fig
 

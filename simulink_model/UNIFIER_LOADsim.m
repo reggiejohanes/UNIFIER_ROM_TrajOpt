@@ -7,7 +7,7 @@
 % The JU receives support from the European Union%s Horizon 2020 research and innovation programme and the 
 % Clean Sky 2 JU members other than the Union.
 
-% clear all
+clear all
 % close all
 % clc
 addpath(genpath(pwd))
@@ -79,16 +79,22 @@ sensor_delay_steps = 5;
 %%------------------------------------------------------------
 
 % Trim condition
-u_trim = [0.0;                   %ail
-          0.0;                   %rud
-          0.025123682891622784;  %elev
-          0.08726646259971647;   %flap(5deg)
-          0.0;                   %DEP_col
-          0.0;                   %DEP_slp
-          0.5456332359332103];   
+load UNIFIER_trim_out_20240612_032607 ustar
+u_trim=ustar;
+% u_trim = [0.0;                   % ail
+%           0.0;                   % rud
+%           0.025123682891622784;  % elev
+%           0.08726646259971647;   % flap(5deg)
+%           0.0;                   % DEP_col
+%           0.0;                   % DEP_slp
+%           0.5456332359332103];   % HTU
 
 % Tracking reference
-load UNIFIERLanding_20240524_162938.mat
+load UNIFIERLanding_20240613_232402.mat solution Va alpha rodft % v1
+% load UNIFIERLanding_20240613_192010.mat solution Va alpha rodft % v2
+% load UNIFIERLanding_20240613_190735.mat solution Va alpha rodft % v3
+dFlap=deg2rad(5);
+t_sim=solution.tf;
 
 % Max/min deflections
 umin(1) = -25; % Min aileron deflection  [deg]
