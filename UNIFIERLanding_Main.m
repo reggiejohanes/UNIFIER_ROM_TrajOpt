@@ -275,9 +275,9 @@ numall = [numset '-' numres];
 
 close all
 
-% physical trajectory -----------------------------------------------------
+% geometric trajectory -----------------------------------------------------
 
-fig(1)=figure('Name','Physical Trajectory','Position', [50 450 1200 400]);
+fig(1)=figure('Name','Geometric Trajectory','Position', [50 450 1200 400]);
 plot(solution.X(:,1)/1000,-1*solution.X(:,2),'.-k')
 title('Altitude vs Horizontal Distance')
 xlabel('Horizontal Distance, km')
