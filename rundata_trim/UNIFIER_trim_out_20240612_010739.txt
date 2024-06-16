@@ -1,0 +1,47 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    3.419670e+01    0.000e+00    8.253e+02
+Objective function returned NaN; trying a new point...
+    1      22    2.377360e+01    0.000e+00    2.906e+02    3.479e-02
+Objective function returned NaN; trying a new point...
+    2      31    2.352853e+01    0.000e+00    2.879e+02    7.849e-03
+    3      37    1.455921e+01    0.000e+00    3.905e+02    4.931e-01
+    4      43    1.844866e+00    0.000e+00    1.988e+02    4.689e-01
+    5      49    8.431723e-01    0.000e+00    1.039e+02    9.429e-01
+    6      55    1.509625e-01    0.000e+00    2.773e+01    5.292e-01
+    7      62    1.379836e-01    0.000e+00    2.010e+01    6.245e-02
+    8      68    1.588450e-01    0.000e+00    4.005e+00    4.760e-02
+    9      74    1.705453e-01    0.000e+00    1.462e+00    8.455e-03
+   10      80    1.180340e-01    0.000e+00    2.683e+01    5.334e-02
+   11      86    1.008237e-01    0.000e+00    5.405e+00    3.118e-02
+   12      92    1.037324e-01    0.000e+00    1.639e+00    5.045e-03
+   13      98    1.047828e-01    0.000e+00    5.293e-02    1.075e-03
+   14     104    9.079122e-02    0.000e+00    6.631e-01    5.661e-03
+   15     110    8.962045e-02    0.000e+00    8.630e-02    2.095e-03
+   16     116    8.962334e-02    0.000e+00    4.000e-03    7.980e-05
+   17     122    8.575095e-02    0.000e+00    1.259e-02    1.839e-03
+   18     128    8.566945e-02    0.000e+00    4.350e-04    8.531e-05
+   19     134    8.566940e-02    0.000e+00    2.321e-05    5.664e-06
+   20     140    8.566300e-02    0.000e+00    1.117e-05    3.299e-06
+   21     146    8.566141e-02    0.000e+00    2.209e-05    7.573e-07
+   22     152    8.566141e-02    0.000e+00    6.892e-08    7.971e-10
+
+Optimization completed: The relative <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 6.508832e-09,
+is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> = 1.000000e-06, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 12.0102 seconds
+Avg. per Iteration   = 0.5222 seconds
+Avg. per Func. Eval. = 0.0790 seconds
+{Unrecognized function or
+variable 'check1'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimROM', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM.m', 132)" style="font-weight:bold">UNIFIER_trimROM</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trimROM.m',132,0)">line 132</a>)
+check2(1,:)=check1(1,:)*100;
+} 
+UNIFIER_trimROM

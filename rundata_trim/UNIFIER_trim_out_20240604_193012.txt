@@ -1,0 +1,15 @@
+<strong><< OPTIMIZATION START >></strong>
+
+{Unrecognized function or variable
+'UNIFIER_trim_obj'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim_DEPoff>@(x)UNIFIER_trim_obj(x)', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trim_DEPoff.m', 105)" style="font-weight:bold">UNIFIER_trim_DEPoff>@(x)UNIFIER_trim_obj(x)</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trim_DEPoff.m',105,0)">line 105</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim_obj(x),z0,[],[],[],[],lb,ub,[],options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m', 563)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m',563,0)">line 563</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim_DEPoff', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trim_DEPoff.m', 105)" style="font-weight:bold">UNIFIER_trim_DEPoff</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trim_DEPoff.m',105,0)">line 105</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim_obj(x),z0,[],[],[],[],lb,ub,[],options);
+} 
+UNIFIER_trim_DEPoff

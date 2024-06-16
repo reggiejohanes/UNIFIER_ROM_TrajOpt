@@ -1,0 +1,20 @@
+<strong><< OPTIMIZATION START >></strong>
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim_obj')" style="font-weight:bold">UNIFIER_trim_obj</a>
+The specified number of model inputs (19) does
+not match actual number (1) of inputs
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim>@(x)UNIFIER_trim_obj(x)', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m', 108)" style="font-weight:bold">UNIFIER_trim>@(x)UNIFIER_trim_obj(x)</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m',108,0)">line 108</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim_obj(x),z0,[],[],[],[],lb,ub,[],options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m', 563)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m',563,0)">line 563</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m', 108)" style="font-weight:bold">UNIFIER_trim</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m',108,0)">line 108</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim_obj(x),z0,[],[],[],[],lb,ub,[],options); - <a href="matlab:interactive_actions_helper.displayMStack([struct('file','D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim_obj.m','line',32,'name','UNIFIER_trim_obj'),struct('file','D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m','line',108,'name','UNIFIER_trim>@(x)UNIFIER_trim_obj(x)'),struct('file','C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m','line',563,'name','fmincon'),struct('file','D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m','line',108,'name','UNIFIER_trim')]);">Show complete stack trace</a>
+Caused by:
+    Failure in initial objective function
+    evaluation. FMINCON cannot continue.
+} 
+UNIFIER_dyn([],[],[],'term')
+UNIFIER_trim

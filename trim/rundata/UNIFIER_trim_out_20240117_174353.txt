@@ -1,7 +1,0 @@
-{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
-Unable to find file or directory 'UNIFIER_trim1_res'.
-
-Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim', 'D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m', 50)" style="font-weight:bold">UNIFIER_trim</a> (<a href="matlab: opentoline('D:\TUDelft\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trim.m',50,0)">line 50</a>)
-    load UNIFIER_trim1_res zstar
-} 
-UNIFIER_trim

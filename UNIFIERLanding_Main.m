@@ -26,7 +26,7 @@ runconfig.boundarycost = 1; % 1 = tf
 runconfig.stagecost    = 1; % 1 = stage cost on
 
 % ROM settings
-runconfig.ROMfile = 2; % 1=72.74, 2=50, 3=v2, 4=v3, 5=v4
+runconfig.ROMfile = 4; % 1=v1-72.74, 2=v1-50, 3=v0, 4=v3, 5=v2
 runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
                             
 % flap deflection
@@ -37,37 +37,34 @@ runconfig.dFlap = dFlap;
 runconfig.ipopttol = 5e-3; %default = 1e-8
 runconfig.scaling  = 1; %1=on, 0=off
 
-% Load ROM
+% Load aircraft data
+load data/UNIFIER_LOAD.mat
+global LOADROM
+LOADROM.gr        = gr;
+LOADROM.dp_DEP    = dp_DEP;
+LOADROM.dp_HTU    = dp_HTU;
+LOADROM.m         = m;
+LOADROM.xyz_cg_12 = xyz_cg_12;
+LOADROM.Iyy       = Iyy;
+LOADROM.S         = S;
+LOADROM.c         = c;
+LOADROM.xyz_DEP   = xyz_DEP;
+
+% Load ROM data
 if runconfig.ROMfile==1
-    load data/UNIFIER_LOAD_ROM_72.mat % v1, 72.74 m/s
+    load data/UNIFIER_ROM_72.mat % v1, 72.74 m/s
 elseif runconfig.ROMfile==2
-    load data/UNIFIER_LOAD_ROM_50.mat % v1, 50 m/s
+    load data/UNIFIER_ROM_50.mat % v1, 50 m/s
 elseif runconfig.ROMfile==3
-    load data/UNIFIER_LOAD_ROM_v2.mat % v2
+    load data/UNIFIER_ROM_v0.mat % v0
 elseif runconfig.ROMfile==4
-    load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat % v3, subset v1-50
+    load data/ROMv3/UNIFIER_ROMv3_20240613_002318.mat % v3, subset v1-50
 elseif runconfig.ROMfile==5
-    load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat % v4, subset v1-10
+    load data/ROMv2/UNIFIER_ROMv2_20240613_053529.mat % v2, subset v1-10
 else
     error("Invalid ROM file setting")
 end
-global ROMLOAD
-ROMLOAD.I         = I;
-ROMLOAD.Iyy       = Iyy;
-ROMLOAD.ROM       = ROM;
-ROMLOAD.S         = S;
-ROMLOAD.b         = b;
-ROMLOAD.c         = c;
-ROMLOAD.dp_DEP    = dp_DEP;
-ROMLOAD.dp_HTU    = dp_HTU;
-ROMLOAD.dumax     = dumax;
-ROMLOAD.gr        = gr;
-ROMLOAD.m         = m;
-ROMLOAD.umax      = umax;
-ROMLOAD.umin      = umin;
-ROMLOAD.xyz_DEP   = xyz_DEP;
-ROMLOAD.xyz_cg    = xyz_cg;
-ROMLOAD.xyz_cg_12 = xyz_cg_12;
+LOADROM.ROM = ROM;
 
 % Error bound multiplier
 runconfig.ebmult = 1;
@@ -81,12 +78,12 @@ runconfig.ineq_Vamin = 35.85*1.1;
 runconfig.ineq_Vamax = 80;
 
 % boundary constraints
+% runconfig.bndc_Vamin  = -inf;
+% runconfig.bndc_Vamax  = inf;
+runconfig.bndc_Vamin  = 35.85*1.1;
+runconfig.bndc_Vamax  = 35.85*1.3;
 runconfig.bndc_rodmin = convvel(-inf,'ft/min','m/s');
 runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
-runconfig.bndc_Vamin  = -inf;
-runconfig.bndc_Vamax  = inf;
-% runconfig.bndc_Vamin  = 35.85*1.1;
-% runconfig.bndc_Vamax  = 35.85*1.3;
 
 % control & rate limits
 
@@ -141,7 +138,7 @@ elseif runconfig.ROMfile==5
 else
     error("Invalid ROM file setting")
 end
-trimfile0='trim/rundata/UNIFIER_trim_out_'+trimname0+'.mat';
+trimfile0='rundata_trim/UNIFIER_trim_out_'+trimname0+'.mat';
 load(trimfile0,"xstar","ustar")
 xstar0=xstar;
 ustar0=ustar;
@@ -183,7 +180,7 @@ elseif runconfig.ROMfile==5
 else
     error("Invalid ROM file setting")
 end
-trimfile_f='trim/rundata/UNIFIER_trim_out_'+trimname_f+'.mat';
+trimfile_f='rundata_trim/UNIFIER_trim_out_'+trimname_f+'.mat';
 load(trimfile_f,"xstar","ustar")
 xstarf=xstar;
 ustarf=ustar;

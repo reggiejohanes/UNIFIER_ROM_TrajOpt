@@ -1,8 +1,0 @@
-<strong><< OPTIMIZATION START >></strong>
-
-{Unrecognized function or variable 'z0'.
-
-Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trim.m', 105)" style="font-weight:bold">UNIFIER_trim</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\trim\UNIFIER_trim.m',105,0)">line 105</a>)
-[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trim_obj(x),z0,[],[],[],[],lb,ub,[],options);
-} 
-UNIFIER_trim

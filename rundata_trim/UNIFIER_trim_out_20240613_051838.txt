@@ -1,0 +1,94 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    1.513968e+01    0.000e+00    2.871e+02
+    1      22    1.086349e+01    0.000e+00    1.458e+02    1.632e-02
+    2      30    9.922649e+00    0.000e+00    2.566e+02    3.457e-02
+    3      37    3.634506e+00    0.000e+00    1.312e+02    7.305e-01
+    4      45    3.141112e+00    0.000e+00    1.205e+02    1.924e-01
+    5      53    3.221830e+00    0.000e+00    8.801e+01    4.873e-01
+    6      60    1.144457e+00    0.000e+00    6.000e+01    4.620e-01
+    7      69    8.714906e-01    0.000e+00    8.820e+01    2.365e-01
+    8      76    7.851771e-01    0.000e+00    5.607e+01    3.377e-01
+    9      83    5.575672e-02    0.000e+00    3.988e+01    3.341e-01
+   10      90    4.039898e-03    0.000e+00    7.173e+00    1.502e-01
+   11      97    1.835594e-03    0.000e+00    4.704e+00    7.382e-02
+   12     104    1.507751e-03    0.000e+00    4.980e-01    4.023e-02
+   13     111    9.925515e-04    0.000e+00    7.359e-01    2.695e-02
+   14     118    9.337145e-04    0.000e+00    4.066e-01    4.571e-03
+   15     125    9.209122e-04    0.000e+00    1.000e-01    3.788e-03
+   16     132    6.742659e-05    0.000e+00    3.576e-01    9.906e-03
+   17     139    4.045144e-05    0.000e+00    5.179e-02    1.035e-03
+   18     146    3.952227e-05    0.000e+00    2.000e-02    1.594e-03
+   19     153    2.374672e-06    0.000e+00    7.245e-02    1.887e-03
+   20     160    1.653523e-06    0.000e+00    1.939e-02    4.225e-04
+   21     167    1.607383e-06    0.000e+00    4.000e-03    2.111e-04
+   22     174    8.703150e-08    0.000e+00    2.868e-03    6.038e-04
+   23     181    6.659792e-08    0.000e+00    8.000e-04    1.404e-04
+   24     188    1.211575e-10    0.000e+00    3.663e-04    8.453e-04
+   25     195    3.791792e-12    0.000e+00    1.446e-04    1.130e-04
+   26     209    6.170428e-12    0.000e+00    1.730e-05    2.739e-05
+
+<a href = "matlab: helpview('optim','feasible_better_objective','CSHelpWindow');">Feasible point with lower objective function value found</a>.
+
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 5.2159 seconds
+Avg. per Iteration   = 0.1863 seconds
+Avg. per Func. Eval. = 0.0226 seconds
+
+<strong>> Table 1 - States</strong>
+                         <strong>Value</strong> 
+                        <strong>_______</strong>
+
+    <strong>1) xe    [m]    </strong>     0.0000
+    <strong>2) ze    [m]    </strong>    -5.0000
+    <strong>3) u     [m/s]  </strong>    49.7329
+    <strong>4) w     [m/s]  </strong>     5.1616
+    <strong>5) theta [deg]  </strong>     5.9253
+    <strong>6) q     [deg/s]</strong>     0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dElevator [deg]</strong>    -8.6688
+    <strong>2) DEP_col   [deg]</strong>     0.4246
+    <strong>3) HTU       [deg]</strong>     0.0575
+    <strong>4) dFlap     [deg]</strong>     5.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    50.0000
+    <strong>2) zedot    [m/s]   </strong>    -0.0000
+    <strong>3) udot     [m/s2]  </strong>     0.0000
+    <strong>4) wdot     [m/s2]  </strong>     0.0000
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>    -0.0000
+
+
+Va_actual =
+
+   50.0000
+
+
+Va_error =
+
+   2.7471e-07
+
+
+f0 =
+
+   5.9903e-12
+

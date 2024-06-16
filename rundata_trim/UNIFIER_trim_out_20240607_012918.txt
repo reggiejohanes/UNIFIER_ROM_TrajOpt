@@ -1,0 +1,84 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    7.415913e-01    0.000e+00    5.696e+01
+Objective function returned NaN; trying a new point...
+    1      28    7.151500e-01    0.000e+00    3.875e+01    2.372e-03
+Objective function returned NaN; trying a new point...
+    2      37    7.136179e-01    0.000e+00    3.628e+01    1.099e-03
+Objective function returned NaN; trying a new point...
+    3      48    6.818186e-01    0.000e+00    8.938e+00    1.532e-03
+Objective function returned NaN; trying a new point...
+    4      56    6.143772e-01    0.000e+00    4.796e+00    6.161e-03
+Objective function returned NaN; trying a new point...
+    5      67    5.312151e-01    0.000e+00    8.373e+00    1.172e-02
+Objective function returned NaN; trying a new point...
+    6      75    4.351684e-01    0.000e+00    2.319e+01    6.280e-02
+    7      83    1.024473e-01    0.000e+00    2.226e+01    4.963e-01
+    8      90    5.839344e-03    0.000e+00    5.474e+00    1.369e-01
+    9      97    4.407497e-03    0.000e+00    4.110e+00    8.987e-02
+   10     104    4.578111e-04    0.000e+00    2.210e+00    5.794e-02
+   11     111    3.988252e-04    0.000e+00    1.815e+00    1.618e-02
+   12     118    4.997247e-04    0.000e+00    1.000e-01    2.116e-02
+   13     125    4.644266e-05    0.000e+00    2.669e-01    8.611e-03
+   14     132    2.795486e-05    0.000e+00    2.008e-01    4.971e-03
+   15     139    2.355690e-05    0.000e+00    3.920e-02    3.743e-03
+   16     147    2.426746e-05    0.000e+00    2.000e-02    3.849e-04
+   17     154    1.203039e-06    0.000e+00    2.821e-02    2.892e-03
+   18     166    1.202801e-06    0.000e+00    1.701e-02    2.697e-07
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 4.2336 seconds
+Avg. per Iteration   = 0.2117 seconds
+Avg. per Func. Eval. = 0.0231 seconds
+
+<strong>> Table 1 - States</strong>
+                         <strong>Value</strong> 
+                        <strong>_______</strong>
+
+    <strong>1) xe    [m]    </strong>     0.0000
+    <strong>2) ze    [m]    </strong>    -5.0000
+    <strong>3) u     [m/s]  </strong>    54.9993
+    <strong>4) w     [m/s]  </strong>     0.2572
+    <strong>5) theta [deg]  </strong>     0.2682
+    <strong>6) q     [deg/s]</strong>     0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dElevator [deg]</strong>    -1.0580
+    <strong>2) DEP_col   [deg]</strong>     0.4106
+    <strong>3) HTU       [deg]</strong>     0.0716
+    <strong>4) dFlap     [deg]</strong>    12.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    54.9999
+    <strong>2) zedot    [m/s]   </strong>    -0.0003
+    <strong>3) udot     [m/s2]  </strong>     0.0010
+    <strong>4) wdot     [m/s2]  </strong>    -0.0001
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>    -0.0002
+
+
+Va_actual =
+
+   54.9999
+
+
+Va_error =
+
+  -6.5631e-05
+

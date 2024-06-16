@@ -1,0 +1,87 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    5.520793e-01    0.000e+00    1.495e+01
+Objective function returned NaN; trying a new point...
+    1      30    5.483753e-01    0.000e+00    7.454e+00    5.882e-04
+Objective function returned NaN; trying a new point...
+    2      38    5.470016e-01    0.000e+00    5.566e+00    5.296e-04
+    3      49    5.435901e-01    0.000e+00    7.051e+00    8.256e-04
+    4      57    5.255079e-01    0.000e+00    4.231e+00    4.265e-03
+    5      65    9.537825e-02    0.000e+00    2.010e+01    5.331e-01
+    6      72    2.077335e-03    0.000e+00    3.600e+00    1.328e-01
+Objective function returned NaN; trying a new point...
+    7      81    3.008271e-03    0.000e+00    1.349e+00    4.606e-02
+    8      88    1.396087e-03    0.000e+00    4.260e+00    3.938e-02
+    9      95    6.787182e-04    0.000e+00    7.305e-01    6.926e-03
+   10     102    6.061366e-04    0.000e+00    1.113e-01    1.630e-02
+   11     109    6.292825e-04    0.000e+00    3.450e-01    1.553e-02
+   12     116    6.415169e-04    0.000e+00    1.768e-01    1.261e-03
+   13     123    6.420243e-04    0.000e+00    1.000e-01    8.703e-04
+   14     130    4.182883e-05    0.000e+00    2.658e-01    9.964e-03
+   15     137    2.860044e-05    0.000e+00    2.642e-02    1.049e-03
+   16     145    2.817699e-05    0.000e+00    2.000e-02    6.358e-04
+   17     152    1.635329e-06    0.000e+00    4.773e-02    3.883e-03
+   18     162    1.540973e-06    0.000e+00    4.066e-02    3.391e-04
+   19     173    1.178054e-06    0.000e+00    1.579e-02    1.126e-04
+   20     184    1.174283e-06    0.000e+00    4.071e-03    4.643e-06
+   21     191    1.164354e-07    0.000e+00    5.067e-03    3.282e-03
+   22     208    7.384731e-08    0.000e+00    8.144e-04    1.113e-04
+   23     226    6.011112e-08    0.000e+00    5.290e-04    8.225e-05
+   24     240    5.900692e-08    0.000e+00    3.504e-04    2.056e-05
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 5.2853 seconds
+Avg. per Iteration   = 0.2033 seconds
+Avg. per Func. Eval. = 0.0202 seconds
+
+<strong>> Table 1 - States</strong>
+                         <strong>Value</strong> 
+                        <strong>_______</strong>
+
+    <strong>1) xe    [m]    </strong>     0.0000
+    <strong>2) ze    [m]    </strong>    -5.0000
+    <strong>3) u     [m/s]  </strong>    54.9994
+    <strong>4) w     [m/s]  </strong>     0.2534
+    <strong>5) theta [deg]  </strong>     0.2640
+    <strong>6) q     [deg/s]</strong>     0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dElevator [deg]</strong>    -1.0572
+    <strong>2) DEP_col   [deg]</strong>     0.4133
+    <strong>3) HTU       [deg]</strong>     0.0681
+    <strong>4) dFlap     [deg]</strong>    12.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    55.0000
+    <strong>2) zedot    [m/s]   </strong>     0.0000
+    <strong>3) udot     [m/s2]  </strong>     0.0001
+    <strong>4) wdot     [m/s2]  </strong>     0.0001
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>    -0.0115
+
+
+Va_actual =
+
+   55.0000
+
+
+Va_error =
+
+  -1.1506e-05
+

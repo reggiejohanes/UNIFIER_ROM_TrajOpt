@@ -1,9 +1,0 @@
-<strong><< OPTIMIZATION START >></strong>
-
-{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim_DEPon')" style="font-weight:bold">UNIFIER_trim_DEPon</a>
-Invalid Simulink object name: 'UNIFIER_dyn'.
-Caused by:
-    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trim_DEPon')" style="font-weight:bold">UNIFIER_trim_DEPon</a>
-    The block diagram 'UNIFIER_dyn' is not loaded.
-} 
-UNIFIER_trim_DEPon

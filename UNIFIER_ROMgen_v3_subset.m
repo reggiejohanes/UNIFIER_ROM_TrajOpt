@@ -15,7 +15,7 @@ load data/UNIFIER_LOAD.mat c S umax umin
 
 %% LOAD MASTER ROM DATA
 
-load data/UNIFIER_ROM_50.mat ROM
+load data/UNIFIER_ROM_50.mat
 ROMv1=ROM;
 clear ROM
 

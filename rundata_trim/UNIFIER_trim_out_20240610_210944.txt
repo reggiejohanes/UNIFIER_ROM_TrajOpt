@@ -1,0 +1,11 @@
+<strong><< OPTIMIZATION START >></strong>
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimHFM')" style="font-weight:bold">UNIFIER_trimHFM</a>
+Invalid Simulink object name:
+'UNIFIER_dyn'.
+Caused by:
+    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimHFM')" style="font-weight:bold">UNIFIER_trimHFM</a>
+    The block diagram 'UNIFIER_dyn' is
+    not loaded.
+} 
+UNIFIER_trimHFM

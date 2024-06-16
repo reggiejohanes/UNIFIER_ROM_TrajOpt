@@ -1,0 +1,8 @@
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+Unable to find file or
+directory
+'trim/rundata/UNIFIER_trim_out_20240613_002923.mat'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 142)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',142,0)">line 142</a>)
+load(trimfile0,"xstar","ustar")} 
+opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',142,0)
+UNIFIERLanding_Main

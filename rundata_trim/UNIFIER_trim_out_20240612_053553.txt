@@ -1,0 +1,79 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    7.772344e-01    0.000e+00    1.003e+02
+    1      21    7.756422e-01    0.000e+00    1.062e+02    7.976e-03
+    2      28    7.269362e-01    0.000e+00    1.062e+02    1.216e-03
+    3      39    6.894737e-01    0.000e+00    1.006e+02    7.770e-03
+    4      46    5.761716e-01    0.000e+00    9.696e+01    2.875e-03
+    5      55    2.274212e-01    0.000e+00    9.403e+01    3.210e-02
+    6      61    1.189102e-01    0.000e+00    2.774e+00    1.064e-01
+    7      68    1.211856e-01    0.000e+00    7.249e+00    9.045e-02
+    8      74    1.159357e-01    0.000e+00    1.000e-01    1.800e-02
+    9      80    1.143440e-01    0.000e+00    2.275e-02    1.805e-02
+   10      86    1.142182e-01    0.000e+00    2.987e-03    7.038e-03
+   11      92    1.142181e-01    0.000e+00    2.001e-04    1.973e-04
+   12      98    1.142181e-01    0.000e+00    8.297e-05    5.659e-05
+   13     110    1.142181e-01    0.000e+00    2.033e-06    1.648e-09
+   14     116    1.142181e-01    0.000e+00    3.213e-07    6.150e-07
+
+Optimization completed: The relative <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 3.212821e-07,
+is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> = 1.000000e-06, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 11.9902 seconds
+Avg. per Iteration   = 0.7993 seconds
+Avg. per Func. Eval. = 0.1034 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ze    [m]    </strong>    -1219.0000
+    <strong>3) u     [m/s]  </strong>       72.7766
+    <strong>4) w     [m/s]  </strong>        0.6734
+    <strong>5) theta [deg]  </strong>        0.5303
+    <strong>6) q     [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dElevator [deg]</strong>    -0.0000
+    <strong>2) DEP_col   [deg]</strong>     0.0000
+    <strong>3) HTU       [deg]</strong>     0.5265
+    <strong>4) dFlap     [deg]</strong>     0.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    72.7797
+    <strong>2) zedot    [m/s]   </strong>    -0.0002
+    <strong>3) udot     [m/s2]  </strong>    -0.0000
+    <strong>4) wdot     [m/s2]  </strong>     0.1589
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>    -1.6937
+
+
+Va_actual =
+
+   72.7797
+
+
+Va_error =
+
+    0.0397
+
+
+f0 =
+
+    0.0277
+

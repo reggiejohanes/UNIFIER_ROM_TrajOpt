@@ -1,0 +1,101 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    1.092678e+01    0.000e+00    8.781e+02
+    1      23    8.035357e+00    0.000e+00    7.806e+02    1.739e-02
+    2      33    7.320730e+00    0.000e+00    2.741e+02    1.701e-02
+    3      41    6.784390e+00    0.000e+00    4.176e+02    8.500e-03
+    4      51    5.319308e+00    0.000e+00    1.295e+02    8.063e-03
+    5      58    3.827072e+00    0.000e+00    1.349e+02    1.999e-02
+    6      66    2.862988e+00    0.000e+00    3.254e+02    4.528e-02
+    7      72    1.016240e+00    0.000e+00    1.997e+02    1.289e-01
+    8      79    2.436826e-01    0.000e+00    5.232e+01    2.762e-01
+    9      85    1.421320e-01    0.000e+00    7.792e+01    3.858e-01
+   10      91    6.622197e-02    0.000e+00    2.681e+01    2.911e-01
+   11      97    1.853129e-03    0.000e+00    4.881e+00    5.724e-02
+   12     103    1.423073e-04    0.000e+00    3.744e+00    1.138e-02
+   13     109    1.759867e-05    0.000e+00    3.096e-01    8.275e-04
+   14     115    7.956084e-06    0.000e+00    1.000e-01    1.026e-04
+   15     121    8.658937e-07    0.000e+00    3.418e-02    1.249e-03
+   16     127    6.571333e-07    0.000e+00    3.953e-02    1.162e-04
+   17     136    6.538259e-07    0.000e+00    2.000e-02    3.267e-06
+   18     142    1.605261e-07    0.000e+00    5.118e-02    4.188e-04
+   19     148    1.654780e-07    0.000e+00    4.311e-02    8.232e-05
+   20     154    1.681516e-07    0.000e+00    3.402e-02    1.371e-05
+   21     169    1.641613e-07    0.000e+00    3.483e-02    6.751e-07
+   22     175    1.185776e-07    0.000e+00    3.728e-02    2.353e-05
+   23     182    3.679615e-08    0.000e+00    6.529e-02    7.563e-05
+   24     188    3.455324e-08    0.000e+00    1.992e-02    3.751e-05
+   25     194    3.881741e-08    0.000e+00    1.419e-02    2.735e-05
+   26     200    3.487482e-08    0.000e+00    1.392e-02    3.164e-05
+   27     206    2.997589e-08    0.000e+00    8.653e-03    2.963e-06
+   28     212    2.721974e-08    0.000e+00    4.000e-03    7.423e-06
+   29     218    1.196148e-08    0.000e+00    1.445e-02    6.573e-05
+   30     224    6.084788e-09    0.000e+00    9.718e-03    1.722e-05
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+   31     230    4.412970e-09    0.000e+00    5.649e-03    1.308e-05
+   32     248    4.408649e-09    0.000e+00    5.637e-03    6.625e-10
+   33     264    4.408176e-09    0.000e+00    5.636e-03    7.246e-11
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 5.2391 seconds
+Avg. per Iteration   = 0.1541 seconds
+Avg. per Func. Eval. = 0.0198 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ye    [m]    </strong>        0.0000
+    <strong>3) ze    [m]    </strong>    -1219.0000
+    <strong>4) u     [m/s]  </strong>       64.8998
+    <strong>5) v     [m/s]  </strong>        0.0000
+    <strong>6) w     [m/s]  </strong>        3.6078
+    <strong>7) phi   [deg]  </strong>        0.0000
+    <strong>8) theta [deg]  </strong>        3.1818
+    <strong>9) psi   [deg]  </strong>        0.0000
+    <strong>10) p    [deg/s]</strong>        0.0000
+    <strong>11) q    [deg/s]</strong>        0.0000
+    <strong>12) r    [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dAileron  [deg]</strong>     0.0000
+    <strong>2) dRudder   [deg]</strong>     0.0000
+    <strong>3) dElevator [deg]</strong>    -3.2465
+    <strong>4) dFlap     [deg]</strong>     0.0000
+    <strong>5) DEP_col   [deg]</strong>     0.0000
+    <strong>6) DEP_slope [deg]</strong>     0.0000
+    <strong>7) HTU       [deg]</strong>     0.4885
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    65.0000
+    <strong>2) yedot    [m/s]   </strong>     0.0000
+    <strong>3) zedot    [m/s]   </strong>     0.0000
+    <strong>4) udot     [m/s2]  </strong>     0.0000
+    <strong>5) vdot     [m/s2]  </strong>     0.0000
+    <strong>6) wdot     [m/s2]  </strong>     0.0001
+    <strong>7) phidot   [deg/s] </strong>     0.0000
+    <strong>8) thetadot [deg/s] </strong>     0.0000
+    <strong>9) psidot   [deg/s] </strong>     0.0000
+    <strong>10) pdot    [deg/s2]</strong>     0.0000
+    <strong>11) qdot    [deg/s2]</strong>    -0.0000
+    <strong>12) rdot    [deg/s2]</strong>     0.0000
+

@@ -1,0 +1,83 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       6    1.898189e+01    0.000e+00    8.751e+02
+Objective function returned NaN; trying a new point...
+    1      22    1.313839e+01    0.000e+00    5.679e+02    3.436e-02
+Objective function returned NaN; trying a new point...
+    2      30    1.303702e+01    0.000e+00    5.249e+02    1.044e-02
+Objective function returned NaN; trying a new point...
+    3      39    1.170039e+01    0.000e+00    4.979e+02    6.677e-02
+    4      46    5.815949e+00    0.000e+00    4.222e+02    2.618e-01
+    5      52    7.027186e-01    0.000e+00    2.160e+02    8.388e-02
+    6      58    3.090187e-01    0.000e+00    1.407e+02    3.127e-01
+    7      64    9.132623e-02    0.000e+00    1.915e+01    5.462e-02
+    8      75    3.100846e-02    0.000e+00    3.814e+01    1.324e-01
+    9      83    1.386180e-02    0.000e+00    1.332e+01    4.443e-02
+   10      89    6.699213e-03    0.000e+00    8.715e+00    4.851e-02
+   11      95    2.913614e-03    0.000e+00    6.543e-01    1.416e-02
+   12     102    3.471129e-03    0.000e+00    4.035e-01    6.348e-03
+   13     108    3.283265e-03    0.000e+00    1.000e-01    1.976e-03
+   14     114    2.239075e-04    0.000e+00    1.826e-01    2.027e-02
+   15     120    1.514721e-04    0.000e+00    2.002e-02    2.047e-03
+   16     126    1.490725e-07    0.000e+00    1.912e-02    6.184e-03
+   17     132    1.615248e-08    0.000e+00    6.994e-04    1.871e-04
+   18     138    1.611282e-08    0.000e+00    2.000e-04    5.021e-07
+   19     144    7.135465e-10    0.000e+00    4.002e-05    5.301e-05
+   20     150    9.415902e-12    0.000e+00    4.013e-07    1.318e-05
+
+Optimization completed: The relative <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 4.012503e-07,
+is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> = 1.000000e-06, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 3.7550 seconds
+Avg. per Iteration   = 0.1788 seconds
+Avg. per Func. Eval. = 0.0250 seconds
+
+<strong>> Table 1 - States</strong>
+                          <strong>Value</strong>   
+                        <strong>__________</strong>
+
+    <strong>1) xe    [m]    </strong>        0.0000
+    <strong>2) ze    [m]    </strong>    -1219.0000
+    <strong>3) u     [m/s]  </strong>       72.5914
+    <strong>4) w     [m/s]  </strong>       -4.6466
+    <strong>5) theta [deg]  </strong>       -3.6625
+    <strong>6) q     [deg/s]</strong>        0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                           <strong>Value</strong> 
+                          <strong>_______</strong>
+
+    <strong>1) dElevator [deg]</strong>     4.3856
+    <strong>2) DEP_col   [deg]</strong>     0.0000
+    <strong>3) HTU       [deg]</strong>     0.5830
+    <strong>4) dFlap     [deg]</strong>    12.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                             <strong>Value</strong> 
+                            <strong>_______</strong>
+
+    <strong>1) xedot    [m/s]   </strong>    72.7400
+    <strong>2) zedot    [m/s]   </strong>    -0.0000
+    <strong>3) udot     [m/s2]  </strong>    -0.0000
+    <strong>4) wdot     [m/s2]  </strong>    -0.0000
+    <strong>5) thetadot [deg/s] </strong>     0.0000
+    <strong>6) qdot     [deg/s2]</strong>     0.0000
+
+
+Va_actual =
+
+   72.7400
+
+
+Va_error =
+
+  -1.5401e-06
+

@@ -1,0 +1,94 @@
+<strong><< OPTIMIZATION START >></strong>
+
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       7    3.422013e+00    0.000e+00    1.921e+02
+Objective function returned NaN; trying a new point...
+    1      26    3.235019e+00    0.000e+00    1.844e+02    9.333e-03
+Objective function returned NaN; trying a new point...
+    2      34    3.133246e+00    0.000e+00    1.613e+02    4.342e-03
+Objective function returned NaN; trying a new point...
+    3      44    1.103319e+00    0.000e+00    1.426e+02    8.938e-02
+    4      52    7.241494e-01    0.000e+00    5.729e+01    4.766e-01
+Objective function returned NaN; trying a new point...
+    5      60    6.284698e-01    0.000e+00    1.002e+02    2.399e-01
+Objective function returned NaN; trying a new point...
+    6      68    2.146832e-01    0.000e+00    1.106e+02    2.250e-01
+    7      78    7.250291e-02    0.000e+00    2.269e+01    5.447e-02
+    8      85    8.097840e-03    0.000e+00    1.445e+01    1.796e-01
+    9      92    6.860660e-04    0.000e+00    7.863e-01    1.742e-02
+   10      99    6.187109e-04    0.000e+00    1.102e-01    1.942e-02
+   11     106    6.480682e-04    0.000e+00    1.983e-01    1.569e-02
+   12     113    6.642280e-04    0.000e+00    1.389e-01    2.128e-03
+   13     120    6.706163e-04    0.000e+00    1.000e-01    8.452e-05
+   14     127    9.564082e-05    0.000e+00    1.674e-01    1.023e-02
+   15     134    4.123165e-05    0.000e+00    1.035e-01    3.033e-03
+   16     141    2.771821e-05    0.000e+00    2.231e-02    3.291e-03
+   17     148    2.942232e-05    0.000e+00    2.000e-02    5.678e-04
+   18     155    1.708490e-06    0.000e+00    9.349e-03    2.152e-03
+   19     162    1.224273e-06    0.000e+00    4.000e-03    4.203e-04
+   20     169    1.343869e-09    0.000e+00    1.188e-03    8.693e-04
+   21     176    1.253563e-10    0.000e+00    8.636e-05    7.303e-05
+   22     183    1.066255e-10    0.000e+00    6.444e-05    9.396e-05
+   23     192    1.047550e-10    0.000e+00    5.982e-05    1.067e-04
+   24     203    1.216731e-10    0.000e+00    3.378e-05    4.750e-07
+   25     210    1.198148e-11    0.000e+00    1.097e-05    1.166e-03
+   26     229    9.878350e-12    0.000e+00    1.167e-05    9.083e-06
+   27     245    8.546574e-12    0.000e+00    6.602e-06    2.595e-07
+   28     263    4.470207e-12    0.000e+00    4.454e-04    4.307e-05
+   29     275    4.328309e-12    0.000e+00    2.238e-04    5.388e-09
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+<strong><< OPTIMIZATION COMPLETE >></strong>
+
+Optimization Processing Time:
+Total                = 9.4018 seconds
+Avg. per Iteration   = 0.3033 seconds
+Avg. per Func. Eval. = 0.0329 seconds
+
+<strong>> Table 1 - States</strong>
+                        <strong>Value</strong> 
+                       <strong>_______</strong>
+
+    <strong>1) xe    [m]   </strong>     0.0000
+    <strong>2) ze    [m]   </strong>    -5.0000
+    <strong>3) u     [m/s] </strong>    49.9641
+    <strong>4) w     [m/s] </strong>     1.8931
+    <strong>5) theta [deg] </strong>     2.1699
+    <strong>6) q     [deg…</strong>     0.0000
+
+
+<strong>> Table 2 - Control Inputs</strong>
+                        <strong>Value</strong> 
+                       <strong>_______</strong>
+
+    <strong>1) dElevator …</strong>    -3.9822
+    <strong>2) DEP_col   …</strong>     0.4084
+    <strong>3) HTU       …</strong>     0.0508
+    <strong>4) dFlap     …</strong>    12.0000
+
+
+<strong>> Table 3 - Accelerations</strong>
+                        <strong>Value</strong> 
+                       <strong>_______</strong>
+
+    <strong>1) xedot    […</strong>    50.0000
+    <strong>2) zedot    […</strong>     0.0000
+    <strong>3) udot     […</strong>     0.0000
+    <strong>4) wdot     […</strong>     0.0000
+    <strong>5) thetadot […</strong>     0.0000
+    <strong>6) qdot     […</strong>    -0.0000
+
+
+Va_actual =
+
+   50.0000
+
+
+Va_error =
+
+   5.2424e-08
+

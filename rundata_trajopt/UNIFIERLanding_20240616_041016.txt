@@ -1,0 +1,26 @@
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+Unable to find file or
+directory
+'trim/rundata/UNIFIER_trim_out_20240613_002923.mat'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Main', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m', 142)" style="font-weight:bold">UNIFIERLanding_Main</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_Main.m',142,0)">line 142</a>)
+load(trimfile0,"xstar","ustar")} 
+UNIFIER_trimloop
+
+<strong><< STARTING LOOP >></strong>
+
+1/246 1.4016 s
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimHFM_obj')" style="font-weight:bold">UNIFIER_trimHFM_obj</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimHFM_loop>@(x)UNIFIER_trimHFM_obj(x)', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\functions\UNIFIER_trimHFM_loop.m', 86)" style="font-weight:bold">UNIFIER_trimHFM_loop>@(x)UNIFIER_trimHFM_obj(x)</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\functions\UNIFIER_trimHFM_loop.m',86,0)">line 86</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimHFM_obj(x),z0,[],[],[],[],lb,ub,[],options);
+In barrier
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m', 891)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2023b\toolbox\shared\optimlib\fmincon.m',891,0)">line 891</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = barrier(funfcn,X,A,B,Aeq,Beq,l,u,confcn,options.HessFcn, ...
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimHFM_loop', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\functions\UNIFIER_trimHFM_loop.m', 86)" style="font-weight:bold">UNIFIER_trimHFM_loop</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\functions\UNIFIER_trimHFM_loop.m',86,0)">line 86</a>)
+[zstar,fval,exitflag,output] = fmincon(@(x) UNIFIER_trimHFM_obj(x),z0,[],[],[],[],lb,ub,[],options);
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIER_trimloop', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trimloop.m', 62)" style="font-weight:bold">UNIFIER_trimloop</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIER_trimloop.m',62,0)">line 62</a>)
+        reshfm = UNIFIER_trimHFM_loop(0,Va_range(j),ze_cruise,dFlap_range(i),penaltyHFM,dmcHFM);} 
+
+UNIFIER_dyn([],[],[],'term')
+UNIFIERLanding_Main
