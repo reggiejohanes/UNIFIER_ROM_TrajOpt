@@ -8,7 +8,7 @@
 % The JU receives support from the European Union%s Horizon 2020 research and innovation programme and the 
 % Clean Sky 2 JU members other than the Union.
 
-% clear all
+clear all
 % close all
 % clc
 
@@ -68,6 +68,9 @@ xyz_DEP = [ -6.9629998	-6.9210000	-6.8660002	-6.8099999	-6.7540002	-6.6999998	-6
             -10.050000	-8.4499998	-6.8499999	-5.2500000	-3.6500001	-2.0500000	2.0500000	3.6500001	5.2500000	6.8499999	8.4499998	10.050000
             -0.90899998	-0.79200000	-0.82300001	-0.85000002	-0.87599999	-0.89899999	-0.89899999	-0.87599999	-0.85000002	-0.82300001	-0.79200000	-0.90899998];
 
+prop_d  = 1.6;
+DEP_inc = deg2rad(-5);
+n_prop  = 12;
 
 %% Simulation Settings
 
@@ -127,8 +130,8 @@ dumax(7) = 2;  % HTU
 % Convert to rad
 umin(1:4)  = deg2rad(umin(1:4));
 umax(1:4)  = deg2rad(umax(1:4));
-dumax = deg2rad(dumax);
+dumax(1:4) = deg2rad(dumax(1:4));
 
 %% Save to .mat
 
-% save UNIFIER_LOAD
+save UNIFIER_LOAD

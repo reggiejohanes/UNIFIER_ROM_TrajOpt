@@ -27,11 +27,10 @@ Iyy       = LOADROM.Iyy;
 S         = LOADROM.S;
 c         = LOADROM.c;
 xyz_DEP   = LOADROM.xyz_DEP;
+prop_d    = LOADROM.prop_d;
+DEP_inc   = LOADROM.DEP_inc;
+n_prop    = LOADROM.n_prop;
 ROM       = LOADROM.ROM;
-
-prop_d  = 1.6;
-DEP_inc = deg2rad(-5);
-n_prop  = 12;
 
 %% Extract State and Control Variables
 
@@ -69,10 +68,11 @@ end
 
 %% Intermediate Variables
 
-alpha         = atan2(w,u);        % angle of attack
-[~,~,~,rho,~] = atmosisa(-z);      % density
-Va            = sqrt(w.^2 + u.^2); % airspeed
-Q             = 0.5*rho.*Va.^2;    % dynamic pressure
+alpha         = atan2(w,u);         % angle of attack
+[~,~,~,rho,~] = atmosisa(-z);       % density
+Va            = sqrt(w.^2 + u.^2);  % airspeed (TAS)
+Va_eas        = Va*sqrt(rho/1.225); % airspeed (EAS)
+Q             = 0.5*rho.*Va.^2;     % dynamic pressure
 
 %% Propulsion
 
@@ -80,11 +80,11 @@ Q             = 0.5*rho.*Va.^2;    % dynamic pressure
 T_HTU_req = interp1([-0.5,1.5],[-5000,15000],HTU,"linear");
 T_HTU_max = interp1(dp_HTU.limits.V_up_lim,...
                     dp_HTU.limits.T_up_lim,...
-                    Va,...
+                    Va_eas,...
                     "linear");
 T_HTU_min = interp1(dp_HTU.limits.V_low_lim,...
                     dp_HTU.limits.T_low_lim,...
-                    Va,...
+                    Va_eas,...
                     "linear");
 T_HTU     = max(min(T_HTU_req,T_HTU_max),T_HTU_min);
 
@@ -94,12 +94,15 @@ MHTU     = 0;
 
 % DEP ---------------------------------------------------------------------
 
+% calculate DEP axial velocity
+Va_DEPax = u.*cos(DEP_inc); % + w.*sin(DEP_inc) - not included in OBM
+
 % convert activity factor to rps command
 T_DEP_req = DEP.*800;
 rpm_cmd   = interpn(dp_DEP.rpm_lookup.V_vec,...
                     dp_DEP.rpm_lookup.T_vec,...
                     dp_DEP.rpm_lookup.rpm_gird,...
-                    Va,...
+                    Va_DEPax,...
                     T_DEP_req,...
                     'linear');
 if DEP < 0.001
@@ -108,7 +111,7 @@ end
 rps_cmd = rpm_cmd./60;
 
 % calculate advance ratio, thrust coefficient, thrust force
-J = Va./(rps_cmd.*1.6+eps);
+J = Va_DEPax./(rps_cmd.*1.6+eps);
 J = max(min(J,2.5),0.3);
 CT = interp1(dp_DEP.J,...
              dp_DEP.C_T,...
@@ -145,9 +148,9 @@ if runconfig.ROMfile==1 || runconfig.ROMfile==2 % v1 ROMs
     if runconfig.ROMdep==1
         % Coefficients (all dependencies) ---------------------------------
         if runconfig.ROMfile==1 %rom72
-            J_lim = max(min(J,DEPVa2J(72.74,min(ROM.DEP_col))),DEPVa2J(72.74,max(ROM.DEP_col)));
+            J_lim = max(min(J,DEPu2J(72.74,min(ROM.DEP_col))),DEPu2J(72.74,max(ROM.DEP_col)));
         elseif runconfig.ROMfile==2 %rom50
-            J_lim = max(min(J,DEPVa2J(50,min(ROM.DEP_col))),DEPVa2J(50,max(ROM.DEP_col)));
+            J_lim = max(min(J,DEPu2J(50,min(ROM.DEP_col))),DEPu2J(50,max(ROM.DEP_col)));
         end
         
         CL = interpn(ROM.dFlap,ROM.alpha,ROM.J,ROM.dElev,... % breakpoints
@@ -163,9 +166,9 @@ if runconfig.ROMfile==1 || runconfig.ROMfile==2 % v1 ROMs
         % Coefficients (reduced dependencies) -----------------------------
         dElev_fixed = deg2rad(0);
         if runconfig.ROMfile==1
-            J_fixed = DEPVa2J(72.74,0.5); % J at Vcruise & DEP=0.5
+            J_fixed = DEPu2J(72.74,0.5); % J at Vcruise & DEP=0.5
         elseif runconfig.ROMfile==2
-            J_fixed = DEPVa2J(50,0.5); % J at Vcruise & DEP=0.5
+            J_fixed = DEPu2J(50,0.5); % J at Vcruise & DEP=0.5
         end
         
         dElev_fixed = linspace(dElev_fixed,dElev_fixed,numel(x))';

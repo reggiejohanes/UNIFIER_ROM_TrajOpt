@@ -2,24 +2,19 @@ clear all
 
 %% Load ROMs
 
+load data/UNIFIER_LOAD_ROM_v2.mat ROM % v0
 load data/UNIFIER_LOAD_ROM_72.mat ROM % v1, 72.74 m/s
-ROM1=ROM;
-clear ROM
 
 load data/UNIFIER_LOAD_ROM_50.mat ROM % v1, 50 m/s
-ROM2=ROM;
+ROMv1=ROM;
 clear ROM
 
-load data/UNIFIER_LOAD_ROM_v2.mat ROM % v2
-ROM3=ROM;
+load data/ROMv2/UNIFIER_LOAD_ROMv2_20240613_053529.mat ROM S c % v2, subset v1-10
+ROMv2=ROM;
 clear ROM
 
 load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat ROM % v3, subset v1-50
-ROM4=ROM;
-clear ROM
-
-load data/ROMv4/UNIFIER_LOAD_ROMv4_20240613_053529.mat ROM S c % v4, subset v1-10
-ROM5=ROM;
+ROMv3=ROM;
 clear ROM
 
 %% Evaluate forces from same control inputs
@@ -43,7 +38,7 @@ DEP   = ustarhfm(5);
 alpha = atan2(w,u);
 dElev = ustarhfm(3);
 dFlap = ustarhfm(4);
-J     = DEPVa2J(Va,DEP);
+J     = DEPVa2J(u,DEP);
 
 h             = -xstarhfm(3);
 [~,~,~,rho,~] = atmosisa(h);
@@ -73,14 +68,14 @@ M_HFM = out(21);
 
 % ROM v1 (ROM2) -----------------------------------------------------------
 
-CLv1 = interpn(ROM2.dFlap,ROM2.alpha,ROM2.J,ROM2.dElev,... % CL(alpha)
-               ROM2.CL,...                              
+CLv1 = interpn(ROMv1.dFlap,ROMv1.alpha,ROMv1.J,ROMv1.dElev,...
+               ROMv1.CL,...                              
                dFlap,alpha,J,dElev);
-CDv1 = interpn(ROM2.dFlap,ROM2.alpha,ROM2.J,ROM2.dElev,... % CD(alpha)
-               ROM2.CD,...
+CDv1 = interpn(ROMv1.dFlap,ROMv1.alpha,ROMv1.J,ROMv1.dElev,...
+               ROMv1.CD,...
                dFlap,alpha,J,dElev); 
-CMv1 = interpn(ROM2.dFlap,ROM2.alpha,ROM2.J,ROM2.dElev,... % CM(alpha,dElev)
-               ROM2.CM,... 
+CMv1 = interpn(ROMv1.dFlap,ROMv1.alpha,ROMv1.J,ROMv1.dElev,...
+               ROMv1.CM,... 
                dFlap,alpha,J,dElev);
 
 L_v1 = CLv1*qS;
@@ -89,15 +84,15 @@ M_v1 = CMv1*qS*c;
 
 % ROM v2 (ROM5) -----------------------------------------------------------
 
-CLv2 = interpn(ROM5.alpha,ROM5.dElev,ROM5.dFlap,... % breakpoints
-               ROM5.CL,...                        % table data
-               alpha,dElev,dFlap);   % inputs
-CDv2 = interpn(ROM5.alpha,ROM5.dElev,ROM5.dFlap,... % breakpoints
-               ROM5.CD,...                        % table data
-               alpha,dElev,dFlap);   % inputs
-CMv2 = interpn(ROM5.alpha,ROM5.dElev,ROM5.dFlap,... % breakpoints
-               ROM5.CM,...                        % table data
-               alpha,dElev,dFlap);   % inputs
+CLv2 = interpn(ROMv2.alpha,ROMv2.dElev,ROMv2.dFlap,... % breakpoints
+               ROMv2.CL,...                            % table data
+               alpha,dElev,dFlap);                     % inputs
+CDv2 = interpn(ROMv2.alpha,ROMv2.dElev,ROMv2.dFlap,... % breakpoints
+               ROMv2.CD,...                            % table data
+               alpha,dElev,dFlap);                     % inputs
+CMv2 = interpn(ROMv2.alpha,ROMv2.dElev,ROMv2.dFlap,... % breakpoints
+               ROMv2.CM,...                            % table data
+               alpha,dElev,dFlap);                     % inputs
 
 L_v2 = CLv2*qS;
 D_v2 = CDv2*qS;
@@ -105,15 +100,15 @@ M_v2 = CMv2*qS*c;
 
 % ROM v2 (ROM5) -----------------------------------------------------------
 
-CLv3 = interp1(ROM4.alpha,...           % breakpoints
-               ROM4.CL,...              % table data
-               alpha);             % inputs
-CDv3 = interp1(ROM4.alpha,...           % breakpoints
-               ROM4.CD,...              % table data
-               alpha);             % inputs
-CMv3 = interpn(ROM4.alpha,ROM4.dElev,... % breakpoints
-               ROM4.CM,...              % table data
-               alpha,dElev);   % inputs
+CLv3 = interp1(ROMv3.alpha,...             % breakpoints
+               ROMv3.CL,...                % table data
+               alpha);                     % inputs
+CDv3 = interp1(ROMv3.alpha,...             % breakpoints
+               ROMv3.CD,...                % table data
+               alpha);                     % inputs
+CMv3 = interpn(ROMv3.alpha,ROMv3.dElev,... % breakpoints
+               ROMv3.CM,...                % table data
+               alpha,dElev);               % inputs
 
 L_v3 = CLv3*qS;
 D_v3 = CDv3*qS;

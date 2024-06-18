@@ -23,7 +23,7 @@ clear ROM
 
 Va          = 50;
 DEP         = 0.5;
-J_fixed     = DEPVa2J(Va,DEP); % J at Vcruise & DEP=0.5
+J_fixed     = DEPu2J(Va,DEP); % J at Vcruise & DEP=0.5
 
 %% SET SWEEP RANGES
 

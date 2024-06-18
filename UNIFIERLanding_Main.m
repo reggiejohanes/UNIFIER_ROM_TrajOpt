@@ -49,6 +49,9 @@ LOADROM.Iyy       = Iyy;
 LOADROM.S         = S;
 LOADROM.c         = c;
 LOADROM.xyz_DEP   = xyz_DEP;
+LOADROM.prop_d    = prop_d;
+LOADROM.DEP_inc   = DEP_inc;
+LOADROM.n_prop    = n_prop;
 
 % Load ROM data
 if runconfig.ROMfile==1
