@@ -8,8 +8,8 @@ load UNIFIER_LOAD.mat
 
 %% Reference trajectory
 
-load UNIFIERLanding_20240524_162938.mat solution Va alpha % prelim results
-% load rundata_trajopt/UNIFIERLanding_20240613_232402.mat solution Va alpha rodft % v1
+% load UNIFIERLanding_20240524_162938.mat solution Va alpha % prelim results
+load rundata_trajopt/UNIFIERLanding_20240613_232402.mat solution Va alpha rodft % v1
 % load rundata_trajopt/UNIFIERLanding_20240613_192010.mat solution Va alpha rodft % v2
 % load rundata_trajopt/UNIFIERLanding_20240613_190735.mat solution Va alpha rodft % v3
 t_sim=solution.tf;
@@ -38,19 +38,30 @@ U_trim = [ustar(3);
           ustar(5);
           ustar(7)];
 
-% u1_0 = [ustar(1), -1*ustar(1), ustar(3)-ustar(2), ustar(3)+ustar(2), ustar(4), ustar(4)];
-% u2_0 = ones(1,12) .* ustar(5);
-% u3_0 = ustar(7);
-% u4_0 = 0;
-
-Va0    = sqrt(xstar(4)^2+xstar(6)^2);
-theta0 = xstar(8);
-q0     = xstar(11);
-alpha0 = atan2(xstar(6),xstar(4));
-x0     = xstar(1);
-z0     = xstar(3);
-
 Xe0     = xstar(1:3)';
 Vb0     = xstar(4:6)';
 Euler0  = xstar(7:9)';
 omegab0 = xstar(10:12)';
+
+% U_trim = [utest(3);
+%           utest(4);
+%           utest(5);
+%           utest(7)];
+% Xe0     = xtest(1:3)';
+% Vb0     = xtest(4:6)';
+% Euler0  = xtest(7:9)';
+% omegab0 = xtest(10:12)';
+
+% u1_0 = [ustar(1), -1*ustar(1), ustar(3)-ustar(2), ustar(3)+ustar(2), ustar(4), ustar(4)];
+% u2_0 = ones(1,12) .* ustar(5);
+% u3_0 = ustar(7);
+% u4_0 = 0;
+% Va0    = sqrt(xstar(4)^2+xstar(6)^2);
+% theta0 = xstar(8);
+% q0     = xstar(11);
+% alpha0 = atan2(xstar(6),xstar(4));
+% x0     = xstar(1);
+% z0     = xstar(3);
+
+
+
