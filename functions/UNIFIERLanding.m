@@ -184,28 +184,28 @@ problem.setpoints.inputs = [];
 problem.constraints.ng_eq   = 0;
 problem.constraints.gTol_eq = [];
 
-problem.constraints.gl = [runconfig.ineq_rodmin,... % min rate of descent convvel(0,'ft/min','m/s')
-                          runconfig.ineq_aoamin,... % min alpha deg2rad(-15)
-                          runconfig.ineq_Vamin,...  % min airspeed 35.85*1.3
-                          runconfig.ineq_gammin];   % min flight path angle
-problem.constraints.gu = [runconfig.ineq_rodmax,... % max rate of descent convvel(350,'ft/min','m/s')
-                          runconfig.ineq_aoamax,... % max alpha deg2rad(10)
-                          runconfig.ineq_Vamax,...
-                          runconfig.ineq_gammax];    % max airspeed
-problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
-                                deg2rad(0.1),...
-                                0.001,...
-                                deg2rad(0.1)];
-
 % problem.constraints.gl = [runconfig.ineq_rodmin,... % min rate of descent convvel(0,'ft/min','m/s')
 %                           runconfig.ineq_aoamin,... % min alpha deg2rad(-15)
-%                           runconfig.ineq_Vamin];   % min airspeed 35.85*1.3
+%                           runconfig.ineq_Vamin,...  % min airspeed 35.85*1.3
+%                           runconfig.ineq_gammin];   % min flight path angle
 % problem.constraints.gu = [runconfig.ineq_rodmax,... % max rate of descent convvel(350,'ft/min','m/s')
 %                           runconfig.ineq_aoamax,... % max alpha deg2rad(10)
-%                           runconfig.ineq_Vamax];    % max airspeed
+%                           runconfig.ineq_Vamax,...
+%                           runconfig.ineq_gammax];    % max airspeed
 % problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
 %                                 deg2rad(0.1),...
-%                                 0.001];
+%                                 0.001,...
+%                                 deg2rad(0.1)];
+
+problem.constraints.gl = [runconfig.ineq_rodmin,... % min rate of descent convvel(0,'ft/min','m/s')
+                          runconfig.ineq_aoamin,... % min alpha deg2rad(-15)
+                          runconfig.ineq_Vamin];   % min airspeed 35.85*1.3
+problem.constraints.gu = [runconfig.ineq_rodmax,... % max rate of descent convvel(350,'ft/min','m/s')
+                          runconfig.ineq_aoamax,... % max alpha deg2rad(10)
+                          runconfig.ineq_Vamax];    % max airspeed
+problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
+                                deg2rad(0.1),...
+                                0.001];
 
 % problem.constraints.gl       = [deg2rad(-15),... % min alpha
 %                                 35.85*1.3];      % min airspeed 35.85*1.3 
@@ -227,14 +227,16 @@ problem.constraints.gTol_neq = [convvel(5,'ft/min','m/s'),...
 % problem.constraints.g_neq_ActiveTime{5}=[];
 
 % Bounds for boundary constraints bl =< b(x0,xf,u0,uf,p,t0,tf) =< bu
-problem.constraints.bl   = [runconfig.bndc_Vamin,... % min final airspeed (m/s) 35.85*1.1
-                            runconfig.bndc_rodmin];  % vertical speed (m/s) convvel(200,'ft/min','m/s')
+problem.constraints.bl   = [runconfig.bndc_Vamin];  % min final airspeed (m/s) 35.85*1.1
+problem.constraints.bu   = [runconfig.bndc_Vamax];  % max final airspeed 35.85*1.3
+problem.constraints.bTol = [0.001];
 
-problem.constraints.bu   = [runconfig.bndc_Vamax,... % max final airspeed 35.85*1.3
-                            runconfig.bndc_rodmax];  % max veritcal speed (m/s) convvel(350,'ft/min','m/s')
-
-problem.constraints.bTol = [0.001,...
-                            convvel(5,'ft/min','m/s')];
+% problem.constraints.bl   = [runconfig.bndc_Vamin,... % min final airspeed (m/s) 35.85*1.1
+%                             runconfig.bndc_rodmin];  % vertical speed (m/s) convvel(200,'ft/min','m/s')
+% problem.constraints.bu   = [runconfig.bndc_Vamax,... % max final airspeed 35.85*1.3
+%                             runconfig.bndc_rodmax];  % max veritcal speed (m/s) convvel(350,'ft/min','m/s')
+% problem.constraints.bTol = [0.001,...
+%                             convvel(5,'ft/min','m/s')];
 
 % store the necessary problem parameters used in the functions
 % problem.data = [];
@@ -368,12 +370,15 @@ function bc=b_unscaled(x0,xf,u0,uf,p,t0,tf,vdat,varargin)
 varargin=varargin{1};
 
 Va_f    = sqrt(xf(3)^2+xf(4)^2);  % airspeed
-alpha_f = atan2(xf(4),xf(3));     % angle of attack
-gamma_f = xf(5)-alpha_f;          % glide slope
-dz_f    = Va_f*sin(gamma_f);      % vertical speed (flat earth frame)
 
-bc=[Va_f;...
-    dz_f];
+% alpha_f = atan2(xf(4),xf(3));     % angle of attack
+% gamma_f = xf(5)-alpha_f;          % glide slope
+% dz_f    = Va_f*sin(gamma_f);      % vertical speed (flat earth frame)
+% 
+% bc=[Va_f;...
+%     dz_f];
+
+bc=Va_f;
 %------------- END OF CODE --------------
 % When adpative time interval add constraint on time
 %------------- BEGIN CODE --------------
