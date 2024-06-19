@@ -11,10 +11,11 @@ logname   = 'rundata_trimloop\UNIFIER_trimloopv2_' + timestamp; % name of diary 
 
 %% Set altitude, airspeed, & flap deflection range
 
-ze_cruise   = 1219;
+ze_cruise   = 5;
+DEPset      = 1;
 
-Va_max      = 75;
-Va_min      = 35;
+Va_max      = 65;
+Va_min      = 25;
 Va_inc      = 1;
 Va_n        = (Va_max-Va_min)/Va_inc+1;
 Va_range    = linspace(Va_min,Va_max,Va_n);
@@ -25,7 +26,7 @@ dFlap_range = deg2rad(dFlap_range);
 %% Set numerical parameters
 
 % HFM
-dmcHFM           = 1e-6;
+dmcHFM           = 1e-6; % fmincon diffminchange setting
 penaltyHFM.zedot = 1;
 penaltyHFM.udot  = 1;
 penaltyHFM.wdot  = 1;
@@ -59,7 +60,7 @@ for i=1:numel(dFlap_range)
         startstep=tic;
 
         % HFM
-        reshfm = UNIFIER_trimHFM_loop(0,Va_range(j),ze_cruise,dFlap_range(i),penaltyHFM,dmcHFM);
+        reshfm = UNIFIER_trimHFM_loop(DEPset,Va_range(j),ze_cruise,dFlap_range(i),penaltyHFM,dmcHFM);
         xdothfm(:,i,j)     = reshfm.xdot;
         Vahfm(i,j)         = reshfm.Va;
         residualhfm(1,i,j) = xdothfm(3,i,j);           % zedot
@@ -71,7 +72,7 @@ for i=1:numel(dFlap_range)
         normhfm(i,j)       = norm(residualhfm(:,i,j)); % norm of residuals
 
         % v1 (ROM2-1)
-        resv1 = UNIFIER_trimROM_loop(0,2,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyROM,dmcROM);
+        resv1 = UNIFIER_trimROM_loop(DEPset,2,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyROM,dmcROM);
         xdotv1(:,i,j)       = resv1.xdot;
         Vav1(i,j)           = resv1.Va;
         residualv1(1:5,i,j) = xdotv1(2:6,i,j);         % xdot except xedot
@@ -79,7 +80,7 @@ for i=1:numel(dFlap_range)
         normv1(i,j)         = norm(residualv1(:,i,j)); % norm of residuals
 
         % v2 (ROM5)
-        resv2 = UNIFIER_trimROM_loop(0,5,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyROM,dmcROM);
+        resv2 = UNIFIER_trimROM_loop(DEPset,5,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyROM,dmcROM);
         xdotv2(:,i,j)       = resv2.xdot;
         Vav2(i,j)           = resv2.Va;
         residualv2(1:5,i,j) = xdotv2(2:6,i,j);         % xdot except xedot
@@ -87,7 +88,7 @@ for i=1:numel(dFlap_range)
         normv2(i,j)         = norm(residualv2(:,i,j)); % norm of residuals
 
         % v3 (ROM4)
-        resv3 = UNIFIER_trimROM_loop(0,4,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyROM,dmcROM);
+        resv3 = UNIFIER_trimROM_loop(DEPset,4,1,Va_range(j),ze_cruise,dFlap_range(i),penaltyROM,dmcROM);
         xdotv3(:,i,j)       = resv3.xdot;
         Vav3(i,j)           = resv3.Va;
         residualv3(1:5,i,j) = xdotv3(2:6,i,j);         % xdot except xedot
@@ -133,7 +134,7 @@ plot3=plot(Va_range,normhfm(6,:),'.-b');
 %        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
 %        'Location','northeast');
 ylim([-0.5 5])
-xlim([35 75])
+xlim([Va_min Va_max])
 % xlabel('Airspeed, m/s')
 % ylabel('Norm of Residuals')
 grid on
@@ -148,7 +149,7 @@ plot3=plot(Va_range,normv1(6,:),'.-b');
 %        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
 %        'Location','northeast');
 ylim([-0.5 5])
-xlim([35 75])
+xlim([Va_min Va_max])
 % xlabel('Airspeed, m/s')
 % ylabel('Norm of Residuals')
 grid on
@@ -163,7 +164,7 @@ plot3=plot(Va_range,normv2(6,:),'.-b');
 %        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
 %        'Location','northeast');
 ylim([-0.5 5])
-xlim([35 75])
+xlim([Va_min Va_max])
 xlabel('Airspeed, m/s')
 ylabel('Norm of Residuals')
 grid on
@@ -178,7 +179,7 @@ legend([plot1 plot2 plot3],...
        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
        'Location','northeast');
 ylim([-0.5 5])
-xlim([35 75])
+xlim([Va_min Va_max])
 % xlabel('Airspeed, m/s')
 % ylabel('Norm of Residuals')
 grid on
@@ -186,26 +187,35 @@ grid on
 %----------------------------------------------------
 
 fig(2)=figure('Name','Approximate Stall Speed vs Flap Deflection','Position',[750 200 600 400]);
-st1=plot(rad2deg(dFlap_range),[52 49 48 47 43 43],'.-k'); %HFM
 hold on
-st2=plot(rad2deg(dFlap_range),[52 51 49 46 43 41],'.-b'); %ROMv1
-st3=plot(rad2deg(dFlap_range),[50 48 46 45 42 40],'.-m'); %ROMv2
-st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-r'); %ROMv3
+
+% st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-r'); %ROMv3
+% st3=plot(rad2deg(dFlap_range),[50 48 46 45 42 40],'.-m'); %ROMv2
+% st2=plot(rad2deg(dFlap_range),[52 49 46 46 43 41],'.-b'); %ROMv1
+% st1=plot(rad2deg(dFlap_range),[52 49 48 47 43 43],'.-k'); %HFM (CRUISE)
+
+st4=plot(rad2deg(dFlap_range),[44 44 44 44 44 44],'.-r'); %ROMv3
+st3=plot(rad2deg(dFlap_range),[48 45 43 42 40 38],'.-m'); %ROMv2
+st2=plot(rad2deg(dFlap_range),[47 45 42 42 39 38],'.-b'); %ROMv1
+st1=plot(rad2deg(dFlap_range),[47 45 42 40 38 35],'.-k'); %HFM (LANDING)
+
 legend([st1 st2 st3 st4],...
        {'HFM','ROM v1','ROM v2','ROM v3'},...
        'Location','northeast');
 ylabel('Stall Speed, m/s')
 xlabel('\delta_F_l_a_p, deg')
-yticks(linspace(40,55,(55-40)/1+1))
+% yticks(linspace(40,55,(55-40)/1+1))
+yticks(linspace(35,48,(48-35)/1+1))
 xlim([0 25])
-ylim([39 53])
+% ylim([39 53])
+ylim([35 48])
 grid on
 
 %% Save results
 
 % save figures
-saveas(fig(1),'figures\residual_'+timestamp,'jpg')
-saveas(fig(2),'figures\stallspeed_'+timestamp,'jpg')
+saveas(fig(1),'figures\trimloop_residual_'+timestamp,'jpg')
+saveas(fig(2),'figures\trimloop_stallspeed_'+timestamp,'jpg')
 savefig(fig,logname + '_figs');
 clear fig
 

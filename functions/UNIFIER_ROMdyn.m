@@ -1,27 +1,43 @@
 function DX=UNIFIER_ROMdyn(X,U)
 
 %% Test
-clear
-load UNIFIER_LOAD.mat
-runconfig.ROMfile=1;
+% 
+% clear
+% 
+% load UNIFIER_LOAD.mat
+% load UNIFIER_ROM_50.mat
+% 
+% runconfig.ROMfile=2;
+% runconfig.ROMdep=1;
+% 
+% X=[xtest(1);
+%    xtest(3);
+%    xtest(4);
+%    xtest(6);
+%    xtest(8);
+%    xtest(11)];
+% U=[utest(3);
+%    utest(5);
+%    utest(7);
+%    utest(4)];
 
 %% Constants
 
-% global runconfig
-% global LOADROM
-% gr        = LOADROM.gr;
-% dp_DEP    = LOADROM.dp_DEP;
-% dp_HTU    = LOADROM.dp_HTU;
-% m         = LOADROM.m;
-% xyz_cg_12 = LOADROM.xyz_cg_12;
-% Iyy       = LOADROM.Iyy;
-% S         = LOADROM.S;
-% c         = LOADROM.c;
-% xyz_DEP   = LOADROM.xyz_DEP;
-% prop_d    = LOADROM.prop_d;
-% DEP_inc   = LOADROM.DEP_inc;
-% n_prop    = LOADROM.n_prop;
-% ROM       = LOADROM.ROM;
+global runconfig
+global LOADROM
+gr        = LOADROM.gr;
+dp_DEP    = LOADROM.dp_DEP;
+dp_HTU    = LOADROM.dp_HTU;
+m         = LOADROM.m;
+xyz_cg_12 = LOADROM.xyz_cg_12;
+Iyy       = LOADROM.Iyy;
+S         = LOADROM.S;
+c         = LOADROM.c;
+xyz_DEP   = LOADROM.xyz_DEP;
+prop_d    = LOADROM.prop_d;
+DEP_inc   = LOADROM.DEP_inc;
+n_prop    = LOADROM.n_prop;
+ROM       = LOADROM.ROM;
 
 %% Extract State and Control Variables
 
@@ -62,7 +78,7 @@ end
 alpha         = atan2(w,u);         % angle of attack
 [~,~,~,rho,~] = atmosisa(-z);       % density
 Va            = sqrt(w.^2 + u.^2);  % airspeed (TAS)
-Va_eas        = Va*sqrt(rho/1.225); % airspeed (EAS)
+Va_eas        = Va.*sqrt(rho/1.225); % airspeed (EAS)
 Q             = 0.5*rho.*Va.^2;     % dynamic pressure
 
 %% Propulsion

@@ -27,7 +27,7 @@ runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies
 
 runconfig.Va_target = 72.74;       % airspeed target (m/s) cruise=72.74m/s
 runconfig.ze        = 1219;        % altitude (m) cruise=1219m
-runconfig.dFlap     = deg2rad(5); % flap deflection (deg)
+runconfig.dFlap     = deg2rad(0); % flap deflection (deg)
 
 runconfig.penalty_zedot = 1;
 runconfig.penalty_udot  = 1;
@@ -330,7 +330,7 @@ if runconfig.DEPset==0
     numall(13)='-';
 end
 
-if runconfig.ROMfile==4
+if runconfig.ROMfile==4 || runconfig.ROMfile==5
     numall(23)='-';
 end
 

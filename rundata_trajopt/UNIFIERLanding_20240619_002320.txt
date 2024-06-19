@@ -1,0 +1,6 @@
+{Unable to resolve the name 'runconfig.ipopttol'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_Settings', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\functions\UNIFIERLanding_Settings.m', 150)" style="font-weight:bold">UNIFIERLanding_Settings</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\functions\UNIFIERLanding_Settings.m',150,0)">line 150</a>)
+options.ipopt.tol=runconfig.ipopttol;
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UNIFIERLanding_trajopt', 'D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_trajopt.m', 246)" style="font-weight:bold">UNIFIERLanding_trajopt</a> (<a href="matlab: opentoline('D:\TUDelft\Year2\Thesis\UNIFIER_ROM_TrajOpt\UNIFIERLanding_trajopt.m',246,0)">line 246</a>)
+options              = problem.settings(mpoints); % Get options and solver settings %2 inputs for LGR} 
+UNIFIERLanding_trajopt

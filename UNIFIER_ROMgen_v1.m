@@ -252,7 +252,7 @@ legend(dflaplegend,'Location','southwest')
 % save plots
 saveas(fig(1),'figures\ROMgenv1_CL_'+timestamp,'jpg')
 saveas(fig(2),'figures\ROMgenv1_CD_'+timestamp,'jpg')
-saveas(fig(2),'figures\ROMgenv1_CM_'+timestamp,'jpg')
+saveas(fig(3),'figures\ROMgenv1_CM_'+timestamp,'jpg')
 savefig(fig,'figures\ROMgenv1_'+timestamp + '_figs');
 
 
