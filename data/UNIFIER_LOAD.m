@@ -119,13 +119,13 @@ umin(7) = -0.5; % Min HTU                 [-]
 umax(7) = 1;    % Max HTU                 [-]
 
 % Rate limits
-dumax(1) = 60; % Aileron    [deg/s]
-dumax(2) = 60; % Rudder     [deg/s]
-dumax(3) = 60; % Elevator   [deg/s]
-dumax(4) = 10; % Flap       [deg/s]
-dumax(5) = 2;  % DEP_col
-dumax(6) = 2;  % DEP_slope
-dumax(7) = 2;  % HTU
+dumax(1) = 120; % Aileron    [deg/s] 120
+dumax(2) = 120; % Rudder     [deg/s] 120
+dumax(3) = 120; % Elevator   [deg/s] 120
+dumax(4) = 60;  % Flap       [deg/s] 60
+dumax(5) = 2; % DEP_col
+dumax(6) = 4;   % DEP_slope
+dumax(7) = 2; % HTU
 
 % Convert to rad
 umin(1:4)  = deg2rad(umin(1:4));

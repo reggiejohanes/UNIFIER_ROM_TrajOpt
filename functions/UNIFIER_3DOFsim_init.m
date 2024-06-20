@@ -9,9 +9,9 @@ load UNIFIER_LOAD.mat
 %% Reference trajectory
 
 % load UNIFIERLanding_20240524_162938.mat solution Va alpha % prelim results
-load rundata_trajopt/UNIFIERLanding_20240613_232402.mat solution Va alpha rodft % v1
-% load rundata_trajopt/UNIFIERLanding_20240613_192010.mat solution Va alpha rodft % v2
-% load rundata_trajopt/UNIFIERLanding_20240613_190735.mat solution Va alpha rodft % v3
+load rundata_trajopt/UNIFIERLanding_20240620_044819.mat solution Va alpha rodft timestamprun % v1
+% load rundata_trajopt/UNIFIERLanding_20240620_045023.mat solution Va alpha rodft timestamprun % v2
+% load rundata_trajopt/UNIFIERLanding_20240620_050711.mat solution Va alpha rodft timestamprun % v3
 t_sim=solution.tf;
 
 %% ROM

@@ -1,0 +1,39 @@
+if system_dependent('IsDebugMode')==1, dbcont; end
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   170085
+Number of nonzeros in Lagrangian Hessian.............:    87210
+
+Total number of variables............................:     4482
+                     variables with only lower bounds:      499
+                variables with lower and upper bounds:     3486
+                     variables with only upper bounds:      497
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:     7480
+        inequality constraints with only lower bounds:     1494
+   inequality constraints with lower and upper bounds:     4492
+        inequality constraints with only upper bounds:     1494
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  1.2709084e+03 4.78e+00 1.83e+01   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  1.2701786e+03 4.76e+00 1.83e+01  -5.4 1.92e+02    -  2.32e-03 2.67e-03f  1
+   2  1.2693932e+03 4.75e+00 1.40e+02  -5.4 1.79e+02    -  2.53e-02 3.06e-03h  1
+Reallocating memory for MA57: lfact (823921)
+Reallocating memory for MA57: lfact (1250953)
+Reallocating memory for MA57: lfact (2271900)
+Reallocating memory for MA57: lfact (4642997)
+Reallocating memory for MA57: lfact (10103464)
+Reallocating memory for MA57: lfact (22572278)
+Reallocating memory for MA57: lfact (31832326)
+Reallocating memory for MA57: lfact (35819959)

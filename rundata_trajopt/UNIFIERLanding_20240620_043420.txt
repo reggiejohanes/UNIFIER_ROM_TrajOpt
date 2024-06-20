@@ -1,0 +1,96 @@
+if system_dependent('IsDebugMode')==1, dbcont; end
+Determine sparsity structure
+Formatting matrices for the hermite-simpson approximation
+Generate finite-difference pertubation vectors
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.12.9, running with linear solver ma57.
+
+Number of nonzeros in equality constraint Jacobian...:        0
+Number of nonzeros in inequality constraint Jacobian.:   170085
+Number of nonzeros in Lagrangian Hessian.............:    87210
+
+Total number of variables............................:     4482
+                     variables with only lower bounds:      499
+                variables with lower and upper bounds:     3486
+                     variables with only upper bounds:      497
+Total number of equality constraints.................:        0
+Total number of inequality constraints...............:     7480
+        inequality constraints with only lower bounds:     1494
+   inequality constraints with lower and upper bounds:     4492
+        inequality constraints with only upper bounds:     1494
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  1.2708625e+03 4.54e+00 1.83e+01   0.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  1.2708622e+03 4.54e+00 1.33e+02  -1.5 5.82e+02    -  4.38e-03 3.36e-07f  1
+   2  1.2699411e+03 4.52e+00 1.85e+02  -1.3 1.14e+02    -  2.17e-02 5.43e-03f  1
+   3  1.2698416e+03 4.45e+00 4.00e+02  -0.8 2.67e+01    -  4.02e-01 1.53e-02f  1
+   4  1.2634739e+03 4.00e+00 3.66e+02   0.0 2.37e+01    -  9.93e-02 1.02e-01f  1
+   5  1.3258256e+03 3.33e+00 3.11e+02   0.4 3.08e+02    -  1.72e-01 1.68e-01f  1
+   6  1.3226548e+03 2.79e+00 3.91e+04   0.6 1.42e+01   2.0 1.00e+00 1.61e-01f  1
+   7  1.3195048e+03 2.25e+00 7.83e+04   1.0 1.19e+01   2.4 1.00e+00 1.95e-01f  1
+   8  1.3148123e+03 1.42e+00 1.26e+05   1.0 9.53e+00   2.9 1.00e+00 3.70e-01f  1
+   9  1.3128115e+03 1.06e+00 3.87e+04   0.7 5.82e+00   2.4 1.00e+00 2.57e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  1.3124961e+03 9.99e-01 3.47e+05   0.9 4.38e+00   2.8 1.00e+00 5.41e-02h  1
+  11  1.3114930e+03 8.49e-01 8.22e+05   1.5 4.82e+00   2.3 1.00e+00 1.50e-01f  1
+  12  1.3098189e+03 7.93e-01 4.19e+06   2.5 1.13e+01   1.8 1.00e+00 6.61e-02f  1
+  13  1.3096337e+03 7.22e-01 2.31e+07   3.2 1.71e+01   2.3 9.98e-01 9.02e-02f  1
+  14  1.3094772e+03 6.92e-01 4.78e+08   3.4 2.70e+00   4.5 1.00e+00 4.05e-02h  1
+  15  1.6759869e+03 1.16e+00 1.08e+08   3.2 5.31e+02    -  7.56e-01 6.26e-01f  1
+  16  1.6761544e+03 1.07e+00 2.95e+08   3.3 2.05e+00   4.9 1.00e+00 8.33e-02h  1
+  17  1.8036938e+03 2.63e-01 9.91e+07   2.0 1.16e+02    -  6.71e-01 9.89e-01f  1
+  18  1.8004521e+03 2.76e-02 8.75e+06  -3.1 3.22e+00    -  9.12e-01 8.96e-01h  1
+  19  1.8004096e+03 2.52e-02 8.36e+07  -0.3 4.29e-01    -  9.88e-01 8.63e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20  1.8004096e+03 2.52e-02 1.05e+11  -0.3 5.49e-02   4.5 1.00e+00 9.44e-04h  1
+  21  1.8003959e+03 2.31e-02 9.37e+08   1.7 7.07e-01   4.0 9.91e-01 8.06e-02f  1
+  22  1.8003959e+03 2.31e-02 1.40e+13   1.2 7.52e-02   3.5 1.00e+00 7.67e-05h  1
+  23  1.8002807e+03 1.37e-03 8.76e+11   0.9 3.92e-02   3.0 9.37e-01 1.00e+00f  1
+  24  1.8002898e+03 1.10e-03 7.59e+09  -0.1 9.51e-03   3.4 9.91e-01 5.00e-01h  2
+  25  1.8002759e+03 2.26e-04 4.08e+01  -1.2 1.84e-02   3.0 1.00e+00 1.00e+00h  1
+  26  1.8002540e+03 3.26e-05 2.68e+02  -2.4 2.15e-02   2.5 1.00e+00 9.49e-01h  1
+  27  1.8002209e+03 9.51e-06 1.13e+00  -3.0 6.09e-03   2.0 1.00e+00 1.00e+00h  1
+  28  1.8001223e+03 5.61e-05 6.62e-01  -3.9 1.91e-02   1.5 1.00e+00 1.00e+00f  1
+  29  1.7999196e+03 1.71e-05 1.58e+02  -4.9 5.73e-02   1.1 1.00e+00 6.93e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  30  1.7990913e+03 4.54e-04 2.60e+01  -5.3 1.72e-01   0.6 1.00e+00 9.71e-01f  1
+  31  1.7986162e+03 3.65e-04 6.10e+03  -5.6 5.15e-01   0.1 1.00e+00 1.96e-01f  1
+  32  1.7971935e+03 1.61e-03 4.82e+03  -4.5 1.54e+00  -0.4 1.00e+00 2.15e-01f  1
+  33  1.7964737e+03 2.37e-03 4.67e+03  -3.9 4.59e+00  -0.8 1.00e+00 4.46e-02f  1
+  34  1.7929200e+03 1.25e-02 4.69e+03  -3.0 1.36e+01  -1.3 1.00e+00 1.04e-01f  1
+  35  1.7871166e+03 2.24e-02 4.24e+03  -9.0 4.05e+01  -1.8 1.70e-01 8.79e-02f  1
+  36  1.7779786e+03 5.87e-02 9.12e+03  -2.4 1.18e+02  -2.3 1.00e+00 6.27e-02f  1
+  37  1.7010464e+03 8.39e-01 8.36e+03  -8.4 3.31e+02  -2.8 8.00e-02 2.15e-01f  1
+  38  1.6694996e+03 8.31e-01 8.05e+03  -8.4 7.79e+02  -3.2 3.15e-02 3.84e-02f  1
+  39  1.6483814e+03 8.05e-01 7.63e+03  -8.4 3.36e+02  -2.8 9.73e-03 5.89e-02f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  40  1.6421517e+03 7.73e-01 7.11e+03  -8.4 1.35e+02  -2.4 3.50e-01 4.18e-02f  1
+  41  1.6153323e+03 7.39e-01 6.60e+03  -2.2 3.64e+02  -2.9 1.14e-01 7.04e-02f  1
+  42  1.6141929e+03 7.34e-01 3.62e+03  -3.2 1.46e+02  -2.4 4.66e-01 7.21e-03f  1
+  43  1.6054725e+03 6.26e-01 1.13e+03  -2.1 5.40e+01  -2.0 1.00e+00 1.48e-01f  1
+  44  1.5969090e+03 5.94e-01 1.11e+03  -2.2 1.49e+02  -2.5 1.15e-01 5.51e-02f  1
+  45  1.5963468e+03 5.82e-01 3.27e+03  -1.7 2.85e+01  -2.1 2.26e-01 2.01e-02h  1
+  46  1.6089886e+03 5.33e-01 2.27e+04  -0.7 6.45e+01  -2.5 7.85e-01 1.05e-01f  1
+  47  1.6089907e+03 5.33e-01 9.00e+12  -0.4 5.90e+01    -  2.86e-01 3.73e-05h  1
+  48  1.6053675e+03 6.09e-01 8.71e+12  -0.1 5.39e+01    -  3.19e-02 6.81e-02f  1
+  49  1.6283523e+03 4.27e-01 2.52e+12  -0.6 6.04e+01    -  7.11e-01 3.12e-01F  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  50  1.6743697e+03 2.16e-02 1.40e+12  -0.6 3.88e+01    -  4.43e-01 1.00e+00H  1
+  51  1.6754442e+03 2.10e-02 1.17e+10   1.4 1.20e+01   0.6 9.92e-01 2.57e-02f  1
+  52  2.1494845e+03 3.14e-01 9.44e+09   1.3 5.44e+02    -  1.91e-01 7.89e-01f  1
+Reallocating memory for MA57: lfact (1397597)
+Reallocating memory for MA57: lfact (3722125)
+Reallocating memory for MA57: lfact (11563238)
+Reallocating memory for MA57: lfact (16287155)
+Reallocating memory for MA57: lfact (34756534)
+Reallocating memory for MA57: lfact (37716028)
+  53  2.1494845e+03 3.14e-01 9.44e+09   1.3 1.10e-01  12.4 2.55e-04 2.55e-04h  1
+Reallocating memory for MA57: lfact (42004858)
+Reallocating memory for MA57: lfact (46558017)
+Reallocating memory for MA57: lfact (56873993)

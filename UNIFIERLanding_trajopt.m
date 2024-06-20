@@ -22,10 +22,10 @@ mpoints = 250;
 global runconfig
 
 % cost function
-runconfig.boundarycost = 1; % 1 = tf
+runconfig.boundarycost = 2; % 1 = tf
                             % 2 = xf(1)
                             % 3 = -
-runconfig.stagecost    = 1; % 1 = stage cost on
+runconfig.stagecost    = 1; % 1 = stage cost on, 0 = off
 
 % ROM settings
 runconfig.ROMfile = 2; % 1=v1-72.74, 2=v1-50, 3=v0, 4=v3, 5=v2
@@ -36,7 +36,7 @@ dFlap = deg2rad(5);
 runconfig.dFlap = dFlap;
 
 % ICLOCS settings
-runconfig.ipopttol = 1e-6; %default = 1e-8
+runconfig.ipopttol = 1e-0; %default = 1e-8
 runconfig.scaling  = 1; %1=on, 0=off
 
 % Load aircraft data
@@ -81,19 +81,20 @@ runconfig.ineq_aoamin = deg2rad(-15);
 runconfig.ineq_aoamax = deg2rad(10);
 runconfig.ineq_Vamin  = 35.85*1.1;
 runconfig.ineq_Vamax  = 80;
-runconfig.ineq_gammin = deg2rad(-inf);
-runconfig.ineq_gammax = deg2rad(inf);
+% runconfig.ineq_gammin = deg2rad(-inf);
+% runconfig.ineq_gammax = deg2rad(inf);
 
 % boundary constraints
 % runconfig.bndc_Vamin  = -inf;
 % runconfig.bndc_Vamax  = inf;
 runconfig.bndc_Vamin  = 35.85*1.1;
 runconfig.bndc_Vamax  = 35.85*1.3;
-runconfig.bndc_rodmin = convvel(-inf,'ft/min','m/s');
-runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
+% runconfig.bndc_rodmin = convvel(-inf,'ft/min','m/s');
+% runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
 
 % control & rate limits
 
+dumax(3) = deg2rad(60); % reduce elevator rate limit (default=120deg/s)
 runconfig.dumax = dumax;
 
 runconfig.xmin     = 0;
@@ -216,30 +217,6 @@ runconfig.qfl     = -inf; %qf-deg2rad(1);
 runconfig.dElev_f = ustarf(1);
 runconfig.DEP_f   = ustarf(2);
 runconfig.HTU_f   = ustarf(3);
-
-% numset = [timestamprun,...
-%           mpoints,...
-%           runconfig.boundarycost,...
-%           runconfig.stagecost,...
-%           convvel(runconfig.ineq_rodmin,'m/s','ft/min'),...
-%           convvel(runconfig.ineq_rodmax,'m/s','ft/min'),...
-%           rad2deg(runconfig.ineq_aoamin),...
-%           rad2deg(runconfig.ineq_aoamax),...
-%           runconfig.ineq_Vamin,...
-%           runconfig.ineq_Vamax,...
-%           rad2deg(runconfig.ineq_gammin),...
-%           rad2deg(runconfig.ineq_gammax),...
-%           runconfig.bndc_Vamin,...
-%           runconfig.bndc_Vamax,...
-%           convvel(runconfig.bndc_rodmin,'m/s','ft/min'),...
-%           convvel(runconfig.bndc_rodmax,'m/s','ft/min'),...
-%           runconfig.ROMfile,...
-%           runconfig.ROMdep,...
-%           rad2deg(runconfig.dFlap),...
-%           runconfig.ebmult,...
-%           runconfig.ipopttol,...
-%           runconfig.scaling,...
-%           trimname0];
 
 numset = [timestamprun,...
           mpoints,...
@@ -395,9 +372,21 @@ ylabel('q, deg/s')
 yline(0,':b','LineWidth',1)
 grid on
 
+% flight path angle -------------------------------------------------------
+
+gammadeg=rad2deg(solution.X(:,5)-alpha);
+fig(4)=figure('Name','Flight Path Angle','Position',[50 450 600 400]);
+plot(solution.X(:,1)/1000,gammadeg,'.-k')
+title('Gamma vs Horizontal Distance')
+xlabel('Distance (x), km')
+ylabel('Flight Path Angle (\gamma), deg')
+% yline(rad2deg(runconfig.ineq_gammin),'-.r',{'Min \gamma = -3 deg'},'LabelHorizontalAlignment','right','LabelVerticalAlignment','bottom','FontSize',8,'LineWidth',2)
+grid on
+ylim([-3.5 0.5])
+
 % rate of climb ---------------------------------------------------------
 
-fig(4)=figure('Name','Rate of Climb','Position',[50 450 600 400]);
+fig(5)=figure('Name','Rate of Climb','Position',[50 450 600 400]);
 plot(solution.X(1:mpoints-1,1)/1000,-1*rodft,'.-k')
 title('RoC vs Horizontal Distance')
 xlabel('Horizontal Distance, km')
@@ -405,17 +394,6 @@ ylabel('Rate of Climb, ft/min')
 yline(-350,'-.r',{'Max RoD = 350 ft/min'},'LabelHorizontalAlignment','right','LabelVerticalAlignment','bottom','FontSize',8,'LineWidth',2)
 grid on
 
-% flight path angle -------------------------------------------------------
-
-gammadeg=rad2deg(solution.X(:,5)-alpha);
-fig(5)=figure('Name','Flight Path Angle','Position',[50 450 600 400]);
-plot(solution.X(:,1)/1000,gammadeg,'.-k')
-title('Gamma vs Horizontal Distance')
-xlabel('Distance (x), km')
-ylabel('Flight Path Angle (\gamma), deg')
-yline(rad2deg(runconfig.ineq_gammin),'-.r',{'Min \gamma = -3 deg'},'LabelHorizontalAlignment','right','LabelVerticalAlignment','bottom','FontSize',8,'LineWidth',2)
-grid on
-ylim([-3.5 0.5])
 
 %% Save results
 
