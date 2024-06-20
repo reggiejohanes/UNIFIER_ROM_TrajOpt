@@ -2,18 +2,20 @@ clear all
 
 %% Load ROMs
 
-load data/UNIFIER_LOAD_ROM_v2.mat ROM % v0
-load data/UNIFIER_LOAD_ROM_72.mat ROM % v1, 72.74 m/s
+% load data/UNIFIER_LOAD_ROM_v2.mat ROM % v0
+% load data/UNIFIER_LOAD_ROM_72.mat ROM % v1, 72.74 m/s
 
-load data/UNIFIER_LOAD_ROM_50.mat ROM % v1, 50 m/s
+load UNIFIER_LOAD.mat S c
+
+load data/UNIFIER_ROM_50.mat ROM % v1, 50 m/s
 ROMv1=ROM;
 clear ROM
 
-load data/ROMv2/UNIFIER_LOAD_ROMv2_20240613_053529.mat ROM S c % v2, subset v1-10
+load data/ROMv2/UNIFIER_ROMv2_20240613_053529.mat ROM % v2, subset v1-10
 ROMv2=ROM;
 clear ROM
 
-load data/ROMv3/UNIFIER_LOAD_ROMv3_20240613_002318.mat ROM % v3, subset v1-50
+load data/ROMv3/UNIFIER_ROMv3_20240613_002318.mat ROM % v3, subset v1-50
 ROMv3=ROM;
 clear ROM
 
@@ -21,8 +23,9 @@ clear ROM
 
 % load states & controls
 
-% load trim/rundata/UNIFIER_trim_out_20240612_031926 xstar ustar % HFM cruise 0 deg flap
-load trim/rundata/UNIFIER_trim_out_20240612_032607 xstar ustar xdotstar% HFM cruise 5 deg flap
+% load rundata_trim/UNIFIER_trim_out_20240612_031926 xstar ustar % HFM cruise 0 deg flap
+% load rundata_trim/UNIFIER_trim_out_20240612_032607 xstar ustar xdotstar% HFM cruise 5 deg flap
+load rundata_trim/UNIFIER_trim_out_20240612_034134 xstar ustar xdotstar% HFM landing 5 deg flap
 xstarhfm=xstar;
 ustarhfm=ustar;
 xdotstarhfm=xdotstar;
@@ -38,7 +41,7 @@ DEP   = ustarhfm(5);
 alpha = atan2(w,u);
 dElev = ustarhfm(3);
 dFlap = ustarhfm(4);
-J     = DEPVa2J(u,DEP);
+J     = DEPu2J(u,DEP);
 
 h             = -xstarhfm(3);
 [~,~,~,rho,~] = atmosisa(h);
@@ -123,7 +126,7 @@ forcecomp = [Lcomp Dcomp Mcomp];
 %% Compare trim controls
 
 % load trim results
-load trim/rundata/UNIFIER_trim_out_20240612_060030 xstar ustar xdotstar% ROM2-1 cruise 5 deg flap
+load rundata_trim/UNIFIER_trim_out_20240618_235804 xstar ustar xdotstar% ROM2-1 landing 5 deg flap
 xstarv1=xstar;
 ustarv1=ustar;
 xdotstarv1=xdotstar;
@@ -131,7 +134,7 @@ clear xdotstar
 clear xstar
 clear ustar
 
-load trim/rundata/UNIFIER_trim_out_20240613_054350 xstar ustar xdotstar% ROM5 cruise 5 deg flap
+load rundata_trim/UNIFIER_trim_out_20240619_001241 xstar ustar xdotstar% ROM5 landing 5 deg flap
 xstarv2=xstar;
 ustarv2=ustar;
 xdotstarv2=xdotstar;
@@ -139,7 +142,7 @@ clear xdotstar
 clear xstar
 clear ustar
 
-load trim/rundata/UNIFIER_trim_out_20240613_002923 xstar ustar xdotstar% ROM4 cruise 5 deg flap
+load rundata_trim/UNIFIER_trim_out_20240619_001344 xstar ustar xdotstar% ROM4 landing 5 deg flap
 xstarv3=xstar;
 ustarv3=ustar;
 xdotstarv3=xdotstar;
@@ -156,6 +159,7 @@ alphacomp    = rad2deg(atan2(wcomp,ucomp));
 thetacomp    = rad2deg([xstarhfm(8); xstarv1(5); xstarv2(5); xstarv3(5)]);
 
 dElevcomp    = rad2deg([ustarhfm(3); ustarv1(1); ustarv2(1); ustarv3(1)]);
+DEPcomp      = [ustarhfm(5); ustarv1(2); ustarv2(2); ustarv3(2)];
 HTUcomp      = [ustarhfm(7); ustarv1(3); ustarv2(3); ustarv3(3)];
 
 xedotcomp    = [xdotstarhfm(1); xdotstarv1(1); xdotstarv2(1); xdotstarv3(1)];
@@ -165,7 +169,7 @@ wdotcomp     = [xdotstarhfm(6); xdotstarv1(4); xdotstarv2(4); xdotstarv3(4)];
 thetadotcomp = rad2deg([xdotstarhfm(8); xdotstarv1(5); xdotstarv2(5); xdotstarv3(5)]);
 qdotcomp    = rad2deg([xdotstarhfm(11); xdotstarv1(6); xdotstarv2(6); xdotstarv3(6)]);
 
-trimcomp = [Vacomp alphacomp dElevcomp HTUcomp xedotcomp zedotcomp udotcomp wdotcomp thetadotcomp qdotcomp];
+trimcomp = [Vacomp alphacomp dElevcomp DEPcomp HTUcomp xedotcomp zedotcomp udotcomp wdotcomp thetadotcomp qdotcomp];
 
 
 
