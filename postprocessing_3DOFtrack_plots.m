@@ -117,8 +117,6 @@ LSEDavgv3 = mean(distv3)
 
 %% Plot error
 
-close all
-
 fig(1)=figure('Name','State Trajectories (vs distance)','Position', [120 200 600 400]);
 hold on
 p1=plot(tsolv1,distv1,'-b');
@@ -136,10 +134,8 @@ legend([p1 p2 p3],...
 
 %% Plot figures (v1)
 
-close all
-
 % state trajectories ======================================================
-fig(2)=figure('Name','State Trajectories (vs distance) V1','Position', [50 75 400 1250]);
+fig(2)=figure('Name','State Trajectories (vs distance) v1','Position', [50 75 400 1250]);
 tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
 % fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
 % tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
@@ -201,7 +197,7 @@ grid on
 % xlim([0 12.5])
 
 % control trajectories ====================================================
-fig(2)=figure('Name','Control Inputs V1','Position', [600 70 500 800]);
+fig(3)=figure('Name','Control Inputs v1','Position', [600 70 500 800]);
 tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
 % nexttile % ALTITUDE -----------------------------------------------------
 % plottraj1=plot(solv1.X(:,1),-1*solv1.X(:,2),'--k');
@@ -236,9 +232,9 @@ grid on
 % yline(0,'--k','LineWidth',1)
 % ylim([-0.75 1])
 % xlim([0 12.5])
-legend([p1 p2],...
-       {'Optimal Trajectory','Tracking Result'},...
-       'Location','northwest','NumColumns',2);
+% legend([p1 p2],...
+%        {'Optimal Trajectory','Tracking Result'},...
+%        'Location','northwest','NumColumns',2);
 nexttile % ELEVATOR -------------------------------------------------------
 hold on
 plot(outv1.x/1000,rad2deg(outv1.elev),'r');
@@ -253,272 +249,21 @@ grid on
 nexttile % FLAP -----------------------------------------------------------
 dFlap=deg2rad(5);
 hold on
-plot(outv1.x/1000,rad2deg(outv1.flap),'r');
-plot(solv1.X(:,1)/1000,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv1.T)),'--k')
+p2=plot(outv1.x/1000,rad2deg(outv1.flap),'r');
+p1=plot(solv1.X(:,1)/1000,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv1.T)),'--k');
 % title('Flap Deflection')
 xlabel('Distance, km')
 ylabel('Flap Deflection, deg')
 % ylim([-5 15])
 % yline(0,'--k','LineWidth',1)
 grid on
-% xlim([0 12.5])
-
-%% Plot figures (v2)
-
-% state trajectories ======================================================
-fig(2)=figure('Name','State Trajectories (vs distance) V1','Position', [50 75 400 1250]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
-% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
-% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
-nexttile % ALTITUDE ------------------------------------------------------- 
-hold on
-plottraj2=plot(outv1.x/1000,-1*outv1.z,'r');
-plottraj1=plot(solv1.X(:,1)/1000,-1*solv1.X(:,2),'--k');
-ylabel('Altitude, m')
-grid on
-legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
-% xlim([0 12.5])
-nexttile % RATE OF CLIMB --------------------------------------------------
-hold on
-plot(outv1.x(1:end-1)/1000,outv1.rocft,'r')
-plot(solv1.X(1:end-1,1)/1000,solv1.rocft,'--k')
-ylabel('Rate of Climb, ft/min')
-grid on
-% ylim([55 80])
-% xlim([0 12.5])
-nexttile % AIRSPEED -------------------------------------------------------
-hold on
-plot(outv1.x/1000,outv1.Va_tas,'r')
-plot(solv1.X(:,1)/1000,solv1.Va,'--k')
-% title('Airspeed')
-% xlabel('x, m')
-ylabel('Airspeed, m/s')
-grid on
-% ylim([55 80])
-% xlim([0 12.5])
-nexttile % ANGLE OF ATTACK ------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.alpha),'r')
-plot(solv1.X(:,1)/1000,rad2deg(solv1.alpha),'--k')
-% title('AoA')
-% xlabel('Distance, m')
-ylabel('Angle of Attack, deg')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-nexttile % PITCH ANGLE ----------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.theta),'r')
-plot(solv1.X(:,1)/1000,rad2deg(solv1.X(:,5)),'--k')
-% title('Pitch Angle')
-% xlabel('x, m')
-ylabel('Pitch Angle, deg')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-nexttile % PITCH RATE -----------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.q),'r')
-plot(solv1.X(:,1)/1000,rad2deg(solv1.X(:,6)),'--k')
-% title('Pitch Rate')
-xlabel('Distance, km')
-ylabel('Pitch Rate, deg/s')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-
-% control trajectories ====================================================
-fig(2)=figure('Name','Control Inputs V1','Position', [600 70 500 800]);
-tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
-% nexttile % ALTITUDE -----------------------------------------------------
-% plottraj1=plot(solv1.X(:,1),-1*solv1.X(:,2),'--k');
-% hold on
-% plottraj2=plot(outv1.x,-1*outv1.z,'r');
-% % title('Altitude')
-% % xlabel('x, m')
-% ylabel('Altitude, m')
-% grid on
-% legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
-% % xlim([0 12.5])
-nexttile % DEP ------------------------------------------------------------
-hold on
-plot(outv1.x/1000,outv1.DEP,'r');
-plot(solv1.X(:,1)/1000,solv1.U(:,2),'--k')
-% plot
-% title('DEP Thrust Level')
-% xlabel('x, m')
-ylabel('DEP_c_o_l, 0-1')
-grid on
-% yline(0,'--k','LineWidth',1)
-ylim([-0.05 0.5])
-% xlim([0 12.5])
-nexttile % HTU ------------------------------------------------------------
-hold on
-p2=plot(outv1.x/1000,outv1.HTU,'r');
-p1=plot(solv1.X(:,1)/1000,solv1.U(:,3),'--k');
-% title('HTU Thrust Level')
-% xlabel('x, m')
-ylabel('HTU, 0-1')
-grid on
-% yline(0,'--k','LineWidth',1)
-% ylim([-0.75 1])
 % xlim([0 12.5])
 legend([p1 p2],...
        {'Optimal Trajectory','Tracking Result'},...
-       'Location','northwest','NumColumns',2);
-nexttile % ELEVATOR -------------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.elev),'r');
-plot(solv1.X(:,1)/1000,rad2deg(solv1.U(:,1)),'--k')
-% title('Elevator Deflection')
-% xlabel('x, m')
-% ylabel('\delta_E_l_e_v, deg')
-ylabel('Elevator Deflection, deg')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-nexttile % FLAP -----------------------------------------------------------
-dFlap=deg2rad(5);
-hold on
-plot(outv1.x/1000,rad2deg(outv1.flap),'r');
-plot(solv1.X(:,1)/1000,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv1.T)),'--k')
-% title('Flap Deflection')
-xlabel('Distance, km')
-ylabel('Flap Deflection, deg')
-% ylim([-5 15])
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-
-%% Plot figures (v3)
-
-% state trajectories ======================================================
-fig(2)=figure('Name','State Trajectories (vs distance) V1','Position', [50 75 400 1250]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
-% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
-% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
-nexttile % ALTITUDE ------------------------------------------------------- 
-hold on
-plottraj2=plot(outv1.x/1000,-1*outv1.z,'r');
-plottraj1=plot(solv1.X(:,1)/1000,-1*solv1.X(:,2),'--k');
-ylabel('Altitude, m')
-grid on
-legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
-% xlim([0 12.5])
-nexttile % RATE OF CLIMB --------------------------------------------------
-hold on
-plot(outv1.x(1:end-1)/1000,outv1.rocft,'r')
-plot(solv1.X(1:end-1,1)/1000,solv1.rocft,'--k')
-ylabel('Rate of Climb, ft/min')
-grid on
-% ylim([55 80])
-% xlim([0 12.5])
-nexttile % AIRSPEED -------------------------------------------------------
-hold on
-plot(outv1.x/1000,outv1.Va_tas,'r')
-plot(solv1.X(:,1)/1000,solv1.Va,'--k')
-% title('Airspeed')
-% xlabel('x, m')
-ylabel('Airspeed, m/s')
-grid on
-% ylim([55 80])
-% xlim([0 12.5])
-nexttile % ANGLE OF ATTACK ------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.alpha),'r')
-plot(solv1.X(:,1)/1000,rad2deg(solv1.alpha),'--k')
-% title('AoA')
-% xlabel('Distance, m')
-ylabel('Angle of Attack, deg')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-nexttile % PITCH ANGLE ----------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.theta),'r')
-plot(solv1.X(:,1)/1000,rad2deg(solv1.X(:,5)),'--k')
-% title('Pitch Angle')
-% xlabel('x, m')
-ylabel('Pitch Angle, deg')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-nexttile % PITCH RATE -----------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.q),'r')
-plot(solv1.X(:,1)/1000,rad2deg(solv1.X(:,6)),'--k')
-% title('Pitch Rate')
-xlabel('Distance, km')
-ylabel('Pitch Rate, deg/s')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-
-% control trajectories ====================================================
-fig(2)=figure('Name','Control Inputs V1','Position', [600 70 500 800]);
-tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
-% nexttile % ALTITUDE -----------------------------------------------------
-% plottraj1=plot(solv1.X(:,1),-1*solv1.X(:,2),'--k');
-% hold on
-% plottraj2=plot(outv1.x,-1*outv1.z,'r');
-% % title('Altitude')
-% % xlabel('x, m')
-% ylabel('Altitude, m')
-% grid on
-% legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
-% % xlim([0 12.5])
-nexttile % DEP ------------------------------------------------------------
-hold on
-plot(outv1.x/1000,outv1.DEP,'r');
-plot(solv1.X(:,1)/1000,solv1.U(:,2),'--k')
-% plot
-% title('DEP Thrust Level')
-% xlabel('x, m')
-ylabel('DEP_c_o_l, 0-1')
-grid on
-% yline(0,'--k','LineWidth',1)
-ylim([-0.05 0.5])
-% xlim([0 12.5])
-nexttile % HTU ------------------------------------------------------------
-hold on
-p2=plot(outv1.x/1000,outv1.HTU,'r');
-p1=plot(solv1.X(:,1)/1000,solv1.U(:,3),'--k');
-% title('HTU Thrust Level')
-% xlabel('x, m')
-ylabel('HTU, 0-1')
-grid on
-% yline(0,'--k','LineWidth',1)
-% ylim([-0.75 1])
-% xlim([0 12.5])
-legend([p1 p2],...
-       {'Optimal Trajectory','Tracking Result'},...
-       'Location','northwest','NumColumns',2);
-nexttile % ELEVATOR -------------------------------------------------------
-hold on
-plot(outv1.x/1000,rad2deg(outv1.elev),'r');
-plot(solv1.X(:,1)/1000,rad2deg(solv1.U(:,1)),'--k')
-% title('Elevator Deflection')
-% xlabel('x, m')
-% ylabel('\delta_E_l_e_v, deg')
-ylabel('Elevator Deflection, deg')
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
-nexttile % FLAP -----------------------------------------------------------
-dFlap=deg2rad(5);
-hold on
-plot(outv1.x/1000,rad2deg(outv1.flap),'r');
-plot(solv1.X(:,1)/1000,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv1.T)),'--k')
-% title('Flap Deflection')
-xlabel('Distance, km')
-ylabel('Flap Deflection, deg')
-% ylim([-5 15])
-% yline(0,'--k','LineWidth',1)
-grid on
-% xlim([0 12.5])
+       'Location','south','NumColumns',2);
 
 % state trajectories (time) ===============================================
-% fig(3)=figure('Name','State Trajectories (vs time) V1','Position', [500 75 800 400]);
+% fig(3)=figure('Name','State Trajectories (vs time) v1','Position', [500 75 800 400]);
 % tiledlayout(1,2,"TileSpacing","tight","Padding","compact")
 % % fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
 % % tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
@@ -543,11 +288,284 @@ grid on
 % % legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
 % % xlim([0 12.5])
 
+%% Plot figures (v2)
+
+% state trajectories ======================================================
+fig(4)=figure('Name','State Trajectories (vs distance) v2','Position', [50 75 400 1250]);
+tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
+% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+nexttile % ALTITUDE ------------------------------------------------------- 
+hold on
+plottraj2=plot(outv2.x/1000,-1*outv2.z,'r');
+plottraj1=plot(solv2.X(:,1)/1000,-1*solv2.X(:,2),'--k');
+ylabel('Altitude, m')
+grid on
+legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+% xlim([0 12.5])
+nexttile % RATE OF CLIMB --------------------------------------------------
+hold on
+plot(outv2.x(1:end-1)/1000,outv2.rocft,'r')
+plot(solv2.X(1:end-1,1)/1000,solv2.rocft,'--k')
+ylabel('Rate of Climb, ft/min')
+grid on
+% ylim([55 80])
+% xlim([0 12.5])
+nexttile % AIRSPEED -------------------------------------------------------
+hold on
+plot(outv2.x/1000,outv2.Va_tas,'r')
+plot(solv2.X(:,1)/1000,solv2.Va,'--k')
+% title('Airspeed')
+% xlabel('x, m')
+ylabel('Airspeed, m/s')
+grid on
+% ylim([55 80])
+% xlim([0 12.5])
+nexttile % ANGLE OF ATTACK ------------------------------------------------
+hold on
+plot(outv2.x/1000,rad2deg(outv2.alpha),'r')
+plot(solv2.X(:,1)/1000,rad2deg(solv2.alpha),'--k')
+% title('AoA')
+% xlabel('Distance, m')
+ylabel('Angle of Attack, deg')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+nexttile % PITCH ANGLE ----------------------------------------------------
+hold on
+plot(outv2.x/1000,rad2deg(outv2.theta),'r')
+plot(solv2.X(:,1)/1000,rad2deg(solv2.X(:,5)),'--k')
+% title('Pitch Angle')
+% xlabel('x, m')
+ylabel('Pitch Angle, deg')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+nexttile % PITCH RATE -----------------------------------------------------
+hold on
+plot(outv2.x/1000,rad2deg(outv2.q),'r')
+plot(solv2.X(:,1)/1000,rad2deg(solv2.X(:,6)),'--k')
+% title('Pitch Rate')
+xlabel('Distance, km')
+ylabel('Pitch Rate, deg/s')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+
+% control trajectories ====================================================
+fig(5)=figure('Name','Control Inputs v2','Position', [600 70 500 800]);
+tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+% nexttile % ALTITUDE -----------------------------------------------------
+% plottraj1=plot(solv2.X(:,1),-1*solv2.X(:,2),'--k');
+% hold on
+% plottraj2=plot(outv2.x,-1*outv2.z,'r');
+% % title('Altitude')
+% % xlabel('x, m')
+% ylabel('Altitude, m')
+% grid on
+% legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+% % xlim([0 12.5])
+nexttile % DEP ------------------------------------------------------------
+hold on
+plot(outv2.x/1000,outv2.DEP,'r');
+plot(solv2.X(:,1)/1000,solv2.U(:,2),'--k')
+% plot
+% title('DEP Thrust Level')
+% xlabel('x, m')
+ylabel('DEP_c_o_l, 0-1')
+grid on
+% yline(0,'--k','LineWidth',1)
+ylim([-0.05 0.65])
+% xlim([0 12.5])
+nexttile % HTU ------------------------------------------------------------
+hold on
+p2=plot(outv2.x/1000,outv2.HTU,'r');
+p1=plot(solv2.X(:,1)/1000,solv2.U(:,3),'--k');
+% title('HTU Thrust Level')
+% xlabel('x, m')
+ylabel('HTU, 0-1')
+grid on
+% yline(0,'--k','LineWidth',1)
+% ylim([-0.75 1])
+% xlim([0 12.5])
+% legend([p1 p2],...
+%        {'Optimal Trajectory','Tracking Result'},...
+%        'Location','northwest','NumColumns',2);
+nexttile % ELEVATOR -------------------------------------------------------
+hold on
+plot(outv2.x/1000,rad2deg(outv2.elev),'r');
+plot(solv2.X(:,1)/1000,rad2deg(solv2.U(:,1)),'--k')
+% title('Elevator Deflection')
+% xlabel('x, m')
+% ylabel('\delta_E_l_e_v, deg')
+ylabel('Elevator Deflection, deg')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+nexttile % FLAP -----------------------------------------------------------
+dFlap=deg2rad(5);
+hold on
+p2=plot(outv2.x/1000,rad2deg(outv2.flap),'r');
+p1=plot(solv2.X(:,1)/1000,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv2.T)),'--k');
+% title('Flap Deflection')
+xlabel('Distance, km')
+ylabel('Flap Deflection, deg')
+% ylim([-5 15])
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+legend([p1 p2],...
+       {'Optimal Trajectory','Tracking Result'},...
+       'Location','south','NumColumns',2);
+
+%% Plot figures (v3)
+
+% state trajectories ======================================================
+fig(6)=figure('Name','State Trajectories (vs distance) v3','Position', [50 75 400 1250]);
+tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
+% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+nexttile % ALTITUDE ------------------------------------------------------- 
+hold on
+plottraj2=plot(outv3.x/1000,-1*outv3.z,'r');
+plottraj1=plot(solv3.X(:,1)/1000,-1*solv3.X(:,2),'--k');
+ylabel('Altitude, m')
+grid on
+legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+% xlim([0 12.5])
+nexttile % RATE OF CLIMB --------------------------------------------------
+hold on
+plot(outv3.x(1:end-1)/1000,outv3.rocft,'r')
+plot(solv3.X(1:end-1,1)/1000,solv3.rocft,'--k')
+ylabel('Rate of Climb, ft/min')
+grid on
+% ylim([55 80])
+% xlim([0 12.5])
+nexttile % AIRSPEED -------------------------------------------------------
+hold on
+plot(outv3.x/1000,outv3.Va_tas,'r')
+plot(solv3.X(:,1)/1000,solv3.Va,'--k')
+% title('Airspeed')
+% xlabel('x, m')
+ylabel('Airspeed, m/s')
+grid on
+% ylim([55 80])
+% xlim([0 12.5])
+nexttile % ANGLE OF ATTACK ------------------------------------------------
+hold on
+plot(outv3.x/1000,rad2deg(outv3.alpha),'r')
+plot(solv3.X(:,1)/1000,rad2deg(solv3.alpha),'--k')
+% title('AoA')
+% xlabel('Distance, m')
+ylabel('Angle of Attack, deg')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+nexttile % PITCH ANGLE ----------------------------------------------------
+hold on
+plot(outv3.x/1000,rad2deg(outv3.theta),'r')
+plot(solv3.X(:,1)/1000,rad2deg(solv3.X(:,5)),'--k')
+% title('Pitch Angle')
+% xlabel('x, m')
+ylabel('Pitch Angle, deg')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+nexttile % PITCH RATE -----------------------------------------------------
+hold on
+plot(outv3.x/1000,rad2deg(outv3.q),'r')
+plot(solv3.X(:,1)/1000,rad2deg(solv3.X(:,6)),'--k')
+% title('Pitch Rate')
+xlabel('Distance, km')
+ylabel('Pitch Rate, deg/s')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+
+% control trajectories ====================================================
+fig(7)=figure('Name','Control Inputs v3','Position', [600 70 500 800]);
+tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+% nexttile % ALTITUDE -----------------------------------------------------
+% plottraj1=plot(solv3.X(:,1),-1*solv3.X(:,2),'--k');
+% hold on
+% plottraj2=plot(outv3.x,-1*outv3.z,'r');
+% % title('Altitude')
+% % xlabel('x, m')
+% ylabel('Altitude, m')
+% grid on
+% legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+% % xlim([0 12.5])
+nexttile % DEP ------------------------------------------------------------
+hold on
+plot(outv3.x/1000,outv3.DEP,'r');
+plot(solv3.X(:,1)/1000,solv3.U(:,2),'--k')
+% plot
+% title('DEP Thrust Level')
+% xlabel('x, m')
+ylabel('DEP_c_o_l, 0-1')
+grid on
+% yline(0,'--k','LineWidth',1)
+ylim([-0.05 0.5])
+% xlim([0 12.5])
+nexttile % HTU ------------------------------------------------------------
+hold on
+p2=plot(outv3.x/1000,outv3.HTU,'r');
+p1=plot(solv3.X(:,1)/1000,solv3.U(:,3),'--k');
+% title('HTU Thrust Level')
+% xlabel('x, m')
+ylabel('HTU, 0-1')
+grid on
+% yline(0,'--k','LineWidth',1)
+% ylim([-0.75 1])
+% xlim([0 12.5])
+% legend([p1 p2],...
+%        {'Optimal Trajectory','Tracking Result'},...
+%        'Location','northwest','NumColumns',2);
+nexttile % ELEVATOR -------------------------------------------------------
+hold on
+plot(outv3.x/1000,rad2deg(outv3.elev),'r');
+plot(solv3.X(:,1)/1000,rad2deg(solv3.U(:,1)),'--k')
+% title('Elevator Deflection')
+% xlabel('x, m')
+% ylabel('\delta_E_l_e_v, deg')
+ylabel('Elevator Deflection, deg')
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+nexttile % FLAP -----------------------------------------------------------
+dFlap=deg2rad(5);
+hold on
+p2=plot(outv3.x/1000,rad2deg(outv3.flap),'r');
+p1=plot(solv3.X(:,1)/1000,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv3.T)),'--k');
+% title('Flap Deflection')
+xlabel('Distance, km')
+ylabel('Flap Deflection, deg')
+% ylim([-5 15])
+% yline(0,'--k','LineWidth',1)
+grid on
+% xlim([0 12.5])
+legend([p1 p2],...
+       {'Optimal Trajectory','Tracking Result'},...
+       'Location','south','NumColumns',2);
+
 %% Save results
 
-% save figuoutv1
-savefig(fig,logname + '_figs');
+starttime = datetime; % start date & time
+timestamp = string(starttime,"yyyyMMdd_HHmmss");
+
+% save figures
+saveas(fig(1),'figures\3doftrack_error_'+timestamp,'jpg')
+saveas(fig(2),'figures\3doftrack_statesv1_'+timestamp,'jpg')
+saveas(fig(3),'figures\3doftrack_controlsv1_'+timestamp,'jpg')
+saveas(fig(4),'figures\3doftrack_statesv2_'+timestamp,'jpg')
+saveas(fig(5),'figures\3doftrack_controlsv2_'+timestamp,'jpg')
+saveas(fig(6),'figures\3doftrack_statesv3_'+timestamp,'jpg')
+saveas(fig(7),'figures\3doftrack_controlsv3_'+timestamp,'jpg')
+savefig(fig,'figures\3doftrack_'+timestamp);
 clear fig
 
 % save workspace
-save(logname);
+save('figures\3doftrack_'+timestamp)
+
+
+
