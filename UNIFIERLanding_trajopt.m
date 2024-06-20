@@ -25,10 +25,10 @@ global runconfig
 runconfig.boundarycost = 2; % 1 = tf
                             % 2 = xf(1)
                             % 3 = -
-runconfig.stagecost    = 1; % 1 = stage cost on, 0 = off
+runconfig.stagecost    = 0; % 1 = stage cost on, 0 = off
 
 % ROM settings
-runconfig.ROMfile = 2; % 1=v1-72.74, 2=v1-50, 3=v0, 4=v3, 5=v2
+runconfig.ROMfile = 4; % 1=v1-72.74, 2=v1-50, 3=v0, 4=v3, 5=v2
 runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies (for v0/v1 only, leave '1' for v2/v3)
                             
 % flap deflection
