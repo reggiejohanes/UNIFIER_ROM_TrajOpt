@@ -91,7 +91,7 @@ hold on
 plot(solutionv2.X(:,1)/1000,rad2deg(alphav2),'-m','LineWidth',0.5)
 plot(solutionv3.X(:,1)/1000,rad2deg(alphav3),'-r','LineWidth',0.5)
 % title('AoA')
-xlabel('Distance, km')
+% xlabel('Distance, km')
 ylabel('Angle of Attack, deg')
 % yline(0,':b','LineWidth',1)
 grid on
@@ -108,7 +108,8 @@ plot(solutionv3.X(:,1)/1000,rad2deg(solutionv3.X(:,5)),'-r','LineWidth',0.5)
 % title('Pitch Angle')
 % xlabel('Distance, km')
 ylabel('Pitch Angle, deg')
-% yline(0,':b','LineWidth',1)
+yline(5,'-.k',{'Max \theta = 5 deg'},'LabelHorizontalAlignment','left','LabelVerticalAlignment','bottom','FontSize',8)
+yline(-5,'-.k',{'Min \theta = -5 deg'},'LabelHorizontalAlignment','right','LabelVerticalAlignment','top','FontSize',8)
 ylim([-6 6])
 yticks(linspace(-6,6,12/2+1))
 grid on
@@ -118,7 +119,7 @@ hold on
 plot(solutionv2.X(:,1)/1000,rad2deg(solutionv2.X(:,6)),'-m','LineWidth',0.5)
 plot(solutionv3.X(:,1)/1000,rad2deg(solutionv3.X(:,6)),'-r','LineWidth',0.5)
 % title('Pitch Rate')
-% xlabel('Distance, km')
+xlabel('Distance, km')
 ylabel('Pitch Rate, deg/s')
 % yline(0,':b','LineWidth',1)
 grid on
@@ -136,7 +137,7 @@ p2=plot(solutionv2.X(:,1)/1000,solutionv2.U(:,2),'-m','LineWidth',0.5);
 p3=plot(solutionv3.X(:,1)/1000,solutionv3.U(:,2),'-r','LineWidth',0.5);
 legend([p1 p2 p3],...
        {'ROM v1','ROM v2','ROM v3'},...
-       'Location','southeast');
+       'Location','northeast');
 % title('DEP Thrust Level')
 % xlabel('Distance, km')
 ylabel('DEP_c_o_l, 0-1')
@@ -275,7 +276,7 @@ p2=plot(solutionv2.X(:,1)/1000,solutionv2.U(:,2),'-m','LineWidth',0.5);
 p3=plot(solutionv3.X(:,1)/1000,solutionv3.U(:,2),'-r','LineWidth',0.5);
 legend([p1 p2 p3],...
        {'ROM v1','ROM v2','ROM v3'},...
-       'Location','southeast');
+       'Location','northeast');
 % title('DEP Thrust Level')
 % xlabel('Distance, km')
 ylabel('DEP_c_o_l, 0-1')

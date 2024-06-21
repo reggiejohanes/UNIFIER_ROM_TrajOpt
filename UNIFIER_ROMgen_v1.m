@@ -127,8 +127,6 @@ for i=1:dFlap_n
                 CL(i,j,k,m) = L/qS;
                 CD(i,j,k,m) = D/qS;
                 CM(i,j,k,m) = My/(qS*c);
-
-
             
             end
             % Store J, CT
@@ -206,7 +204,7 @@ plotstyle = [".-m";".-r";".-g";".-c";".-b";".-k";
 fig(1)=figure('Name','Total Lift Coefficient','Position',[150 250 600 500]);
 for i=1:dFlap_n
     dflaplegend(i) = strjoin(["\delta_{flap} =",num2str(dFlap_deg(i)),"\circ"]);
-    plot(alpha_deg,CL(i,:,1,2),plotstyle(i))
+    plot(alpha_deg,CL(i,:,6,7),plotstyle(i))
     hold on
 end
 title('Total Lift Coefficient')
@@ -221,7 +219,7 @@ legend(dflaplegend,'Location','northwest')
 % CD ----------------------------------------------------------------------
 fig(2)=figure('Name','Total Drag Coefficient','Position',[800 250 600 500]);
 for i=1:dFlap_n
-    plot(alpha_deg,CD(i,:,1,2),plotstyle(i))
+    plot(alpha_deg,CD(i,:,6,7),plotstyle(i))
     hold on
 end
 title('Total Drag Coefficient')
@@ -237,7 +235,7 @@ legend(dflaplegend,'Location','northwest')
 % CM ----------------------------------------------------------------------
 fig(3)=figure('Name','Pitching Moment Coefficient','Position',[150 250 600 500]);
 for i=1:dFlap_n
-    plot(alpha_deg,CM(i,:,1,2),plotstyle(i))
+    plot(alpha_deg,CM(i,:,6,7),plotstyle(i))
     hold on
 end
 title('Pitching Moment Coefficient')
