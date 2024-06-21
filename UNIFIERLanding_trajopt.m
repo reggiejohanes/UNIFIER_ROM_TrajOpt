@@ -194,7 +194,7 @@ xstarf=xstar;
 ustarf=ustar;
 
 runconfig.zf      = xstarf(2);
-runconfig.xf      = -1*(xstar0(2)-runconfig.zf)/tand(1); % 3deg glide slope
+runconfig.xf      = -1*(xstar0(2)-runconfig.zf)/tand(1); % 1deg glide slope
 runconfig.uf      = xstarf(3); %35.85*1.3
 runconfig.wf      = xstarf(4);
 runconfig.thetaf  = xstarf(5);

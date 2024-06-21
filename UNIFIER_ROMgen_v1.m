@@ -33,7 +33,7 @@ alpha     = deg2rad(alpha_deg);
 dElev_min = rad2deg(umin(3));
 dElev_max = rad2deg(umax(3));
 dElev_inc = 5;
-dElev_n   = (dElev_max-dElev_min)/dElev_inc+1;
+dElev_n   = (round(dElev_max)-round(dElev_min))/dElev_inc+1;
 dElev_deg = linspace(dElev_min,dElev_max,dElev_n)';
 dElev     = deg2rad(dElev_deg);
 
