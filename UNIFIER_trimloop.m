@@ -125,26 +125,26 @@ fig(1)=figure('Name','Trim Results at Varying Airspeeds','Position',[150 200 600
 tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
 
 nexttile
-plot1=plot(Va_range,normhfm(1,:),'.-r');
+plot1=plot(Va_range,normhfm(1,:),'.-c');
 title('HFM')
 hold on
 plot2=plot(Va_range,normhfm(3,:),'.-m');
-plot3=plot(Va_range,normhfm(6,:),'.-b');
+plot3=plot(Va_range,normhfm(6,:),'.-g');
 % legend([plot1 plot2 plot3],...
 %        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
 %        'Location','northeast');
 ylim([-0.5 5])
 xlim([Va_min Va_max])
 % xlabel('Airspeed, m/s')
-% ylabel('Norm of Residuals')
+ylabel('Norm of Residuals')
 grid on
 
 nexttile
-plot1=plot(Va_range,normv1(1,:),'.-r');
+plot1=plot(Va_range,normv1(1,:),'.-c');
 title('ROM v1')
 hold on
 plot2=plot(Va_range,normv1(3,:),'.-m');
-plot3=plot(Va_range,normv1(6,:),'.-b');
+plot3=plot(Va_range,normv1(6,:),'.-g');
 % legend([plot1 plot2 plot3],...
 %        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
 %        'Location','northeast');
@@ -155,11 +155,11 @@ xlim([Va_min Va_max])
 grid on
 
 nexttile
-plot1=plot(Va_range,normv2(1,:),'.-r');
+plot1=plot(Va_range,normv2(1,:),'.-c');
 title('ROM v2')
 hold on
 plot2=plot(Va_range,normv2(3,:),'.-m');
-plot3=plot(Va_range,normv2(6,:),'.-b');
+plot3=plot(Va_range,normv2(6,:),'.-g');
 % legend([plot1 plot2 plot3],...
 %        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
 %        'Location','northeast');
@@ -170,17 +170,17 @@ ylabel('Norm of Residuals')
 grid on
 
 nexttile
-plot1=plot(Va_range,normv3(1,:),'.-r');
+plot1=plot(Va_range,normv3(1,:),'.-c');
 title('ROM v3')
 hold on
 plot2=plot(Va_range,normv3(3,:),'.-m');
-plot3=plot(Va_range,normv3(6,:),'.-b');
+plot3=plot(Va_range,normv3(6,:),'.-g');
 legend([plot1 plot2 plot3],...
        {'\delta_F_l_a_p = 0 deg','\delta_F_l_a_p = 10 deg','\delta_F_l_a_p = 25 deg'},...
        'Location','northeast');
 ylim([-0.5 5])
 xlim([Va_min Va_max])
-% xlabel('Airspeed, m/s')
+xlabel('Airspeed, m/s')
 % ylabel('Norm of Residuals')
 grid on
 
@@ -189,26 +189,26 @@ grid on
 fig(2)=figure('Name','Approximate Stall Speed vs Flap Deflection','Position',[750 200 600 400]);
 hold on
 
-% st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-r'); %ROMv3
+% st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-c'); %ROMv3
 % st3=plot(rad2deg(dFlap_range),[50 48 46 45 42 40],'.-m'); %ROMv2
-% st2=plot(rad2deg(dFlap_range),[52 49 46 46 43 41],'.-b'); %ROMv1
+% st2=plot(rad2deg(dFlap_range),[52 49 46 46 43 41],'.-g'); %ROMv1
 % st1=plot(rad2deg(dFlap_range),[52 49 48 47 43 43],'.-k'); %HFM (CRUISE)
+% yticks(linspace(40,55,(55-40)/1+1))
+% ylim([39 53])
 
-st4=plot(rad2deg(dFlap_range),[44 44 44 44 44 44],'.-r'); %ROMv3
+st4=plot(rad2deg(dFlap_range),[44 44 44 44 44 44],'.-c'); %ROMv3
 st3=plot(rad2deg(dFlap_range),[48 45 43 42 40 38],'.-m'); %ROMv2
-st2=plot(rad2deg(dFlap_range),[47 45 42 42 39 38],'.-b'); %ROMv1
+st2=plot(rad2deg(dFlap_range),[47 45 42 42 39 38],'.-g'); %ROMv1
 st1=plot(rad2deg(dFlap_range),[47 45 42 40 38 35],'.-k'); %HFM (LANDING)
+yticks(linspace(35,48,(48-35)/1+1))
+ylim([35 48])
 
 legend([st1 st2 st3 st4],...
        {'HFM','ROM v1','ROM v2','ROM v3'},...
        'Location','northeast');
 ylabel('Stall Speed, m/s')
 xlabel('\delta_F_l_a_p, deg')
-% yticks(linspace(40,55,(55-40)/1+1))
-yticks(linspace(35,48,(48-35)/1+1))
 xlim([0 25])
-% ylim([39 53])
-ylim([35 48])
 grid on
 
 %% Save results
@@ -220,7 +220,7 @@ savefig(fig,logname + '_figs');
 clear fig
 
 % save workspace
-save (logname);
+% save (logname);
 
 
 

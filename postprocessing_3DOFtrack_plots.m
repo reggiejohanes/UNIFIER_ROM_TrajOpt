@@ -1,5 +1,5 @@
 
-clc
+% clc
 clear all
 % close all
 
@@ -119,9 +119,9 @@ LSEDavgv3 = mean(distv3)
 
 fig(1)=figure('Name','State Trajectories (vs distance)','Position', [120 200 600 400]);
 hold on
-p1=plot(tsolv1,distv1,'-b');
-p2=plot(tsolv2,distv2,'-m');
-p3=plot(tsolv3,distv3,'-r');
+p1=plot(tsolv1,distv1,'-g','LineWidth',1);
+p2=plot(tsolv2,distv2,'-m','LineWidth',1);
+p3=plot(tsolv3,distv3,'-c','LineWidth',1);
 grid on
 ylabel('Tracking Error (Euclidean Distance, m)')
 xlabel('Time, s')
@@ -135,10 +135,10 @@ legend([p1 p2 p3],...
 %% Plot figures (v1)
 
 % state trajectories ======================================================
-fig(2)=figure('Name','State Trajectories (vs distance) v1','Position', [50 75 400 1250]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
-% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
-% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+% fig(2)=figure('Name','State Trajectories (vs distance) v1','Position', [50 75 400 1250]);
+% tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+fig(2)=figure('Name','State Trajectories (vs distance) v1','Position', [5 75 1200 600]);
+tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 nexttile % ALTITUDE ------------------------------------------------------- 
 hold on
 plottraj2=plot(outv1.x/1000,-1*outv1.z,'r');
@@ -197,8 +197,10 @@ grid on
 % xlim([0 12.5])
 
 % control trajectories ====================================================
-fig(3)=figure('Name','Control Inputs v1','Position', [600 70 500 800]);
-tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+% fig(3)=figure('Name','Control Inputs v1','Position', [600 70 500 800]);
+% tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+fig(3)=figure('Name','Control Inputs v1','Position', [600 70 800 600]);
+tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
 % nexttile % ALTITUDE -----------------------------------------------------
 % plottraj1=plot(solv1.X(:,1),-1*solv1.X(:,2),'--k');
 % hold on
@@ -291,10 +293,10 @@ legend([p1 p2],...
 %% Plot figures (v2)
 
 % state trajectories ======================================================
-fig(4)=figure('Name','State Trajectories (vs distance) v2','Position', [50 75 400 1250]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
-% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
-% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+% fig(4)=figure('Name','State Trajectories (vs distance) v2','Position', [50 75 400 1250]);
+% tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+fig(4)=figure('Name','State Trajectories (vs distance) v2','Position', [50 75 1200 600]);
+tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 nexttile % ALTITUDE ------------------------------------------------------- 
 hold on
 plottraj2=plot(outv2.x/1000,-1*outv2.z,'r');
@@ -353,8 +355,10 @@ grid on
 % xlim([0 12.5])
 
 % control trajectories ====================================================
-fig(5)=figure('Name','Control Inputs v2','Position', [600 70 500 800]);
-tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+% fig(5)=figure('Name','Control Inputs v2','Position', [600 70 500 800]);
+% tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+fig(5)=figure('Name','Control Inputs v2','Position', [600 70 800 600]);
+tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
 % nexttile % ALTITUDE -----------------------------------------------------
 % plottraj1=plot(solv2.X(:,1),-1*solv2.X(:,2),'--k');
 % hold on
@@ -421,10 +425,10 @@ legend([p1 p2],...
 %% Plot figures (v3)
 
 % state trajectories ======================================================
-fig(6)=figure('Name','State Trajectories (vs distance) v3','Position', [50 75 400 1250]);
-tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
-% fig(1)=figure('Name','State Trajectories','Position', [5 75 1200 400]);
-% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+% fig(6)=figure('Name','State Trajectories (vs distance) v3','Position', [50 75 400 1250]);
+% tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+fig(6)=figure('Name','State Trajectories (vs distance) v3','Position', [50 75 1200 600]);
+tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
 nexttile % ALTITUDE ------------------------------------------------------- 
 hold on
 plottraj2=plot(outv3.x/1000,-1*outv3.z,'r');
@@ -483,8 +487,10 @@ grid on
 % xlim([0 12.5])
 
 % control trajectories ====================================================
-fig(7)=figure('Name','Control Inputs v3','Position', [600 70 500 800]);
-tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+% fig(7)=figure('Name','Control Inputs v3','Position', [600 70 500 800]);
+% tiledlayout(4,1,"TileSpacing","tight","Padding","compact")
+fig(7)=figure('Name','Control Inputs v3','Position', [600 70 800 600]);
+tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
 % nexttile % ALTITUDE -----------------------------------------------------
 % plottraj1=plot(solv3.X(:,1),-1*solv3.X(:,2),'--k');
 % hold on

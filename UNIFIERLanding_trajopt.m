@@ -4,7 +4,7 @@ clear all;
 % close all;
 format compact;
 
-% openfig('figures/3dofcomp_20240618_224103')
+openfig('figures/3dofcomp_20240618_224103')
 
 %% Documentation
 
@@ -28,7 +28,7 @@ runconfig.boundarycost = 2; % 1 = tf
 runconfig.stagecost    = 0; % 1 = stage cost on, 0 = off
 
 % ROM settings
-runconfig.ROMfile = 4; % 1=v1-72.74, 2=v1-50, 3=v0, 4=v3, 5=v2
+runconfig.ROMfile = 2; % 1=v1-72.74, 2=v1-50, 3=v0, 4=v3, 5=v2
 runconfig.ROMdep  = 1; % 1=all dependencies, 2=reduced dependencies (for v0/v1 only, leave '1' for v2/v3)
                             
 % flap deflection
@@ -85,10 +85,10 @@ runconfig.ineq_Vamax  = 80;
 % runconfig.ineq_gammax = deg2rad(inf);
 
 % boundary constraints
-% runconfig.bndc_Vamin  = -inf;
-% runconfig.bndc_Vamax  = inf;
-runconfig.bndc_Vamin  = 35.85*1.1;
-runconfig.bndc_Vamax  = 35.85*1.3;
+runconfig.bndc_Vamin  = -inf;
+runconfig.bndc_Vamax  = inf;
+% runconfig.bndc_Vamin  = 35.85*1.1;
+% runconfig.bndc_Vamax  = 35.85*1.3;
 % runconfig.bndc_rodmin = convvel(-inf,'ft/min','m/s');
 % runconfig.bndc_rodmax = convvel(inf,'ft/min','m/s');
 

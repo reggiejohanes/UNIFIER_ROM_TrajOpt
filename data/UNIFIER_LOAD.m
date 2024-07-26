@@ -101,10 +101,10 @@ umin(1) = -25;  % Min aileron deflection  [deg]
 umax(1) = 25;   % Max aileron deflection  [deg]
 
 umin(2) = -30;  % Min rudder deflection   [deg]
-umax(2) = 30;   % Max rudder deflection   [deg]
+umax(2) = 15;   % Max rudder deflection   [deg]
 
 umin(3) = -30;  % Min elevator deflection [deg]
-umax(3) = 30;   % Max elevator deflection [deg]
+umax(3) = 15;   % Max elevator deflection [deg]
 
 umin(4) = 0;    % Min flap deflection     [deg]
 umax(4) = 25;   % Max flap deflection     [deg]
