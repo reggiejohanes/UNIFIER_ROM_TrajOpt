@@ -184,24 +184,24 @@ xlabel('Airspeed, m/s')
 % ylabel('Norm of Residuals')
 grid on
 
-%----------------------------------------------------
+%% ----------------------------------------------------
 
 fig(2)=figure('Name','Approximate Stall Speed vs Flap Deflection','Position',[750 200 600 400]);
 hold on
 
-% st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-c'); %ROMv3
-% st3=plot(rad2deg(dFlap_range),[50 48 46 45 42 40],'.-m'); %ROMv2
-% st2=plot(rad2deg(dFlap_range),[52 49 46 46 43 41],'.-g'); %ROMv1
-% st1=plot(rad2deg(dFlap_range),[52 49 48 47 43 43],'.-k'); %HFM (CRUISE)
-% yticks(linspace(40,55,(55-40)/1+1))
-% ylim([39 53])
+st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-c'); %ROMv3
+st3=plot(rad2deg(dFlap_range),[50 48 46 45 42 40],'.-m'); %ROMv2
+st2=plot(rad2deg(dFlap_range),[52 49 46 46 43 41],'.-g','LineWidth',1); %ROMv1
+st1=plot(rad2deg(dFlap_range),[52 49 48 47 43 43],'.-k'); %HFM (CRUISE)
+yticks(linspace(40,55,(55-40)/1+1))
+ylim([39 53])
 
-st4=plot(rad2deg(dFlap_range),[44 44 44 44 44 44],'.-c'); %ROMv3
-st3=plot(rad2deg(dFlap_range),[48 45 43 42 40 38],'.-m'); %ROMv2
-st2=plot(rad2deg(dFlap_range),[47 45 42 42 39 38],'.-g'); %ROMv1
-st1=plot(rad2deg(dFlap_range),[47 45 42 40 38 35],'.-k'); %HFM (LANDING)
-yticks(linspace(35,48,(48-35)/1+1))
-ylim([35 48])
+% st4=plot(rad2deg(dFlap_range),[44 44 44 44 44 44],'.-c'); %ROMv3
+% st3=plot(rad2deg(dFlap_range),[48 45 43 42 40 38],'.-m'); %ROMv2
+% st2=plot(rad2deg(dFlap_range),[47 45 42 42 39 38],'.-g','LineWidth',1); %ROMv1
+% st1=plot(rad2deg(dFlap_range),[47 45 42 40 38 35],'.-k'); %HFM (LANDING)
+% yticks(linspace(35,48,(48-35)/1+1))
+% ylim([35 48])
 
 legend([st1 st2 st3 st4],...
        {'HFM','ROM v1','ROM v2','ROM v3'},...

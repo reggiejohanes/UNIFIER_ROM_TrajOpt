@@ -23,9 +23,9 @@ clear ROM
 
 % load states & controls
 
-% load rundata_trim/UNIFIER_trim_out_20240612_031926 xstar ustar % HFM cruise 0 deg flap
+load rundata_trim/UNIFIER_trim_out_20240612_031926 xstar ustar xdotstar % HFM cruise 0 deg flap
 % load rundata_trim/UNIFIER_trim_out_20240612_032607 xstar ustar xdotstar% HFM cruise 5 deg flap
-load rundata_trim/UNIFIER_trim_out_20240612_034134 xstar ustar xdotstar% HFM landing 5 deg flap
+% load rundata_trim/UNIFIER_trim_out_20240612_034134 xstar ustar xdotstar% HFM landing 5 deg flap
 xstarhfm=xstar;
 ustarhfm=ustar;
 xdotstarhfm=xdotstar;

@@ -281,7 +281,7 @@ legend([p1 p2],...
 % % xlim([0 12.5])
 % nexttile % DISTANCE -------------------------------------------------------
 % hold on
-% plottraj2=plot(outv1.tout,outv1.x/1000,'r');
+% plottraj2=plot(outv1.tout,outv1.tout/1000,'r');
 % plottraj1=plot(solv1.T,solv1.X(:,1)/1000,'--k');
 % % title('Altitude')
 % xlabel('Time, s')
@@ -554,6 +554,265 @@ legend([p1 p2],...
        {'Optimal Trajectory','Tracking Result'},...
        'Location','south','NumColumns',2);
 
+%% Plot figures (v1,time)
+
+% state trajectories ======================================================
+fig(8)=figure('Name','State Trajectories (vs time) v1','Position', [50 75 400 1250]);
+tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(8)=figure('Name','State Trajectories (vs time) v1','Position', [5 75 1200 600]);
+% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+nexttile % ALTITUDE ------------------------------------------------------- 
+hold on
+plottraj2=plot(outv1.tout,-1*outv1.z,'r');
+plottraj1=plot(solv1.T,-1*solv1.X(:,2),'--k');
+ylabel('Altitude, m')
+grid on
+legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+nexttile % RATE OF CLIMB --------------------------------------------------
+hold on
+plot(outv1.tout(1:end-1),outv1.rocft,'r')
+plot(solv1.T(1:end-1),solv1.rocft,'--k')
+ylabel('Rate of Climb, ft/min')
+grid on
+nexttile % AIRSPEED -------------------------------------------------------
+hold on
+plot(outv1.tout,outv1.Va_tas,'r')
+plot(solv1.T,solv1.Va,'--k')
+ylabel('Airspeed, m/s')
+grid on
+nexttile % ANGLE OF ATTACK ------------------------------------------------
+hold on
+plot(outv1.tout,rad2deg(outv1.alpha),'r')
+plot(solv1.T,rad2deg(solv1.alpha),'--k')
+ylabel('Angle of Attack, deg')
+grid on
+nexttile % PITCH ANGLE ----------------------------------------------------
+hold on
+plot(outv1.tout,rad2deg(outv1.theta),'r')
+plot(solv1.T,rad2deg(solv1.X(:,5)),'--k')
+ylabel('Pitch Angle, deg')
+grid on
+nexttile % PITCH RATE -----------------------------------------------------
+hold on
+plot(outv1.tout,rad2deg(outv1.q),'r')
+plot(solv1.T,rad2deg(solv1.X(:,6)),'--k')
+xlabel('Time, s')
+ylabel('Pitch Rate, deg/s')
+grid on
+
+% control trajectories ====================================================
+fig(9)=figure('Name','Control Inputs v1','Position', [600 70 500 800]);
+tiledlayout(3,1,"TileSpacing","tight","Padding","compact")
+% fig(9)=figure('Name','Control Inputs v1','Position', [600 70 800 600]);
+% tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
+nexttile % DEP ------------------------------------------------------------
+hold on
+plot(outv1.tout,outv1.DEP,'r');
+plot(solv1.T,solv1.U(:,2),'--k')
+ylabel('DEP_c_o_l, 0-1')
+grid on
+ylim([-0.05 0.5])
+nexttile % HTU ------------------------------------------------------------
+hold on
+p2=plot(outv1.tout,outv1.HTU,'r');
+p1=plot(solv1.T,solv1.U(:,3),'--k');
+ylabel('HTU, 0-1')
+grid on
+nexttile % ELEVATOR -------------------------------------------------------
+hold on
+p2=plot(outv1.tout,rad2deg(outv1.elev),'r');
+p1=plot(solv1.T,rad2deg(solv1.U(:,1)),'--k');
+ylabel('Elevator Deflection, deg')
+grid on
+xlabel('Time, s')
+legend([p1 p2],...
+       {'Optimal Trajectory','Tracking Result'},...
+       'Location','south','NumColumns',2);
+% nexttile % FLAP -----------------------------------------------------------
+% dFlap=deg2rad(5);
+% hold on
+% p2=plot(outv1.tout,rad2deg(outv1.flap),'r');
+% p1=plot(solv1.T,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv1.T)),'--k');
+% xlabel('Time, s')
+% ylabel('Flap Deflection, deg')
+% grid on
+% legend([p1 p2],...
+%        {'Optimal Trajectory','Tracking Result'},...
+%        'Location','south','NumColumns',2);
+
+
+%% Plot figures (v2,time)
+
+% state trajectories ======================================================
+fig(10)=figure('Name','State Trajectories (vs time) v2','Position', [50 75 400 1250]); % PORTRAIT
+tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(10)=figure('Name','State Trajectories (vs time) v2','Position', [50 75 1200 600]);
+% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+nexttile % ALTITUDE ------------------------------------------------------- 
+hold on
+plottraj2=plot(outv2.tout,-1*outv2.z,'r');
+plottraj1=plot(solv2.T,-1*solv2.X(:,2),'--k');
+ylabel('Altitude, m')
+grid on
+legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+nexttile % RATE OF CLIMB --------------------------------------------------
+hold on
+plot(outv2.tout(1:end-1),outv2.rocft,'r')
+plot(solv2.T(1:end-1),solv2.rocft,'--k')
+ylabel('Rate of Climb, ft/min')
+grid on
+nexttile % AIRSPEED -------------------------------------------------------
+hold on
+plot(outv2.tout,outv2.Va_tas,'r')
+plot(solv2.T,solv2.Va,'--k')
+ylabel('Airspeed, m/s')
+grid on
+nexttile % ANGLE OF ATTACK ------------------------------------------------
+hold on
+plot(outv2.tout,rad2deg(outv2.alpha),'r')
+plot(solv2.T,rad2deg(solv2.alpha),'--k')
+ylabel('Angle of Attack, deg')
+grid on
+nexttile % PITCH ANGLE ----------------------------------------------------
+hold on
+plot(outv2.tout,rad2deg(outv2.theta),'r')
+plot(solv2.T,rad2deg(solv2.X(:,5)),'--k')
+ylabel('Pitch Angle, deg')
+grid on
+nexttile % PITCH RATE -----------------------------------------------------
+hold on
+plot(outv2.tout,rad2deg(outv2.q),'r')
+plot(solv2.T,rad2deg(solv2.X(:,6)),'--k')
+xlabel('Time, s')
+ylabel('Pitch Rate, deg/s')
+grid on
+
+% control trajectories ====================================================
+fig(11)=figure('Name','Control Inputs v2','Position', [600 70 500 800]); % PORTRAIT
+tiledlayout(3,1,"TileSpacing","tight","Padding","compact")
+% fig(11)=figure('Name','Control Inputs v2','Position', [600 70 800 600]);
+% tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
+nexttile % DEP ------------------------------------------------------------
+hold on
+plot(outv2.tout,outv2.DEP,'r');
+plot(solv2.T,solv2.U(:,2),'--k')
+ylabel('DEP_c_o_l, 0-1')
+grid on
+ylim([-0.05 0.65])
+nexttile % HTU ------------------------------------------------------------
+hold on
+p2=plot(outv2.tout,outv2.HTU,'r');
+p1=plot(solv2.T,solv2.U(:,3),'--k');
+ylabel('HTU, 0-1')
+grid on
+nexttile % ELEVATOR -------------------------------------------------------
+hold on
+p2=plot(outv2.tout,rad2deg(outv2.elev),'r');
+p1=plot(solv2.T,rad2deg(solv2.U(:,1)),'--k');
+ylabel('Elevator Deflection, deg')
+grid on
+xlabel('Time, s')
+legend([p1 p2],...
+       {'Optimal Trajectory','Tracking Result'},...
+       'Location','south','NumColumns',2);
+% nexttile % FLAP -----------------------------------------------------------
+% dFlap=deg2rad(5);
+% hold on
+% p2=plot(outv2.tout,rad2deg(outv2.flap),'r');
+% p1=plot(solv2.T,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv2.T)),'--k');
+% xlabel('Time, s')
+% ylabel('Flap Deflection, deg')
+% grid on
+% legend([p1 p2],...
+%        {'Optimal Trajectory','Tracking Result'},...
+%        'Location','south','NumColumns',2);
+
+%% Plot figures (v3,time)
+
+% state trajectories ======================================================
+fig(12)=figure('Name','State Trajectories (vs time) v2','Position', [50 75 400 1250]); % PORTRAIT
+tiledlayout(6,1,"TileSpacing","tight","Padding","compact")
+% fig(12)=figure('Name','State Trajectories (vs time) v3','Position', [50 75 1200 600]);
+% tiledlayout(2,3,"TileSpacing","tight","Padding","compact")
+nexttile % ALTITUDE ------------------------------------------------------- 
+hold on
+plottraj2=plot(outv3.tout,-1*outv3.z,'r');
+plottraj1=plot(solv3.T,-1*solv3.X(:,2),'--k');
+ylabel('Altitude, m')
+grid on
+legend([plottraj1 plottraj2],{'Optimal Trajectory','Tracking Result'},'Location','northeast');
+nexttile % RATE OF CLIMB --------------------------------------------------
+hold on
+plot(outv3.tout(1:end-1),outv3.rocft,'r')
+plot(solv3.T(1:end-1),solv3.rocft,'--k')
+ylabel('Rate of Climb, ft/min')
+grid on
+nexttile % AIRSPEED -------------------------------------------------------
+hold on
+plot(outv3.tout,outv3.Va_tas,'r')
+plot(solv3.T,solv3.Va,'--k')
+ylabel('Airspeed, m/s')
+grid on
+nexttile % ANGLE OF ATTACK ------------------------------------------------
+hold on
+plot(outv3.tout,rad2deg(outv3.alpha),'r')
+plot(solv3.T,rad2deg(solv3.alpha),'--k')
+ylabel('Angle of Attack, deg')
+grid on
+nexttile % PITCH ANGLE ----------------------------------------------------
+hold on
+plot(outv3.tout,rad2deg(outv3.theta),'r')
+plot(solv3.T,rad2deg(solv3.X(:,5)),'--k')
+ylabel('Pitch Angle, deg')
+grid on
+nexttile % PITCH RATE -----------------------------------------------------
+hold on
+plot(outv3.tout,rad2deg(outv3.q),'r')
+plot(solv3.T,rad2deg(solv3.X(:,6)),'--k')
+xlabel('Time, s')
+ylabel('Pitch Rate, deg/s')
+grid on
+
+% control trajectories ====================================================
+fig(13)=figure('Name','Control Inputs v3','Position', [600 70 500 800]); % PORTRAIT
+tiledlayout(3,1,"TileSpacing","tight","Padding","compact")
+% fig(13)=figure('Name','Control Inputs v3','Position', [600 70 800 600]);
+% tiledlayout(2,2,"TileSpacing","tight","Padding","compact")
+nexttile % DEP ------------------------------------------------------------
+hold on
+plot(outv3.tout,outv3.DEP,'r');
+plot(solv3.T,solv3.U(:,2),'--k')
+ylabel('DEP_c_o_l, 0-1')
+grid on
+ylim([-0.05 0.5])
+nexttile % HTU ------------------------------------------------------------
+hold on
+p2=plot(outv3.tout,outv3.HTU,'r');
+p1=plot(solv3.T,solv3.U(:,3),'--k');
+ylabel('HTU, 0-1')
+grid on
+nexttile % ELEVATOR -------------------------------------------------------
+hold on
+p2=plot(outv3.tout,rad2deg(outv3.elev),'r');
+p1=plot(solv3.T,rad2deg(solv3.U(:,1)),'--k');
+xlabel('Time, s')
+ylabel('Elevator Deflection, deg')
+grid on
+legend([p1 p2],...
+       {'Optimal Trajectory','Tracking Result'},...
+       'Location','south','NumColumns',2);
+% nexttile % FLAP -----------------------------------------------------------
+% dFlap=deg2rad(5);
+% hold on
+% p2=plot(outv3.tout,rad2deg(outv3.flap),'r');
+% p1=plot(solv3.T,linspace(rad2deg(dFlap),rad2deg(dFlap),numel(solv3.T)),'--k');
+% xlabel('Time, s')
+% ylabel('Flap Deflection, deg')
+% grid on
+% legend([p1 p2],...
+%        {'Optimal Trajectory','Tracking Result'},...
+%        'Location','south','NumColumns',2);
+
 %% Save results
 
 starttime = datetime; % start date & time
@@ -561,14 +820,14 @@ timestamp = string(starttime,"yyyyMMdd_HHmmss");
 
 % save figures
 saveas(fig(1),'figures\3doftrack_error_'+timestamp,'jpg')
-saveas(fig(2),'figures\3doftrack_statesv1_'+timestamp,'jpg')
-saveas(fig(3),'figures\3doftrack_controlsv1_'+timestamp,'jpg')
-saveas(fig(4),'figures\3doftrack_statesv2_'+timestamp,'jpg')
-saveas(fig(5),'figures\3doftrack_controlsv2_'+timestamp,'jpg')
-saveas(fig(6),'figures\3doftrack_statesv3_'+timestamp,'jpg')
-saveas(fig(7),'figures\3doftrack_controlsv3_'+timestamp,'jpg')
-savefig(fig,'figures\3doftrack_'+timestamp);
-clear fig
+saveas(fig(8),'figures\3doftrack_statesv1_'+timestamp,'jpg')
+saveas(fig(9),'figures\3doftrack_controlsv1_'+timestamp,'jpg')
+saveas(fig(10),'figures\3doftrack_statesv2_'+timestamp,'jpg')
+saveas(fig(11),'figures\3doftrack_controlsv2_'+timestamp,'jpg')
+saveas(fig(12),'figures\3doftrack_statesv3_'+timestamp,'jpg')
+saveas(fig(13),'figures\3doftrack_controlsv3_'+timestamp,'jpg')
+% savefig(fig,'figures\3doftrack_'+timestamp);
+% clear fig
 
 % save workspace
 save('figures\3doftrack_'+timestamp)
