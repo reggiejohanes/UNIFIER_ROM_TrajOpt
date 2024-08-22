@@ -132,6 +132,31 @@ legend([p1 p2 p3],...
        {'ROM v1','ROM v2','ROM v3'},...
        'Location','northwest','NumColumns',3);
 
+%% Plot presentation figure
+
+close all
+
+figp=figure('Name','Tracking Result','Position', [100 200 600 500]);
+hold on
+
+plotv1trk = plot(outv1.x/1000,-1*outv1.z,'g','LineWidth',1);
+plotv1sol = plot(solv1.X(:,1)/1000,-1*solv1.X(:,2),'--k');
+
+plotv2trk = plot(outv2.x/1000,-1*outv2.z,'m','LineWidth',1);
+plotv2sol = plot(solv2.X(:,1)/1000,-1*solv2.X(:,2),'--k');
+
+plotv3trk = plot(outv3.x/1000,-1*outv3.z,'c','LineWidth',1);
+plotv3sol = plot(solv3.X(:,1)/1000,-1*solv3.X(:,2),'--k');
+
+grid on
+ylim([0 1400])
+xlim([0 110])
+xlabel('Distance, km')
+ylabel('Altitude, m')
+legend([plotv1sol plotv1trk plotv2trk plotv3trk],{'Optimal Trajectories','ROM v1 Tracking Result','ROM v2 Tracking Result','ROM v3 Tracking Result'},'Location','northeast');
+
+saveas(figp,'figures\3doftrack_presentation','jpg')
+
 %% Plot figures (v1)
 
 % state trajectories ======================================================

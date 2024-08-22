@@ -189,6 +189,9 @@ grid on
 fig(2)=figure('Name','Approximate Stall Speed vs Flap Deflection','Position',[750 200 600 400]);
 hold on
 
+% NOTE: stall speeds are identified by hand from the norm of trim residuals,
+% values are hardcoded below
+
 st4=plot(rad2deg(dFlap_range),[46 46 46 46 46 46],'.-c'); %ROMv3
 st3=plot(rad2deg(dFlap_range),[50 48 46 45 42 40],'.-m'); %ROMv2
 st2=plot(rad2deg(dFlap_range),[52 49 46 46 43 41],'.-g','LineWidth',1); %ROMv1

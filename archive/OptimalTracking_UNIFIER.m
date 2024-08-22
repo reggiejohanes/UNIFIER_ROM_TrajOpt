@@ -5,9 +5,30 @@ clear all
 
 %% Load data
 
+% reference trajectory
 % load rundata_trajopt/UNIFIERLanding_20240219_003236.mat solution
-load rundata_trajopt/UNIFIERLanding_20240322_035130.mat solution
-load data/UNIFIER_LOAD_ROM.mat
+% load rundata_trajopt/UNIFIERLanding_20240322_035130.mat solution
+load rundata_trajopt/UNIFIERLanding_20240620_050711.mat solution
+
+% aircraft data
+load data/UNIFIER_LOAD.mat
+global LOADROM
+LOADROM.gr        = gr;
+LOADROM.dp_DEP    = dp_DEP;
+LOADROM.dp_HTU    = dp_HTU;
+LOADROM.m         = m;
+LOADROM.xyz_cg_12 = xyz_cg_12;
+LOADROM.Iyy       = Iyy;
+LOADROM.S         = S;
+LOADROM.c         = c;
+LOADROM.xyz_DEP   = xyz_DEP;
+LOADROM.prop_d    = prop_d;
+LOADROM.DEP_inc   = DEP_inc;
+LOADROM.n_prop    = n_prop;
+
+% Load ROM data
+load data/ROMv3/UNIFIER_ROMv3_20240613_002318.mat % v3, subset v1-50
+LOADROM.ROM = ROM;
 
 dt       = solution.T(2);    % timestep size
 X_target = solution.X;       % extract reference state trajectories
@@ -21,8 +42,10 @@ DUmax    = [dumax(3) dumax(5) dumax(7)]; % control rate limits
 
 dFlap = deg2rad(12);
 
-global controls
-controls.dFlap = dFlap;
+global runconfig
+runconfig.dFlap = dFlap;
+runconfig.ROMfile=4;
+runconfig.ROMdep=1;
 
 %% Optimization
 
